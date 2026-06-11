@@ -1,0 +1,107 @@
+<%= form_with(model: daily_update, local: true, class: 'modern-form') do |form| %>
+  <% if daily_update.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <div class="d-flex align-center gap-2 mb-3">
+        <i class="fas fa-exclamation-triangle fa-lg"></i>
+        <h3 class="mb-0">Please fix the following errors:</h3>
+      </div>
+      <ul class="mb-0">
+        <% daily_update.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <!-- Update Information Section -->
+    <div class="col-md-8 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-clipboard-list"></i>
+          Daily Update Details
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :user_id, class: 'form-label required' do %>
+            <i class="fas fa-user"></i>
+            Reporter
+          <% end %>
+          <%= form.collection_select :user_id, User.all, :id, :email, 
+              { prompt: 'Select the person reporting' }, 
+              { class: 'form-control', required: true } %>
+          <small class="form-text">Person responsible for this update</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :note, class: 'form-label required' do %>
+            <i class="fas fa-edit"></i>
+            Update Details
+          <% end %>
+          <%= form.text_area :note, class: 'form-control', 
+              placeholder: 'Enter detailed daily update information...',
+              rows: 8,
+              required: true %>
+          <small class="form-text">Detailed information about today's progress, issues, or important notes</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :approved, class: 'form-label' do %>
+            <i class="fas fa-check-circle"></i>
+            Approval Status
+          <% end %>
+          <div class="form-check">
+            <%= form.check_box :approved, class: 'form-check-input' %>
+            <%= form.label :approved, 'Mark as Approved', class: 'form-check-label' %>
+          </div>
+          <small class="form-text">Check if this update has been reviewed and approved</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guidelines Section -->
+    <div class="col-md-4 mb-4">
+      <div class="info-panel">
+        <h4 class="info-title">
+          <i class="fas fa-info-circle"></i>
+          Update Guidelines
+        </h4>
+        <ul class="info-list">
+          <li><strong>Be Specific:</strong> Include concrete details about progress</li>
+          <li><strong>Include Issues:</strong> Mention any problems or delays</li>
+          <li><strong>Next Steps:</strong> What's planned for tomorrow</li>
+          <li><strong>Resources:</strong> Any material or equipment needs</li>
+        </ul>
+      </div>
+
+      <div class="info-panel mt-3">
+        <h4 class="info-title">
+          <i class="fas fa-lightbulb"></i>
+          What to Include
+        </h4>
+        <ul class="info-list">
+          <li>Tasks completed today</li>
+          <li>Current project status</li>
+          <li>Team performance notes</li>
+          <li>Weather or site conditions</li>
+          <li>Safety observations</li>
+          <li>Material usage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="form-actions">
+    <div class="d-flex gap-3">
+      <%= form.submit class: 'btn btn-primary btn-lg' do %>
+        <i class="fas fa-save"></i>
+        Save Daily Update
+      <% end %>
+      <%= link_to daily_updates_path, class: 'btn btn-secondary btn-lg' do %>
+        <i class="fas fa-times"></i>
+        Cancel
+      <% end %>
+    </div>
+  </div>
+<% end %>

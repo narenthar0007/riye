@@ -1,0 +1,131 @@
+<%= form_with(model: stock, local: true, class: 'modern-form') do |form| %>
+  <% if stock.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <div class="d-flex align-center gap-2 mb-3">
+        <i class="fas fa-exclamation-triangle fa-lg"></i>
+        <h3 class="mb-0">Please fix the following errors:</h3>
+      </div>
+      <ul class="mb-0">
+        <% stock.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <!-- Stock Information Section -->
+    <div class="col-md-6 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-boxes"></i>
+          Stock Item Details
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :name, class: 'form-label required' do %>
+            <i class="fas fa-box"></i>
+            Item Name
+          <% end %>
+          <%= form.text_field :name, class: 'form-control', 
+              placeholder: 'Enter item name',
+              required: true %>
+          <small class="form-text">Name of the construction material or equipment</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :quantity, class: 'form-label required' do %>
+            <i class="fas fa-calculator"></i>
+            Quantity
+          <% end %>
+          <%= form.number_field :quantity, class: 'form-control', 
+              placeholder: 'Enter quantity',
+              min: 0,
+              required: true %>
+          <small class="form-text">Available quantity of this item</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :unit, class: 'form-label required' do %>
+            <i class="fas fa-ruler"></i>
+            Unit of Measurement
+          <% end %>
+          <%= form.select :unit, 
+              options_for_select([
+                ['Pieces (pcs)', 'pcs'],
+                ['Kilograms (kg)', 'kg'], 
+                ['Meters (m)', 'm'],
+                ['Square Meters (sq m)', 'sq_m'],
+                ['Cubic Meters (cu m)', 'cu_m'],
+                ['Liters (L)', 'L'],
+                ['Bags', 'bags'],
+                ['Boxes', 'boxes']
+              ], stock.unit), 
+              { prompt: 'Select unit' }, 
+              { class: 'form-control', required: true } %>
+          <small class="form-text">Unit for measuring this stock item</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assignment Information Section -->
+    <div class="col-md-6 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-building"></i>
+          Assignment & Location
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :company_id, class: 'form-label required' do %>
+            <i class="fas fa-building"></i>
+            Company
+          <% end %>
+          <%= form.collection_select :company_id, Company.all, :id, :name, 
+              { prompt: 'Select a company' }, 
+              { class: 'form-control', required: true } %>
+          <small class="form-text">Company that owns this stock</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :project_id, class: 'form-label' do %>
+            <i class="fas fa-project-diagram"></i>
+            Project (Optional)
+          <% end %>
+          <%= form.collection_select :project_id, Project.all, :id, 
+              lambda { |project| "#{project.name} (#{project.location})" }, 
+              { prompt: 'Select a project (optional)' }, 
+              { class: 'form-control' } %>
+          <small class="form-text">Optional: Assign to a specific project</small>
+        </div>
+
+        <div class="info-panel">
+          <h4 class="info-title">
+            <i class="fas fa-info-circle"></i>
+            Stock Guidelines
+          </h4>
+          <ul class="info-list">
+            <li><strong>Name:</strong> Be specific about the item type</li>
+            <li><strong>Quantity:</strong> Enter current available amount</li>
+            <li><strong>Unit:</strong> Choose appropriate measurement unit</li>
+            <li><strong>Company:</strong> Required for inventory tracking</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="form-actions">
+    <div class="d-flex gap-3">
+      <%= form.submit class: 'btn btn-primary btn-lg' do %>
+        <i class="fas fa-save"></i>
+        Save Stock Item
+      <% end %>
+      <%= link_to stocks_path, class: 'btn btn-secondary btn-lg' do %>
+        <i class="fas fa-times"></i>
+        Cancel
+      <% end %>
+    </div>
+  </div>
+<% end %>

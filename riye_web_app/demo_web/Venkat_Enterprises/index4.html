@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venkat Enterprises - Survey, Lab, Construction & Power Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles for Black & Orange Theme */
+        :root {
+            --primary-orange: #FF8C00; /* DarkOrange */
+            --dark-orange: #FFA500;    /* More vibrant orange */
+            --black: #1a1a1a;          /* A deep, dark black */
+            --light-black: #2c2c2c;    /* A slightly lighter black for backgrounds */
+            --white: #ffffff;          /* Pure white for all text */
+            --light-gray: #e9ecef;
+            --text-color: var(--white); /* All general text is now white */
+            --border-color: #383838;   /* Dark border color */
+            --shadow-subtle: rgba(255, 140, 0, 0.2); /* A subtle orange shadow */
+            --shadow-soft: rgba(255, 140, 0, 0.4);   /* A more prominent orange shadow */
+            --glossy-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            --button-gradient: linear-gradient(145deg, var(--dark-orange), var(--primary-orange));
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black);
+            color: var(--text-color);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--dark-orange);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background-size: 200% auto;
+            color: var(--white);
+            background-image: var(--button-gradient);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.3);
+        }
+
+        .btn:hover {
+            background-position: right center;
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .text-orange {
+            color: var(--primary-orange);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        header.header-scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo svg {
+            height: 60px;
+            transition: height 0.3s ease;
+        }
+
+        .logo span {
+            margin-left: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-orange);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-link {
+            display: none; /* Hide on larger screens */
+        }
+
+        .header-btn {
+            margin-left: 20px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--primary-orange);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://placehold.co/1920x1080/1a1a1a/FF8C00?text=Venkat+Enterprises') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 20px 0 40px;
+            font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background-color: var(--light-black);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-text {
+            flex: 1.5;
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #d1d1d1;
+        }
+
+        .about-text ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-text ul li {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #d1d1d1;
+        }
+
+        .about-text ul li i {
+            color: var(--primary-orange);
+            margin-right: 10px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--black);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .service-card {
+            background-color: var(--light-black);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: #d1d1d1;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+            background-color: var(--light-black);
+        }
+
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .products-filter .btn {
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            background: var(--black);
+            color: var(--white);
+            border: 1px solid var(--border-color);
+            box-shadow: none;
+        }
+
+        .products-filter .btn.active, .products-filter .btn:hover {
+            background-image: var(--button-gradient);
+            border-color: var(--primary-orange);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--black);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-image-container {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 10px;
+            color: var(--white);
+        }
+
+        .product-info p {
+            font-size: 1rem;
+            color: var(--primary-orange);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .add-to-cart {
+            margin-top: 20px;
+        }
+
+        /* Brands Section */
+        .brands {
+            padding: 100px 0;
+            background-color: var(--light-black);
+            text-align: center;
+        }
+
+        .brands-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .brand-logo {
+            flex: 0 0 auto;
+            width: 150px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--black);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The hover and active effects for desktop and mobile */
+        .brand-logo:hover,
+        .brand-logo:active {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow-soft);
+        }
+
+        .brand-logo:hover::before,
+        .brand-logo:active::before {
+            opacity: 1;
+        }
+
+        .brand-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glossy-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .brand-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%) invert(100%);
+            opacity: 0.7;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .brand-logo:hover img,
+        .brand-logo:active img {
+            filter: none;
+            opacity: 1;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--black);
+        }
+
+        .testimonial-card {
+            background-color: var(--light-black);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            margin: 0 0 20px;
+            color: #d1d1d1;
+        }
+
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--primary-orange);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--light-black);
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--black);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            padding: 50px 0 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-orange);
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            font-size: 0.9rem;
+            color: #d1d1d1;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #d1d1d1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-orange);
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Sidebar for Mobile Nav & Cart */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--light-black);
+            z-index: 1010;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+            transition: right 0.4s ease;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.show {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            color: var(--white);
+        }
+
+        .close-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-orange);
+            transition: transform 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+            padding: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-nav a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* Cart styles */
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-info h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--white);
+        }
+
+        .cart-item-info p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            color: var(--primary-orange);
+        }
+
+        .cart-summary {
+            margin-top: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        /* Floating Nav Toggle */
+        .floating-nav-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--button-gradient);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.5);
+            z-index: 1020;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-nav-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-nav-toggle i {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .header-btn {
+                display: none;
+            }
+
+            .contact-info {
+                gap: 15px;
+            }
+
+            .phone-link {
+                display: block;
+                color: var(--white);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 1rem;
+            }
+
+            .logo span {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+            .footer-section {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 0L0 25L25 50L50 75L75 50L100 25L50 0Z" fill="url(#orangeGradient)"/>
+                    <path d="M50 100L25 75L50 50L75 75L50 100Z" fill="url(#darkOrangeGradient)"/>
+                    <defs>
+                        <linearGradient id="orangeGradient" x1="50" y1="0" x2="50" y2="75" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF8C00"/>
+                            <stop offset="1" stop-color="#FFA500"/>
+                        </linearGradient>
+                        <linearGradient id="darkOrangeGradient" x1="50" y1="50" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF8C00"/>
+                            <stop offset="1" stop-color="#FFA500"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>Venkat Enterprises</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="contact-info">
+                <a href="tel:+919876543210" class="phone-link"><i class="fas fa-phone"></i> +91 98765 43210</a>
+                <a href="#contact" class="btn header-btn">Get a Quote</a>
+                <i class="fas fa-bars hamburger"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar for Mobile -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <i class="fas fa-times close-btn" id="close-sidebar"></i>
+        </div>
+        <div class="sidebar-nav">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn">Get a Quote</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Floating Nav/Cart Toggle -->
+    <div class="floating-nav-toggle" id="floating-nav-toggle">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <!-- Floating Nav/Cart Sidebar -->
+    <div class="sidebar" id="floating-nav">
+        <div class="sidebar-header">
+            <h3>Your Cart</h3>
+            <i class="fas fa-times close-btn" id="close-floating-nav"></i>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be dynamically inserted here -->
+            <div class="cart-empty-message" style="text-align:center; padding:20px;">
+                <p>Your cart is empty.</p>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">₹0.00</span>
+            </div>
+            <button class="btn" style="width:100%;">Checkout</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container hero-content">
+                <h1>Venkat Enterprises</h1>
+                <p>Your Trusted Partner for Survey, Lab, Construction & Power Tools</p>
+                <a href="#products" class="btn">Explore Products</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container about-content">
+                <div class="about-image">
+                    <img src="https://placehold.co/500x500/FF8C00/FFF?text=About+Us" alt="About Venkat Enterprises">
+                </div>
+                <div class="about-text">
+                    <h2 class="section-title">About Us</h2>
+                    <p>Venkat Enterprises is a leading supplier of high-quality tools and equipment for a wide range of industries. With years of experience, we pride ourselves on providing exceptional service and reliable products to meet your project needs.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Best Quality Products</li>
+                        <li><i class="fas fa-check-circle"></i> Competitive Pricing</li>
+                        <li><i class="fas fa-check-circle"></i> Excellent Customer Support</li>
+                        <li><i class="fas fa-check-circle"></i> On-Time Delivery</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-ruler-combined"></i>
+                        <h3>Survey Equipment Supply</h3>
+                        <p>Providing precision survey instruments for accurate measurements and project planning.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-flask"></i>
+                        <h3>Lab Instrument Supply</h3>
+                        <p>A comprehensive range of lab equipment to support your research and testing needs.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-hard-hat"></i>
+                        <h3>Construction Tools</h3>
+                        <p>Durable and high-performance tools for all your construction and building projects.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-battery-three-quarters"></i>
+                        <h3>Power Tools</h3>
+                        <p>A wide selection of powerful and efficient tools to get the job done right.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products">
+            <div class="container">
+                <h2 class="section-title">Our Products</h2>
+
+                <div class="products-filter" id="products-filter">
+                    <button class="btn active" data-filter="all">All</button>
+                    <button class="btn" data-filter="survey">Survey</button>
+                    <button class="btn" data-filter="lab">Lab</button>
+                    <button class="btn" data-filter="construction">Construction</button>
+                    <button class="btn" data-filter="power">Power</button>
+                </div>
+
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands Section -->
+        <section id="brands" class="brands">
+            <div class="container">
+                <h2 class="section-title">Our Partner Brands</h2>
+                <div class="brands-grid">
+                    <div class="brand-logo"><img src="https://placehold.co/120x60/1a1a1a/FF8C00?text=Brand+1" alt="Brand 1"></div>
+                    <div class="brand-logo"><img src="https://placehold.co/120x60/1a1a1a/FF8C00?text=Brand+2" alt="Brand 2"></div>
+                    <div class="brand-logo"><img src="https://placehold.co/120x60/1a1a1a/FF8C00?text=Brand+3" alt="Brand 3"></div>
+                    <div class="brand-logo"><img src="https://placehold.co/120x60/1a1a1a/FF8C00?text=Brand+4" alt="Brand 4"></div>
+                    <div class="brand-logo"><img src="https://placehold.co/120x60/1a1a1a/FF8C00?text=Brand+5" alt="Brand 5"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonials-grid" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                    <div class="testimonial-card" style="max-width: 450px;">
+                        <blockquote>"The quality of the tools is excellent, and the service was incredibly fast. Highly recommended!"</blockquote>
+                        <div class="author">- Jane Doe, Project Manager</div>
+                    </div>
+                    <div class="testimonial-card" style="max-width: 450px;">
+                        <blockquote>"Venkat Enterprises provided us with the perfect lab equipment. Their expertise was invaluable."</blockquote>
+                        <div class="author">- John Smith, Researcher</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <form class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section about-us">
+                <h4>About Venkat Enterprises</h4>
+                <p>Your dedicated partner for high-quality survey, lab, construction, and power tools. We deliver excellence and reliability with every product.</p>
+            </div>
+            <div class="footer-section quick-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-info-footer">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Tool Street, Chennai, India</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@venkatenterprises.com</p>
+            </div>
+            <div class="footer-section social-media">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 Venkat Enterprises. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Sample product data
+        const products = [
+            { id: 1, name: 'Total Station', category: 'survey', price: 150000, brand: 'Brand 1', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Total+Station' },
+            { id: 2, name: 'Digital Theodolite', category: 'survey', price: 85000, brand: 'Brand 2', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Digital+Theodolite' },
+            { id: 3, name: 'Compound Microscope', category: 'lab', price: 25000, brand: 'Brand 3', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Microscope' },
+            { id: 4, name: 'Concrete Mixer', category: 'construction', price: 45000, brand: 'Brand 4', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Concrete+Mixer' },
+            { id: 5, name: 'Cordless Drill', category: 'power', price: 8000, brand: 'Brand 5', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Cordless+Drill' },
+            { id: 6, name: 'Laser Level', category: 'survey', price: 12000, brand: 'Brand 1', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Laser+Level' },
+            { id: 7, name: 'Centrifuge', category: 'lab', price: 30000, brand: 'Brand 3', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Centrifuge' },
+            { id: 8, name: 'Hammer Drill', category: 'power', price: 15000, brand: 'Brand 5', imageUrl: 'https://placehold.co/400x400/1a1a1a/FF8C00?text=Hammer+Drill' },
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const productsGrid = document.getElementById('products-grid');
+        const productsFilter = document.getElementById('products-filter');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+
+        // Function to render products
+        function renderProducts(filteredProducts) {
+            productsGrid.innerHTML = ''; // Clear existing products
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = '<p style="text-align:center; grid-column: 1 / -1; color: #777;">No products found for this category.</p>';
+                return;
+            }
+
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-category', product.category);
+                productCard.innerHTML = `
+                    <div class="product-image-container">
+                        <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>₹${product.price.toLocaleString('en-IN')}</p>
+                        <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Function to filter and sort products
+        function filterAndSortProducts(filter = 'all') {
+            let filteredProducts = products;
+            if (filter !== 'all') {
+                filteredProducts = products.filter(product => product.category === filter);
+            }
+            renderProducts(filteredProducts);
+        }
+
+        // Handle product filter clicks
+        productsFilter.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn')) {
+                const filter = e.target.dataset.filter;
+                // Update active class
+                document.querySelectorAll('.products-filter .btn').forEach(button => {
+                    button.classList.remove('active');
+                });
+                e.target.classList.add('active');
+                filterAndSortProducts(filter);
+            }
+        });
+
+        // Add to cart functionality
+        productsGrid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productId = parseInt(e.target.dataset.id);
+                const productToAdd = products.find(p => p.id === productId);
+
+                const existingCartItem = cart.find(item => item.id === productId);
+                if (existingCartItem) {
+                    existingCartItem.quantity++;
+                } else {
+                    cart.push({ ...productToAdd, quantity: 1 });
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartDisplay();
+            }
+        });
+
+        // Update cart display
+        function updateCartDisplay() {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<div class="cart-empty-message" style="text-align:center; padding:20px;">
+                    <p>Your cart is empty.</p>
+                </div>`;
+            } else {
+                cart.forEach(item => {
+                    const cartItemEl = document.createElement('div');
+                    cartItemEl.className = 'cart-item';
+                    cartItemEl.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toLocaleString('en-IN')} x ${item.quantity}</p>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItemEl);
+                    total += item.price * item.quantity;
+                });
+            }
+
+            cartTotalPrice.textContent = `₹${total.toLocaleString('en-IN')}`;
+        }
+
+        // Handle mobile sidebar and floating nav
+        const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        const floatingNavToggle = document.getElementById('floating-nav-toggle');
+        const floatingNav = document.getElementById('floating-nav');
+        const closeFloatingNav = document.getElementById('close-floating-nav');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('show');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+        });
+
+        floatingNavToggle.addEventListener('click', () => {
+            floatingNav.classList.toggle('show');
+            const icon = floatingNavToggle.querySelector('i');
+            if (floatingNav.classList.contains('show')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-plus';
+            }
+        });
+
+        closeFloatingNav.addEventListener('click', () => {
+            floatingNav.classList.remove('show');
+            floatingNavToggle.querySelector('i').className = 'fas fa-plus';
+        });
+
+        // Header shrink/expand behavior
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        const logoSvg = header.querySelector('.logo svg');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.classList.add('header-scrolled');
+                if (logoSvg) {
+                    logoSvg.style.height = '45px';
+                }
+            } else if (scrollTop < lastScrollTop || scrollTop <= 100) {
+                header.classList.remove('header-scrolled');
+                if (logoSvg) {
+                    logoSvg.style.height = '60px';
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAndSortProducts();
+            updateCartDisplay();
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+</body>
+</html>

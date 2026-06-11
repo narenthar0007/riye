@@ -1,0 +1,71 @@
+<h1>API Access Keys</h1>
+
+<div class="mb-3">
+    <%= link_to 'New API Key', new_api_access_path, class: 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Access Key</th>
+            <th>User</th>
+            <th>Permissions</th>
+            <th>Status</th>
+            <th>Last Used</th>
+            <th>Expires At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @api_accesses.each do |api_access| %>
+        <tr>
+            <td><%= api_access.name %></td>
+            <td>
+                <code><%= api_access.access_key %></code>
+                <button class="btn btn-sm btn-outline-secondary ms-2" onclick="copyToClipboard('<%= api_access.access_key %>')">Copy</button>
+            </td>
+            <td><%= api_access.user&.email || 'System' %></td>
+            <td>
+                <% if api_access.permissions.present? %>
+                <small><%= api_access.permissions_array.join(', ') %></small>
+                <% else %>
+                <em>All permissions</em>
+                <% end %>
+            </td>
+            <td>
+                <% if api_access.active? %>
+                <span class="badge bg-success">Active</span>
+                <% else %>
+                <span class="badge bg-danger">Inactive</span>
+                <% end %>
+            </td>
+            <td><%= api_access.last_used_at&.strftime('%Y-%m-%d %H:%M') || 'Never' %></td>
+            <td><%= api_access.expires_at&.strftime('%Y-%m-%d') || 'Never' %></td>
+            <td>
+                <%= link_to 'Show', api_access, class: 'btn btn-sm btn-outline-info' %>
+                <%= link_to 'Edit', edit_api_access_path(api_access), class: 'btn btn-sm btn-outline-warning' %>
+                <%= link_to 'Delete', api_access, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger' %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            // Show success message
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        });
+    }
+</script>

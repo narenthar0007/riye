@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Shot - Instant Water Heaters at Affordable Prices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-red: #e30613;
+            --dark-red: #b00000;
+            --light-red: #ff4d4d;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-color: #4a4a4a; /* Slightly softer dark gray for general text */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
+        }
+        
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-red);
+            font-size: 2.5rem; /* Slightly larger for prominence */
+            position: relative;
+            font-weight: 700; /* Bolder */
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px; /* Wider underline */
+            height: 5px; /* Thicker underline */
+            background: var(--primary-red);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--primary-red);
+            font-size: 2rem; /* Slightly larger */
+            font-weight: 800; /* Extra bold */
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Larger icon */
+            color: var(--primary-red);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px; /* More spacing */
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding-bottom: 5px; /* Space for underline effect */
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Floating Circular Navigation */
+        .floating-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex; /* Ensure it uses flex for alignment */
+            flex-direction: column; /* Stack vertically */
+            gap: 10px; /* Space between items */
+        }
+        
+        .floating-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .floating-nav ul li {
+            margin: 0; /* Reset margin */
+            position: relative;
+        }
+        
+        .floating-nav ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px; /* Slightly larger */
+            height: 55px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            font-size: 1.3rem; /* Larger icon */
+        }
+        
+        .floating-nav ul li a:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .floating-nav ul li .nav-tooltip {
+            position: absolute;
+            right: 65px; /* Adjusted position */
+            background: var(--dark-gray);
+            color: white;
+            padding: 8px 15px; /* More padding */
+            border-radius: 8px; /* More rounded */
+            font-size: 0.95rem; /* Slightly larger font */
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+            top: 50%;
+        }
+        
+        .floating-nav ul li .nav-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -8px; /* Adjusted position */
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid var(--dark-gray);
+        }
+        
+        .floating-nav ul li a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px; /* Adjusted position on hover */
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 90vh; /* Taller hero */
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+            position: relative; /* For overlay */
+        }
+        
+        .hero-content {
+            max-width: 900px; /* Wider content */
+            margin: 0 auto;
+            padding: 30px; /* More padding */
+            background-color: rgba(0, 0, 0, 0.3); /* Subtle overlay for text readability */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero h2 {
+            font-size: 3.8rem; /* Larger heading */
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem; /* Larger paragraph */
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* More spacing */
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0; /* More padding */
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minwidth */
+            gap: 40px; /* More spacing */
+        }
+        
+        .feature-card {
+            background: var(--light-gray);
+            padding: 35px; /* More padding */
+            border-radius: 15px; /* More rounded */
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px); /* More pronounced lift */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem; /* Larger icon */
+            color: var(--primary-red);
+            margin-bottom: 25px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-size: 1.5rem; /* Larger heading */
+        }
+        
+        .feature-card p {
+            color: var(--text-color);
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minwidth */
+            gap: 40px; /* More spacing */
+        }
+        
+        .product-card-container {
+            perspective: 1000px; /* For 3D flip effect */
+            height: 450px; /* Fixed height for consistent cards */
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s; /* Flip animation speed */
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card-container.flipped .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start; /* Align content to top */
+            text-align: left;
+        }
+
+        .product-img {
+            height: 200px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer; /* Indicate clickable */
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card-container:hover .product-img img { /* Apply hover to container for image zoom */
+            transform: scale(1.1);
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-red);
+            font-size: 1.4rem;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin: 15px 0;
+            color: var(--dark-red);
+        }
+        
+        .product-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%; /* Ensure buttons take full width */
+        }
+
+        .product-card-back .product-details-full {
+            flex-grow: 1; /* Allow details to take up space */
+            margin-bottom: 20px;
+            overflow-y: auto; /* Enable scrolling for long descriptions */
+            padding-right: 5px; /* Space for scrollbar */
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        .product-card-back .btn {
+            width: 100%; /* Full width for back buttons */
+            margin-top: 10px;
+        }
+        
+        /* Franchise Section */
+        .franchise {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .franchise-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 60px; /* More spacing */
+        }
+        
+        .franchise-text {
+            flex: 1;
+            min-width: 350px; /* Larger min-width */
+        }
+        
+        .franchise-image {
+            flex: 1;
+            min-width: 350px;
+            border-radius: 15px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+        }
+        
+        .franchise-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .franchise-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .benefits-list {
+            margin: 30px 0; /* More margin */
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 12px; /* More spacing */
+            position: relative;
+            padding-left: 35px; /* Space for icon */
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+        
+        .benefits-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #28a745; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonials Section (Slideshow) */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden; /* Hide overflowing slides */
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 800px; /* Constrain width for better slideshow appearance */
+            margin: 0 auto;
+            overflow: hidden; /* Hide parts of cards not in view */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonials-wrapper {
+            display: flex;
+            transition: transform 0.8s ease-in-out; /* Smooth slide transition */
+        }
+        
+        .testimonial-card {
+            min-width: 100%; /* Each card takes full width of container */
+            flex-shrink: 0; /* Prevent cards from shrinking */
+            background: var(--white);
+            padding: 40px; /* More padding */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center; /* Center content */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .testimonial-card:before {
+            content: '\201C';
+            font-family: Georgia, serif;
+            font-size: 5rem; /* Larger quote mark */
+            color: var(--light-red);
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%); /* Center the quote mark */
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            padding-top: 20px;
+            font-size: 1.15rem; /* Slightly larger text */
+            color: var(--text-color);
+            z-index: 2; /* Ensure text is above quote mark */
+            position: relative;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center author info */
+            margin-top: 20px;
+        }
+        
+        .author-img {
+            width: 60px; /* Larger image */
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--primary-red); /* Thicker border */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-red);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Slideshow Navigation Buttons */
+        .slideshow-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(227, 6, 19, 0.7); /* Primary red with transparency */
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            z-index: 10;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .slideshow-nav-btn:hover {
+            background: var(--primary-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        /* Slideshow Dots */
+        .slideshow-dots {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        .dot.active {
+            background-color: var(--primary-red);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            color: var(--primary-red);
+            margin-right: 20px;
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .contact-item a:hover {
+            color: var(--primary-red);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 350px;
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 180px; /* Taller textarea */
+            resize: vertical; /* Allow vertical resizing */
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 30px; /* More padding */
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted min-width */
+            gap: 40px; /* More spacing */
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+        }
+        
+        .footer-col p, .footer-col ul li {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-red);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px; /* More spacing */
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
+            width: 45px; /* Larger icons */
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-red);
+            transform: translateY(-5px) scale(1.1); /* More pronounced hover */
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 65px; /* Larger buttons */
+            height: 65px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem; /* Larger icons */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-8px) scale(1.1); /* More pronounced lift and scale */
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Cart Icon and Sidebar Styles */
+        #cartIcon {
+            position: fixed;
+            bottom: 30px; /* Aligned with other floating buttons */
+            left: 30px;
+            width: 65px;
+            height: 65px;
+            background-color: #007bff; /* Blue for cart */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #cartIcon:hover {
+            background-color: #0056b3;
+            transform: translateY(-8px) scale(1.1);
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-red);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 4px 8px;
+            min-width: 25px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #cartSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px; /* Fixed width */
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1100; /* Higher than cart icon */
+            transform: translateX(100%); /* Start off-screen */
+            transition: transform 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        #cartSidebar.open {
+            transform: translateX(0); /* Slide into view */
+        }
+
+        #cartSidebar h3 {
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        #cartSidebar h3::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-red);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        #closeCartSidebar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        #closeCartSidebar:hover {
+            color: var(--primary-red);
+        }
+
+        #cartItems {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1; /* Allows list to take available space */
+            overflow-y: auto; /* Scroll for many items */
+            padding-right: 10px; /* Space for scrollbar */
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .cart-item-details p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.3s ease;
+        }
+        .remove-item-btn:hover {
+            color: var(--dark-red);
+        }
+
+        #cartTotal {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--primary-red);
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: right;
+            color: var(--dark-gray);
+        }
+        #cartTotal span {
+            color: var(--primary-red);
+        }
+
+
+        /* Responsive Styles (Adjusted for Cart Sidebar) */
+        @media (max-width: 768px) {
+            #cartSidebar {
+                width: 100%; /* Full width on mobile */
+            }
+            #cartIcon {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.7rem;
+                padding: 3px 7px;
+                min-width: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' fill='%23e30613'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3EMS%3C/text%3E%3C/svg%3E" alt="Mr Shot Logo">
+                <h1>Mr Shot</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#franchise">Franchise</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Circular Navigation -->
+    <div class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <i class="fas fa-fire"></i>
+                    <span class="nav-tooltip">Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#franchise">
+                    <i class="fas fa-store"></i>
+                    <span class="nav-tooltip">Franchise</span>
+                </a>
+            </li>
+            <li>
+                <a href="#testimonials">
+                    <i class="fas fa-star"></i>
+                    <span class="nav-tooltip">Testimonials</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-phone"></i>
+                    <span class="nav-tooltip">Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Instant Hot Water at Unbeatable Prices</h2>
+                <p>Mr Shot brings you high-quality instant water heaters at the most affordable prices in Tamil Nadu and across India. Perfect for homes and businesses.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-large">View Products</a>
+                    <a href="#franchise" class="btn btn-large">Franchise Opportunity</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Mr Shot?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Our direct manufacturing approach allows us to offer the best prices without compromising on quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Heating</h3>
+                    <p>Get hot water instantly with our advanced heating technology that saves both time and electricity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Built with multiple safety features including auto cut-off and thermal protection for complete peace of mind.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>All India Delivery</h3>
+                    <p>We deliver across Tamil Nadu and all other states in India with our extensive dealer network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section class="franchise" id="franchise">
+        <div class="container">
+            <h2 class="section-title">Franchise Opportunity</h2>
+            <div class="franchise-content">
+                <div class="franchise-text">
+                    <h3>Become a Mr Shot Franchise Partner</h3>
+                    <p>Join our growing network of franchise partners across Tamil Nadu and other states. We provide complete support to help you establish and grow your water heater business.</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Low investment with high returns</li>
+                        <li>Exclusive territory rights</li>
+                        <li>Training and marketing support</li>
+                        <li>Established brand recognition</li>
+                        <li>Ongoing product supply</li>
+                        <li>Business operation guidance</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-large">Apply for Franchise</a>
+                </div>
+                <div class="franchise-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mr Shot Franchise Opportunity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="slideshow-container">
+                <div class="testimonials-wrapper" id="testimonialsWrapper">
+                    <!-- Testimonial cards will be dynamically generated here by JavaScript -->
+                </div>
+                <button class="slideshow-nav-btn prev-btn" id="prevTestimonialBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slideshow-nav-btn next-btn" id="nextTestimonialBtn"><i class="fas fa-chevron-right"></i></button>
+                <div class="slideshow-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Head Office</h4>
+                                <p>123 Industrial Estate, Chennai, Tamil Nadu - 600032</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 9876543210 (Sales)</p>
+                                <p>+91 9876543211 (Franchise)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>sales@mrshort.com</p>
+                                <p>franchise@mrshort.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="product">Product Enquiry</option>
+                                <option value="franchise">Franchise Opportunity</option>
+                                <option value="support">Customer Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Mr Shot</h3>
+                    <p>Leading manufacturer of affordable instant water heaters in Tamil Nadu and across India. Quality products at unbeatable prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#franchise">Franchise</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Mr Shot Basic</a></li>
+                        <li><a href="#">Mr Shot Premium</a></li>
+                        <li><a href="#">Mr Shot Commercial</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Find a Dealer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mr Shot. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btns">
+        <a href="https://wa.me/919876543210" class="floating-btn whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919876543210" class="floating-btn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar">
+        <button id="closeCartSidebar"><i class="fas fa-times"></i></button>
+        <h3>Your Shopping Cart</h3>
+        <ul id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="cartTotal">
+            Total: ₹<span id="cartTotalAmount">0.00</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.querySelector('ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.querySelector('ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Form Submission
+        const enquiryForm = document.getElementById('enquiryForm');
+        
+        enquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to your server
+            // For demo, we'll just show a custom message box instead of alert
+            showCustomMessage(`Thank you, ${name}! Your ${subject} enquiry has been received. We'll contact you soon at ${phone} or ${email}.`, 'success');
+            
+            // Reset form
+            enquiryForm.reset();
+        });
+        
+        // Custom Message Box (replaces alert)
+        function showCustomMessage(message, type = 'info') {
+            const existingMessage = document.getElementById('customMessageBox');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                font-size: 1rem;
+                text-align: center;
+                max-width: 90%;
+                min-width: 250px;
+            `;
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+
+            // Animate in
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 50);
+
+            // Animate out and remove after 5 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 5000);
+        }
+
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container'); // Added new elements
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                if (elementPosition < windowHeight - 150) { // Adjusted threshold
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                } else {
+                    // Reset if scrolled back up, to re-trigger on scroll down
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                }
+            });
+        }
+        
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Trigger initial check
+        revealOnScroll();
+        
+        // Active link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a, .floating-nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Adjust for fixed header height
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Product Data as Key-Value Pairs (Array of Objects) ---
+        const productsData = [
+            {
+                id: 'basic',
+                name: 'Mr Shot Basic',
+                price: 2499,
+                img: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Perfect for small households with basic hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '3000 Watts',
+                    features: 'Instant heating, Auto cut-off, Rust-proof body.',
+                    description: 'This compact and efficient water heater is designed for quick hot water delivery, ideal for kitchens, small bathrooms, and single-person use. Its robust build ensures durability and safety.'
+                }
+            },
+            {
+                id: 'premium',
+                name: 'Mr Shot Premium',
+                price: 3999,
+                img: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Advanced features for families with higher hot water demand.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4500 Watts',
+                    features: 'Digital temperature display, Multiple safety layers, Energy-saving mode, Faster heating.',
+                    description: 'Designed for modern homes, the Premium model offers enhanced capacity and smart features for optimal comfort and efficiency. Enjoy precise temperature control and advanced safety mechanisms.'
+                }
+            },
+            {
+                id: 'commercial',
+                name: 'Mr Shot Commercial',
+                price: 5999,
+                img: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Heavy-duty model for shops, salons, and small businesses.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'High-capacity tank, Industrial-grade heating element, Continuous hot water supply, Robust construction.',
+                    description: 'Built for demanding environments, this model ensures a constant supply of hot water for commercial applications like salons, small hotels, and offices. Its heavy-duty components guarantee long-lasting performance.'
+                }
+            }
+        ];
+
+        // Function to render products dynamically
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = ''; // Clear existing content
+
+            productsData.forEach(product => {
+                const productCardHtml = `
+                    <div class="product-card-container">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <a href="javascript:void(0);" class="product-image-link" data-product-id="${product.id}">
+                                    <div class="product-img">
+                                        <img src="${product.img}" alt="${product.name}">
+                                    </div>
+                                </a>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p>${product.shortDescription}</p>
+                                    <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="product-btns">
+                                        <button class="btn view-details-btn" data-product-id="${product.id}">View Details</button>
+                                        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>${product.name} Details</h3>
+                                <div class="product-details-full">
+                                    <p><strong>Capacity:</strong> ${product.fullDetails.capacity}</p>
+                                    <p><strong>Power:</strong> ${product.fullDetails.power}</p>
+                                    <p><strong>Features:</strong> ${product.fullDetails.features}</p>
+                                    <p>${product.fullDetails.description}</p>
+                                </div>
+                                <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-secondary back-to-front-btn" style="background-color: #6c757d; margin-top: 10px;">Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsGrid.insertAdjacentHTML('beforeend', productCardHtml);
+            });
+
+            // Re-attach event listeners after rendering products
+            attachProductEventListeners();
+        }
+
+        // Attach event listeners for product cards (called after rendering)
+        function attachProductEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.product-image-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.back-to-front-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.remove('flipped');
+                });
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const product = productsData.find(p => p.id === productId);
+                    if (product) {
+                        addItemToCart(product);
+                    }
+                });
+            });
+        }
+
+        // --- Cart Logic ---
+        let cart = []; // Array to store cart items
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartSidebarBtn = document.getElementById('closeCartSidebar');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            cartCount.textContent = cart.length;
+            cartItemsList.innerHTML = ''; // Clear current items
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: var(--text-color); margin-top: 20px;">Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('cart-item');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${item.id}"><i class="fas fa-times-circle"></i></button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price;
+                });
+            }
+            cartTotalAmount.textContent = total.toFixed(2);
+
+            // Re-attach event listeners for remove buttons
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = this.dataset.productId;
+                    removeItemFromCart(productIdToRemove);
+                });
+            });
+        }
+
+        // Function to add item to cart
+        function addItemToCart(product) {
+            cart.push(product);
+            updateCartDisplay();
+            showCustomMessage(`"${product.name}" added to cart!`, 'success');
+            cartSidebar.classList.add('open'); // Open sidebar when item is added
+        }
+
+        // Function to remove item from cart
+        function removeItemFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                const removedItemName = cart[index].name;
+                cart.splice(index, 1); // Remove one item at the found index
+                updateCartDisplay();
+                showCustomMessage(`"${removedItemName}" removed from cart.`, 'info');
+            }
+        }
+
+        // Open/Close Cart Sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+        });
+
+        closeCartSidebarBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+
+        // Close sidebar if clicked outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target) && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+
+
+        // Testimonials Slideshow Logic
+        let currentTestimonialIndex = 0;
+        const testimonialsData = [
+            {
+                text: "I've been using Mr Shot water heater for 2 years now. It's energy efficient and provides instant hot water even in winter. Best purchase for my family!",
+                author: "Ramesh Kumar",
+                location: "Chennai, Tamil Nadu",
+                img: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                text: "As a franchise partner, I'm impressed with the support from Mr Shot team. The products sell themselves because of their quality and affordable pricing.",
+                author: "Priya Sharma",
+                location: "Franchise Partner, Bangalore",
+                img: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            {
+                text: "We installed Mr Shot heaters in our salon. They work perfectly even with continuous use. Our customers appreciate the consistent hot water supply.",
+                author: "Arun Joshi",
+                location: "Salon Owner, Coimbatore",
+                img: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            {
+                text: "Fantastic product! The Mr Shot Premium model heats up so fast and is very reliable. Customer service was also excellent during installation.",
+                author: "Anjali Singh",
+                location: "Mumbai, Maharashtra",
+                img: "https://randomuser.me/api/portraits/women/68.jpg"
+            }
+        ];
+
+        const testimonialsWrapper = document.getElementById('testimonialsWrapper');
+        const prevTestimonialBtn = document.getElementById('prevTestimonialBtn');
+        const nextTestimonialBtn = document.getElementById('nextTestimonialBtn');
+        const testimonialDotsContainer = document.getElementById('testimonialDots');
+
+        function renderTestimonials() {
+            testimonialsWrapper.innerHTML = ''; // Clear existing content
+            testimonialDotsContainer.innerHTML = ''; // Clear existing dots
+
+            testimonialsData.forEach((testimonial, index) => {
+                const testimonialCardHtml = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"${testimonial.text}"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="${testimonial.img}" alt="${testimonial.author}">
+                            </div>
+                            <div class="author-info">
+                                <h4>${testimonial.author}</h4>
+                                <p>${testimonial.location}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                testimonialsWrapper.insertAdjacentHTML('beforeend', testimonialCardHtml);
+
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.dataset.index = index;
+                testimonialDotsContainer.appendChild(dot);
+                dot.addEventListener('click', () => showTestimonial(index));
+            });
+            showTestimonial(currentTestimonialIndex); // Show initial testimonial
+        }
+
+        const dots = document.querySelectorAll('.dot'); // Re-select dots after rendering
+
+        function showTestimonial(index) {
+            const totalTestimonials = testimonialsData.length;
+            if (index >= totalTestimonials) {
+                currentTestimonialIndex = 0;
+            } else if (index < 0) {
+                currentTestimonialIndex = totalTestimonials - 1;
+            } else {
+                currentTestimonialIndex = index;
+            }
+
+            const offset = -currentTestimonialIndex * 100;
+            testimonialsWrapper.style.transform = `translateX(${offset}%)`;
+
+            // Update active dot
+            document.querySelectorAll('.dot').forEach((dot, i) => { // Re-select dots here too
+                if (i === currentTestimonialIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        prevTestimonialBtn.addEventListener('click', () => showTestimonial(currentTestimonialIndex - 1));
+        nextTestimonialBtn.addEventListener('click', () => showTestimonial(currentTestimonialIndex + 1));
+
+        // Auto-play slideshow
+        let testimonialAutoPlayInterval;
+        function startAutoPlay() {
+            testimonialAutoPlayInterval = setInterval(() => {
+                showTestimonial(currentTestimonialIndex + 1);
+            }, 5000); // Change slide every 5 seconds
+        }
+
+        function stopAutoPlay() {
+            clearInterval(testimonialAutoPlayInterval);
+        }
+
+        // Pause auto-play on hover
+        testimonialsWrapper.addEventListener('mouseenter', stopAutoPlay);
+        testimonialsWrapper.addEventListener('mouseleave', startAutoPlay);
+        prevTestimonialBtn.addEventListener('mouseenter', stopAutoPlay);
+        prevTestimonialBtn.addEventListener('mouseleave', startAutoPlay);
+        nextTestimonialBtn.addEventListener('mouseenter', stopAutoPlay);
+        nextTestimonialBtn.addEventListener('mouseleave', startAutoPlay);
+        testimonialDotsContainer.addEventListener('mouseenter', stopAutoPlay);
+        testimonialDotsContainer.addEventListener('mouseleave', startAutoPlay);
+
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(); // Render products from data
+            updateCartDisplay(); // Initialize cart display
+            renderTestimonials(); // Render testimonials from data
+            startAutoPlay(); // Start testimonial slideshow
+        });
+    </script>
+</body>
+</html>

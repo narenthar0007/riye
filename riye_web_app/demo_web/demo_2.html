@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bthanan Associates Engineers & Builders</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enable dark mode based on 'dark' class on HTML
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navyBlue: {
+                            DEFAULT: '#0F1A3B',
+                            light: '#28417A',
+                            dark: '#0A1121',
+                        },
+                        brightBlue: '#19d2e7',
+                        white: '#FFFFFF',
+                        lightGray: '#f0f2f5',
+                        darkGray: '#334155',
+                        mediumGray: '#4b5563',
+                        lightBlueGradientStart: '#e0e7ff',
+                        lightBlueGradientEnd: '#eef2ff',
+                        // Define dark mode specific colors
+                        dark: {
+                            bg: '#1a202c', // Dark background
+                            text: '#e2e8f0', // Light text
+                            card: '#2d3748', // Darker card background
+                            border: '#4a5568', // Darker border
+                            primary: '#4299e1', // Blue accent for dark mode
+                            secondary: '#63b3ed', // Lighter blue accent
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for the Inter font and smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: theme('colors.lightGray');
+            color: theme('colors.darkGray');
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Dark mode styles */
+        html.dark body {
+            background-color: theme('colors.dark.bg');
+            color: theme('colors.dark.text');
+        }
+        html.dark header {
+            background-color: theme('colors.dark.card');
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        html.dark nav a {
+            color: theme('colors.gray.400');
+        }
+        html.dark nav a:hover {
+            color: theme('colors.white');
+            background-color: theme('colors.dark.border');
+        }
+        html.dark .hero-background .bg-black {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        html.dark .hero-background h1 {
+            color: theme('colors.white');
+        }
+        html.dark .hero-background p {
+            color: theme('colors.gray.300');
+        }
+        html.dark .hero-background a {
+            background-color: theme('colors.dark.primary');
+            color: theme('colors.navyBlue.dark');
+        }
+        html.dark .section:not(.hero-background) {
+            background-color: theme('colors.dark.bg');
+            color: theme('colors.dark.text');
+        }
+        html.dark .section-title {
+            color: theme('colors.dark.text');
+        }
+        html.dark .section-title::after {
+            background-color: theme('colors.dark.primary');
+        }
+        html.dark .bg-white {
+            background-color: theme('colors.dark.card');
+            border-color: theme('colors.dark.border');
+            color: theme('colors.dark.text');
+        }
+        html.dark .service-card {
+            background-color: theme('colors.dark.card');
+            border-color: theme('colors.dark.border');
+        }
+        html.dark .service-card:hover {
+            background-color: theme('colors.dark.border');
+        }
+        html.dark .service-card .service-icon {
+            color: theme('colors.dark.primary');
+        }
+        html.dark .service-card:hover .service-icon {
+            color: theme('colors.white');
+        }
+        html.dark .service-card .service-title {
+            color: theme('colors.dark.text');
+        }
+        html.dark .service-card:hover .service-title {
+            color: theme('colors.white');
+        }
+        html.dark .service-card .service-description {
+            color: theme('colors.gray.400');
+        }
+        html.dark .service-card:hover .service-description {
+            color: theme('colors.gray.300');
+        }
+        html.dark .project-card {
+            background-color: theme('colors.dark.card');
+            border-color: theme('colors.dark.border');
+        }
+        html.dark .project-card h3 {
+            color: theme('colors.dark.text');
+        }
+        html.dark .project-card p {
+            color: theme('colors.gray.400');
+        }
+        html.dark .project-card a {
+            color: theme('colors.dark.primary');
+        }
+        html.dark .project-card a:hover {
+            color: theme('colors.dark.secondary');
+        }
+        html.dark button.bg-blue-600 {
+            background-color: theme('colors.dark.primary');
+            color: theme('colors.navyBlue.dark');
+        }
+        html.dark button.bg-blue-600:hover {
+            background-color: theme('colors.dark.secondary');
+        }
+        html.dark footer {
+            background-color: theme('colors.dark.card');
+            border-color: theme('colors.dark.border');
+        }
+        html.dark footer a {
+            color: theme('colors.dark.primary');
+        }
+        html.dark footer a:hover {
+            color: theme('colors.white');
+        }
+        html.dark #scroll-to-top, html.dark #chat-support-btn {
+            background-color: theme('colors.dark.primary');
+        }
+        html.dark #scroll-to-top:hover, html.dark #chat-support-btn:hover {
+            background-color: theme('colors.dark.secondary');
+        }
+        html.dark .chat-modal-content {
+            background-color: theme('colors.dark.card');
+        }
+        html.dark .chat-modal-content input,
+        html.dark .chat-modal-content textarea {
+            background-color: theme('colors.dark.border');
+            border-color: theme('colors.dark.primary');
+            color: theme('colors.dark.text');
+        }
+        html.dark .chat-modal-content input::placeholder,
+        html.dark .chat-modal-content textarea::placeholder {
+            color: theme('colors.gray.500');
+        }
+        html.dark .chat-modal-content h3 {
+            color: theme('colors.dark.text');
+        }
+        html.dark .chat-modal-content button.bg-green-500 {
+            background-color: #48bb78; /* Tailwind green-500 */
+        }
+        html.dark .chat-modal-content button.bg-blue-600 {
+            background-color: theme('colors.dark.primary');
+        }
+        html.dark .contact-form button.bg-green-500 {
+            background-color: #48bb78; /* Tailwind green-500 */
+        }
+        html.dark .contact-form button.bg-blue-600 {
+            background-color: theme('colors.dark.primary');
+        }
+
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            position: relative;
+        }
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section {
+                padding: 2rem 0.5rem;
+            }
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+
+        /* Scroll-to-Top Button */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: theme('colors.navyBlue.DEFAULT');
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        #scroll-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        #scroll-to-top:hover {
+            background-color: theme('colors.brightBlue');
+            transform: translateY(-2px);
+        }
+
+        /* Chat Support Button */
+        #chat-support-btn {
+            position: fixed;
+            bottom: 6rem;
+            left: 2rem;
+            background-color: theme('colors.navyBlue.DEFAULT');
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, background-color 0.3s ease;
+            opacity: 1;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #chat-support-btn:hover {
+            background-color: theme('colors.brightBlue');
+            transform: translateY(-2px);
+        }
+
+
+        /* Service Card Styling */
+        .service-card {
+            background-color: theme('colors.white');
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid theme('colors.gray.100');
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            background-color: theme('colors.gray.200');
+        }
+        .service-card .service-icon {
+            color: theme('colors.brightBlue');
+            transition: color 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            color: theme('colors.navyBlue.DEFAULT');
+        }
+        .service-card .service-title {
+            color: theme('colors.darkGray');
+            transition: color 0.3s ease;
+        }
+        .service-card:hover .service-title {
+            color: theme('colors.navyBlue.DEFAULT');
+        }
+        .service-card .service-description {
+            color: theme('colors.mediumGray');
+            transition: color 0.3s ease;
+        }
+        .service-card:hover .service-description {
+            color: theme('colors.navyBlue.DEFAULT');
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: theme('colors.white');
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid theme('colors.gray.100');
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: theme('colors.darkGray');
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: theme('colors.mediumGray');
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-card a {
+            color: theme('colors.brightBlue');
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-card a:hover {
+            color: theme('colors.navyBlue.DEFAULT');
+        }
+
+        /* Section Title Styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            color: theme('colors.darkGray');
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: theme('colors.brightBlue');
+            border-radius: 2px;
+        }
+
+        /* Hero Background */
+        .hero-background {
+            background-image: url('https://img.freepik.com/free-photo/form-dwelling-tower-high-engineering_1127-2349.jpg?ga=GA1.1.739747845.1749899900&semt=ais_hybrid&w=740');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: theme('colors.navyBlue.dark');
+            color: theme('colors.gray.400');
+            padding: 3rem 1rem;
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: theme('colors.brightBlue');
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: theme('colors.white');
+        }
+
+        /* Social Icons */
+        .social-icon {
+            @apply w-8 h-8 mx-2 text-gray-400 hover:text-brightBlue transition-colors duration-300;
+        }
+
+        /* Chat Modal Styles */
+        .chat-modal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 5000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+        }
+
+        .chat-modal.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .chat-modal-content {
+            background-color: theme('colors.navyBlue.DEFAULT');
+            border-radius: 0.75rem;
+            max-width: 28rem;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            color: theme('colors.white');
+        }
+        .chat-modal.show .chat-modal-content {
+            transform: translateY(0);
+        }
+
+        .chat-modal-content label {
+            color: theme('colors.gray.300');
+        }
+        .chat-modal-content input,
+        .chat-modal-content textarea {
+            background-color: theme('colors.navyBlue.light');
+            color: theme('colors.white');
+            border: 1px solid theme('colors.brightBlue');
+        }
+        .chat-modal-content input::placeholder,
+        .chat-modal-content textarea::placeholder {
+            color: theme('colors.gray.400');
+        }
+
+        /* Project Gallery Carousel */
+        .project-gallery-carousel {
+            position: relative;
+            width: 100%;
+            height: 400px; /* Fixed height for carousel */
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .project-gallery-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .project-gallery-carousel img.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg fixed w-full z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2">
+                <img src="https://placehold.co/40x40/0d9488/ffffff?text=BA" alt="Bthanan Associates Logo" class="rounded-full">
+                <span class="text-2xl font-bold text-gray-800">Bthanan Associates</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">About Us</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Services</a>
+                <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Projects</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Contact</a>
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 transition-colors duration-300 ml-4">
+                    <svg id="sun-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 00-.707-.707L14 2.5a1 1 0 00.707.707zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4-8a4 4 0 11-8 0 4 4 0 018 0zm.464-4.95l-.707-.707a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414zm-2.12 10.607a1 1 0 00.707.707L6 17.5a1 1 0 00-.707-.707z"></path></svg>
+                    <svg id="moon-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#home" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
+            <a href="#about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About Us</a>
+            <a href="#services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a>
+            <a href="#projects" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Projects</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-background h-screen flex items-center justify-center text-center text-white pt-16">
+            <div class="bg-black bg-opacity-60 p-8 md:p-12 rounded-xl max-w-4xl mx-auto shadow-2xl">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                    Building Dreams, Engineering Excellence.
+                </h1>
+                <p class="text-lg md:text-xl mb-8 opacity-90 animate-fade-in-up delay-200">
+                    Your Trusted Partner in All Kinds of Construction.
+                </p>
+                <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300 animate-fade-in-up delay-400 inline-block">
+                    Explore Our Work
+                </a>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 md:py-24 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 section-title mx-auto">About Us</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        <span class="font-bold text-blue-700">Bthanan Associates Engineers & Builders</span> is a leading construction company based in Coimbatore with over 11 years of excellence in the industry since 2012. We specialize in delivering high-quality construction solutions across residential and commercial buildings, industrial complexes (including cement factories, paper mills, engineering units, and spinning mills), institutional projects, and bespoke interior designs. Our team of skilled engineers, architects, and construction professionals is dedicated to precision, innovation, and timely project execution, ensuring every structure we build meets the highest standards of quality and durability
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                        Our dedicated team of skilled engineers, architects, and construction professionals works tirelessly to bring your vision to life. We pride ourselves on our meticulous attention to detail, adherence to strict quality standards, timely project completion, and a client-centric approach that ensures complete satisfaction.
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700">
+                        At Bthanan Associates, we believe in building strong foundations, not just structures. We are passionate about innovation, sustainability, and creating spaces that inspire and endure.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section bg-gray-50">
+            <div class="section-content px-4">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 section-title mx-auto">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Home" alt="Residential Construction Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Residential Construction</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            From dream homes to multi-family dwellings, we build high-quality residential properties that stand the test of time and offer comfortable living.
+                        </p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Office" alt="Commercial Construction Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Commercial Projects</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            Developing innovative and functional commercial spaces, including offices, retail outlets, and institutional buildings tailored to your business needs.
+                        </p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Eng" alt="Engineering Consulting Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Engineering Consulting</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            Providing expert structural design, civil engineering, and project management consulting to ensure the integrity and efficiency of your projects.
+                        </p>
+                    </div>
+                    <!-- Service Card 4 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Renov" alt="Renovation & Remodeling Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Renovation & Remodeling</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            Transforming existing spaces with modern renovations, ensuring enhanced functionality, aesthetics, and structural integrity.
+                        </p>
+                    </div>
+                    <!-- Service Card 5 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Indus" alt="Industrial Construction Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Industrial Construction</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            Specialized construction services for industrial facilities, including factories, warehouses, and infrastructure projects.
+                        </p>
+                    </div>
+                    <!-- Service Card 6 -->
+                    <div class="service-card">
+                        <img src="https://placehold.co/100x100/3b82f6/ffffff?text=Infra" alt="Infrastructure Development Icon" class="mx-auto mb-6 rounded-full p-4 bg-blue-100">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 service-title">Infrastructure Development</h3>
+                        <p class="text-gray-600 leading-relaxed service-description">
+                            Building essential public and private infrastructure, ensuring durability and compliance with all regulations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Main - showing latest 3) -->
+        <section id="projects" class="section bg-gradient-to-l from-blue-50 to-indigo-50">
+            <div class="section-content px-4">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 section-title mx-auto">Our Latest Projects</h2>
+                <div id="latest-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Projects will be dynamically loaded here -->
+                </div>
+                <div class="mt-12">
+                    <button id="view-all-projects-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        View All Projects
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Projects Section (Hidden by default) -->
+        <section id="all-projects-page" class="section bg-white hidden">
+            <div class="section-content px-4">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 section-title mx-auto">All Our Projects</h2>
+                <div id="all-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- All projects will be dynamically loaded here -->
+                </div>
+                <div class="mt-12">
+                    <button id="back-to-latest-btn" class="bg-blue-600 text-white hover:bg-blue-700 font-bold py-3 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-300">
+                        &larr; Back to Latest Projects
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Details Section (Initially hidden, shown when "View Details" is clicked) -->
+        <section id="project-details-section" class="section bg-gradient-to-l from-blue-50 to-indigo-50 hidden">
+            <div class="section-content px-4">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-left relative">
+                    <button id="back-from-details-btn" class="absolute top-4 left-4 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-full text-sm flex items-center transition-colors duration-300">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Projects
+                    </button>
+                    <h2 id="project-details-title" class="text-4xl font-extrabold text-gray-800 mb-6 text-center pt-8"></h2>
+
+                    <!-- Project Image Carousel -->
+                    <div id="project-gallery-carousel" class="project-gallery-carousel">
+                        <!-- Images will be dynamically loaded here -->
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">About This Project</h3>
+                            <p id="project-details-description" class="text-gray-700 leading-relaxed"></p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Key Information</h3>
+                            <ul class="text-gray-700 space-y-3">
+                                <li class="flex items-center"><strong class="w-32">Category:</strong> <span id="project-details-category"></span></li>
+                                <li class="flex items-center"><strong class="w-32">Location:</strong> <span id="project-details-location">Coimbatore, Tamil Nadu</span></li>
+                                <li class="flex items-center"><strong class="w-32">Year Completed:</strong> <span id="project-details-year"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section bg-white">
+            <div class="section-content px-4">
+                <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center section-title">Who We Are: Built on Trust</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="text-gray-700 text-lg leading-relaxed text-left">
+                        <p class="mb-6">At **Bthanan Associates Engineers & Builders**, we don't just construct buildings; we build legacies. With over two decades of unwavering dedication and a seasoned team of visionary architects, meticulous engineers, and skilled craftspeople, we transform ambitious blueprints into tangible masterpieces.</p>
+                        <p class="text-lg leading-relaxed text-gray-700">
+                            Our foundation is built on integrity, innovation, and an unwavering commitment to sustainable practices. We pride ourselves on delivering projects that not only meet but exceed expectations, on time and within budget, ensuring a greener, more efficient future for generations to come.
+                        </p>
+                    </div>
+                    <div class="flex justify-center md:justify-end">
+                        <img src="https://placehold.co/450x350/3b82f6/ffffff?text=Our+Dedicated+Team" alt="Our Team" class="rounded-xl shadow-xl border border-gray-200 max-w-full h-auto object-cover transform transition duration-500 hover:scale-105">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 section-title mx-auto">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Testimonial Card 1 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 flex flex-col items-center">
+                        <img src="https://placehold.co/80x80/3b82f6/ffffff?text=C1" alt="Client 1 Photo" class="w-20 h-20 rounded-full mb-4 object-cover border-4 border-blue-200">
+                        <p class="text-lg italic text-gray-700 mb-4">
+                            "Bthanan Associates delivered our new home with exceptional quality and professionalism. Their attention to detail and commitment to deadlines were truly impressive."
+                        </p>
+                        <p class="font-bold text-blue-700">- Mrs. Priya Sharma, Homeowner</p>
+                    </div>
+                    <!-- Testimonial Card 2 -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 flex flex-col items-center">
+                        <img src="https://placehold.co/80x80/3b82f6/ffffff?text=C2" alt="Client 2 Photo" class="w-20 h-20 rounded-full mb-4 object-cover border-4 border-blue-200">
+                        <p class="text-lg italic text-gray-700 mb-4">
+                            "We entrusted them with our office renovation, and they exceeded our expectations. The team was highly responsive, and the finished space is exactly what we envisioned."
+                        </p>
+                        <p class="font-bold text-blue-700">- Mr. Ramesh Kumar, Business Owner</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="section py-16 md:py-24 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 section-title mx-auto">Contact Us</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <!-- Contact Information -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Get in Touch</h3>
+                        <p class="mb-4 text-gray-700">
+                            Have a project in mind or just want to learn more about our services? Feel free to reach out to us!
+                        </p>
+                                                <div class="space-y-4 text-gray-700">
+                            <p class="flex items-start space-x-3">
+                                <svg class="w-6 h-6 text-blue-600 mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg><!-- todo need to change this to bs logo -->
+                                <span>2/8, 7th cross Kanjimaanagar, near Cheranmaanager, Vilankurichi, Coimbatore-641035</span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                                <span><a href="mailto:bthananassociates@gmail.com" class="hover:underline">bthananassociates@gmail.com</a></span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.47.57 3.57.11.35.03.75-.25 1.02L6.62 10.79z"/></svg>
+                                <span><a href="tel:+919942223010" class="hover:underline">9942223010</a></span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <i class="bi bi-whatsapp text-green-600 text-xl"></i>
+                                <span>
+                                    <a href="https://wa.me/919942223010" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                    WhatsApp
+                                    </a>
+                                </span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <i class="bi bi-linkedin text-blue-600 text-xl"></i>
+                                <span>
+                                    <a href="https://www.linkedin.com/company/bthanan-associates/" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                    LinkedIn
+                                    </a>
+                            </span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <i class="bi bi-facebook text-blue-600 text-xl"></i>
+                                <span>
+                                    <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                    Facebook
+                                    </a>
+                                </span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <i class="bi bi-twitter-x text-black text-xl"></i>
+                                <span>
+                                    <a href="https://x.com/yourhandle" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                    X (Twitter)
+                                    </a>
+                                </span>
+                            </p>
+                            <p class="flex items-center space-x-3">
+                                <i class="bi bi-instagram text-pink-600 text-xl"></i>
+                                <span>
+                                    <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                                    Instagram
+                                    </a>
+                                </span>
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-left">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="contact-name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                                <input type="text" id="contact-name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Name" required>
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                                <input type="email" id="contact-email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@example.com" required>
+                            </div>
+                            <div>
+                                <label for="contact-phone" class="block text-gray-700 text-sm font-bold mb-2">Phone (Optional)</label>
+                                <input type="tel" id="contact-phone" name="phone" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="+91 98765 43210">
+                            </div>
+                            <div>
+                                <label for="contact-message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                                <textarea id="contact-message" name="message" rows="6" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your project or inquiry..." required></textarea>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button type="button" id="send-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5 mr-2" fill="white"><path d="M380.9 97.1C339.4 55.6 283.8 32 223.5 32c-56.3 0-109.9 20.3-150.3 58.7-41.2 39.4-66.2 93.3-66.2 150.1 0 44.5 13.9 86.8 40.7 122.2L32 480l113.6-32.9c35.6 25.1 78.4 38.6 123.4 38.6 56.3 0 111.8-22.3 150.3-58.7 41.2-39.4 66.2-93.3 66.2-150.1.1-56.9-22.3-111.4-58.7-150.9zM223.5 448c-40.4 0-79.6-13.6-112.9-38.6L46.4 445.6l23.5-83.1c-24.9-34.9-38.4-75.7-38.4-118.5 0-50 19.3-97.4 53.7-130.8 34.4-33.4 80.5-52.1 129.8-52.1 50.7 0 98.7 19.4 133.1 53.7 34.4 33.4 53.7 80.5 53.7 129.8.1 50-19.4 98.4-53.7 131.8-34.4 33.4-80.5 52.1-129.8 52.1zm102.5-131.2c-3.1-1.6-18.4-9.1-21.3-10.1s-4.9-1.5-6.9 1.5c-2 3-7.8 9.1-9.5 10.9-1.7 1.8-3.4 2.1-6.3.7-3.2-1.7-13.4-4.9-25.5-15.7-9.4-8.3-14.7-15.5-16.4-18.4-1.7-2.9-.2-4.5 1.3-6.1.7-.7 1.7-1.8 2.6-2.9.9-1.1 1.2-2 1.8-2.9.6-.9.4-1.7-.1-2.6-.5-.9-4.9-12.7-6.7-17s-3.4-3.8-4.9-3.8-3.9 0-6 0c-2.1 0-8.2 2.5-12.5 6.3-4.2 3.8-16.1 15.6-16.1 37.9 0 22.4 16.5 43.9 18.9 47.1s31.5 48.7 75.3 68.3c4.7 2.1 8.4 3.4 11.3 4.4 5.9 2.1 11.3 1.8 15.4 1.1 4.7-.8 14.2-5.8 16.3-11.4 2.2-5.6 2.2-10.4 1.5-11.4-.7-.9-2.2-1.4-4.7-2.7z"/></svg>
+                                    Send via WhatsApp
+                                </button>
+                                <button type="button" id="send-email-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 mr-2" fill="white"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                                    Send via Email
+                                </button>
+                            </div>
+                            <p id="send-message-info" class="text-gray-500 text-sm mt-4 hidden">
+                                *Note: This will open your preferred WhatsApp/Email app to send the message.
+                            </p>
+                            <div id="form-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Google Map -->
+                <div class="mt-16 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Find Us on the Map</h3>
+                    <div class="map-container">
+                        <!-- Google Maps embed code for 2/8,7th cross Kanjimaanagar, near chanmaanager, VilanKurichi, coimbatore-641035 -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.74815197825!2d76.95383567470656!3d11.08200635544778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8f4c000000001%3A0x6b4c3e8a4a3e8f81!2sKanjimaanagar%2C%20Vilankurichi%2C%20Coimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1718712000000!5m2!1sen!2sin"
+                            width="600"
+                            height="450"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Bthanan Associates Location"
+                        ></iframe>
+                    </div>
+                    <p class="text-gray-600 mt-4 text-sm">
+                        *Note: The map shows the general Kanjimaanagar area. For precise directions, please use the address provided.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-10">
+        <div class="container mx-auto px-6 text-center md:flex md:justify-between md:items-center">
+            <div class="mb-6 md:mb-0">
+                <h4 class="text-xl font-bold text-blue-400">Bthanan Associates</h4>
+                <p class="text-gray-300 text-sm">Engineers & Builders</p>
+            </div>
+            <div class="mb-6 md:mb-0">
+                <p class="text-gray-400">
+                    2/8, 7th cross Kanjimaanagar, near Cheranmaanager,<br>
+                    Vilankurichi, Coimbatore-641035
+                </p>
+                <p class="text-gray-400 mb-2">Email: <a href="mailto:bthananassociates@gmail.com" class="hover:underline">bthananassociates@gmail.com</a></p>
+                <p class="text-gray-400">Mobile: <a href="tel:+919942223010" class="hover:underline">9942223010</a></p>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <a href="https://www.linkedin.com/company/bthanan-associates/" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-12.4-58.5-45.6-58.5-24.6 0-39.3 16.6-45.7 32.9v141.1h-92.7V148.9h92.7v39.1c12.4-23.5 41.3-58.5 89.1-58.5 65.2 0 114.9 42.1 114.9 132.3V448z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/bthananassociates/" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.35 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.35 504 379.78 504 256z"/></svg>
+                </a>
+                <a href="https://wa.me/919942223010" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M380.9 97.1C339.4 55.6 283.8 32 223.5 32c-56.3 0-109.9 20.3-150.3 58.7-41.2 39.4-66.2 93.3-66.2 150.1 0 44.5 13.9 86.8 40.7 122.2L32 480l113.6-32.9c35.6 25.1 78.4 38.6 123.4 38.6 56.3 0 111.8-22.3 150.3-58.7 41.2-39.4 66.2-93.3 66.2-150.1.1-56.9-22.3-111.4-58.7-150.9zM223.5 448c-40.4 0-79.6-13.6-112.9-38.6L46.4 445.6l23.5-83.1c-24.9-34.9-38.4-75.7-38.4-118.5 0-50 19.3-97.4 53.7-130.8 34.4-33.4 80.5-52.1 129.8-52.1 50.7 0 98.7 19.4 133.1 53.7 34.4 33.4 53.7 80.5 53.7 129.8.1 50-19.4 98.4-53.7 131.8-34.4 33.4-80.5 52.1-129.8 52.1zm102.5-131.2c-3.1-1.6-18.4-9.1-21.3-10.1s-4.9-1.5-6.9 1.5c-2 3-7.8 9.1-9.5 10.9-1.7 1.8-3.4 2.1-6.3.7-3.2-1.7-13.4-4.9-25.5-15.7-9.4-8.3-14.7-15.5-16.4-18.4-1.7-2.9-.2-4.5 1.3-6.1.7-.7 1.7-1.8 2.6-2.9.9-1.1 1.2-2 1.8-2.9.6-.9.4-1.7-.1-2.6-.5-.9-4.9-12.7-6.7-17s-3.4-3.8-4.9-3.8-3.9 0-6 0c-2.1 0-8.2 2.5-12.5 6.3-4.2 3.8-16.1 15.6-16.1 37.9 0 22.4 16.5 43.9 18.9 47.1s31.5 48.7 75.3 68.3c4.7 2.1 8.4 3.4 11.3 4.4 5.9 2.1 11.3 1.8 15.4 1.1 4.7-.8 14.2-5.8 16.3-11.4 2.2-5.6 2.2-10.4 1.5-11.4-.7-.9-2.2-1.4-4.7-2.7z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/bthananassociates/" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224.1 148.1c-38.2 0-69 30.9-69 69s30.9 69 69 69c38.2 0 69-30.9 69-69s-30.9-69-69-69zm0 100c-17.1 0-31-13.9-31-31s13.9-31 31-31c17.1 0 31 13.9 31 31s-13.9 31-31 31zm138.8-129.5c-3.7-3.7-9.8-5.9-16.4-5.9h-44.4c-6.6 0-12.7 2.2-16.4 5.9-3.7 3.7-5.9 9.8-5.9 16.4v44.4c0 6.6 2.2 12.7 5.9 16.4 3.7 3.7 9.8 5.9 16.4 5.9h44.4c6.6 0 12.7-2.2 16.4-5.9 3.7-3.7 5.9-9.8 5.9-16.4v-44.4c0-6.6-2.2-12.7-5.9-16.4zM448 96c0-40.8-33.2-74-74-74H74C33.2 22 0 55.2 0 96v256c0 40.8 33.2 74 74 74h299c40.8 0 74-33.2 74-74V96zm-44 256c0 24.3-19.7 44-44 44H88c-24.3 0-44-19.7-44-44V136c0-24.3 19.7-44 44-44h264c24.3 0 44 19.7 44 44v216z"/></svg>
+                </a>
+                <a href="https://twitter.com/bthananassociates" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L214.2 284.4 81.6 464H11.4L184.8 245.8 28.2 48H180.3L274.5 186.3 389.2 48zM364.4 421.8h39.2L123.6 92.2H80.3L364.4 421.8z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/channel/your-channel-id" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42 24.95-48.284 48.597-11.668 44.49-11.668 115.657 0 160.154 6.281 23.65 24.787 42.276 48.284 48.597C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.322 42-24.95 48.284-48.597 11.668-44.49 11.668-115.657 0-160.154zM272 342V170l115.546 86.417L272 342z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500 text-sm">
+            &copy; 2025 Bthanan Associates Engineers & Builders. All rights reserved.
+            <p class="mt-2">
+                Maintained by <a href="https://www.bluevent.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Bluevent</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scroll-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <!-- Chat Support Button -->
+    <button id="chat-support-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+    </button>
+
+    <!-- Chat Modal -->
+    <div id="chat-modal" class="chat-modal">
+        <div class="chat-modal-content">
+            <button id="close-chat-modal" class="absolute top-4 right-4 text-white hover:text-gray-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-6 text-center">Chat with Support</h3>
+            <form id="chat-form" class="space-y-4">
+                <div>
+                    <label for="chat-name" class="block text-gray-300 text-sm font-bold mb-2">Name</label>
+                    <input type="text" id="chat-name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-brightBlue focus:border-transparent bg-navyBlue-light text-white placeholder-gray-400" placeholder="Your Name" required>
+                </div>
+                <div>
+                    <label for="chat-email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="chat-email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-brightBlue focus:border-transparent bg-navyBlue-light text-white placeholder-gray-400" placeholder="your@example.com" required>
+                </div>
+                <div>
+                    <label for="chat-message" class="block text-gray-300 text-sm font-bold mb-2">Message</label>
+                    <textarea id="chat-message" name="message" rows="6" class="shadow appearance-none border rounded-lg w-full py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-brightBlue focus:border-transparent bg-navyBlue-light text-white placeholder-gray-400" placeholder="Type your message here..." required></textarea>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="button" id="send-whatsapp-chat-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5 mr-2" fill="white"><path d="M380.9 97.1C339.4 55.6 283.8 32 223.5 32c-56.3 0-109.9 20.3-150.3 58.7-41.2 39.4-66.2 93.3-66.2 150.1 0 44.5 13.9 86.8 40.7 122.2L32 480l113.6-32.9c35.6 25.1 78.4 38.6 123.4 38.6 56.3 0 111.8-22.3 150.3-58.7 41.2-39.4 66.2-93.3 66.2-150.1.1-56.9-22.3-111.4-58.7-150.9zM223.5 448c-40.4 0-79.6-13.6-112.9-38.6L46.4 445.6l23.5-83.1c-24.9-34.9-38.4-75.7-38.4-118.5 0-50 19.3-97.4 53.7-130.8 34.4-33.4 80.5-52.1 129.8-52.1 50.7 0 98.7 19.4 133.1 53.7 34.4 33.4 53.7 80.5 53.7 129.8.1 50-19.4 98.4-53.7 131.8-34.4 33.4-80.5 52.1-129.8 52.1zm102.5-131.2c-3.1-1.6-18.4-9.1-21.3-10.1s-4.9-1.5-6.9 1.5c-2 3-7.8 9.1-9.5 10.9-1.7 1.8-3.4 2.1-6.3.7-3.2-1.7-13.4-4.9-25.5-15.7-9.4-8.3-14.7-15.5-16.4-18.4-1.7-2.9-.2-4.5 1.3-6.1.7-.7 1.7-1.8 2.6-2.9.9-1.1 1.2-2 1.8-2.9.6-.9.4-1.7-.1-2.6-.5-.9-4.9-12.7-6.7-17s-3.4-3.8-4.9-3.8-3.9 0-6 0c-2.1 0-8.2 2.5-12.5 6.3-4.2 3.8-16.1 15.6-16.1 37.9 0 22.4 16.5 43.9 18.9 47.1s31.5 48.7 75.3 68.3c4.7 2.1 8.4 3.4 11.3 4.4 5.9 2.1 11.3 1.8 15.4 1.1 4.7-.8 14.2-5.8 16.3-11.4 2.2-5.6 2.2-10.4 1.5-11.4-.7-.9-2.2-1.4-4.7-2.7z"/></svg>
+                        Send via WhatsApp
+                    </button>
+                    <button type="button" id="send-email-chat-btn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md transform hover:scale-105 transition-all duration-300 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 mr-2" fill="white"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
+                        Send via Email
+                    </button>
+                </div>
+                <p id="chat-message-info" class="text-gray-400 text-sm mt-4 hidden">
+                    *Note: This will open your preferred WhatsApp/Email app to send the message.
+                </p>
+                <div id="chat-form-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Check for saved theme in localStorage
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        });
+
+        // JavaScript for Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked (for smooth scrolling)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Contact Form Logic (for the main contact page)
+        const contactForm = document.getElementById('contact-form');
+        const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
+        const sendEmailBtn = document.getElementById('send-email-btn');
+        const sendMessageInfo = document.getElementById('send-message-info');
+        const formMessage = document.getElementById('form-message');
+
+        const companyPhoneNumber = '919942223010'; // Replace with your company's phone number (with country code)
+        const companyEmail = 'bthananassociates@gmail.com'; // Replace with your company's email
+
+        // Function to generate and open WhatsApp link for contact form
+        function openWhatsAppLinkContact() {
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+
+            if (name === "" || email === "" || message === "") {
+                formMessage.textContent = "Please fill in all required fields (Name, Email, Message) to send a message.";
+                formMessage.className = "mt-4 text-center text-sm font-medium text-red-600";
+                sendMessageInfo.classList.add('hidden');
+                formMessage.classList.remove('hidden');
+                return;
+            }
+
+            const whatsappMessage = `Hello Bthanan Associates,%0A%0AI'm ${name}.%0AEmail: ${email}%0APhone: ${phone || 'N/A'}%0A%0A${message}%0A%0ALooking forward to hearing from you.`;
+            const whatsappUrl = `https://wa.me/${companyPhoneNumber}?text=${whatsappMessage}`;
+            window.open(whatsappUrl, '_blank');
+            sendMessageInfo.classList.remove('hidden');
+            formMessage.classList.add('hidden'); // Hide any previous error messages
+            contactForm.reset(); // Optionally reset form after opening link
+        }
+
+        // Function to generate and open Email link for contact form
+        function openEmailLinkContact() {
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+
+            if (name === "" || email === "" || message === "") {
+                formMessage.textContent = "Please fill in all required fields (Name, Email, Message) to send a message.";
+                formMessage.className = "mt-4 text-center text-sm font-medium text-red-600";
+                sendMessageInfo.classList.add('hidden');
+                formMessage.classList.remove('hidden');
+                return;
+            }
+
+            const subject = encodeURIComponent(`Inquiry from ${name} via Website`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}\n\n`);
+            const mailtoUrl = `mailto:${companyEmail}?subject=${subject}&body=${body}`;
+            window.open(mailtoUrl, '_blank');
+            sendMessageInfo.classList.remove('hidden');
+            formMessage.classList.add('hidden'); // Hide any previous error messages
+            contactForm.reset(); // Optionally reset form after opening link
+        }
+
+        if (sendWhatsappBtn) {
+            sendWhatsappBtn.addEventListener('click', openWhatsAppLinkContact);
+        }
+        if (sendEmailBtn) {
+            sendEmailBtn.addEventListener('click', openEmailLinkContact);
+        }
+
+        // Chat Modal Logic
+        const chatSupportBtn = document.getElementById('chat-support-btn');
+        const chatModal = document.getElementById('chat-modal');
+        const closeChatModalBtn = document.getElementById('close-chat-modal');
+        const sendWhatsappChatBtn = document.getElementById('send-whatsapp-chat-btn');
+        const sendEmailChatBtn = document.getElementById('send-email-chat-btn');
+        const chatMessageInfo = document.getElementById('chat-message-info');
+        const chatFormMessage = document.getElementById('chat-form-message');
+
+        function showChatModal() {
+            chatModal.classList.add('show');
+            chatFormMessage.classList.add('hidden'); // Clear previous messages
+            chatMessageInfo.classList.add('hidden'); // Hide info message initially
+            // Optional: Clear chat form fields when opening
+            document.getElementById('chat-name').value = '';
+            document.getElementById('chat-email').value = '';
+            document.getElementById('chat-message').value = '';
+        }
+
+        function hideChatModal() {
+            chatModal.classList.remove('show');
+        }
+
+        // Function to generate and open WhatsApp link for chat modal
+        function openWhatsAppLinkChat() {
+            const name = document.getElementById('chat-name').value;
+            const email = document.getElementById('chat-email').value;
+            const message = document.getElementById('chat-message').value;
+
+            if (name === "" || email === "" || message === "") {
+                chatFormMessage.textContent = "Please fill in all required fields (Name, Email, Message) to send a message.";
+                chatFormMessage.className = "mt-4 text-center text-sm font-medium text-red-600";
+                chatMessageInfo.classList.add('hidden');
+                chatFormMessage.classList.remove('hidden');
+                return;
+            }
+
+            const whatsappMessage = `Hello Bthanan Associates Support,%0A%0AI'm ${name}.%0AEmail: ${email}%0A%0A${message}%0A%0A(Sent via Website Chat)`;
+            const whatsappUrl = `https://wa.me/${companyPhoneNumber}?text=${whatsappMessage}`;
+            window.open(whatsappUrl, '_blank');
+            chatMessageInfo.classList.remove('hidden');
+            chatFormMessage.classList.add('hidden');
+            // hideChatModal(); // Optionally close modal after sending
+        }
+
+        // Function to generate and open Email link for chat modal
+        function openEmailLinkChat() {
+            const name = document.getElementById('chat-name').value;
+            const email = document.getElementById('chat-email').value;
+            const message = document.getElementById('chat-message').value;
+
+            if (name === "" || email === "" || message === "") {
+                chatFormMessage.textContent = "Please fill in all required fields (Name, Email, Message) to send a message.";
+                chatFormMessage.className = "mt-4 text-center text-sm font-medium text-red-600";
+                chatMessageInfo.classList.add('hidden');
+                chatFormMessage.classList.remove('hidden');
+                return;
+            }
+
+            const subject = encodeURIComponent(`Support Chat Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\n(Sent via Website Chat)`);
+            const mailtoUrl = `mailto:${companyEmail}?subject=${subject}&body=${body}`;
+            window.open(mailtoUrl, '_blank');
+            chatMessageInfo.classList.remove('hidden');
+            chatFormMessage.classList.add('hidden');
+            // hideChatModal(); // Optionally close modal after sending
+        }
+
+        if (chatSupportBtn) {
+            chatSupportBtn.addEventListener('click', showChatModal);
+        }
+        if (closeChatModalBtn) {
+            closeChatModalBtn.addEventListener('click', hideChatModal);
+        }
+        if (chatModal) {
+            chatModal.addEventListener('click', (event) => {
+                // Only close if clicking directly on the overlay, not on the modal content
+                if (event.target === chatModal) {
+                    hideChatModal();
+                }
+            });
+        }
+        if (sendWhatsappChatBtn) {
+            sendWhatsappChatBtn.addEventListener('click', openWhatsAppLinkChat);
+        }
+        if (sendEmailChatBtn) {
+            sendEmailChatBtn.addEventListener('click', openEmailLinkChat);
+        }
+
+        // Project Data
+        const allProjects = [
+            {
+                id: 'p1',
+                title: 'Luxury Residential Villa',
+                category: 'Residential',
+                description: 'A spacious modern villa designed with sustainable materials and smart home features, completed in Coimbatore.',
+                coverImage: 'https://placehold.co/600x400/0F1A3B/19d2e7?text=Luxury+Villa+Cover',
+                details: 'This bespoke villa showcases advanced architectural design with energy-efficient systems, premium finishes, and expansive green spaces. Features include solar power, rainwater harvesting, and smart home automation.',
+                yearCompleted: 2023,
+                galleryImages: [
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Villa+Exterior+1',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Villa+Interior+Living',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Villa+Kitchen',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Villa+Garden',
+                ]
+            },
+            {
+                id: 'p2',
+                title: 'Corporate Office Complex',
+                category: 'Commercial',
+                description: 'A multi-story commercial building offering modern office spaces and retail units in a prime city location.',
+                coverImage: 'https://placehold.co/600x400/0A1121/19d2e7?text=Office+Complex+Cover',
+                details: 'Designed for productivity and collaboration, this Class A office complex integrates ergonomic workspaces, high-speed connectivity, and common areas like a rooftop lounge and fitness center. Built to LEED certification standards.',
+                yearCompleted: 2022,
+                galleryImages: [
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Office+Facade',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Office+Lobby',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Office+Workspace',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Office+Meeting+Room',
+                ]
+            },
+            {
+                id: 'p3',
+                title: 'Automotive Manufacturing Unit',
+                category: 'Industrial',
+                description: 'Construction of a state-of-the-art factory for an automotive component manufacturer, ensuring high efficiency.',
+                coverImage: 'https://placehold.co/600x400/28417A/19d2e7?text=Factory+Unit+Cover',
+                details: 'A cutting-edge manufacturing facility equipped with automated production lines, robust infrastructure for heavy machinery, and dedicated research and development zones. Emphasizes safety protocols and efficient material flow.',
+                yearCompleted: 2024,
+                galleryImages: [
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Factory+Exterior',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Assembly+Line',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Warehouse',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Robotics',
+                ]
+            },
+            {
+                id: 'p4',
+                title: 'Urban Apartment Complex',
+                category: 'Residential',
+                description: 'A contemporary apartment complex offering luxury living with amenities in the heart of the city.',
+                coverImage: 'https://placehold.co/600x400/0F1A3B/19d2e7?text=Apartments+Cover',
+                details: 'This multi-unit residential project boasts a rooftop pool, private balconies, modern interiors, and close proximity to public transport and shopping centers. Designed for urban professionals and families.',
+                yearCompleted: 2021,
+                galleryImages: [
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Apartment+Building',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Apartment+Living',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Rooftop+Pool',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Apartment+Bedroom',
+                ]
+            },
+            {
+                id: 'p5',
+                title: 'Highway Overpass Bridge',
+                category: 'Infrastructure',
+                description: 'Construction of a critical highway overpass to alleviate traffic congestion and improve urban mobility.',
+                coverImage: 'https://placehold.co/600x400/0A1121/19d2e7?text=Bridge+Project+Cover',
+                details: 'An essential infrastructure project improving connectivity and reducing travel times. Utilized advanced civil engineering techniques to ensure structural integrity and long-term durability, minimizing disruption during construction.',
+                yearCompleted: 2020,
+                galleryImages: [
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Bridge+Construction',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Bridge+Completed',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Overpass+View',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Traffic+Flow',
+                ]
+            },
+            {
+                id: 'p6',
+                title: 'Modern Hospital Wing',
+                category: 'Healthcare',
+                description: 'Expansion of a regional hospital with a new wing featuring state-of-the-art medical facilities.',
+                coverImage: 'https://placehold.co/600x400/28417A/19d2e7?text=Hospital+Wing+Cover',
+                details: 'A vital addition to the healthcare infrastructure, providing specialized patient care units, advanced surgical suites, and accessible facilities for improved patient experience. Built with strict adherence to medical facility standards.',
+                yearCompleted: 2019,
+                galleryImages: [
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Hospital+Exterior',
+                    'https://placehold.co/600x400/0A1121/19d2e7?text=Hospital+Waiting',
+                    'https://placehold.co/600x400/0F1A3B/19d2e7?text=Operating+Room',
+                    'https://placehold.co/600x400/28417A/19d2e7?text=Patient+Room',
+                ]
+            }
+        ];
+
+        // Global state to remember the last project view
+        let currentProjectView = 'latest'; // 'latest', 'all', or 'details'
+        let currentCarouselInterval; // To store the interval ID for the carousel
+
+        // Function to render project cards
+        function renderProjects(projectsToRender, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = ''; // Clear existing content
+
+            projectsToRender.forEach(project => {
+                const projectCard = `
+                    <div class="project-card" data-project-id="${project.id}">
+                        <img src="${project.coverImage}" alt="${project.title}" class="w-full h-64 object-cover">
+                        <div class="project-card-content">
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">${project.title}</h3>
+                                <p class="text-gray-600 mb-4">${project.description}</p>
+                            </div>
+                            <a href="#" class="view-project-details text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-300">View Details &rarr;</a>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', projectCard);
+            });
+
+            // Add event listeners to all "View Details" links
+            document.querySelectorAll('.view-project-details').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const projectId = this.closest('.project-card').dataset.projectId;
+                    const project = allProjects.find(p => p.id === projectId);
+                    if (project) {
+                        showProjectDetails(project);
+                    }
+                });
+            });
+        }
+
+        // Function to start the image carousel
+        function startCarousel(images) {
+            const carouselContainer = document.getElementById('project-gallery-carousel');
+            if (!carouselContainer || images.length === 0) return;
+
+            // Clear any existing images and interval
+            carouselContainer.innerHTML = '';
+            if (currentCarouselInterval) {
+                clearInterval(currentCarouselInterval);
+            }
+
+            let currentIndex = 0;
+
+            // Create image elements and append them
+            images.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Project Image ${index + 1}`;
+                if (index === 0) {
+                    img.classList.add('active'); // Set first image as active
+                }
+                carouselContainer.appendChild(img);
+            });
+
+            // Function to show next image
+            const showNextImage = () => {
+                const allImages = carouselContainer.querySelectorAll('img');
+                allImages[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % allImages.length;
+                allImages[currentIndex].classList.add('active');
+            };
+
+            // Start interval for automatic cycling
+            if (images.length > 1) { // Only start cycling if there's more than one image
+                currentCarouselInterval = setInterval(showNextImage, 3000); // Change image every 3 seconds
+            }
+        }
+
+        // Function to show project details section
+        function showProjectDetails(project) {
+            const projectsSection = document.getElementById('projects');
+            const allProjectsPage = document.getElementById('all-projects-page');
+            const projectDetailsSection = document.getElementById('project-details-section');
+
+            // Set current view before hiding
+            if (!projectsSection.classList.contains('hidden')) {
+                currentProjectView = 'latest';
+            } else if (!allProjectsPage.classList.contains('hidden')) {
+                currentProjectView = 'all';
+            } else {
+                currentProjectView = 'latest'; // Default if somehow neither is visible
+            }
+
+            // Hide other project sections
+            projectsSection.classList.add('hidden');
+            allProjectsPage.classList.add('hidden');
+
+            // Populate project details
+            document.getElementById('project-details-title').textContent = project.title;
+            document.getElementById('project-details-description').textContent = project.details;
+            document.getElementById('project-details-category').textContent = project.category;
+            document.getElementById('project-details-location').textContent = project.location || 'Coimbatore, Tamil Nadu';
+            document.getElementById('project-details-year').textContent = project.yearCompleted || 'N/A'; // Display year
+
+            // Start the carousel with gallery images
+            startCarousel(project.galleryImages);
+
+            // Show project details section
+            projectDetailsSection.classList.remove('hidden');
+
+            // Scroll to project details section
+            projectDetailsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+
+        // DOMContentLoaded ensures the DOM is fully loaded before script runs
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render latest 3 projects on initial load
+            const latestProjects = allProjects.slice(0, 3);
+            renderProjects(latestProjects, 'latest-projects-container');
+
+            // Get references to project sections and buttons
+            const viewAllBtn = document.getElementById('view-all-projects-btn');
+            const latestProjectsSection = document.getElementById('projects');
+            const allProjectsPage = document.getElementById('all-projects-page');
+            const backToLatestBtn = document.getElementById('back-to-latest-btn');
+            const projectDetailsSection = document.getElementById('project-details-section');
+            const backFromDetailsBtn = document.getElementById('back-from-details-btn');
+
+
+            // Handle "View All Projects" button click
+            if (viewAllBtn) {
+                viewAllBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    latestProjectsSection.classList.add('hidden');
+                    projectDetailsSection.classList.add('hidden'); // Hide details if open
+                    allProjectsPage.classList.remove('hidden');
+                    renderProjects(allProjects, 'all-projects-container'); // Render all projects
+                    allProjectsPage.scrollIntoView({ behavior: 'smooth' }); // Scroll to the top of all projects
+                    currentProjectView = 'all';
+                    if (currentCarouselInterval) clearInterval(currentCarouselInterval); // Stop carousel if navigating away
+                });
+            }
+
+            // Handle "Back to Latest Projects" button click (from All Projects page)
+            if (backToLatestBtn) {
+                backToLatestBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    allProjectsPage.classList.add('hidden');
+                    projectDetailsSection.classList.add('hidden'); // Hide details if open
+                    latestProjectsSection.classList.remove('hidden');
+                    latestProjectsSection.scrollIntoView({ behavior: 'smooth' }); // Scroll back to latest projects
+                    currentProjectView = 'latest';
+                    if (currentCarouselInterval) clearInterval(currentCarouselInterval); // Stop carousel if navigating away
+                });
+            }
+
+            // Handle "Back to Projects" button click (from Project Details page)
+            if (backFromDetailsBtn) {
+                backFromDetailsBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    projectDetailsSection.classList.add('hidden');
+                    if (currentCarouselInterval) clearInterval(currentCarouselInterval); // Stop carousel when closing details
+
+                    if (currentProjectView === 'all') {
+                        allProjectsPage.classList.remove('hidden');
+                        allProjectsPage.scrollIntoView({ behavior: 'smooth' });
+                    } else { // Default or if came from latest
+                        latestProjectsSection.classList.remove('hidden');
+                        latestProjectsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    // Logic to manage project section visibility when navigating from the navbar
+                    if (targetId === '#projects') {
+                        // If navigating to projects, ensure only latest projects are shown by default
+                        allProjectsPage.classList.add('hidden');
+                        projectDetailsSection.classList.add('hidden');
+                        latestProjectsSection.classList.remove('hidden');
+                        currentProjectView = 'latest';
+                    } else {
+                        // If navigating to any other section, hide all project-related sections
+                        allProjectsPage.classList.add('hidden');
+                        latestProjectsSection.classList.add('hidden');
+                        projectDetailsSection.classList.add('hidden');
+                    }
+                    if (currentCarouselInterval) clearInterval(currentCarouselInterval); // Stop carousel when navigating away
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Close mobile menu if open after clicking a link
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Intersection Observer for section animations
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the section is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        // Optionally remove 'active' when out of view, except for the hero
+                        if (entry.target.id !== 'home') {
+                            entry.target.classList.remove('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+
+            // Scroll-to-top button logic
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

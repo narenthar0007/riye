@@ -1,0 +1,114 @@
+<%= form_with(model: team, local: true, class: 'modern-form') do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <div class="d-flex align-center gap-2 mb-3">
+        <i class="fas fa-exclamation-triangle fa-lg"></i>
+        <h3 class="mb-0">Please fix the following errors:</h3>
+      </div>
+      <ul class="mb-0">
+        <% team.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <!-- Team Information Section -->
+    <div class="col-md-6 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-users-cog"></i>
+          Team Details
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :name, class: 'form-label required' do %>
+            <i class="fas fa-users"></i>
+            Team Name
+          <% end %>
+          <%= form.text_field :name, class: 'form-control', 
+              placeholder: 'Enter team name',
+              required: true %>
+          <small class="form-text">Descriptive name for the team</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :nature_of_skill, class: 'form-label required' do %>
+            <i class="fas fa-tools"></i>
+            Nature of Skill
+          <% end %>
+          <%= form.select :nature_of_skill, 
+              options_for_select([
+                ['Local Team', 'local_team'],
+                ['Electrical', 'electrical'], 
+                ['Plumbing', 'plumbing'],
+                ['Carpentry', 'carpentry'],
+                ['Masonry', 'masonry'],
+                ['Painting', 'painting'],
+                ['Welding', 'welding']
+              ], team.nature_of_skill), 
+              { prompt: 'Select skill type' }, 
+              { class: 'form-control', required: true } %>
+          <small class="form-text">Primary skill or trade of this team</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :team_head_id, class: 'form-label required' do %>
+            <i class="fas fa-user-tie"></i>
+            Team Head
+          <% end %>
+          <%= form.collection_select :team_head_id, @team_heads || TeamHead.all, :id, 
+              lambda { |head| "#{head.name} - #{head.contact_number}" }, 
+              { prompt: 'Select a team head' }, 
+              { class: 'form-control', required: true } %>
+          <small class="form-text">Choose the person who will lead this team</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guidelines Section -->
+    <div class="col-md-6 mb-4">
+      <div class="info-panel">
+        <h4 class="info-title">
+          <i class="fas fa-info-circle"></i>
+          Team Guidelines
+        </h4>
+        <ul class="info-list">
+          <li><strong>Name:</strong> Use clear, descriptive team names</li>
+          <li><strong>Skills:</strong> Match the team's primary expertise</li>
+          <li><strong>Team Head:</strong> Assign an experienced leader</li>
+          <li><strong>Specialization:</strong> Teams work best with focused skills</li>
+        </ul>
+      </div>
+
+      <div class="info-panel mt-3">
+        <h4 class="info-title">
+          <i class="fas fa-users"></i>
+          Team Types
+        </h4>
+        <ul class="info-list">
+          <li><strong>Local Team:</strong> General construction work</li>
+          <li><strong>Electrical:</strong> Wiring, lighting, power systems</li>
+          <li><strong>Plumbing:</strong> Water, drainage, pipe work</li>
+          <li><strong>Carpentry:</strong> Wood work, framing, finishing</li>
+          <li><strong>Masonry:</strong> Brick, stone, concrete work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="form-actions">
+    <div class="d-flex gap-3">
+      <%= form.submit class: 'btn btn-primary btn-lg' do %>
+        <i class="fas fa-save"></i>
+        Save Team
+      <% end %>
+      <%= link_to teams_path, class: 'btn btn-secondary btn-lg' do %>
+        <i class="fas fa-times"></i>
+        Cancel
+      <% end %>
+    </div>
+  </div>
+<% end %>

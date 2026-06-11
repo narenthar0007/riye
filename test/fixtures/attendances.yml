@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  punch_in: 2025-09-17 14:30:01
+  punch_out: 2025-09-17 14:30:01
+  worker: one
+
+two:
+  punch_in: 2025-09-17 14:30:01
+  punch_out: 2025-09-17 14:30:01
+  worker: two

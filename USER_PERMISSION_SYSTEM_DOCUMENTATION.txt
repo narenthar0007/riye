@@ -1,0 +1,497 @@
+================================================================================
+                    RIYE CONSTRUCTION MANAGEMENT SYSTEM
+                        USER PERMISSION SYSTEM DOCUMENTATION
+================================================================================
+
+VERSION: 1.0
+DATE: 2025-09-27
+AUTHOR: System Administrator
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+The Riye Construction Management System implements a comprehensive role-based 
+access control (RBAC) system with the following key features:
+
+• 4-tier role hierarchy: Employee, Manager, Administrator, Owner
+• Super Admin functionality for users with 'bluvent@gmail.com' in email
+• Granular permissions for user creation, editing, and deletion
+• View-level access controls
+• Secure authorization checks at model and controller levels
+
+================================================================================
+2. ROLE HIERARCHY AND PERMISSIONS
+================================================================================
+
+2.1 EMPLOYEE (Role ID: 0)
+--------------------------
+• Default role for new users
+• Can view and edit their own profile only
+• Cannot create, edit, or delete other users
+• Basic system access for daily operations
+
+Permissions:
+✓ View own profile
+✓ Edit own basic information
+✗ Create users
+✗ Edit other users
+✗ Delete users
+✗ Manage system settings
+
+2.2 MANAGER (Role ID: 2)
+-------------------------
+• Team management capabilities
+• Can manage employee-level users only
+• Project oversight permissions
+
+Permissions:
+✓ View employee profiles
+✓ Edit employee information
+✓ Team management
+✓ Project oversight
+✗ Create users
+✗ Edit admin/owner users
+✗ Delete users
+✗ System configuration
+
+2.3 ADMINISTRATOR (Role ID: 1)
+-------------------------------
+• Full system access except owner-level functions
+• Can create and manage Employee and Manager accounts
+• Cannot create other Administrator accounts (requires Super Admin)
+• System configuration access
+
+Permissions:
+✓ Create Employee/Manager users
+✓ Edit Employee/Manager users  
+✓ Delete Employee/Manager users
+✓ Full system configuration
+✓ User management interface
+✗ Create Administrator users
+✗ Edit/Delete Owner users
+
+**SPECIAL RESTRICTION**: Only Super Admins can create Administrator accounts
+
+2.4 OWNER (Role ID: 3)
+-----------------------
+• Highest privilege level
+• Complete system control
+• Can create any role including other Owners
+• Financial and strategic access
+
+Permissions:
+✓ Create users of any role (including Owner)
+✓ Edit any user (including other Owners)
+✓ Delete any user except themselves
+✓ Complete system access
+✓ Financial data access
+✓ Strategic decision making
+
+2.5 SUPER ADMIN (Special Designation)
+--------------------------------------
+• Not a separate role, but a special capability
+• Applies to ANY user whose email contains 'bluvent@gmail.com'
+• Only Super Admins can create Administrator accounts
+• Can be Employee, Manager, Admin, or Owner with Super Admin privileges
+
+Super Admin Identification:
+```ruby
+def super_admin?
+  email.include?('bluvent@gmail.com')
+end
+```
+
+================================================================================
+3. USER CREATION RULES
+================================================================================
+
+3.1 WHO CAN CREATE USERS
+-------------------------
+• Only Administrator and Owner roles can create new users
+• Employee and Manager roles CANNOT create users
+
+3.2 ROLE CREATION RESTRICTIONS
+-------------------------------
+
+Creating EMPLOYEE accounts:
+• Can be created by: Administrator, Owner
+• No special restrictions
+
+Creating MANAGER accounts:
+• Can be created by: Administrator, Owner  
+• No special restrictions
+
+Creating ADMINISTRATOR accounts:
+• Can ONLY be created by: Super Admins (users with 'bluvent@gmail.com')
+• Regular Administrators CANNOT create other Administrator accounts
+• This prevents privilege escalation
+
+Creating OWNER accounts:
+• Can ONLY be created by: Existing Owners
+• Administrators cannot create Owner accounts
+• Maintains highest privilege protection
+
+3.3 USER CREATION PROCESS
+--------------------------
+1. User must be authenticated
+2. System checks if user has create_user permission
+3. Role selection is filtered based on user's privileges
+4. Form validation occurs on both client and server side
+5. Server-side authorization validates role assignment
+6. User is created with specified role and default password
+7. Success/failure notification is shown
+
+================================================================================
+4. USER EDITING PERMISSIONS
+================================================================================
+
+4.1 SELF-EDITING
+-----------------
+• All users can view and edit their own basic profile
+• Users CANNOT change their own role to a higher privilege
+• Users CANNOT delete themselves
+
+4.2 CROSS-USER EDITING
+-----------------------
+
+EMPLOYEE users:
+• Can edit: Nobody except themselves
+• Cannot change roles
+
+MANAGER users:  
+• Can edit: Employee users only
+• Cannot edit Administrator, Owner, or other Manager users
+
+ADMINISTRATOR users:
+• Can edit: Employee and Manager users
+• Cannot edit Owner users or other Administrator users
+• Cannot promote users to Administrator role (requires Super Admin)
+
+OWNER users:
+• Can edit: All users including other Owners
+• Can promote/demote any user to any role
+• Cannot delete themselves
+
+SUPER ADMIN capability:
+• Can create/promote users to Administrator role
+• Works in combination with user's base role permissions
+
+4.3 USER DELETION PERMISSIONS
+------------------------------
+• Users cannot delete themselves (prevents account lockout)
+• Owners can delete any user except themselves
+• Administrators can delete Employee and Manager users only
+• Managers and Employees cannot delete any users
+
+================================================================================
+5. TECHNICAL IMPLEMENTATION
+================================================================================
+
+5.1 MODEL-LEVEL AUTHORIZATION (User Model)
+-------------------------------------------
+```ruby
+# Authorization methods in app/models/user.rb
+
+def can_create_users?
+  admin? || owner?
+end
+
+def can_edit_users?
+  admin? || owner?  
+end
+
+def can_create_admin?
+  super_admin?
+end
+
+def can_edit_user?(target_user)
+  return false if self == target_user && role_changed? && role == 'employee'
+  return true if owner?
+  return true if admin? && (target_user.employee? || target_user.manager?)
+  return true if manager? && target_user.employee?
+  false
+end
+
+def can_delete_user?(target_user)
+  return false if self == target_user
+  return true if owner?
+  return true if admin? && (target_user.employee? || target_user.manager?)
+  false
+end
+
+def super_admin?
+  email.include?('bluvent@gmail.com')
+end
+```
+
+5.2 CONTROLLER-LEVEL AUTHORIZATION (UsersController)
+----------------------------------------------------
+```ruby
+# Authorization filters in app/controllers/users_controller.rb
+
+before_action :authenticate_user!
+before_action :set_current_user_context
+before_action :authorize_user_access!
+before_action :authorize_user_action!, only: [:show, :edit, :update, :destroy]
+
+private
+
+def authorize_user_access!
+  unless current_user.can_edit_users? || current_user == @user
+    redirect_to root_path, alert: 'Access denied.'
+  end
+end
+
+def authorize_create_user!
+  unless current_user.can_create_users?
+    redirect_to users_path, alert: 'Only admins and owners can create users.'
+  end
+end
+```
+
+5.3 VIEW-LEVEL RESTRICTIONS
+----------------------------
+Views dynamically show/hide elements based on user permissions:
+
+```erb
+<!-- Show "Add User" button only for authorized users -->
+<% if @can_create_users %>
+  <%= link_to new_user_path, class: 'btn btn-success' do %>
+    <i class="fas fa-user-plus"></i> Add New User
+  <% end %>
+<% end %>
+
+<!-- Show edit button only if user can edit target user -->
+<% if current_user.can_edit_user?(user) %>
+  <%= link_to edit_user_path(user), class: 'btn btn-warning' do %>
+    Edit User
+  <% end %>
+<% end %>
+
+<!-- Role selection filtered by permissions -->
+<% available_roles = [] %>
+<% available_roles << ['Employee', 'employee'] %>
+<% available_roles << ['Manager', 'manager'] %>
+<% available_roles << ['Administrator', 'admin'] if current_user.super_admin? %>
+<% available_roles << ['Owner', 'owner'] if current_user.owner? %>
+```
+
+5.4 DATABASE SCOPE FILTERING
+-----------------------------
+```ruby
+# User model scope for filtering accessible users
+def self.accessible_by(current_user)
+  return all if current_user.owner?
+  return where.not(role: 'owner') if current_user.admin?
+  return where(role: 'employee') if current_user.manager?
+  where(id: current_user.id) # Employees see only themselves
+end
+```
+
+================================================================================
+6. SECURITY CONSIDERATIONS
+================================================================================
+
+6.1 PRIVILEGE ESCALATION PREVENTION
+------------------------------------
+• Users cannot elevate their own privileges
+• Administrator creation requires Super Admin privileges
+• Owner role can only be assigned by existing Owners
+• Multiple authorization layers (model, controller, view)
+
+6.2 SUPER ADMIN PROTECTION
+---------------------------
+• Super Admin capability based on email domain check
+• Cannot be revoked by changing role
+• Provides ultimate system access control
+• Should be limited to core system administrators
+
+6.3 THREAD SAFETY
+------------------
+• Current user context stored in thread-local storage
+• Prevents cross-request user context contamination
+• Properly cleaned up after each request
+
+```ruby
+# Thread-safe current user tracking
+def self.current
+  Thread.current[:current_user]
+end
+
+def self.current=(user)
+  Thread.current[:current_user] = user
+end
+```
+
+6.4 INPUT VALIDATION AND SANITIZATION
+--------------------------------------
+• Strong parameters filtering based on user permissions
+• Role validation at model level
+• Email format validation
+• Password complexity requirements
+• CSRF protection via Rails built-in mechanisms
+
+================================================================================
+7. USER INTERFACE FLOWS
+================================================================================
+
+7.1 USER CREATION FLOW
+-----------------------
+1. Administrator/Owner clicks "Add New User"
+2. System validates user has creation permissions
+3. Form displays with role options based on user's privileges
+4. User fills form with email, password, and role
+5. Client-side validation checks password match and required fields
+6. Form submission triggers server-side authorization
+7. User created with success message or error display
+
+7.2 USER EDITING FLOW
+----------------------
+1. User clicks "Edit" button on user profile
+2. System validates edit permissions for target user
+3. Edit form pre-populated with current user data
+4. Role dropdown filtered based on current user's privileges
+5. Changes submitted with authorization validation
+6. Role changes logged and notifications sent
+
+7.3 PERMISSION DENIED FLOWS
+----------------------------
+• Unauthorized access attempts redirect with error message
+• Hidden UI elements for unauthorized actions
+• Clear error messages explaining permission requirements
+• Graceful degradation for different user roles
+
+================================================================================
+8. TESTING SCENARIOS
+================================================================================
+
+8.1 POSITIVE TEST CASES
+------------------------
+✓ Super Admin can create Administrator accounts
+✓ Owner can create any role including other Owners
+✓ Administrator can create Employee and Manager accounts
+✓ Users can edit their own profiles
+✓ Owner can edit any user
+✓ Administrator can edit Employee/Manager users
+
+8.2 NEGATIVE TEST CASES  
+------------------------
+✗ Regular Administrator cannot create other Administrator accounts
+✗ Employee cannot create any users
+✗ Manager cannot create users
+✗ Users cannot delete themselves
+✗ Administrator cannot edit Owner accounts
+✗ Employee cannot edit other users
+
+8.3 EDGE CASES
+---------------
+• User with 'bluvent@gmail.com' email gets Super Admin privileges regardless of role
+• Role changes properly validated and restricted
+• Session handling during role changes
+• Concurrent user editing scenarios
+
+================================================================================
+9. CONFIGURATION AND MAINTENANCE
+================================================================================
+
+9.1 ADDING NEW ROLES
+---------------------
+To add a new role:
+1. Update the enum in User model
+2. Add permission methods for the new role
+3. Update authorization logic in controllers
+4. Modify view restrictions
+5. Update this documentation
+
+9.2 CHANGING SUPER ADMIN DOMAIN
+--------------------------------
+To change the Super Admin email requirement:
+1. Update the super_admin? method in User model
+2. Update validation messages in views
+3. Update documentation
+4. Test thoroughly with new domain
+
+9.3 MONITORING AND AUDITING
+----------------------------
+• Log all user creation and role changes
+• Monitor Super Admin account usage
+• Regular review of user permissions
+• Audit trail for security compliance
+
+================================================================================
+10. TROUBLESHOOTING
+================================================================================
+
+10.1 COMMON ISSUES
+-------------------
+
+Issue: "Only super admins can create admin accounts" error
+Solution: Ensure user's email contains 'bluvent@gmail.com'
+
+Issue: User cannot see "Add User" button
+Solution: Check user has Administrator or Owner role
+
+Issue: Role dropdown doesn't show Administrator option
+Solution: Verify current user is a Super Admin
+
+Issue: Cannot edit other users
+Solution: Verify user has appropriate role (Admin/Owner)
+
+10.2 DEBUG METHODS
+-------------------
+```ruby
+# Check user permissions in Rails console
+user = User.find_by(email: 'user@example.com')
+user.can_create_users?
+user.super_admin?
+user.can_edit_user?(target_user)
+
+# Check accessible users for current user
+User.accessible_by(current_user)
+```
+
+================================================================================
+11. IMPLEMENTATION CHECKLIST
+================================================================================
+
+✓ User model with role enum and authorization methods
+✓ Controller authorization filters and actions  
+✓ View restrictions and conditional rendering
+✓ Super Admin functionality for 'bluvent@gmail.com'
+✓ Secure parameter filtering
+✓ Thread-safe current user context
+✓ Comprehensive error handling
+✓ User creation with role restrictions
+✓ User editing with permission validation
+✓ User deletion with authorization checks
+✓ Database scoping for user visibility
+✓ Form validation (client and server-side)
+✓ Success and error messaging
+✓ Documentation and testing guidelines
+
+================================================================================
+12. FUTURE ENHANCEMENTS
+================================================================================
+
+• Role-based menu system
+• Permission-based API endpoints
+• Audit logging for user management actions
+• Email notifications for role changes
+• Multi-factor authentication for Super Admins
+• Time-based role assignments
+• Department-based user grouping
+• Advanced filtering and search capabilities
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+
+For questions or issues regarding this permission system, contact the system 
+administrator or refer to the source code comments in:
+- app/models/user.rb
+- app/controllers/users_controller.rb  
+- app/views/users/
+
+Last Updated: 2025-09-27
+System Version: 1.0

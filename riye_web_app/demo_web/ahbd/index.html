@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Akarshana!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        /* Import custom fonts for a stylish and elegant look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Sacramento&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FF69B4, #9400D3, #C71585, #FFC0CB);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6);
+            animation: pulse 2s infinite, drop-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation-delay: 0.5s;
+        }
+
+        @keyframes drop-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #E6E6FA;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            animation: drop-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation-delay: 0.8s;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            min-width: 60px;
+            color: #ffffff;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700; }
+            to { box-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700; }
+        }
+
+        .countdown-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .countdown-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #E6E6FA;
+        }
+
+        .message-box {
+            background-color: rgba(255, 255, 255, 0.25);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .message-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.2);
+        }
+        .daily-message {
+            font-style: italic;
+            color: #FFFAF0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Elegant sparkling background */
+        .sparkle {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle-glow 5s linear infinite;
+        }
+
+        @keyframes sparkle-glow {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        /* New falling hearts animation */
+        .falling-heart {
+            position: fixed;
+            top: -10vh;
+            font-size: 2rem;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #FF69B4, #9400D3);
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .button:hover {
+            transform: scale(1.05) translateY(-2px) rotate(5deg);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            animation: wobble 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        .button:active {
+            transform: scale(0.98);
+        }
+
+        /* Akarshana's name in the background */
+        .background-name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-10deg);
+            font-size: 12vw;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.08);
+            z-index: 5;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+        
+        /* Modal for surprises */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .modal-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #4B0082;
+            padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modal-fade-in 0.3s ease-out;
+            border: 5px solid transparent;
+            border-image: linear-gradient(to right, #ff69b4, #9400d3);
+            border-image-slice: 1;
+        }
+        
+        @keyframes modal-fade-in {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #4B0082;
+            z-index: 60;
+            transition: transform 0.2s;
+        }
+
+        .close-button:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Styles for Surprise 1 (Names) */
+        .language-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .language-item {
+            font-size: 1.2rem;
+            font-weight: 500;
+            width: 48%;
+        }
+        
+        /* Styles for the new Surprise 2 (Flower Match Game) */
+        .game-title {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #9400D3;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 1.5rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background-color: #FFC0CB;
+            border-radius: 1rem;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card.matched {
+            transform: rotateY(180deg) scale(1.05);
+            box-shadow: 0 0 15px #FF69B4, 0 0 20px #C71585;
+            pointer-events: none;
+        }
+        
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: inherit;
+        }
+
+        .card-front {
+            background-color: #F8BBD0;
+            transform: rotateY(180deg);
+        }
+
+        .card-back {
+            background: linear-gradient(45deg, #FF69B4, #9400D3);
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .win-message {
+            text-align: center;
+            padding: 2rem;
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        .win-message h3 {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #FF69B4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .win-message p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #9400D3;
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+
+        /* Styles for Surprise 3 (Acrostic) */
+        .acrostic-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .acrostic-title {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #9400D3;
+            margin-bottom: 1rem;
+        }
+
+        .acrostic-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .acrostic-item {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .highlighted-letter {
+            font-weight: bold;
+            color: #FF69B4;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.5);
+        }
+
+        .language-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .language-button {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            background-color: #9400D3;
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .language-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .language-button.active {
+            background-color: #FF69B4;
+            transform: scale(1.05);
+        }
+
+        /* Confetti animation for surprise modal */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            opacity: 0;
+            border-radius: 50%;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-name">Akarshana</div>
+    
+    <div class="container">
+        <h1>Happy Early Birthday, Akarshana!</h1>
+        <h2>A special countdown for a truly unique sister.</h2>
+
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Seconds</div>
+            </div>
+        </div>
+
+        <div class="message-box">
+            <p class="daily-message" id="message">
+                Day 175: Your maturity and wisdom have always been a guiding light for me. I am so grateful to have a friend who is also a sister, and I am excited to celebrate the amazing person you are.
+            </p>
+        </div>
+
+        <div class="button-group">
+            <button class="button" onclick="showNames()">Surprise 1</button>
+            <button class="button" onclick="showFlowerMatchGame()">Surprise 2</button>
+            <button class="button" onclick="showInspirationalMessage()">Surprise 3</button>
+        </div>
+    </div>
+    
+    <!-- The modal for surprises -->
+    <div id="surprise-modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div id="modal-content-area"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set the target birthday date for the countdown
+        const birthdayDate = new Date("February 2, 2026 00:00:00").getTime();
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("message").innerHTML = "Happy Birthday! Today is the day!";
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+
+        // Creates the subtle sparkle background animation
+        function createSparkles() {
+            const numSparkles = 50;
+            for (let i = 0; i < numSparkles; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                const size = Math.random() * 5 + 2;
+                sparkle.style.width = `${size}px`;
+                sparkle.style.height = `${size}px`;
+                sparkle.style.left = `${Math.random() * 100}vw`;
+                sparkle.style.top = `${Math.random() * 100}vh`;
+                sparkle.style.animationDelay = `${Math.random() * 5}s`;
+                document.body.appendChild(sparkle);
+            }
+        }
+        createSparkles();
+
+        // Creates a shower of falling hearts
+        function createFallingHearts() {
+            const numHearts = 30;
+            const colors = ['#FF69B4', '#C71585', '#FFC0CB', '#9400D3'];
+            const container = document.body;
+
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('falling-heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                heart.style.animationDelay = `${Math.random() * 2}s`;
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(heart);
+            }
+        }
+        createFallingHearts();
+        
+        // Function to generate confetti
+        function generateConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.classList.add('confetti');
+            document.body.appendChild(confettiContainer);
+            const numPieces = 50;
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+
+            for (let i = 0; i < numPieces; i++) {
+                const piece = document.createElement('div');
+                piece.classList.add('confetti-piece');
+                piece.style.left = `${Math.random() * window.innerWidth}px`;
+                piece.style.top = `${Math.random() * window.innerHeight}px`;
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDelay = `${Math.random() * 0.5}s`;
+                piece.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                confettiContainer.appendChild(piece);
+            }
+            setTimeout(() => confettiContainer.remove(), 3000);
+        }
+
+        // A list of languages for the first surprise
+        const languages = {
+            "English": "Akarshana", "Tamil": "அகர்ஷனா", "Hindi": "आकर्षणा", "Latin": "Akarshana", "Japanese": "アカルシャナ", "Marathi": "आकर्षणा", "Korean": "아카르샤나", "Swahili": "Akashana", "Persian": "آکارشانه", "Albanian": "Akarshana", "Amharic": "አካርሻና", "Arabic": "أكارشنا", "Armenian": "Ակարշանա", "Azerbaijani": "Akarsana", "Belarusian": "Акаршана", "Bengali": "আকর্ষণা", "Bosnian": "Akarshana", "Bulgarian": "Акаршана", "Burmese": "အာကာရ်ှနာ", "Catalan": "Akarshana", "Cebuano": "Akarshana", "Chinese": "阿卡沙纳", "Croatian": "Akarshana", "Czech": "Akarshana", "Danish": "Akarshana", "Dutch": "Akarshana", "Estonian": "Akarshana", "Fijian": "Akarshana", "Filipino": "Akarshana", "Finnish": "Akarshana", "French": "Akarshana", "German": "Akarshana", "Georgian": "აკარშანა", "Greek": "Ακαρσανα", "Gujarati": "અકર્શના", "Hausa": "Akarshana", "Hawaiian": "Akarshana", "Hebrew": "אקרשנה", "Hungarian": "Akarshana", "Icelandic": "Akarshana", "Indonesian": "Akarshana", "Irish": "Akarshana", "Italian": "Akarshana", "Javanese": "Akarshana", "Kannada": "ಅಕರ್ಷಣಾ", "Kazakh": "Акаршана", "Khmer": "អកសរណ", "Lao": "ອັກກາສະນະ", "Latvian": "Akarshana", "Lithuanian": "Akarshana", "Macedonian": "Акаршана", "Malayalam": "ആകർഷണ", "Maori": "Akarshana", "Mongolian": "Акаршана", "Nepali": "आकर्षणा", "Norwegian": "Akarshana", "Pashto": "اکارشنا", "Polish": "Akarshana", "Portuguese": "Akarshana", "Punjabi": "ਅਕਰਸ਼ਨਾ", "Romanian": "Akarshana", "Russian": "Акшана", "Samoan": "Akarshana", "Serbian": "Акаршана", "Sinhala": "ආකර්ශන", "Slovak": "Akarshana", "Slovenian": "Akarshana", "Spanish": "Akarshana", "Swedish": "Akarshana", "Thai": "อคาร์ชนา", "Tongan": "Akarshana", "Turkish": "Akarshana", "Ukrainian": "Акаршана", "Urdu": "آکرشنا", "Uzbek": "Akarshana", "Vietnamese": "Akarshana", "Welsh": "Akarshana", "Yiddish": "אקרשנה", "Yoruba": "Akarshana", "Zulu": "Akarshana", "Afrikaans": "Akarshana", "Akan": "Akarshana", "Aymara": "Akarshana", "Bambara": "Akarshana", "Basque": "Akarshana", "Breton": "Akarshana", "Coptic": "Akarshana", "Corsican": "Akarshana", "Ewe": "Akarshana", "Esperanto": "Akarshana", "Faroese": "Akarshana", "Galician": "Akarshana", "Ganda": "Akarshana", "Guarani": "Akarshana", "Haitian Creole": "Akarshana", "Igbo": "Akarshana", "Kinyarwanda": "Akarshana", "Kirundi": "Akarshana", "Kurdish": "Akarshana", "Lingala": "Akarshana", "Luxembourgish": "Akarshana", "Malagasy": "Akarshana", "Maltese": "Akarshana", "Ndebele": "Akarshana", "Oromo": "Akarshana", "Quechua": "Akarshana", "Sango": "Akarshana", "Shona": "Akarshana", "Somali": "Akarshana", "Sundanese": "Akarshana", "Tagalog": "Akarshana", "Tswana": "Akarshana", "Turkmen": "Akarshana", "Uighur": "Akarshana", "Wolof": "Akarshana", "Xhosa": "Akarshana", "Yoruba": "Akarshana", "Zazaki": "Akarshana", "Afaan Oromo": "Akarshana", "Fula": "Akarshana", "Kikuyu": "Akarshana", "Kongo": "Akarshana", "Kurdish Sorani": "Akarshana", "Luo": "Akarshana", "Twi": "Akarshana", "Avaric": "Akarshana", "Balochi": "Akarshana", "Bhojpuri": "आकर्षणा", "Bislama": "Akarshana", "Chechen": "Акаршана", "Chuvash": "Акаршана", "Crimean Tatar": "Akarshana", "Divehi": "އަކަރުޝަނާ", "Dzongkha": "Akarshana", "Farsi": "آکارشانا", "Frisian": "Akarshana", "Gaelic": "Akarshana", "Hiligaynon": "Akarshana", "Hmong": "Akarshana", "Igala": "Akarshana", "Kashmiri": "آکرشݨا", "Lojban": "Akarshana", "Manx": "Akarshana", "Mizo": "Akarshana", "Nahuatl": "Akarshana", "Ndebele": "Akarshana", "Nepali": "आकर्षणा", "Papiamento": "Akarshana", "Sanskrit": "अकर्षणा", "Setswana": "Akarshana", "Shona": "Akarshana", "Sinhala": "ආකර්ශන", "Sotho": "Akarshana", "Sundanese": "Akarshana", "Tswana": "Akarshana", "Turkmen": "Akarshana", "Uighur": "Akarshana", "Urdu": "آکرشنا", "Wolof": "Akarshana", "Xhosa": "Akarshana", "Zazaki": "Akarshana", "Zhuang": "Akarshana",
+        };
+        
+        // Display the list of names in the modal
+        function showNames() {
+            generateConfetti();
+            const modalContentArea = document.getElementById("modal-content-area");
+            modalContentArea.innerHTML = `<h3 class="text-2xl font-bold mb-4 text-center">175 Days, 175 Names</h3>
+                                          <p class="text-center mb-4">Each language represents a day of waiting. With all my love, in every tongue, I'm counting down to your special day.</p>
+                                          <ul class="language-list"></ul>`;
+            const listElement = modalContentArea.querySelector("ul");
+            
+            for (const [key, value] of Object.entries(languages)) {
+                const li = document.createElement("li");
+                li.classList.add("language-item");
+                li.innerHTML = `<span class="font-bold">${key}</span>: ${value}`;
+                listElement.appendChild(li);
+            }
+            document.getElementById("surprise-modal").style.display = "flex";
+        }
+        
+        // New function for the flower matching game
+        function showFlowerMatchGame() {
+            generateConfetti();
+            const modalContentArea = document.getElementById("modal-content-area");
+            modalContentArea.innerHTML = `
+                <h3 class="game-title text-center">Match the Flowers!</h3>
+                <div id="game-board" class="game-board"></div>
+            `;
+            document.getElementById("surprise-modal").style.display = "flex";
+
+            const emojis = ['🌸', '🌺', '🌻', '🌷', '🌼', '🌹', '💐', '🪷'];
+            const gameEmojis = [...emojis, ...emojis]; // Duplicate for pairs
+            
+            // Fisher-Yates shuffle algorithm to randomize the cards
+            for (let i = gameEmojis.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [gameEmojis[i], gameEmojis[j]] = [gameEmojis[j], gameEmojis[i]];
+            }
+
+            const gameBoard = document.getElementById('game-board');
+            let flippedCards = [];
+            let matchedPairs = 0;
+            let canFlip = true;
+
+            // Function to create a card element
+            function createCard(emoji) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.emoji = emoji;
+                card.innerHTML = `
+                    <div class="card-inner card-back">?</div>
+                    <div class="card-inner card-front">${emoji}</div>
+                `;
+                card.addEventListener('click', handleCardClick);
+                return card;
+            }
+
+            // Function to handle card clicks
+            function handleCardClick(event) {
+                if (!canFlip || flippedCards.length >= 2) return;
+
+                const card = event.currentTarget;
+                if (card.classList.contains('flipped')) return;
+
+                card.classList.add('flipped');
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    canFlip = false;
+                    const [card1, card2] = flippedCards;
+
+                    if (card1.dataset.emoji === card2.dataset.emoji) {
+                        card1.classList.add('matched');
+                        card2.classList.add('matched');
+                        matchedPairs++;
+                        flippedCards = [];
+                        canFlip = true;
+
+                        if (matchedPairs === emojis.length) {
+                            showWinMessage();
+                        }
+                    } else {
+                        setTimeout(() => {
+                            card1.classList.remove('flipped');
+                            card2.classList.remove('flipped');
+                            flippedCards = [];
+                            canFlip = true;
+                        }, 1000);
+                    }
+                }
+            }
+
+            // Function to display the win message
+            function showWinMessage() {
+                const winMessageHTML = `
+                    <div class="win-message">
+                        <h3>Advance Happy Birthday, my dear sister!</h3>
+                        <p>
+                            Your kindness and joy are a gift to everyone around you.
+                            <br>May your special day be the start of a year filled with wonderful adventures,
+                            <br>endless laughter, and all the happiness you deserve.
+                        </p>
+                    </div>
+                `;
+                setTimeout(() => {
+                    modalContentArea.innerHTML = winMessageHTML;
+                }, 1000);
+            }
+
+            // Populate the board with cards
+            gameEmojis.forEach(emoji => {
+                gameBoard.appendChild(createCard(emoji));
+            });
+        }
+
+        const acrosticData = {
+            english: {
+                name: "Akarshana",
+                list: [
+                    { letter: "A", line: "All the stars are shining just for you." },
+                    { letter: "K", line: "Know that your joy is a gift to us all." },
+                    { letter: "A", line: "Always allowing your light to brighten the world." },
+                    { letter: "R", line: "Radiant and kind, you shine like the sun." },
+                    { letter: "S", line: "So wonderful to see you grow and bloom." },
+                    { letter: "H", line: "Hope and dreams you hold in your heart." },
+                    { letter: "A", line: "Always there with a caring smile." },
+                    { letter: "N", line: "Nothing can dim the beauty of your soul." },
+                    { letter: "A", line: "Amazing adventures lie ahead for you." },
+                ]
+            },
+            tamil: {
+                name: "அகர்ஷணா",
+                list: [
+                    { letter: "அ", line: "அன்பினால் அனைவரையும் கட்டிப்போடும் சக்தி உங்களிடம் உள்ளது." },
+                    { letter: "க", line: "கருணையினால் நிறைந்த கனவுப் பெண் நீங்கள்." },
+                    { letter: "ர்", line: "உயர்ந்த எண்ணங்களுடன் நீங்கள் எப்போதும் சிறப்பாக பிரகாசிக்கிறீர்கள்." },
+                    { letter: "ஷ", line: "உங்கள் புன்னகையில் எப்போதும் ஆகர்ஷனையாக இருக்கிறீர்கள்." },
+                    { letter: "ண", line: "உங்கள் குணங்களை எண்ணிக்கையால் அடக்க முடியாது." },
+                    { letter: "ா", line: "ஆனந்தம் என்பது உங்கள் ஆத்மாவின் பிரதிபலிப்பு." },
+                ]
+            },
+            hindi: {
+                name: "आकर्षणा",
+                list: [
+                    { letter: "आ", line: "आपके जीवन में हमेशा आनंद और रोशनी रहे।" },
+                    { letter: "क", line: "करुणा और प्यार से भरा कमल का फूल हैं आप." },
+                    { letter: "र", line: "रहें हमेशा खुश रहें, आपका हर सपना सच हो।" },
+                    { letter: "श", line: "शक्ति और साहस शब्दों से परे है।" },
+                    { letter: "ण", line: "आपकी रचनात्मकता में एक विशेष गुण है।" },
+                    { letter: "आ", line: "आपकी मुस्कान से आसमान भी मुस्कुराता है।" },
+                ]
+            }
+        };
+
+        function renderAcrostic(language) {
+            const data = acrosticData[language];
+            const modalContentArea = document.getElementById("modal-content-area");
+
+            modalContentArea.innerHTML = `
+                <div class="acrostic-container">
+                    <h3 class="acrostic-title text-center">A special message for ${data.name}</h3>
+                    <div class="language-buttons">
+                        <button class="language-button" data-lang="english" onclick="renderAcrostic('english')">English</button>
+                        <button class="language-button" data-lang="tamil" onclick="renderAcrostic('tamil')">தமிழ்</button>
+                        <button class="language-button" data-lang="hindi" onclick="renderAcrostic('hindi')">हिंदी</button>
+                    </div>
+                    <ul class="acrostic-list"></ul>
+                </div>
+            `;
+            
+            const buttons = modalContentArea.querySelectorAll('.language-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                if (button.dataset.lang === language) {
+                    button.classList.add('active');
+                }
+            });
+
+            const listElement = modalContentArea.querySelector("ul");
+            data.list.forEach(item => {
+                const li = document.createElement("li");
+                li.classList.add("acrostic-item");
+                
+                const regex = new RegExp(item.letter);
+                const highlightedLine = item.line.replace(regex, `<span class="highlighted-letter">${item.letter}</span>`);
+                
+                li.innerHTML = highlightedLine;
+                listElement.appendChild(li);
+            });
+        }
+        
+        function showInspirationalMessage() {
+            generateConfetti();
+            renderAcrostic('english');
+            document.getElementById("surprise-modal").style.display = "flex";
+        }
+        
+        // Closes the modal
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) {
+                return;
+            }
+            document.getElementById("surprise-modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<%= form_with(model: worker, local: true) do |form| %>
+<% if worker.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(worker.errors.count, "error") %> prohibited this worker from being saved:</h2>
+    <ul>
+        <% worker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+</div>
+<div class="field">
+    <%= form.label :contact %>
+    <%= form.text_field :contact %>
+</div>
+<div class="field">
+    <%= form.label :project_id, 'Project' %>
+    <%= form.collection_select :project_id, Project.all, :id, :name, prompt: 'Select a project' %>
+</div>
+<div class="field">
+    <%= form.label :head_worker_id, 'Head Worker' %>
+    <%= form.collection_select :head_worker_id, Worker.all, :id, :name, prompt: 'Select a head worker (optional)' %>
+</div>
+<div class="field">
+    <%= form.label :team_id, 'Team' %><br>
+        <%= form.collection_select :team_id, Team.all, :id, lambda { |team| team.nature_of_skill.present? ? "#{team.name} (#{team.nature_of_skill})" : team.name }, prompt: 'Select a team' %>
+</div>
+<div class="actions">
+    <%= form.submit %>
+</div>
+<% end %>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%= yield :head %>
+
+<%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+<%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+<link rel="icon" href="/icon.png" type="image/png">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon.png">
+
+<%# Includes all stylesheet files in app/assets/stylesheets %>
+</head>
+
+<body>
+    <h1>Workers</h1>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= link_to 'New Worker', new_worker_path, class: 'btn btn-success', style: 'margin-bottom: 1em;' %>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Project</th>
+                <th>Head Worker</th>
+                <th>Nature of Skill</th>

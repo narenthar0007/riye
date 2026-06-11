@@ -1,0 +1,688 @@
+================================================================================
+                    RIYE CONSTRUCTION MANAGEMENT SYSTEM
+                        RECORD CREATION GUIDE FOR NEW EMPLOYEES
+================================================================================
+
+VERSION: 1.0
+DATE: 2025-01-27
+AUTHOR: System Administrator
+
+================================================================================
+1. OVERVIEW
+================================================================================
+
+This guide provides step-by-step instructions for new employees to create 
+records in all system tables. The Riye Construction Management System manages:
+
+• Companies and Projects
+• Teams and Team Heads  
+• Workers and Attendance
+• Bank Details and Stock Management
+• Daily Updates and Communication
+• User Management and Permissions
+
+Each section includes:
+✓ Required fields and validations
+✓ Step-by-step creation process
+✓ Common errors and solutions
+✓ Best practices and tips
+
+================================================================================
+2. SYSTEM TABLES OVERVIEW
+================================================================================
+
+2.1 CORE ENTITIES
+------------------
+• COMPANIES: Construction companies we work with
+• PROJECTS: Individual construction projects
+• TEAM_HEADS: Leaders of worker teams
+• TEAMS: Groups of workers with specific skills
+• WORKERS: Individual construction workers
+• USERS: System users (employees, managers, admins)
+
+2.2 OPERATIONAL ENTITIES
+-------------------------
+• ATTENDANCES: Worker punch-in/punch-out records
+• BANK_DETAILS: Worker payment information
+• STOCKS: Construction materials and inventory
+• DAILY_UPDATES: Project progress reports
+• REPLIES: Responses to daily updates
+
+================================================================================
+3. COMPANY RECORDS
+================================================================================
+
+3.1 CREATING A COMPANY
+------------------------
+Purpose: Register construction companies we work with
+
+Required Fields:
+• name (string) - Company name (unique)
+
+Step-by-Step Process:
+1. Navigate to Companies section
+2. Click "Add New Company"
+3. Enter company name (e.g., "ABC Construction Ltd")
+4. Click "Create Company"
+5. Verify company appears in list
+
+Validation Rules:
+✓ Name must be present
+✓ Name must be unique (no duplicates)
+✓ Name length: 2-100 characters
+
+Common Errors:
+❌ "Name can't be blank" - Enter a company name
+❌ "Name has already been taken" - Choose a different name
+❌ "Name is too short" - Use at least 2 characters
+
+Example:
+Company.create!(name: "ABC Construction Ltd")
+
+================================================================================
+4. PROJECT RECORDS
+================================================================================
+
+4.1 CREATING A PROJECT
+-----------------------
+Purpose: Track individual construction projects
+
+Required Fields:
+• name (string) - Project name
+• location (string) - Project location
+• status (string) - Project status
+• company_id (integer) - Must link to existing company
+• user_id (integer) - Must link to existing user (project manager)
+
+Step-by-Step Process:
+1. Navigate to Projects section
+2. Click "Add New Project"
+3. Enter project name (e.g., "Residential Complex Phase 1")
+4. Enter location (e.g., "Mumbai, Maharashtra")
+5. Select status (e.g., "Active", "Completed", "On Hold")
+6. Choose company from dropdown
+7. Assign project manager (user)
+8. Click "Create Project"
+
+Validation Rules:
+✓ All fields are required
+✓ Company must exist
+✓ User must exist
+
+Common Errors:
+❌ "Company must exist" - Create company first
+❌ "User must exist" - Ensure user is created
+❌ "Name can't be blank" - Enter project name
+
+Example:
+Project.create!(
+  name: "Residential Complex Phase 1",
+  location: "Mumbai, Maharashtra", 
+  status: "Active",
+  company_id: 1,
+  user_id: 1
+)
+
+================================================================================
+5. TEAM HEAD RECORDS
+================================================================================
+
+5.1 CREATING A TEAM HEAD
+--------------------------
+Purpose: Register team leaders who manage worker groups
+
+Required Fields:
+• name (string) - Full name (2-50 characters)
+• dob (date) - Date of birth
+• age (integer) - Age (18-99, auto-calculated from DOB)
+• gender (string) - Male/Female/Other
+• address (text) - Full address
+• aadhaar_number (string) - 12-digit Aadhaar (unique)
+• contact_number (string) - 10-digit phone number
+
+Step-by-Step Process:
+1. Navigate to Team Heads section
+2. Click "Add New Team Head"
+3. Enter full name
+4. Select date of birth (age auto-calculates)
+5. Choose gender
+6. Enter complete address
+7. Enter 12-digit Aadhaar number
+8. Enter 10-digit contact number
+9. Click "Create Team Head"
+
+Validation Rules:
+✓ Name: 2-50 characters, required
+✓ DOB: Required, age 18-99
+✓ Gender: Must be Male/Female/Other
+✓ Address: Required
+✓ Aadhaar: 12 digits, unique
+✓ Contact: 10 digits, required
+
+Common Errors:
+❌ "Aadhaar number has already been taken" - Use different Aadhaar
+❌ "Contact number must be 10 digits" - Check phone number
+❌ "Age must be greater than 18" - Check date of birth
+❌ "Gender is not valid" - Use Male/Female/Other
+
+Example:
+TeamHead.create!(
+  name: "Rajesh Kumar",
+  dob: Date.new(1985, 6, 15),
+  gender: "Male",
+  address: "123 Main Street, Mumbai",
+  aadhaar_number: "123456789012",
+  contact_number: "9876543210"
+)
+
+================================================================================
+6. TEAM RECORDS
+================================================================================
+
+6.1 CREATING A TEAM
+---------------------
+Purpose: Create worker teams with specific skills
+
+Required Fields:
+• name (string) - Team name (2-50 characters)
+• nature_of_skill (string) - Skill type (default: "local_team")
+• team_head_id (integer) - Must link to existing team head
+
+Step-by-Step Process:
+1. Navigate to Teams section
+2. Click "Add New Team"
+3. Enter team name (e.g., "Masonry Team A") 
+4. Select nature of skill (e.g., "local_team", "specialized")
+5. Choose team head from dropdown
+6. Click "Create Team"
+
+Validation Rules:
+✓ Name: 2-50 characters, required
+✓ Nature of skill: Required
+✓ Team head must exist
+
+Common Errors:
+❌ "Team head must exist" - Create team head first
+❌ "Name is too short" - Use at least 2 characters
+
+Example:
+Team.create!(
+  name: "Masonry Team A",
+  nature_of_skill: "local_team",
+  team_head_id: 1
+)
+
+================================================================================
+7. WORKER RECORDS
+================================================================================
+
+7.1 CREATING A WORKER
+-----------------------
+Purpose: Register individual construction workers
+
+Required Fields:
+• name (string) - Worker name (2-50 characters)
+• contact (string) - Contact number (unique per project)
+• project_id (integer) - Must link to existing project
+• worker_id (string) - Auto-generated (W1000, W1001, etc.)
+• nature_of_worker (integer) - 0=regular, 1=head, 2=supervisor
+• team_id (integer) - Optional team assignment
+• head_worker_id (integer) - Optional supervisor
+
+Step-by-Step Process:
+1. Navigate to Workers section
+2. Click "Add New Worker"
+3. Enter worker name
+4. Enter contact number
+5. Select project from dropdown
+6. Choose nature of worker (regular/head/supervisor)
+7. Optionally assign to team
+8. Optionally assign head worker
+9. Click "Create Worker" (worker_id auto-generated)
+
+Validation Rules:
+✓ Name: 2-50 characters, required
+✓ Contact: Required, unique per project
+✓ Project: Must exist
+✓ Worker ID: Auto-generated, unique
+✓ Nature: 0=regular, 1=head, 2=supervisor
+
+Common Errors:
+❌ "Project must exist" - Create project first
+❌ "Contact can only be used once per project" - Use different contact
+❌ "Worker id has already been taken" - System error, contact admin
+
+Example:
+Worker.create!(
+  name: "Suresh Kumar",
+  contact: "9876543210",
+  project_id: 1,
+  nature_of_worker: 0, # regular
+  team_id: 1
+)
+
+7.2 WORKER HIERARCHY
+----------------------
+• Head Workers: head_worker_id = nil
+• Subordinates: head_worker_id = head worker's ID
+• Supervisors: nature_of_worker = 2
+
+================================================================================
+8. ATTENDANCE RECORDS
+================================================================================
+
+8.1 CREATING ATTENDANCE
+-------------------------
+Purpose: Record worker punch-in/punch-out times
+
+Required Fields:
+• worker_id (integer) - Must link to existing worker
+• punch_in (datetime) - Punch-in time
+• punch_out (datetime) - Punch-out time (optional)
+• punch_in_location (string) - Location of punch-in
+• punch_out_location (string) - Location of punch-out
+• approved (boolean) - Approval status (default: false)
+
+Step-by-Step Process:
+1. Navigate to Attendances section
+2. Click "Add New Attendance"
+3. Select worker from dropdown
+4. Enter punch-in time and location
+5. Optionally enter punch-out time and location
+6. Set approval status
+7. Click "Create Attendance"
+
+Validation Rules:
+✓ Worker must exist
+✓ Punch-in time required
+✓ Punch-out optional
+
+Common Errors:
+❌ "Worker must exist" - Create worker first
+❌ "Punch in can't be blank" - Enter punch-in time
+
+Example:
+Attendance.create!(
+  worker_id: 1,
+  punch_in: Time.current,
+  punch_in_location: "Site A",
+  approved: false
+)
+
+================================================================================
+9. BANK DETAIL RECORDS
+================================================================================
+
+9.1 CREATING BANK DETAILS
+---------------------------
+Purpose: Store worker payment information
+
+Required Fields:
+• worker_id (integer) - Must link to existing worker
+• name_of_beneficiary (string) - Account holder name (2-100 chars)
+• account_number (string) - 9-18 digits, unique
+• bank_name (string) - Bank name (2-100 chars)
+• ifsc_code (string) - Valid IFSC format (e.g., SBIN0001234)
+• branch_name (string) - Branch name (2-100 chars)
+
+Step-by-Step Process:
+1. Navigate to Bank Details section
+2. Click "Add New Bank Detail"
+3. Select worker from dropdown
+4. Enter beneficiary name
+5. Enter account number (9-18 digits)
+6. Enter bank name
+7. Enter IFSC code (format: SBIN0001234)
+8. Enter branch name
+9. Click "Create Bank Detail"
+
+Validation Rules:
+✓ Worker must exist
+✓ One bank detail per worker
+✓ Account number: 9-18 digits, unique
+✓ IFSC: Valid format (4 letters + 0 + 6 alphanumeric)
+✓ All fields required
+
+Common Errors:
+❌ "Worker must exist" - Create worker first
+❌ "Account number has already been taken" - Use different account
+❌ "Ifsc code must be valid IFSC format" - Check IFSC format
+❌ "Worker can only have one bank detail record" - Worker already has bank details
+
+Example:
+BankDetail.create!(
+  worker_id: 1,
+  name_of_beneficiary: "Suresh Kumar",
+  account_number: "123456789012",
+  bank_name: "State Bank of India",
+  ifsc_code: "SBIN0001234",
+  branch_name: "Mumbai Main Branch"
+)
+
+================================================================================
+10. STOCK RECORDS
+================================================================================
+
+10.1 CREATING STOCK
+--------------------
+Purpose: Track construction materials and inventory
+
+Required Fields:
+• name (string) - Stock item name
+• quantity (integer) - Available quantity
+• unit (string) - Unit of measurement
+• company_id (integer) - Must link to existing company
+• project_id (integer) - Optional project assignment
+
+Step-by-Step Process:
+1. Navigate to Stocks section
+2. Click "Add New Stock"
+3. Enter stock item name
+4. Enter quantity
+5. Enter unit (e.g., "kg", "pieces", "meters")
+6. Select company from dropdown
+7. Optionally assign to project
+8. Click "Create Stock"
+
+Validation Rules:
+✓ Company must exist
+✓ Project optional but must exist if provided
+
+Common Errors:
+❌ "Company must exist" - Create company first
+❌ "Project must exist" - Create project first
+
+Example:
+Stock.create!(
+  name: "Cement Bags",
+  quantity: 100,
+  unit: "bags",
+  company_id: 1,
+  project_id: 1
+)
+
+================================================================================
+11. DAILY UPDATE RECORDS
+================================================================================
+
+11.1 CREATING DAILY UPDATES
+-----------------------------
+Purpose: Record daily project progress and notes
+
+Required Fields:
+• note (text) - Update content
+• user_id (integer) - Must link to existing user
+• approved (boolean) - Approval status (default: false)
+
+Step-by-Step Process:
+1. Navigate to Daily Updates section
+2. Click "Add New Daily Update"
+3. Enter detailed note about progress
+4. Select user (reporter)
+5. Set approval status
+6. Click "Create Daily Update"
+
+Validation Rules:
+✓ User must exist
+✓ Note content required
+
+Common Errors:
+❌ "User must exist" - Create user first
+❌ "Note can't be blank" - Enter update content
+
+Example:
+DailyUpdate.create!(
+  note: "Completed foundation work for Block A. 15 workers on site. No issues reported.",
+  user_id: 1,
+  approved: false
+)
+
+================================================================================
+12. REPLY RECORDS
+================================================================================
+
+12.1 CREATING REPLIES
+-----------------------
+Purpose: Respond to daily updates
+
+Required Fields:
+• content (text) - Reply content
+• daily_update_id (integer) - Must link to existing daily update
+• user_id (integer) - Must link to existing user
+
+Step-by-Step Process:
+1. Navigate to Daily Updates section
+2. Find the daily update to reply to
+3. Click "Reply" button
+4. Enter reply content
+5. Click "Create Reply"
+
+Validation Rules:
+✓ Daily update must exist
+✓ User must exist
+✓ Content required
+
+Common Errors:
+❌ "Daily update must exist" - Create daily update first
+❌ "User must exist" - Create user first
+
+Example:
+Reply.create!(
+  content: "Good progress! Please ensure safety protocols are followed.",
+  daily_update_id: 1,
+  user_id: 2
+)
+
+================================================================================
+13. USER RECORDS (ADMIN ONLY)
+================================================================================
+
+13.1 CREATING USERS
+--------------------
+Purpose: Create system users (employees, managers, admins)
+
+Required Fields:
+• email (string) - User email (unique)
+• password (string) - User password
+• password_confirmation (string) - Password confirmation
+• role (integer) - 0=employee, 1=admin, 2=manager, 3=owner
+
+Step-by-Step Process:
+1. Navigate to Users section (Admin/Owner only)
+2. Click "Add New User"
+3. Enter email address
+4. Enter password and confirmation
+5. Select role based on permissions
+6. Click "Create User"
+
+Validation Rules:
+✓ Email: Required, unique, valid format
+✓ Password: Required, minimum 6 characters
+✓ Role: Required, valid role
+
+Role Permissions:
+• Employee (0): Basic access, own profile only
+• Manager (2): Team management, employee oversight
+• Admin (1): User management, system configuration
+• Owner (3): Full system access
+
+Common Errors:
+❌ "Email has already been taken" - Use different email
+❌ "Password confirmation doesn't match" - Check password match
+❌ "Only super admins can create admin accounts" - Need super admin privileges
+
+Example:
+User.create!(
+  email: "john@company.com",
+  password: "password123",
+  password_confirmation: "password123",
+  role: 0 # employee
+)
+
+================================================================================
+14. RECORD CREATION WORKFLOW
+================================================================================
+
+14.1 RECOMMENDED ORDER
+-----------------------
+1. Create Company
+2. Create Users (for project managers)
+3. Create Projects (link to company and user)
+4. Create Team Heads
+5. Create Teams (link to team heads)
+6. Create Workers (link to projects and teams)
+7. Create Bank Details (link to workers)
+8. Create Stocks (link to companies/projects)
+9. Create Attendances (link to workers)
+10. Create Daily Updates (link to users)
+11. Create Replies (link to daily updates and users)
+
+14.2 DEPENDENCY CHAIN
+----------------------
+Companies → Projects → Workers → Attendances/Bank Details
+Team Heads → Teams → Workers
+Users → Daily Updates → Replies
+Companies → Stocks
+
+================================================================================
+15. COMMON VALIDATION ERRORS
+================================================================================
+
+15.1 FOREIGN KEY ERRORS
+-------------------------
+❌ "X must exist" - Create the referenced record first
+❌ "X can't be blank" - Fill in required field
+❌ "X is invalid" - Check field format and content
+
+15.2 UNIQUENESS ERRORS
+-----------------------
+❌ "X has already been taken" - Use different value
+❌ "X can only be used once per Y" - Check scope constraints
+
+15.3 FORMAT ERRORS
+-------------------
+❌ "X must be valid format" - Check field format requirements
+❌ "X is too short/long" - Check length constraints
+❌ "X is not included in the list" - Use valid option
+
+================================================================================
+16. BEST PRACTICES
+================================================================================
+
+16.1 DATA ENTRY TIPS
+---------------------
+✓ Always create parent records before child records
+✓ Use consistent naming conventions
+✓ Double-check unique fields (emails, Aadhaar, account numbers)
+✓ Validate all required fields before submission
+✓ Use meaningful names and descriptions
+
+16.2 ERROR PREVENTION
+---------------------
+✓ Check dropdown options before selecting
+✓ Verify contact numbers and IDs
+✓ Use proper date formats
+✓ Follow IFSC code format (4 letters + 0 + 6 alphanumeric)
+✓ Ensure Aadhaar numbers are exactly 12 digits
+
+16.3 SYSTEM MAINTENANCE
+-----------------------
+✓ Regularly backup data
+✓ Monitor for duplicate entries
+✓ Keep user roles updated
+✓ Archive completed projects
+✓ Review and approve daily updates
+
+================================================================================
+17. TROUBLESHOOTING GUIDE
+================================================================================
+
+17.1 COMMON ISSUES
+-------------------
+
+Issue: "Cannot create worker - project doesn't exist"
+Solution: Create project first, then create worker
+
+Issue: "Bank detail creation failed - worker already has bank details"
+Solution: One bank detail per worker, edit existing instead
+
+Issue: "Team head creation failed - Aadhaar already exists"
+Solution: Check if team head already exists, use different Aadhaar
+
+Issue: "User creation failed - email already taken"
+Solution: Use different email address
+
+Issue: "Attendance creation failed - worker doesn't exist"
+Solution: Create worker first, then create attendance
+
+17.2 DEBUGGING STEPS
+---------------------
+1. Check if parent records exist
+2. Verify field formats and lengths
+3. Check for duplicate unique fields
+4. Validate required field completion
+5. Review error messages carefully
+
+================================================================================
+18. QUICK REFERENCE
+================================================================================
+
+18.1 REQUIRED FIELDS SUMMARY
+------------------------------
+Companies: name
+Projects: name, location, status, company_id, user_id
+Team Heads: name, dob, age, gender, address, aadhaar_number, contact_number
+Teams: name, nature_of_skill, team_head_id
+Workers: name, contact, project_id, worker_id (auto), nature_of_worker
+Attendances: worker_id, punch_in
+Bank Details: worker_id, name_of_beneficiary, account_number, bank_name, ifsc_code, branch_name
+Stocks: name, quantity, unit, company_id
+Daily Updates: note, user_id
+Replies: content, daily_update_id, user_id
+Users: email, password, password_confirmation, role
+
+18.2 UNIQUE FIELDS
+-------------------
+• Company names
+• User emails
+• Worker contacts (per project)
+• Worker IDs
+• Aadhaar numbers
+• Account numbers
+• IFSC codes
+
+18.3 AUTO-GENERATED FIELDS
+---------------------------
+• Worker IDs (W1000, W1001, etc.)
+• User IDs
+• Record timestamps (created_at, updated_at)
+
+================================================================================
+19. CONTACT AND SUPPORT
+================================================================================
+
+For technical issues or questions:
+• Contact system administrator
+• Check error logs in application
+• Verify database connections
+• Review validation rules in models
+
+For data entry questions:
+• Refer to this documentation
+• Check field requirements
+• Validate data formats
+• Follow creation order
+
+================================================================================
+END OF DOCUMENTATION
+================================================================================
+
+This guide covers all major record creation scenarios in the Riye Construction 
+Management System. For additional help, refer to:
+- User Permission System Documentation
+- Model files in app/models/
+- Controller files in app/controllers/
+- View files in app/views/
+
+Last Updated: 2025-01-27
+System Version: 1.0

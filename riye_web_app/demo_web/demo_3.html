@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champ Fitness - Your Path to Wellness</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navyBlue: {
+                            DEFAULT: '#22386E', // Lighter main navy blue
+                            light: '#425D9B',   // Lighter shade for some elements
+                            dark: '#14264F',    // Lighter very dark navy for deep contrasts
+                        },
+                        white: '#FFFFFF',
+                        black: '#000000',
+                        lightGray: '#F7FAFC',
+                        darkGray: '#1A202C',
+
+                        // Aliases updated to reflect new navyBlue shades
+                        primaryAccent: '#22386E', // Now the lighter default navy
+                        secondaryAccent: '#FFFFFF',
+                        backgroundLight: '#F7FAFC',
+                        backgroundDark: '#1A202C',
+                        textDark: '#2D3748',
+                        textLight: '#E2E8F0',
+                        cardLight: '#FFFFFF',
+                        cardDark: '#14264F', // Now the lighter dark navy
+                        borderLight: '#CBD5E0',
+                        borderDark: '#425D9B', // Now the lighter light navy
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            background-color: theme('colors.backgroundLight');
+            color: theme('colors.textDark');
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section {
+            padding: 5rem 1rem;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: theme('colors.textDark');
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background-color: theme('colors.primaryAccent'); /* Navy Blue underline */
+            border-radius: 2px;
+        }
+
+        .hero-background {
+            background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Updated hero image with lighter blue */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .card {
+            background-color: theme('colors.cardLight');
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid theme('colors.borderLight');
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .dark-section .section-title, .dark-section .text-lightTextColor {
+            color: theme('colors.textLight');
+        }
+        .dark-section .card {
+            background-color: theme('colors.cardDark');
+            border: 1px solid theme('colors.borderDark');
+        }
+        .dark-section .card h3 {
+            color: theme('colors.secondaryAccent'); /* White for class titles on dark cards */
+        }
+        .dark-section .card p {
+            color: theme('colors.textLight');
+        }
+        .dark-section .card img {
+            border: 1px solid theme('colors.navyBlue.light');
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Pricing Card Border Animation */
+        .pricing-card.selected {
+            border: 3px solid theme('colors.primaryAccent'); /* Thicker, navy blue border when selected/hovered */
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Icons specific styling for contact section */
+        .social-icon-wrapper {
+            @apply flex items-center justify-center w-12 h-12 rounded-full shadow-md transition-all duration-300;
+        }
+        .social-icon-wrapper i {
+            @apply text-2xl;
+        }
+        .social-icon-wrapper.gmail { @apply bg-red-500 hover:bg-red-600 text-white; }
+        .social-icon-wrapper.whatsapp { @apply bg-green-500 hover:bg-green-600 text-white; }
+        .social-icon-wrapper.instagram { @apply bg-pink-500 hover:bg-pink-600 text-white; }
+        .social-icon-wrapper.x-twitter { @apply bg-black hover:bg-gray-800 text-white; }
+        .social-icon-wrapper.linkedin { @apply bg-blue-700 hover:bg-blue-800 text-white; }
+        .social-icon-wrapper.facebook { @apply bg-blue-600 hover:bg-blue-700 text-white; }
+        .social-icon-wrapper.youtube { @apply bg-red-700 hover:bg-red-800 text-white; }
+
+        /* Member Area Specific Styles */
+        #member-area {
+            background-color: theme('colors.backgroundLight');
+            color: theme('colors.textDark');
+            padding: 5rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        #member-area .login-form-container, #member-area .plans-content-container {
+            max-width: 900px; /* Increased max-width for better content display */
+            width: 100%;
+            background-color: theme('colors.cardLight');
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        #member-area h3 {
+            color: theme('colors.primaryAccent');
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        #member-area ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+            text-align: left;
+        }
+        #member-area li {
+            margin-bottom: 0.5rem;
+            color: theme('colors.textDark');
+        }
+        #member-area .plan-category-header {
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            background-color: theme('colors.navyBlue.light');
+            color: theme('colors.white');
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+            font-size: 1.125rem; /* text-lg */
+        }
+        #member-area .plan-category-header:hover {
+            background-color: theme('colors.navyBlue.DEFAULT');
+        }
+        #member-area .plan-category-header i {
+            transition: transform 0.3s ease;
+        }
+        #member-area .plan-category-header.expanded i {
+            transform: rotate(90deg);
+        }
+        #member-area .plan-content {
+            border: 1px solid theme('colors.borderLight');
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: theme('colors.lightGray'); /* Lighter background for content */
+        }
+        #member-area .plan-content h5 {
+            font-weight: 600;
+            color: theme('colors.navyBlue.DEFAULT');
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        #member-area .plan-item {
+            margin-left: 1.5rem;
+            margin-bottom: 0.3rem;
+            list-style: disc; /* Use disc for list items */
+        }
+
+        /* Dropdown specific styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            top: 100%; /* Position below the button */
+            left: 0;
+            margin-top: 0.5rem; /* Space between button and dropdown */
+        }
+
+        .dropdown-content a {
+            color: theme('colors.gray.700');
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: theme('colors.gray.100');
+            color: theme('colors.primaryAccent');
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg fixed w-full z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3">
+                <img src="https://placehold.co/40x40/22386E/FFFFFF?text=CF" alt="Champ Fitness Logo" class="rounded-full">
+                <span class="text-3xl font-extrabold text-navyBlue-DEFAULT">Champ Fitness</span>
+            </a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#home" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Home</a>
+                <a href="#about" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">About</a>
+                <a href="#pricing" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Pricing</a>
+                <a href="#contact" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Contact</a>
+
+                <!-- More dropdown -->
+                <div class="dropdown">
+                    <button class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold focus:outline-none py-2 px-4 rounded-md">
+                        More <i class="bi bi-chevron-down text-sm ml-1"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#awards-trainer" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Awards & Trainer</a>
+                        <a href="#services" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Services</a>
+                        <a href="#products" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Products</a>
+                        <a href="#testimonials" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Testimonials</a>
+                        <a href="#social-activity" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Social Activity</a>
+                        <a href="#transformation" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Transformation</a>
+                        <a href="#member-area" class="text-lg text-gray-700 hover:text-primaryAccent transition-colors duration-300 font-semibold">Member Area</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-2">
+            <a href="#home" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</a>
+            <a href="#about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About</a>
+            <a href="#pricing" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pricing</a>
+            <a href="#contact" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+            <!-- Dropdown content for mobile menu -->
+            <div class="border-t border-gray-200 mt-2 pt-2">
+                <p class="px-4 py-2 text-gray-500 text-sm">More Sections</p>
+                <a href="#awards-trainer" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Awards & Trainer</a>
+                <a href="#services" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Services</a>
+                <a href="#products" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Products</a>
+                <a href="#testimonials" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Testimonials</a>
+                <a href="#social-activity" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Social Activity</a>
+                <a href="#transformation" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Transformation</a>
+                <a href="#member-area" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Member Area</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-background relative">
+            <div class="bg-black bg-opacity-60 p-8 md:p-12 rounded-xl max-w-4xl mx-auto shadow-2xl text-center">
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 animate-fade-in-up">
+                    Champ Fitness: Your Path to Wellness
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 animate-fade-in-up delay-200">
+                    Unleash your potential in our premier unisex fitness hub.
+                </p>
+                <a href="#pricing" class="bg-primaryAccent hover:bg-navyBlue-light text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all duration-300 inline-block">
+                    Join Today!
+                </a>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="section bg-backgroundLight">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title">About Champ Fitness</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-left mt-8">
+                    <div>
+                        <img src="abuot_us_img.jpg" alt="Champ Fitness Unisex Gym" class="rounded-xl shadow-lg transform transition duration-500 hover:scale-105">
+                    </div>
+                    <div>
+                        <p class="text-lg leading-relaxed text-textDark mb-6">
+                            Welcome to **Champ Fitness**, a leading unisex gym dedicated to helping every individual achieve their health and fitness goals. We offer a comprehensive suite of services tailored to meet diverse needs, whether you're looking for personal transformation, specific strength gains, or overall wellness.
+                        </p>
+                        <p class="text-lg leading-relaxed text-textDark mb-6">
+                            Our gym is founded and led by **Karthick Arasu**, a passionate fitness expert committed to creating a supportive and results-driven environment. We pride ourselves on our state-of-the-art equipment, experienced trainers, and a welcoming community that inspires greatness.
+                        </p>
+                        <p class="text-lg leading-relaxed text-textDark">
+                            At Champ Fitness, we believe that fitness is a journey, not a destination. Let us be your partner in building a stronger, healthier, and more confident you.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards & Trainer Section (NEW) -->
+        <section id="awards-trainer" class="section bg-backgroundLight">
+            <div class="container mx-auto max-w-5xl">
+                <!-- Awards Sub-section -->
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Our Accolades</h2>
+                    <div class="grid md:grid-cols-2 gap-8 text-left mt-8">
+                        <!-- Award 1 -->
+                        <div class="card bg-gradient-to-br from-primaryAccent to-navyBlue-light text-white p-6 rounded-lg shadow-lg flex items-start space-x-4 transform transition-transform duration-300 hover:scale-105">
+                            <i class="bi bi-award-fill w-12 h-12 flex-shrink-0 text-yellow-300 text-4xl"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">"Best Training Institute" - 2023</h3>
+                                <p class="text-blue-100">Awarded by the Global Fitness Council for exceptional curriculum and client success.</p>
+                            </div>
+                        </div>
+                        <!-- Award 2 -->
+                        <div class="card bg-gradient-to-br from-navyBlue-light to-primaryAccent text-white p-6 rounded-lg shadow-lg flex items-start space-x-4 transform transition-transform duration-300 hover:scale-105">
+                            <i class="bi bi-award-fill w-12 h-12 flex-shrink-0 text-yellow-300 text-4xl"></i>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">"Innovator in Fitness Coaching" - 2024</h3>
+                                <p class="text-blue-100">Recognized by Fitness Insights Magazine for our cutting-edge methodologies and practical approach.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trainer Sub-section -->
+                <div class="text-center pt-8">
+                    <h2 class="section-title">Meet Our Expert Trainer</h2>
+                    <div class="card flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12 bg-lightGray p-8 rounded-lg shadow-md mt-8">
+                        <div class="flex-shrink-0">
+                            <img src="https://placehold.co/200x200/22386E/FFFFFF?text=Karthick+Arasu" alt="Karthick Arasu Profile Picture" class="w-48 h-48 rounded-full object-cover border-4 border-primaryAccent shadow-lg">
+                        </div>
+                        <div class="text-left">
+                            <h3 class="text-3xl font-bold text-primaryAccent mb-3">Karthick Arasu</h3>
+                            <p class="text-lg text-textDark mb-4">
+                                Karthick Arasu is the visionary founder and head trainer of Champ Fitness, bringing over 12 years of dedicated experience in personal training, strength conditioning, and nutritional guidance. His philosophy centers on holistic wellness, empowering individuals to achieve sustainable results and a healthier lifestyle.
+                            </p>
+                            <p class="text-lg text-textDark mb-4">
+                                Certified by leading fitness organizations, Karthick specializes in creating personalized workout regimes and diet plans that cater to diverse fitness levels and goals, from weight loss and muscle gain to performance enhancement and rehabilitation. His commitment to his clients' success is unmatched, making him a highly sought-after mentor in the fitness community.
+                            </p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li><strong class="text-primaryAccent">Specializations:</strong> Personal Training, Strength & Conditioning, Nutrition</li>
+                                <li><strong class="text-primaryAccent">Experience:</strong> 12+ Years in Fitness Industry</li>
+                                <li><strong class="text-primaryAccent">Certifications:</strong> Certified Personal Trainer (CPT), Certified Nutrition Coach (CNC)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section bg-backgroundDark dark-section">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title text-textLight">Our Services</h2>
+                <p class="text-xl mb-12 opacity-90 text-textLight">Personalized programs for every fitness journey.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1: Personal Training -->
+                    <div class="card bg-cardDark text-textLight hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/425D9B/FFFFFF?text=Personal+Training" alt="Personal Training" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Personal Training</h3>
+                        <p class="text-textLight">One-on-one sessions tailored to your unique goals, providing personalized workout plans and expert guidance.</p>
+                    </div>
+                    <!-- Service Card 2: Strength Training -->
+                    <div class="card bg-cardDark text-textLight hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/425D9B/FFFFFF?text=Strength+Training" alt="Strength Training" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Strength Training</h3>
+                        <p class="text-textLight">Build muscle, increase power, and enhance overall body composition with our comprehensive strength programs.</p>
+                    </div>
+                    <!-- Service Card 3: Endurance Training / HIIT -->
+                    <div class="card bg-cardDark text-textLight hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/425D9B/FFFFFF?text=Endurance+HIIT" alt="Endurance Training / HIIT" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Endurance Training / HIIT</h3>
+                        <p class="text-textLight">Boost your cardiovascular health and stamina with high-intensity interval training and endurance-focused workouts.</p>
+                    </div>
+                    <!-- Service Card 4: Women Fitness -->
+                    <div class="card bg-cardDark text-textLight hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/425D9B/FFFFFF?text=Women+Fitness" alt="Women Fitness" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Women Fitness</h3>
+                        <p class="text-textLight">Specialized fitness programs designed to address the unique needs and goals of women, fostering strength and confidence.</p>
+                    </div>
+                    <!-- Service Card 5: Nutritional Guidance -->
+                    <div class="card bg-cardDark text-textLight hover:shadow-xl">
+                        <img src="https://placehold.co/400x250/425D9B/FFFFFF?text=Nutritional+Guidance" alt="Nutritional Guidance" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Nutritional Guidance</h3>
+                        <p class="text-textLight">Receive expert nutritional advice and customized meal plans to complement your training and optimize your results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="section bg-backgroundLight">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title">Our Products</h2>
+                <p class="text-xl mb-12 opacity-90 text-textDark">Enhance your fitness journey with our exclusive range of products.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product Card 1 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Protein+Supplements" alt="Protein Supplements" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Premium Protein Powders</h3>
+                        <p class="text-textDark mb-4">High-quality protein supplements to support muscle recovery and growth. Available in various flavors.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">View Details</button>
+                    </div>
+                    <!-- Product Card 2 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Gym+Apparel" alt="Gym Apparel" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Champ Fitness Apparel</h3>
+                        <p class="text-textDark mb-4">Comfortable and stylish activewear designed for peak performance during your workouts.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">View Details</button>
+                    </div>
+                    <!-- Product Card 3 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Fitness+Accessories" alt="Fitness Accessories" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Essential Fitness Accessories</h3>
+                        <p class="text-textDark mb-4">From resistance bands to lifting gloves, find all the accessories you need for your training.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="section bg-backgroundLight">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title">Membership Plans</h2>
+                <p class="text-xl mb-12 opacity-90 text-textDark">Flexible options to fit your lifestyle and budget.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Pricing Card 1: Monthly -->
+                    <div class="card pricing-card flex flex-col justify-between items-center text-center">
+                        <h3 class="text-3xl font-extrabold text-primaryAccent mb-4">Monthly Plan</h3>
+                        <p class="text-5xl font-bold mb-4">₹2500<span class="text-xl font-normal text-gray-500">/month</span></p>
+                        <ul class="text-lg text-textDark space-y-2 mb-8 list-none p-0">
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Gym Access</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Basic Equipment</li>
+                            <li class="text-gray-400"><span class="text-red-500 font-bold">&#10006;</span> Group Classes</li>
+                            <li class="text-gray-400"><span class="text-red-500 font-bold">&#10006;</span> Personal Trainer</li>
+                        </ul>
+                        <button class="choose-plan-btn bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition-all duration-300" data-plan="Monthly Plan">Choose Plan</button>
+                    </div>
+                    <!-- Pricing Card 2: 3-Month Plan (Popular) -->
+                    <div class="card pricing-card flex flex-col justify-between items-center text-center border-2 border-primaryAccent transform scale-105">
+                        <h3 class="text-3xl font-extrabold text-primaryAccent mb-4">3-Month Plan <span class="text-sm bg-primaryAccent text-white rounded-full px-3 py-1 ml-2">Popular</span></h3>
+                        <p class="text-5xl font-bold mb-4">₹4500<span class="text-xl font-normal text-gray-500">/3 months</span></p>
+                        <ul class="text-lg text-textDark space-y-2 mb-8 list-none p-0">
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Gym Access</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> All Equipment</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Group Classes</li>
+                            <li class="text-gray-400"><span class="text-red-500 font-bold">&#10006;</span> Personal Trainer</li>
+                        </ul>
+                        <button class="choose-plan-btn bg-primaryAccent hover:bg-navyBlue-light text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition-all duration-300" data-plan="3-Month Plan">Choose Plan</button>
+                    </div>
+                    <!-- Pricing Card 3: 6-Month Plan -->
+                    <div class="card pricing-card flex flex-col justify-between items-center text-center">
+                        <h3 class="text-3xl font-extrabold text-primaryAccent mb-4">6-Month Plan</h3>
+                        <p class="text-5xl font-bold mb-4">₹7500<span class="text-xl font-normal text-gray-500">/6 months</span></p>
+                        <ul class="text-lg text-textDark space-y-2 mb-8 list-none p-0">
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Gym Access</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> All Equipment</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Group Classes</li>
+                            <li><span class="text-green-500 font-bold">&#10003;</span> Personal Trainer (2 sessions/month)</li>
+                        </ul>
+                        <button class="choose-plan-btn bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition-all duration-300" data-plan="6-Month Plan">Choose Plan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section bg-backgroundDark dark-section">
+            <div class="container mx-auto max-w-4xl">
+                <h2 class="section-title text-textLight">What Our Members Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                    <!-- Testimonial 1 -->
+                    <div class="card bg-cardDark text-textLight">
+                        <p class="text-lg italic mb-4">"Joining Champ Fitness was the best decision I made for my health. The trainers are amazing and the community is so supportive!"</p>
+                        <p class="font-bold text-primaryAccent">- Jane Doe</p>
+                        <p class="text-sm text-gray-400">Regular Member</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="card bg-cardDark text-textLight">
+                        <p class="text-lg italic mb-4">"I've seen incredible results since I started my personal training sessions here. Highly recommend Champ Fitness!"</p>
+                        <p class="font-bold text-primaryAccent">- John Smith</p>
+                        <p class="text-sm text-gray-400">Premium Member</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Activity Section (NEW) -->
+        <section id="social-activity" class="section bg-backgroundLight">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title">Community & Social Activity</h2>
+                <p class="text-xl mb-12 opacity-90 text-textDark">More than just a gym, we're a community that thrives together!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Social Event Card 1 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Community+Run" alt="Community Run Event" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Annual Community Run</h3>
+                        <p class="text-textDark mb-4">Join our annual 5K run, fostering fitness and camaraderie among members.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">Learn More</button>
+                    </div>
+                    <!-- Social Event Card 2 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Wellness+Workshop" alt="Wellness Workshop" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Monthly Wellness Workshops</h3>
+                        <p class="text-textDark mb-4">Expert-led sessions on nutrition, mindfulness, and injury prevention.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">View Schedule</button>
+                    </div>
+                    <!-- Social Event Card 3 -->
+                    <div class="card flex flex-col justify-between items-center text-center">
+                        <img src="https://placehold.co/400x250/22386E/FFFFFF?text=Charity+Bootcamp" alt="Charity Bootcamp" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold text-primaryAccent mb-3">Charity Bootcamp Events</h3>
+                        <p class="text-textDark mb-4">Get fit for a cause! Participate in our charity bootcamps for local initiatives.</p>
+                        <button class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-2 px-6 rounded-full shadow-md text-md transition-all duration-300">See Events</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Our Transformation Section -->
+        <section id="transformation" class="section bg-backgroundDark dark-section">
+            <div class="container mx-auto max-w-5xl">
+                <h2 class="section-title text-textLight">Our Transformations</h2>
+                <p class="text-xl mb-12 opacity-90 text-textLight">Witness the incredible journeys of our members!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Transformation Card 1 -->
+                    <div class="card bg-cardDark text-textLight">
+                        <img src="https://placehold.co/400x250/14264F/FFFFFF?text=Before+%26+After+1" alt="Member Transformation 1" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Sarah's Journey</h3>
+                        <p class="text-textLight">"Lost 20kg and gained immense confidence in just 6 months!"</p>
+                    </div>
+                    <!-- Transformation Card 2 -->
+                    <div class="card bg-cardDark text-textLight">
+                        <img src="https://placehold.co/400x250/14264F/FFFFFF?text=Before+%26+After+2" alt="Member Transformation 2" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Mike's Strength Gain</h3>
+                        <p class="text-textLight">"Doubled my lifting capacity and feel stronger than ever!"</p>
+                    </div>
+                    <!-- Transformation Card 3 -->
+                    <div class="card bg-cardDark text-textLight">
+                        <img src="https://placehold.co/400x250/14264F/FFFFFF?text=Before+%26+After+3" alt="Member Transformation 3" class="rounded-lg mb-4 object-cover w-full h-48">
+                        <h3 class="text-2xl font-bold mb-3 text-secondaryAccent">Emily's Wellness Path</h3>
+                        <p class="text-textLight">"Improved my overall well-being and energy levels significantly!"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Member Area Section -->
+        <section id="member-area" class="section bg-backgroundLight">
+            <div class="container mx-auto flex flex-col items-center">
+                <h2 class="section-title">Member Area</h2>
+                <div id="login-form-container" class="login-form-container text-left p-6 hidden">
+                    <p class="text-center text-sm text-red-500 mb-4" id="login-error-message"></p>
+                    <h3 class="text-center">Member Login</h3>
+                    <form id="member-login-form" class="space-y-4">
+                        <div>
+                            <label for="member-username" class="block text-textDark text-sm font-bold mb-2">Username</label>
+                            <input type="text" id="member-username" name="username" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="Enter your username" required value="member">
+                        </div>
+                        <div>
+                            <label for="member-password" class="block text-textDark text-sm font-bold mb-2">Password</label>
+                            <input type="password" id="member-password" name="password" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="Enter your password" required value="">
+                        </div>
+                        <button type="submit" class="bg-primaryAccent hover:bg-navyBlue-light text-white font-bold py-3 px-8 rounded-full shadow-md text-lg w-full transition-all duration-300">Login</button>
+                    </form>
+                    <p class="text-center text-sm text-gray-500 mt-4">
+                        For demo: Username `member`, Password `champ2025`
+                    </p>
+                </div>
+
+                <div id="plans-content-container" class="plans-content-container text-left p-6 hidden">
+                    <h3 class="text-center">Your Personalized Plans</h3>
+                    <p class="text-center text-textDark mb-4">Welcome, valued member! Here are your diet and exercise plans.</p>
+                    <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full shadow-md text-sm transition-all duration-300 mb-6">Logout</button>
+
+                    <div class="space-y-6">
+                        <!-- Exercise Plan Section -->
+                        <div>
+                            <h4 class="text-2xl font-bold text-primaryAccent mb-4">Exercise Plan</h4>
+
+                            <!-- Day 1 -->
+                            <div class="exercise-day">
+                                <div class="plan-category-header" data-target="day1-exercise-content">
+                                    <span>Day 1: Chest, Shoulder, Cardio</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="day1-exercise-content" class="plan-content hidden">
+                                    <h5>Chest:</h5>
+                                    <ul>
+                                        <li class="plan-item">Barbell Bench Press (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Incline Dumbbell Press (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Cable Crossovers (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Shoulder:</h5>
+                                    <ul>
+                                        <li class="plan-item">Overhead Dumbbell Press (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Lateral Raises (3 sets x 10-15 reps)</li>
+                                        <li class="plan-item">Front Raises (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Cardio:</h5>
+                                    <ul>
+                                        <li class="plan-item">Treadmill Run (15 minutes, moderate intensity)</li>
+                                        <li class="plan-item">Jump Rope (5 minutes)</li>
+                                        <li class="plan-item">Dynamic Stretching (5 minutes)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Day 2 -->
+                            <div class="exercise-day">
+                                <div class="plan-category-header" data-target="day2-exercise-content">
+                                    <span>Day 2: Back, Cardio</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="day2-exercise-content" class="plan-content hidden">
+                                    <h5>Back:</h5>
+                                    <ul>
+                                        <li class="plan-item">Pull-ups / Lat Pulldowns (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Barbell Rows (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Seated Cable Rows (3 sets x 10-15 reps)</li>
+                                        <li class="plan-item">T-Bar Rows (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Hyperextensions (3 sets x 10-15 reps)</li>
+                                        <li class="plan-item">Face Pulls (3 sets x 12-15 reps)</li>
+                                    </ul>
+                                    <h5>Cardio:</h5>
+                                    <ul>
+                                        <li class="plan-item">Elliptical (20 minutes, moderate intensity)</li>
+                                        <li class="plan-item">Core Plank (3 sets, hold 30-60 seconds)</li>
+                                        <li class="plan-item">Cool Down Stretch (5 minutes)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Day 3 -->
+                            <div class="exercise-day">
+                                <div class="plan-category-header" data-target="day3-exercise-content">
+                                    <span>Day 3: Biceps, Triceps, Cardio</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="day3-exercise-content" class="plan-content hidden">
+                                    <h5>Biceps:</h5>
+                                    <ul>
+                                        <li class="plan-item">Barbell Curls (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Incline Dumbbell Curls (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Hammer Curls (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Triceps:</h5>
+                                    <ul>
+                                        <li class="plan-item">Close-Grip Bench Press (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Overhead Dumbbell Extension (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Rope Pushdowns (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Cardio:</h5>
+                                    <ul>
+                                        <li class="plan-item">Stationary Bike (15 minutes, steady pace)</li>
+                                        <li class="plan-item">Abdominal Crunches (3 sets x 15-20 reps)</li>
+                                        <li class="plan-item">Plank Variations (3 sets)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Day 4 -->
+                            <div class="exercise-day">
+                                <div class="plan-category-header" data-target="day4-exercise-content">
+                                    <span>Day 4: Legs, Cardio</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="day4-exercise-content" class="plan-content hidden">
+                                    <h5>Quads:</h5>
+                                    <ul>
+                                        <li class="plan-item">Barbell Squats (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Leg Press (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Hamstrings:</h5>
+                                    <ul>
+                                        <li class="plan-item">Romanian Deadlifts (3 sets x 8-12 reps)</li>
+                                        <li class="plan-item">Leg Curls (3 sets x 10-15 reps)</li>
+                                    </ul>
+                                    <h5>Calves:</h5>
+                                    <ul>
+                                        <li class="plan-item">Standing Calf Raises (3 sets x 15-20 reps)</li>
+                                        <li class="plan-item">Seated Calf Raises (3 sets x 15-20 reps)</li>
+                                    </ul>
+                                    <h5>Cardio:</h5>
+                                    <ul>
+                                        <li class="plan-item">Incline Treadmill Walk (20 minutes)</li>
+                                        <li class="plan-item">Box Jumps (3 sets x 10 reps)</li>
+                                        <li class="plan-item">Cool Down Stretch (5 minutes)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Diet Plan Section -->
+                        <div class="mt-8">
+                            <h4 class="text-2xl font-bold text-primaryAccent mb-4">Diet Plan</h4>
+
+                            <div class="diet-plan">
+                                <div class="plan-category-header" data-target="veg-diet-content">
+                                    <span>Vegetarian Diet Plan</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="veg-diet-content" class="plan-content hidden">
+                                    <h5>Breakfast:</h5>
+                                    <ul>
+                                        <li class="plan-item">1 cup Oatmeal with berries and nuts</li>
+                                        <li class="plan-item">1 glass Skim Milk / Almond Milk</li>
+                                        <li class="plan-item">2 Hard-boiled Eggs (optional) / Tofu Scramble</li>
+                                    </ul>
+                                    <h5>Lunch:</h5>
+                                    <ul>
+                                        <li class="plan-item">1.5 cups Brown Rice / Quinoa</li>
+                                        <li class="plan-item">150g Lentil Soup (Dal) or Paneer Curry</li>
+                                        <li class="plan-item">Large mixed green salad with olive oil dressing</li>
+                                    </ul>
+                                    <h5>Dinner:</h5>
+                                    <ul>
+                                        <li class="plan-item">2 whole wheat Rotis / 1 cup Millet</li>
+                                        <li class="plan-item">150g Mixed Vegetable Curry</li>
+                                        <li class="plan-item">1 cup Greek Yogurt</li>
+                                    </ul>
+                                    <h5>Snacks (between meals):</h5>
+                                    <ul>
+                                        <li class="plan-item">Fruits, a handful of almonds, protein bar</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="diet-plan mt-4">
+                                <div class="plan-category-header" data-target="non-veg-diet-content">
+                                    <span>Non-Vegetarian Diet Plan</span>
+                                    <i class="bi bi-chevron-right"></i>
+                                </div>
+                                <div id="non-veg-diet-content" class="plan-content hidden">
+                                    <h5>Breakfast:</h5>
+                                    <ul>
+                                        <li class="plan-item">3 Egg Whites omelette with vegetables</li>
+                                        <li class="plan-item">1 whole-wheat Toast</li>
+                                        <li class="plan-item">1 scoop Whey Protein Shake</li>
+                                    </ul>
+                                    <h5>Lunch:</h5>
+                                    <ul>
+                                        <li class="plan-item">1 cup Brown Rice / Quinoa</li>
+                                        <li class="plan-item">150g Grilled Chicken Breast / Fish</li>
+                                        <li class="plan-item">Steamed Broccoli and Mixed Vegetables</li>
+                                    </ul>
+                                    <h5>Dinner:</h5>
+                                    <ul>
+                                        <li class="plan-item">150g Baked Fish / Lean Beef Stir-fry</li>
+                                        <li class="plan-item">Large serving of green leafy vegetables</li>
+                                        <li class="plan-item">Small sweet potato (optional)</li>
+                                    </ul>
+                                    <h5>Snacks (between meals):
+                                        <ul>
+                                            <li class="plan-item">Handful of nuts, protein bar, fruit</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-4">
+                                    *Note: Quantities are illustrative. Please consult a professional nutritionist for personalized plans.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Us Section -->
+            <section id="contact" class="section bg-backgroundLight">
+                <div class="container mx-auto max-w-4xl">
+                    <h2 class="section-title">Contact Us</h2>
+                    <p class="text-xl mb-12 opacity-90 text-textDark">Have questions? Reach out to us!</p>
+                    <div class="card text-left">
+                        <form id="contact-form" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-textDark text-sm font-bold mb-2">Name</label>
+                                <input type="text" id="name" name="name" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="Your Name" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-textDark text-sm font-bold mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="your@example.com" required>
+                            </div>
+                            <div>
+                                <label for="mobile" class="block text-textDark text-sm font-bold mb-2">Mobile Number</label>
+                                <input type="tel" id="mobile" name="mobile" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="Your Mobile Number" pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-textDark text-sm font-bold mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-textDark leading-tight focus:outline-none focus:ring-2 focus:ring-primaryAccent focus:border-transparent" placeholder="Tell us about your inquiry..." required></textarea>
+                            </div>
+                            <button type="submit" class="bg-primaryAccent hover:bg-navyBlue-light text-white font-bold py-3 px-8 rounded-full shadow-md text-lg w-full transition-all duration-300">Send Message</button>
+                            <div id="form-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+                        </form>
+
+                        <div class="mt-8 pt-6 border-t border-borderLight">
+                            <h3 class="text-2xl font-bold text-textDark mb-4">Or Connect Directly</h3>
+                            <div class="flex flex-col gap-4 mb-6">
+                                <button id="send-whatsapp-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg w-full transition-all duration-300 flex items-center justify-center">
+                                    <i class="bi bi-whatsapp mr-3 text-2xl"></i> Send WhatsApp Message
+                                </button>
+                                <button id="send-gmail-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg w-full transition-all duration-300 flex items-center justify-center">
+                                    <i class="bi bi-envelope-fill mr-3 text-2xl"></i> Send Email to Gmail
+                                </button>
+                            </div>
+
+                            <h3 class="text-2xl font-bold text-textDark mb-4">Follow Us</h3>
+                            <div class="flex flex-wrap justify-center sm:justify-start gap-4">
+                                <!-- Gmail -->
+                                <a href="mailto:littelchampion2111@gmail.com" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper gmail">
+                                    <i class="bi bi-envelope-fill" aria-label="Send Email"></i>
+                                </a>
+                                <!-- WhatsApp -->
+                                <a href="https://wa.me/919150690610?text=Hello%20Champ%20Fitness%2C%20I%20saw%20your%20website%20and%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer" class="social-icon-wrapper whatsapp">
+                                    <i class="bi bi-whatsapp" aria-label="Send WhatsApp Message"></i>
+                                </a>
+                                <!-- Instagram -->
+                                <a href="https://www.instagram.com/champfitness/" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper instagram">
+                                    <i class="bi bi-instagram" aria-label="Visit Instagram"></i>
+                                </a>
+                                <!-- X (Twitter) -->
+                                <a href="https://twitter.com/champfitness" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper x-twitter">
+                                    <i class="bi bi-twitter-x" aria-label="Visit X (Twitter)"></i>
+                                </a>
+                                <!-- LinkedIn -->
+                                <a href="https://www.linkedin.com/company/champfitness/" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper linkedin">
+                                    <i class="bi bi-linkedin" aria-label="Visit LinkedIn"></i>
+                                </a>
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/champfitness" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper facebook">
+                                    <i class="bi bi-facebook" aria-label="Visit Facebook"></i>
+                                </a>
+                                <!-- YouTube -->
+                                <a href="https://www.youtube.com/user/champfitness" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper youtube">
+                                    <i class="bi bi-youtube" aria-label="Visit YouTube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book a Trial/Demo Session Button -->
+                    <div class="mt-8 text-center">
+                        <button id="book-trial-btn" class="bg-navyBlue-light hover:bg-primaryAccent text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition-all duration-300">
+                            Book a Trial/Demo Session
+                        </button>
+                    </div>
+
+                    <!-- Google Map -->
+                    <div class="mt-16 card bg-cardLight text-textDark">
+                        <h3 class="text-2xl font-bold mb-6 text-center text-textDark">Find Us on the Map</h3>
+                        <div class="map-container rounded-xl overflow-hidden shadow-lg border border-borderLight">
+                            <!-- Google Maps embed code for 11.070092162182048, 76.94037574438734 -->
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15667.6534571995!2d76.93818701045763!3d11.070092162182048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDA0JzEyLjMiTiA3NsKwNTYnMjUuNCJF!5e0!3m2!1sen!2sin!4v1718712000000!5m2!1sen!2sin"
+                                width="600"
+                                height="450"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Champ Fitness Location"
+                            ></iframe>
+                        </div>
+                        <p class="text-gray-600 mt-4 text-sm">
+                            *Note: This map shows the specified coordinates.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-navyBlue-dark text-white py-10">
+            <div class="container mx-auto px-6 text-center text-gray-400">
+                <p>&copy; 2025 Champ Fitness. All rights reserved.</p>
+                <p class="mt-2">Owned by Karthick Arasu</p>
+                <p class="mt-2">Contact: 9150690610 | littelchampion2111@gmail.com</p>
+                <p class="mt-2 text-sm">Maintained by <a href="https://www.bluevent.com" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">Bluevent</a></p>
+            </div>
+        </footer>
+
+        <script>
+            // Gym Contact Details
+            const gymPhoneNumber = '919150690610';
+            const gymEmail = 'littelchampion2111@gmail.com';
+
+            // JavaScript for Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Smooth scrolling for navigation links (general)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Contact Form Submission (Simulated)
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent actual form submission
+
+                // Simulate form submission success/failure
+                const isSuccess = Math.random() > 0.1; // 90% chance of success
+
+                formMessage.classList.remove('hidden');
+                if (isSuccess) {
+                    formMessage.textContent = "Your message has been sent successfully! We'll get back to you soon.";
+                    formMessage.className = "mt-4 text-center text-sm font-medium text-green-500";
+                    contactForm.reset(); // Clear the form
+                } else {
+                    formMessage.textContent = "Oops! Something went wrong. Please try accurate data.";
+                    formMessage.className = "mt-4 text-center text-sm font-medium text-red-500";
+                }
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            });
+
+            // New: Send WhatsApp Message Button
+            const sendWhatsAppBtn = document.getElementById('send-whatsapp-btn');
+            if (sendWhatsAppBtn) {
+                sendWhatsAppBtn.addEventListener('click', () => {
+                    const message = encodeURIComponent("Hello Champ Fitness, I'm reaching out from your website for a general inquiry.");
+                    window.open(`https://wa.me/${gymPhoneNumber}?text=${message}`, '_blank');
+                });
+            }
+
+            // New: Send Gmail Button
+            const sendGmailBtn = document.getElementById('send-gmail-btn');
+            if (sendGmailBtn) {
+                sendGmailBtn.addEventListener('click', () => {
+                    const subject = encodeURIComponent("General Inquiry from Champ Fitness Website");
+                    const body = encodeURIComponent("Hello Champ Fitness,\n\nI am writing to you with a general inquiry based on your website.\n\nBest regards,");
+                    window.open(`mailto:${gymEmail}?subject=${subject}&body=${body}`, '_blank');
+                });
+            }
+
+            // Book a Trial/Demo Session Button Logic
+            const bookTrialBtn = document.getElementById('book-trial-btn');
+            if (bookTrialBtn) {
+                bookTrialBtn.addEventListener('click', () => {
+                    const message = encodeURIComponent("Hello Champ Fitness, I'd like to book a trial/demo session. Please let me know the available slots.");
+                    window.open(`https://wa.me/${gymPhoneNumber}?text=${message}`, '_blank');
+                });
+            }
+
+            // Pricing Card Hover/Click effect logic
+            const pricingCards = document.querySelectorAll('.pricing-card');
+            pricingCards.forEach(card => {
+                // Add 'selected' class on hover
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('selected');
+                });
+                // Remove 'selected' class on mouse leave
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('selected');
+                });
+                // Also apply 'selected' on click, and remove from others
+                card.addEventListener('click', () => {
+                    pricingCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('selected');
+                        }
+                    });
+                    card.classList.toggle('selected'); // Toggle on click for persistent selection
+                });
+            });
+
+
+            // Member Area Login Logic
+            const memberAreaSection = document.getElementById('member-area');
+            const loginFormContainer = document.getElementById('login-form-container');
+            const memberLoginForm = document.getElementById('member-login-form');
+            const loginErrorMessage = document.getElementById('login-error-message');
+            const plansContentContainer = document.getElementById('plans-content-container');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            const correctUsername = 'member'; // Hardcoded username for demo
+            const correctPassword = 'champ2025'; // Hardcoded password for demo
+
+            function showMemberContent() {
+                loginFormContainer.classList.add('hidden');
+                plansContentContainer.classList.remove('hidden');
+            }
+
+            function showLoginForm() {
+                loginFormContainer.classList.remove('hidden');
+                plansContentContainer.classList.add('hidden');
+                loginErrorMessage.classList.add('hidden'); // Hide any previous errors
+                memberLoginForm.reset(); // Clear form fields
+            }
+
+            function checkLoginStatus() {
+                if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                    showMemberContent();
+                } else {
+                    showLoginForm();
+                }
+            }
+
+            // Initial check on page load
+            document.addEventListener('DOMContentLoaded', checkLoginStatus);
+
+            memberLoginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('member-username').value;
+                const password = document.getElementById('member-password').value;
+
+                if (username === correctUsername && password === correctPassword) {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    showMemberContent();
+                    // Scroll to the member area if navigated from a tab
+                    memberAreaSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    loginErrorMessage.textContent = "Invalid username or password. Please try again.";
+                    loginErrorMessage.classList.remove('hidden');
+                }
+            });
+
+            logoutBtn.addEventListener('click', function() {
+                sessionStorage.removeItem('isLoggedIn');
+                showLoginForm();
+                memberAreaSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Ensure login form is shown when navigating directly to #member-area if not logged in
+            window.addEventListener('hashchange', () => {
+                if (window.location.hash === '#member-area') {
+                    checkLoginStatus();
+                }
+            });
+
+            // Collapsible Exercise & Diet Plan Logic
+            document.querySelectorAll('.plan-category-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const targetId = header.dataset.target;
+                    const content = document.getElementById(targetId);
+
+                    // Toggle visibility
+                    content.classList.toggle('hidden');
+                    // Toggle header class for arrow rotation
+                    header.classList.toggle('expanded');
+                });
+            });
+        </script>
+    </body>
+    </html>

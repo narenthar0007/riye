@@ -1,0 +1,546 @@
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { ShoppingCart, X, Plus, Minus, Home, Package, ChevronLeft, CheckCircle, Gift, Printer } from 'lucide-react'; // Using lucide-react for icons
+
+// Context for managing the shopping cart state globally
+const CartContext = createContext();
+
+const productsData = [
+  {
+    id: '3d-printed-vase-1',
+    name: 'Geometric 3D Printed Vase',
+    price: 45.00,
+    image: 'https://placehold.co/400x400/A7C7E7/000000?text=3D+Vase', // Placeholder image for 3D print
+    description: 'A modern geometric vase, 3D printed with eco-friendly PLA. Perfect for home decor.',
+    themeColor: 'bg-blue-100',
+    hoverColor: 'hover:bg-blue-200'
+  },
+  {
+    id: 'custom-phone-case-2',
+    name: 'Personalized Phone Case',
+    price: 25.99,
+    image: 'https://placehold.co/400x400/FFD1DC/000000?text=Custom+Case', // Placeholder image for personalized gift
+    description: 'Custom 3D printed phone case with your name or custom text. Durable and unique!',
+    themeColor: 'bg-pink-100',
+    hoverColor: 'hover:bg-pink-200'
+  },
+  {
+    id: 'mini-figurine-3',
+    name: 'Custom Mini Figurine',
+    price: 60.00,
+    image: 'https://placehold.co/400x400/D3F8E2/000000?text=Figurine', // Placeholder image for 3D print
+    description: 'Bring your character to life! Custom 3D printed mini figurine from your design.',
+    themeColor: 'bg-green-100',
+    hoverColor: 'hover:bg-green-200'
+  },
+  {
+    id: 'engraved-wood-plaque-4',
+    name: 'Engraved Wooden Photo Plaque',
+    price: 39.50,
+    image: 'https://placehold.co/400x400/E0BBE4/000000?text=Wood+Plaque', // Placeholder image for personalized gift
+    description: 'A beautiful wooden plaque, laser engraved with your favorite photo or message.',
+    themeColor: 'bg-purple-100',
+    hoverColor: 'hover:bg-purple-200'
+  },
+  {
+    id: 'tool-organizer-5',
+    name: 'Modular Desk Tool Organizer',
+    price: 30.00,
+    image: 'https://placehold.co/400x400/B0E0E6/000000?text=Organizer', // Placeholder image for 3D print
+    description: 'Keep your workspace tidy with this customizable 3D printed modular organizer.',
+    themeColor: 'bg-cyan-100',
+    hoverColor: 'hover:bg-cyan-200'
+  },
+  {
+    id: 'custom-keychain-6',
+    name: 'Personalized Acrylic Keychain',
+    price: 15.00,
+    image: 'https://placehold.co/400x400/FFECB3/000000?text=Keychain', // Placeholder image for personalized gift
+    description: 'A durable acrylic keychain, customized with your initials or a special date.',
+    themeColor: 'bg-yellow-100',
+    hoverColor: 'hover:bg-yellow-200'
+  },
+];
+
+// Custom hook for cart management
+const useCart = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [notification, setNotification] = useState(null);
+
+  // Add item to cart or update quantity if it exists
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prevItems.map((item) =>
+          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
+    setNotification(`${product.name} added to cart!`);
+    setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
+  };
+
+  // Remove item from cart
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  };
+
+  // Update quantity of an item in the cart
+  const updateQuantity = (productId, newQuantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity: Math.max(1, newQuantity) } : item
+      )
+    );
+  };
+
+  // Calculate total price of items in the cart
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  // Clear the cart
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  return { cartItems, addToCart, removeFromCart, updateQuantity, getTotalPrice, clearCart, notification };
+};
+
+// Component for displaying notifications (e.g., "Item added to cart")
+const Notification = ({ message }) => {
+  if (!message) return null;
+
+  return (
+    <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-fade-in-up z-50">
+      <CheckCircle className="mr-2" size={20} />
+      <span>{message}</span>
+    </div>
+  );
+};
+
+// Header component with logo, navigation, and cart icon
+const Header = ({ toggleCart, cartItemCount, navigate }) => {
+  return (
+    <header className="bg-gradient-to-r from-blue-600 to-purple-700 text-white p-4 shadow-lg sticky top-0 z-40">
+      <div className="container mx-auto flex justify-between items-center font-inter">
+        {/* Logo/Home Button */}
+        <button
+          onClick={() => navigate('home')}
+          className="flex items-center space-x-2 text-2xl font-bold transition-transform duration-300 transform hover:scale-105"
+        >
+          <Printer className="text-white" size={30} />
+          <span>Max3D Printing & Gifts</span>
+        </button>
+
+        {/* Navigation - could be expanded */}
+        <nav className="hidden md:flex space-x-6">
+          <button onClick={() => navigate('home')} className="text-white hover:text-yellow-200 transition-colors duration-200 flex items-center">
+            <Home className="mr-1" size={18} /> Home
+          </button>
+          <button onClick={() => navigate('home')} className="text-white hover:text-yellow-200 transition-colors duration-200 flex items-center">
+            <Package className="mr-1" size={18} /> Products
+          </button>
+        </nav>
+
+        {/* Cart Icon */}
+        <button
+          onClick={toggleCart}
+          className="relative p-2 rounded-full bg-white text-blue-600 hover:bg-blue-100 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          aria-label="Shopping Cart"
+        >
+          <ShoppingCart size={24} />
+          {cartItemCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-bounce-once">
+              {cartItemCount}
+            </span>
+          )}
+        </button>
+      </div>
+    </header>
+  );
+};
+
+// Product Card component
+const ProductCard = ({ product, addToCart, selectProduct }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className={`relative ${product.themeColor} rounded-2xl shadow-xl overflow-hidden cursor-pointer transform transition-all duration-300 ease-in-out
+                 ${isHovered ? 'scale-105 shadow-2xl' : 'scale-100 shadow-xl'}
+                 flex flex-col`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Product Image */}
+      <div className="relative w-full h-48 sm:h-64 overflow-hidden rounded-t-2xl">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
+          style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
+          onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/400x400/CCCCCC/000000?text=Image+Error`; }}
+        />
+        {/* Quick View Overlay */}
+        {isHovered && (
+          <div
+            className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 transition-opacity duration-300"
+            style={{ opacity: isHovered ? 1 : 0 }}
+            onClick={() => selectProduct(product)}
+          >
+            <span className="text-white text-lg font-bold p-3 rounded-full bg-blue-500 hover:bg-blue-600 transition-colors">Quick View</span>
+          </div>
+        )}
+      </div>
+
+      {/* Product Info */}
+      <div className="p-4 flex-grow flex flex-col justify-between">
+        <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+        <div className="flex justify-between items-center mt-auto">
+          <span className="text-2xl font-bold text-purple-600">${product.price.toFixed(2)}</span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent triggering selectProduct
+              addToCart(product);
+            }}
+            className={`bg-purple-500 text-white px-4 py-2 rounded-full flex items-center space-x-2
+                       transition-all duration-300 transform hover:scale-105 hover:bg-purple-600
+                       focus:outline-none focus:ring-2 focus:ring-purple-300 active:scale-95`}
+            aria-label={`Add ${product.name} to cart`}
+          >
+            <ShoppingCart size={18} />
+            <span className="hidden sm:inline">Add to Cart</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Product List component
+const ProductList = ({ products, addToCart, selectProduct }) => {
+  return (
+    <div className="container mx-auto p-4 py-8">
+      <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-10 animate-fade-in-down">
+        Explore Our 3D Printed & Personalized Gifts!
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+            selectProduct={selectProduct}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Product Detail component (simple modal-like)
+const ProductDetail = ({ product, addToCart, onClose }) => {
+  if (!product) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 animate-fade-in">
+      <div className={`relative ${product.themeColor} rounded-3xl shadow-2xl p-6 w-full max-w-2xl transform transition-all duration-300 ease-out animate-scale-in`}>
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 transition-colors duration-200 p-2 rounded-full bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          aria-label="Close"
+        >
+          <X size={24} />
+        </button>
+
+        <div className="flex flex-col md:flex-row gap-6 items-center">
+          <div className="w-full md:w-1/2">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-auto rounded-xl shadow-lg"
+              onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/600x600/CCCCCC/000000?text=Image+Error`; }}
+            />
+          </div>
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-3">{product.name}</h2>
+            <p className="text-gray-700 text-lg mb-4">{product.description}</p>
+            <div className="text-5xl font-bold text-purple-700 mb-6">${product.price.toFixed(2)}</div>
+            <button
+              onClick={() => {
+                addToCart(product);
+                onClose(); // Close modal after adding to cart
+              }}
+              className="w-full bg-purple-600 text-white px-6 py-3 rounded-full text-xl font-semibold flex items-center justify-center space-x-2
+                         transition-all duration-300 transform hover:scale-105 hover:bg-purple-700
+                         focus:outline-none focus:ring-4 focus:ring-purple-300 active:scale-95"
+            >
+              <ShoppingCart size={24} />
+              <span>Add to Cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Shopping Cart Sidebar component
+const ShoppingCartSidebar = ({ isOpen, toggleCart, cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart }) => {
+  const [isCheckoutConfirmed, setIsCheckoutConfirmed] = useState(false);
+
+  // Handle checkout confirmation
+  const handleCheckout = () => {
+    // In a real app, this would send data to a backend
+    // For this demo, we just clear the cart and show a confirmation
+    clearCart();
+    setIsCheckoutConfirmed(true);
+    setTimeout(() => {
+      setIsCheckoutConfirmed(false);
+      toggleCart(); // Close cart after confirmation
+    }, 3000);
+  };
+
+  return (
+    <>
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 animate-fade-in"
+          onClick={toggleCart}
+        ></div>
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-gradient-to-br from-blue-100 to-purple-100 shadow-2xl z-50 transform transition-transform duration-500 ease-in-out p-6 flex flex-col
+          ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+      >
+        <div className="flex justify-between items-center mb-6 pb-4 border-b border-blue-300">
+          <h2 className="text-3xl font-extrabold text-gray-800 flex items-center">
+            <ShoppingCart className="mr-2 text-purple-500" size={30} /> Your Cart
+          </h2>
+          <button
+            onClick={toggleCart}
+            className="p-2 rounded-full bg-white text-gray-600 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            aria-label="Close Cart"
+          >
+            <X size={24} />
+          </button>
+        </div>
+
+        {isCheckoutConfirmed ? (
+          <div className="flex flex-col items-center justify-center flex-grow text-center text-green-700 text-2xl font-bold animate-fade-in">
+            <CheckCircle size={60} className="mb-4 text-green-600" />
+            <p>Order Placed Successfully!</p>
+            <p className="text-lg text-gray-600 mt-2">Thank you for your purchase!</p>
+          </div>
+        ) : (
+          <>
+            {cartItems.length === 0 ? (
+              <div className="flex flex-col items-center justify-center flex-grow text-center text-gray-500 text-xl">
+                <p>Your cart is empty!</p>
+                <p className="mt-2">Time to find some amazing prints and gifts!</p>
+                <img src="https://placehold.co/150x150/A7C7E7/000000?text=Empty+Cart" alt="Empty Cart" className="mt-6 rounded-full opacity-70" />
+              </div>
+            ) : (
+              <ul className="flex-grow overflow-y-auto pr-2 -mr-2">
+                {cartItems.map((item) => (
+                  <li key={item.id} className="flex items-center justify-between bg-white p-4 rounded-xl shadow-md mb-4 animate-slide-in-right">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-20 h-20 object-cover rounded-lg mr-4"
+                      onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/80x80/CCCCCC/000000?text=Image`; }}
+                    />
+                    <div className="flex-grow">
+                      <h3 className="font-semibold text-gray-800 text-lg">{item.name}</h3>
+                      <p className="text-purple-600 font-bold">${item.price.toFixed(2)}</p>
+                    </div>
+                    <div className="flex items-center space-x-2 ml-4">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        aria-label="Decrease quantity"
+                      >
+                        <Minus size={16} />
+                      </button>
+                      <span className="font-bold text-gray-800 w-6 text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="p-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        aria-label="Increase quantity"
+                      >
+                        <Plus size={16} />
+                      </button>
+                      <button
+                        onClick={() => removeFromCart(item.id)}
+                        className="ml-2 p-1 rounded-full bg-red-400 text-white hover:bg-red-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-300"
+                        aria-label="Remove item"
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Cart Summary and Checkout Button */}
+            {cartItems.length > 0 && (
+              <div className="mt-6 pt-4 border-t border-blue-300">
+                <div className="flex justify-between items-center text-2xl font-bold text-gray-800 mb-4">
+                  <span>Total:</span>
+                  <span>${getTotalPrice().toFixed(2)}</span>
+                </div>
+                <button
+                  onClick={handleCheckout}
+                  className="w-full bg-purple-500 text-white px-6 py-3 rounded-full text-xl font-semibold flex items-center justify-center space-x-2
+                             transition-all duration-300 transform hover:scale-105 hover:bg-purple-600
+                             focus:outline-none focus:ring-4 focus:ring-purple-300 active:scale-95"
+                >
+                  <CheckCircle size={24} />
+                  <span>Proceed to Checkout</span>
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+
+// Main App component
+const App = () => {
+  const { cartItems, addToCart, removeFromCart, updateQuantity, getTotalPrice, clearCart, notification } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' or 'productDetail'
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const navigate = (page, product = null) => {
+    setCurrentPage(page);
+    setSelectedProduct(product);
+  };
+
+  // Define global styles for the body and root element
+  useEffect(() => {
+    document.body.style.fontFamily = '"Inter", sans-serif';
+    document.body.style.backgroundColor = '#E0F2F7'; // Light bluish background
+    document.body.style.margin = '0';
+    document.body.style.overflowX = 'hidden'; // Prevent horizontal scroll
+    document.documentElement.style.scrollBehavior = 'smooth'; // Smooth scrolling
+  }, []);
+
+  return (
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, getTotalPrice, clearCart, notification }}>
+      <div className="min-h-screen flex flex-col">
+        {/* Custom Tailwind CSS animations */}
+        <style>
+          {`
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+          body {
+            font-family: 'Inter', sans-serif;
+          }
+
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+
+          @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in-down { animation: fadeInDown 0.6s ease-out forwards; }
+
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+
+          @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+          }
+          .animate-scale-in { animation: scaleIn 0.3s ease-out forwards; }
+
+          @keyframes bounceOnce {
+            0%, 100% { transform: translateY(0); }
+            20% { transform: translateY(-5px); }
+            40% { transform: translateY(0); }
+            60% { transform: translateY(-2px); }
+            80% { transform: translateY(0); }
+          }
+          .animate-bounce-once { animation: bounceOnce 0.8s ease-in-out; }
+
+          @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+          .animate-slide-in-right { animation: slideInRight 0.4s ease-out forwards; }
+          `}
+        </style>
+
+        <Header
+          toggleCart={toggleCart}
+          cartItemCount={cartItems.reduce((count, item) => count + item.quantity, 0)}
+          navigate={navigate}
+        />
+
+        <main className="flex-grow">
+          {currentPage === 'home' && (
+            <ProductList
+              products={productsData}
+              addToCart={addToCart}
+              selectProduct={(product) => navigate('productDetail', product)}
+            />
+          )}
+          {currentPage === 'productDetail' && selectedProduct && (
+            <ProductDetail
+              product={selectedProduct}
+              addToCart={addToCart}
+              onClose={() => navigate('home')}
+            />
+          )}
+        </main>
+
+        <ShoppingCartSidebar
+          isOpen={isCartOpen}
+          toggleCart={toggleCart}
+          cartItems={cartItems}
+          removeFromCart={removeFromCart}
+          updateQuantity={updateQuantity}
+          getTotalPrice={getTotalPrice}
+          clearCart={clearCart}
+        />
+
+        <Notification message={notification} />
+
+        {/* Footer */}
+        <footer className="bg-gradient-to-r from-purple-600 to-blue-700 text-white p-6 text-center mt-auto shadow-inner">
+          <p className="text-lg font-semibold">&copy; 2025 Max3D Printing & Gifts. All rights reserved.</p>
+          <p className="text-sm mt-2">Crafted with precision for you!</p>
+          <div className="flex justify-center space-x-4 mt-4">
+            <a href="#" className="text-white hover:text-yellow-200 transition-colors">Privacy Policy</a>
+            <a href="#" className="text-white hover:text-yellow-200 transition-colors">Terms of Service</a>
+            <a href="#" className="text-white hover:text-yellow-200 transition-colors">Contact Us</a>
+          </div>
+        </footer>
+      </div>
+    </CartContext.Provider>
+  );
+};
+
+export default App;

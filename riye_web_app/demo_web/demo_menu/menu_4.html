@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandham Restaurant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #c9e9ff 100%);
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 80vh;
+            position: relative;
+        }
+
+        /* Landing Page Styles */
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(45deg, #1a4d2e, #2e8b57);
+            color: #fff;
+            flex-grow: 1;
+            border-radius: 15px;
+        }
+        .landing-page h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite alternate;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+        .landing-page p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        .landing-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .landing-button {
+            background-color: #ffc107;
+            color: #1a4d2e;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .landing-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .landing-button.menu-button {
+            background-color: #fff;
+            color: #1a4d2e;
+            border: 2px solid #ffc107;
+        }
+        .landing-button.menu-button:hover {
+            background-color: #e6ffe6;
+        }
+        .landing-button svg {
+            margin-right: 8px;
+        }
+
+        /* Header and Navigation Styles */
+        .header {
+            background-color: #1a4d2e;
+            color: #fff;
+            padding: 20px 30px;
+            text-align: center;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            position: relative; /* For positioning filter button */
+            padding-bottom: 70px; /* Make space for search bar */
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .filter-toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ffc107;
+            color: #1a4d2e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .filter-toggle-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-1px);
+        }
+        /* Home button in header */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #ffc107;
+            color: #1a4d2e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .home-button:hover {
+            background-color: #e0a800;
+            transform: translateY(-1px);
+        }
+
+        .header .search-bar { /* Specific styling for search bar in header */
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+        .header .search-bar input {
+            flex-grow: 1;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+            color: #333; /* Ensure text is visible on dark background */
+        }
+        .header .search-bar input:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.3);
+        }
+        .header .search-bar button {
+            background-color: #ffc107;
+            color: #1a4d2e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header .search-bar button:hover {
+            background-color: #e0a800;
+            transform: translateY(-1px);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            background-color: #2e8b57;
+            padding: 15px 20px;
+            border-bottom: 2px solid #1a4d2e;
+            scrollbar-width: thin;
+            scrollbar-color: #ffc107 #2e8b57;
+        }
+        .nav-buttons::-webkit-scrollbar {
+            height: 8px;
+        }
+        .nav-buttons::-webkit-scrollbar-track {
+            background: #2e8b57;
+            border-radius: 10px;
+        }
+        .nav-buttons::-webkit-scrollbar-thumb {
+            background-color: #ffc107;
+            border-radius: 10px;
+            border: 2px solid #2e8b57;
+        }
+        .nav-button {
+            flex-shrink: 0;
+            background-color: #fff;
+            color: #1a4d2e;
+            padding: 12px 25px;
+            margin: 8px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        .nav-button:hover {
+            background-color: #e6ffe6;
+            border-color: #1a4d2e;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .nav-button.active {
+            background-color: #ffc107;
+            color: #1a4d2e;
+            border-color: #1a4d2e;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.08);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Menu Content Styles */
+        .menu-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+        .category-section {
+            margin-bottom: 40px;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .category-section.active {
+            display: block;
+            animation: fadeInSlideUp 0.6s ease-out forwards;
+        }
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .category-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a4d2e;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .category-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #ffc107;
+            border-radius: 2px;
+        }
+        .category-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            border: 3px solid #ffc107;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .menu-item {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .menu-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .menu-item .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-left: 15px;
+            white-space: nowrap;
+        }
+        .gst-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #ddd;
+        }
+        .footer {
+            background: linear-gradient(90deg, #1a4d2e, #2e8b57);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            margin-top: auto;
+        }
+        .footer p {
+            margin-bottom: 5px;
+        }
+        .footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #333;
+        }
+        .modal-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a4d2e;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .modal-filter-group {
+            margin-bottom: 20px;
+        }
+        .modal-filter-group label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .modal-filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .modal-filter-button {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #ddd;
+        }
+        .modal-filter-button:hover {
+            background-color: #e0e0e0;
+        }
+        .modal-filter-button.active {
+            background-color: #ffc107;
+            color: #1a4d2e;
+            border-color: #ffc107;
+            font-weight: 700;
+        }
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .modal-actions button {
+            flex-grow: 1;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .modal-actions .apply-filters-button {
+            background-color: #1a4d2e;
+            color: #fff;
+        }
+        .modal-actions .apply-filters-button:hover {
+            background-color: #2e8b57;
+            transform: translateY(-2px);
+        }
+        .modal-actions .clear-filters-button {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+        .modal-actions .clear-filters-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .landing-page h1 {
+                font-size: 2.5rem;
+            }
+            .landing-page p {
+                font-size: 1.2rem;
+            }
+            .landing-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .header {
+                padding-bottom: 60px; /* Adjust for smaller search bar */
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+            .filter-toggle-button {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .header .search-bar {
+                bottom: 10px;
+                width: 95%;
+            }
+            .header .search-bar input, .header .search-bar button {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            .nav-button {
+                padding: 10px 20px;
+                margin: 5px;
+                font-size: 0.9rem;
+            }
+            .menu-content {
+                padding: 20px;
+            }
+            .category-section h2 {
+                font-size: 1.8rem;
+            }
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+            .menu-item .price {
+                margin-top: 10px;
+                margin-left: 0;
+                align-self: flex-end;
+            }
+            .modal-content {
+                padding: 20px;
+            }
+            .modal-content h3 {
+                font-size: 1.5rem;
+            }
+            .modal-filter-button {
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+            .modal-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-buttons {
+                flex-direction: column;
+            }
+            .landing-button {
+                width: 80%;
+            }
+            .header .search-bar {
+                flex-direction: column;
+            }
+            .header .search-bar input, .header .search-bar button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Landing Page -->
+        <div id="landingPage" class="landing-page">
+            <div class="landing-content">
+                <h1>Anandham Restaurant</h1>
+                <p>A taste of home</p>
+                <div class="landing-buttons">
+                    <a href="tel:+919092820444" class="landing-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.07 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Call Us
+                    </a>
+                    <a href="https://wa.me/919092820444" target="_blank" class="landing-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a href="https://www.google.com/maps/search/No.3%2F3.+%E0%AE%86%E0%AE%9A%E0%AE%BE%E0%AE%B0%E0%AE%BF+%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AF%81%E0%AE%AE%E0%AE%A3%E0%AE%BF,+%E0%AE%B5%E0%AE%BF%E0%AE%A9%E0%AE%BE%E0%AE%AF%E0%AE%95%E0%AE%AA%E0%AF%81%E0%AE%B0%E0%AE%AE%E0%AF%8D+%E0%AE%B0%E0%AF%8B%E0%AE%9F%E0%AF%81,+%E0%AE%B5%E0%AE%BF%E0%AE%B3%E0%AE%BE%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AF%81%E0%AE%B1%E0%AE%BF%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%BF,+%E0%AE%9A%E0%AE%B0%E0%AE%B5%E0%AE%A3%E0%AE%AE%E0%AF%8D%E0%AE%AA%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%BF.+%E0%AE%95%E0%AF%8B%E0%AE%AF%E0%AE%AE%E0%AF%8D%E0%AE%AA%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%82%E0%AE%B0%E0%AF%8D+-+641035." target="_blank" class="landing-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M12 12.75a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M18 8c0 4.5-6 9-6 9s-6-4.5-6-9a6 6 0 0 1 12 0Z"/><path d="M12 22s8-4 8-10V7l-8-5-8 5v5c0 6 8 10 8 10Z"/></svg>
+                        Find Us
+                    </a>
+                    <button id="viewMenuButton" class="landing-button menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-text"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/></svg>
+                        View Menu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Menu Content (initially hidden) -->
+        <div id="mainMenu" class="hidden flex flex-col flex-grow">
+            <header class="header">
+                <h1>Anandham Restaurant</h1>
+                <p>A taste of home</p>
+                <button id="homeButton" class="home-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Home
+                </button>
+                <button id="filterToggleButton" class="filter-toggle-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                    Filter & Search
+                </button>
+                <!-- Search Bar moved to header -->
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for dishes...">
+                    <button id="searchButton">Search</button>
+                </div>
+            </header>
+
+            <nav class="nav-buttons" id="navButtons">
+                <!-- Category Navigation buttons will be dynamically added here -->
+            </nav>
+
+            <main class="menu-content" id="menuContent">
+                <!-- Menu categories and items will be dynamically added here -->
+            </main>
+
+            <div class="gst-note">
+                <p>GST 5% EXTRA on all prices.</p>
+                <p>With Ice Cream Extra 20/- Rs. (for applicable items)</p>
+            </div>
+
+            <footer class="footer">
+                <p>No.3/3. ஆசாரி தோட்டம், விநாயகபுரம் ரோடு, விளாங்குறிச்சி, சரவணம்பட்டி. கோயம்புத்தூர் - 641035.</p>
+                <p>Contact: <a href="tel:+919092820444">090928 20444</a> | <a href="tel:+919092820666">9092820666</a></p>
+                <p>This page is maintained by <a href="https://www.instagram.com/bluvent.riye?igsh=NmI0Mjg2cnpiYnFi" target="_blank">Bluvent</a></p>
+                <p>&copy; 2024 Anandham Restaurant. All rights reserved.</p>
+            </footer>
+        </div>
+
+        <!-- Filter and Search Modal -->
+        <div id="filterSearchModal" class="modal-overlay">
+            <div class="modal-content">
+                <button class="modal-close-button" id="modalCloseButton">&times;</button>
+                <h3>Filter Menu</h3>
+
+                <div class="modal-filter-group">
+                    <label>Food Type:</label>
+                    <div class="modal-filter-buttons" id="modalFoodTypeFilters">
+                        <button class="modal-filter-button active" data-filter-type="food-type" data-filter-value="all">All</button>
+                        <button class="modal-filter-button" data-filter-type="food-type" data-filter-value="veg">Veg</button>
+                        <button class="modal-filter-button" data-filter-type="food-type" data-filter-value="non-veg">Non-Veg</button>
+                        <button class="modal-filter-button" data-filter-type="food-type" data-filter-value="egg">Egg</button>
+                    </div>
+                </div>
+
+                <div class="modal-filter-group">
+                    <label>Meal Time:</label>
+                    <div class="modal-filter-buttons" id="modalMealTimeFilters">
+                        <button class="modal-filter-button active" data-filter-type="meal-time" data-filter-value="all-day">All Day</button>
+                        <button class="modal-filter-button" data-filter-type="meal-time" data-filter-value="morning">Morning</button>
+                        <button class="modal-filter-button" data-filter-type="meal-time" data-filter-value="lunch">Lunch</button>
+                        <button class="modal-filter-button" data-filter-type="meal-time" data-filter-value="evening">Evening</button>
+                        <button class="modal-filter-button" data-filter-type="meal-time" data-filter-value="dinner">Dinner</button>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="apply-filters-button" id="applyFiltersButton">Apply Filters</button>
+                    <button class="clear-filters-button" id="clearFiltersButton">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Original menu data structure (will be flattened)
+        const rawMenuData = {
+            "Veg. Soup": {
+                items: [
+                    { name: "Veg Soup", price: 60 },
+                    { name: "Pepper Soup", price: 70 },
+                    { name: "Hot & Sour Soup", price: 80 },
+                    { name: "Mushroom Soup", price: 80 },
+                    { name: "Chettinadu Veg Soup", price: 90 },
+                    { name: "Sweet Corn Soup", price: 80 },
+                    { name: "Veg Clear Soup", price: 80 }
+                ],
+                foodType: "veg",
+                mealTimes: ["morning", "lunch", "evening", "dinner"]
+            },
+            "Non Veg Starter - Chicken": {
+                items: [
+                    { name: "Chicken 65 (Boneless)", price: 160 },
+                    { name: "Chicken Loli Pop - 3", price: 140 },
+                    { name: "Chicken Chukka", price: 210 },
+                    { name: "Garlice Chicken", price: 210 },
+                    { name: "Dragon Chicken", price: 240 },
+                    { name: "Ginger Chicken", price: 210 },
+                    { name: "Chicken Uppu Curry", price: 210 },
+                    { name: "Chinthamani Chicken", price: 240 },
+                    { name: "Chicken Pallipalayam (Dry)", price: 210 },
+                    { name: "Chicken Manjurian", price: 210 },
+                    { name: "Chicken Monika", price: 240 },
+                    { name: "Ghee Podi Chicken", price: 210 },
+                    { name: "Andra Chicken", price: 220 },
+                    { name: "Chicken Chettinadu (Dry)", price: 210 },
+                    { name: "Chicken Pepper Fry", price: 210 },
+                    { name: "Hot Pepper Chicken", price: 210 },
+                    { name: "Chilly Leg", price: 100 },
+                    { name: "Pepper Leg", price: 110 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Soup Non - Veg": {
+                items: [
+                    { name: "Chicken Soup", price: 90 },
+                    { name: "Mutton Bone Soup", price: 100 },
+                    { name: "Nattu Kozhi Soup", price: 100 },
+                    { name: "Chettinadu Non Veg Soup", price: 100 },
+                    { name: "Sweet Corn Chicken Soup", price: 120 },
+                    { name: "Chicken Clear Soup", price: 100 },
+                    { name: "Chicken Hot & Sour Soup", price: 120 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Bucket Biryani Combo": {
+                items: [
+                    { name: "Chicken Biryani Full", price: 1400 },
+                    { name: "Chicken Biryani Half", price: 800 },
+                    { name: "Mutton Biryani Full", price: 2200 },
+                    { name: "Mutton Biryani Half", price: 1100 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Grill": {
+                items: [
+                    { name: "Grill Chicken Full", price: 440 },
+                    { name: "Grill Chicken Half", price: 220 },
+                    { name: "Pepper Grill Chicken Full", price: 480 },
+                    { name: "Pepper Grill Chicken Half", price: 240 },
+                    { name: "Schezwan Grill Chicken Full", price: 480 },
+                    { name: "Schezwan Grill Chicken Half", price: 240 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["evening", "dinner"]
+            },
+            "Pandhi Biryani Combo": {
+                items: [
+                    { name: "Chicken Biryani", price: 249 },
+                    { name: "Mutton Biryani", price: 349 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Biryani - Parcel": {
+                items: [
+                    { name: "Chicken Biryani", price: 200 },
+                    { name: "Mutton Biryani", price: 280 },
+                    { name: "Nattu Kozhi Biryani", price: 260 },
+                    { name: "Prawn Biryani", price: 260 },
+                    { name: "Egg Biryani", price: 160 },
+                    { name: "Plain Biryani", price: 140 },
+                    { name: "Gilma Biryani", price: 240 },
+                    { name: "Chilli Chicken Biryani", price: 240 },
+                    { name: "Mutton Chukka Biriyani", price: 320 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Thandoori": {
+                items: [
+                    { name: "Thandoori Chicken Full", price: 440 },
+                    { name: "Thandoori Chicken Half", price: 220 },
+                    { name: "Chicken Tikka", price: 190 },
+                    { name: "Malai Tikka", price: 230 },
+                    { name: "Tangdi Kabab", price: 190 },
+                    { name: "Malai Kabab", price: 230 },
+                    { name: "Chicken Seekh Kabab", price: 230 },
+                    { name: "Mutton Seekh Kabab", price: 280 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["evening", "dinner"]
+            },
+            "Mutton": {
+                items: [
+                    { name: "Mutton Milagu Pirattal", price: 270 },
+                    { name: "Mutton Chuka", price: 280 },
+                    { name: "Mutton Balls (4 Pcs)", price: 250 },
+                    { name: "Mutton Chops", price: 270 },
+                    { name: "Kudal Fry", price: 220 },
+                    { name: "Mutton Thala Curry", price: 190 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Chicken Gravy": {
+                items: [
+                    { name: "Butter Chicken Masala", price: 220 },
+                    { name: "Chicken Pepper Masala", price: 210 },
+                    { name: "Chicken Chettinadu", price: 210 },
+                    { name: "Kadai Chicken", price: 210 },
+                    { name: "Chicken Masala", price: 210 },
+                    { name: "Hyderabad Chicken", price: 210 },
+                    { name: "Garlice Chicken Masala", price: 210 },
+                    { name: "Ginger Chicken Masala", price: 210 },
+                    { name: "Chicken Tikka Masala", price: 220 },
+                    { name: "Chicken Pallipalayam", price: 210 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Fish": {
+                items: [
+                    { name: "Vanjaram Sea Fish", price: 240 },
+                    { name: "Fish Finger (5 Pcs)", price: 210 },
+                    { name: "Nethili Fish Fry", price: 200 },
+                    { name: "Fish Manjurian", price: 230 },
+                    { name: "Chilly Fish", price: 230 },
+                    { name: "Dragon Fish", price: 230 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Fish Gravy": {
+                items: [
+                    { name: "Kerala Fish Curry", price: 180 },
+                    { name: "Fish Masala", price: 190 },
+                    { name: "Garlic Fish Masala", price: 210 },
+                    { name: "Aachi Meen Kolambu", price: 210 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Prawns": {
+                items: [
+                    { name: "Prawn - 65", price: 200 },
+                    { name: "Prawn Manjurian", price: 220 },
+                    { name: "Chilly Prawn", price: 220 },
+                    { name: "Ginger Prawn (Dry)", price: 220 },
+                    { name: "Chettinadu (Dry)", price: 220 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["evening", "dinner"]
+            },
+            "Prawn Gravy": {
+                items: [
+                    { name: "Prawn Masala", price: 250 },
+                    { name: "Prawn Chettinadu", price: 250 },
+                    { name: "Prawn Pepper Masala", price: 250 },
+                    { name: "Ginger Prawn Gravy", price: 250 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Nattu Kozhi": {
+                items: [
+                    { name: "Nattu Kozhi Uppu Curry", price: 220 },
+                    { name: "Nattu Kozhi Chettinad", price: 220 },
+                    { name: "Nattu Kozhi Pepper Fry", price: 220 },
+                    { name: "Nattu Kozhi Pallipalayam", price: 220 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Mutton Gravy": {
+                items: [
+                    { name: "Mutton Chettinadu Gravy", price: 270 },
+                    { name: "Mutton Pepper Gravy", price: 270 },
+                    { name: "Mutton Masala", price: 270 },
+                    { name: "Mutton Kudal Kulambu", price: 220 },
+                    { name: "Mutton Pallipalayam Gravy", price: 270 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Veg Gravy": {
+                items: [
+                    { name: "Paneer Butter Masala", price: 180 },
+                    { name: "Mushroom Masala", price: 180 },
+                    { name: "Aloo Gobi Masala", price: 180 },
+                    { name: "Gobi Masala", price: 170 },
+                    { name: "Kadai Veg", price: 180 },
+                    { name: "Kadai Paneer", price: 200 },
+                    { name: "Kadai Mushroom", price: 180 },
+                    { name: "Mix Veg Curry (Carrot-Beans Gobi Capsicum)", price: 210 },
+                    { name: "Veg Chettinadu (Carrot-Bee-Gobi)", price: 180 },
+                    { name: "Paneer Tikka Masala", price: 200 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Parotta Special": {
+                items: [
+                    { name: "Parotta", price: 25 },
+                    { name: "Bun Parotta", price: 35 },
+                    { name: "Nool Parotta", price: 35 },
+                    { name: "Veechu Parotta", price: 40 },
+                    { name: "Egg Veechu Parotta", price: 60 },
+                    { name: "Egg Kothu Patotta", price: 100 },
+                    { name: "Egg Lappa", price: 100 },
+                    { name: "Chicken Lappa", price: 160 },
+                    { name: "Mutton Lappa", price: 200 },
+                    { name: "Chicken Kothu Parotta", price: 160 },
+                    { name: "Mutton Kothu Parotta", price: 200 },
+                    { name: "Chicken Leaf Parotta", price: 180 },
+                    { name: "Mutton Leaf Parotta", price: 220 }
+                ],
+                foodType: "non-veg", // Parotta itself is veg, but these are non-veg specials
+                mealTimes: ["evening", "dinner"]
+            },
+            "Veg Starter": {
+                items: [
+                    { name: "Gobi-65", price: 110 },
+                    { name: "Mushroom-65", price: 140 },
+                    { name: "Paneer - 65", price: 140 },
+                    { name: "Chilly Gobi", price: 150 },
+                    { name: "Chilly Mushroom", price: 170 },
+                    { name: "Chilly Paneer", price: 170 },
+                    { name: "Gobi Manjurian", price: 170 },
+                    { name: "Mushroom Manjurian", price: 170 },
+                    { name: "Paneer Manjurian", price: 170 },
+                    { name: "Gobi Pepper Fry", price: 140 },
+                    { name: "Mushroom Pepper Fry", price: 170 },
+                    { name: "Paneer Pepper Fry", price: 170 },
+                    { name: "Gobi Pallipalayam", price: 160 },
+                    { name: "Mushroom Pallipalayam", price: 180 },
+                    { name: "Paneer Pallipalayam", price: 180 },
+                    { name: "Paneer Tikka", price: 180 },
+                    { name: "Hot Pepper Mushroom", price: 180 },
+                    { name: "Baby Corn -65", price: 130 },
+                    { name: "Baby Corn Manjurian", price: 170 },
+                    { name: "Baby Corn Pepper Fry", price: 170 }
+                ],
+                foodType: "veg",
+                mealTimes: ["evening", "dinner"]
+            },
+            "Chappathi & Egg Chappathi": {
+                items: [
+                    { name: "Chappathi", price: 25 },
+                    { name: "Egg Chappathi", price: 70 },
+                    { name: "Egg Kothu Chappathi", price: 100 }
+                ],
+                foodType: "egg",
+                mealTimes: ["morning", "evening", "dinner"]
+            },
+            "Veg Parotta": {
+                items: [
+                    { name: "Chilly Parotta", price: 120 },
+                    { name: "Mushroom Keema Parotta", price: 180 },
+                    { name: "Paneer Keema Parotta", price: 180 },
+                    { name: "Veg Kothu Parotta", price: 90 },
+                    { name: "Paneer Leaf Parotta", price: 200 },
+                    { name: "Veg Leaf Parotta", price: 160 }
+                ],
+                foodType: "veg",
+                mealTimes: ["evening", "dinner"]
+            },
+            "Indian Breads": {
+                items: [
+                    { name: "Roti", price: 45 },
+                    { name: "Naan", price: 45 },
+                    { name: "Butter Rotti", price: 60 },
+                    { name: "Butter Naan", price: 60 },
+                    { name: "Garlic Naan", price: 70 },
+                    { name: "Kulcha", price: 70 },
+                    { name: "Butter Kulcha", price: 80 },
+                    { name: "Stuffed Kulcha", price: 90 },
+                    { name: "Aloo Paratha", price: 90 },
+                    { name: "Thandoori Paratha", price: 45 },
+                    { name: "Pulka", price: 35 },
+                    { name: "Rumali Roti", price: 70 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Fried Rice (Non.Veg.)": {
+                items: [
+                    { name: "Chicken Fried Rice", price: 180 },
+                    { name: "Mutton Fried Rice", price: 210 },
+                    { name: "Schezwan Chicken Fried Rice", price: 200 },
+                    { name: "Egg Fried Rice", price: 140 },
+                    { name: "Schezwan Egg Fried Rice", price: 160 },
+                    { name: "Mixed Fried Rice (Mutton-Chicken-Prawns-Egg)", price: 220 },
+                    { name: "Prawn Fried Rice", price: 200 },
+                    { name: "Schezwan Mixed Fried Rice", price: 240 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Noodles (Non.Veg.)": {
+                items: [
+                    { name: "Chicken Noodles", price: 180 },
+                    { name: "Mutton Noodles", price: 210 },
+                    { name: "Egg Noodles", price: 140 },
+                    { name: "Schezwan Chicken Noodles", price: 200 },
+                    { name: "Mixed Noodles (Mutton-Chicken-Prawns)", price: 220 },
+                    { name: "Prawn Noodles", price: 200 },
+                    { name: "Schezwan Mixed Noodles (Mutton-Chicken)", price: 240 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Salad": {
+                items: [
+                    { name: "Veg Salad", price: 70 },
+                    { name: "Onion Salad", price: 60 },
+                    { name: "Cucumber Salad", price: 60 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Egg Items": {
+                items: [
+                    { name: "Chicken Kari Omelette", price: 120 },
+                    { name: "Mutton Kari Omelette", price: 160 },
+                    { name: "Double Omelette", price: 50 },
+                    { name: "White Omelette", price: 50 },
+                    { name: "Omelette", price: 25 },
+                    { name: "Egg Poriyal", price: 60 },
+                    { name: "Egg Podimass", price: 70 },
+                    { name: "Kulambu Kalakki", price: 30 },
+                    { name: "Double Kalakki", price: 50 },
+                    { name: "Onion Pepper Kalakki", price: 30 },
+                    { name: "Pepper Kalakki", price: 25 },
+                    { name: "Kalakki", price: 25 },
+                    { name: "Egg Masala", price: 100 },
+                    { name: "Egg Bhuriji", price: 120 },
+                    { name: "Half Boil", price: 20 },
+                    { name: "Plain Omelette", price: 20 },
+                    { name: "Plain Double Omelette", price: 45 }
+                ],
+                foodType: "egg",
+                mealTimes: ["morning", "lunch", "evening", "dinner"]
+            },
+            "Veg. Fried Rice": {
+                items: [
+                    { name: "Veg Fried Rice", price: 140 },
+                    { name: "Mushroom Fried Rice", price: 160 },
+                    { name: "Paneer Fried Rice", price: 160 },
+                    { name: "Gobi Fried Rice", price: 140 },
+                    { name: "Mix Veg Fried Rice", price: 180 },
+                    { name: "Schezwan Fried Rice", price: 180 },
+                    { name: "Schezwan Mushroom Fried Rice", price: 180 },
+                    { name: "Schezwan Paneer Fried Rice", price: 180 },
+                    { name: "Schezwan Mix Fried Rice", price: 200 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Veg. Noodles": {
+                items: [
+                    { name: "Veg Noodles", price: 140 },
+                    { name: "Mushroom Noodles", price: 160 },
+                    { name: "Paneer Noodles", price: 160 },
+                    { name: "Gobi Noodles", price: 140 },
+                    { name: "Mix Veg Noodles", price: 180 },
+                    { name: "Schezwan Noodles", price: 180 },
+                    { name: "Schezwan Mushroom Noodles", price: 180 },
+                    { name: "Schezwan Paneer Noodles", price: 180 },
+                    { name: "Schezwan Mix Noodles", price: 200 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "evening", "dinner"]
+            },
+            "Dosa Roast": {
+                items: [
+                    { name: "Kal Dosai", price: 45 },
+                    { name: "Plain Roast", price: 70 },
+                    { name: "Onion Roast", price: 90 },
+                    { name: "Ghee Roast", price: 90 },
+                    { name: "Masal Roast", price: 100 },
+                    { name: "Mushroom Roast", price: 140 },
+                    { name: "Paneer Roast", price: 140 },
+                    { name: "Gobi Roast", price: 130 },
+                    { name: "Butter Roast", price: 90 },
+                    { name: "Podi Roast", price: 90 },
+                    { name: "Ghee Podi Rost", price: 110 }
+                ],
+                foodType: "veg",
+                mealTimes: ["morning", "evening", "dinner"]
+            },
+            "Pulav": {
+                items: [
+                    { name: "Veg. Pulav", price: 160 },
+                    { name: "Mushroom Pulav", price: 180 },
+                    { name: "Paneer Pulav", price: 180 },
+                    { name: "Mixed Pulav", price: 200 },
+                    { name: "Ghree Rice", price: 140 },
+                    { name: "Jeera Rice", price: 140 },
+                    { name: "Cashew Nut Pulav", price: 180 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Special Biryani": {
+                items: [
+                    { name: "Veg Biryani", price: 160 },
+                    { name: "Mushroom Biryani", price: 180 },
+                    { name: "Paneer Biryani", price: 180 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "dinner"]
+            },
+            "Rava Roast": {
+                items: [
+                    { name: "Rava Roast", price: 110 },
+                    { name: "Onion Rava Roast", price: 130 },
+                    { name: "Ghee Rava Roast", price: 130 },
+                    { name: "Rava Masala Roast", price: 140 },
+                    { name: "Butter Rava Roast", price: 140 },
+                    { name: "Podi Rava Roast", price: 140 },
+                    { name: "Cashew Nut Rava Roast", price: 140 }
+                ],
+                foodType: "veg",
+                mealTimes: ["morning", "evening"]
+            },
+            "Anandham Special - Non Veg Dosa": {
+                items: [
+                    { name: "Chicken Kari Uthappam", price: 180 },
+                    { name: "Mutton Kari Uthappam", price: 220 },
+                    { name: "Egg Kal Dosa", price: 80 },
+                    { name: "Egg Rost", price: 90 },
+                    { name: "Egg Onion Podi Roast", price: 130 },
+                    { name: "Chicken Kima Roast", price: 180 },
+                    { name: "Mutton Kima Roast", price: 220 }
+                ],
+                foodType: "non-veg",
+                mealTimes: ["morning", "evening", "dinner"]
+            },
+            "Fresh Juice": {
+                items: [
+                    { name: "Apple", price: 80 },
+                    { name: "Musambi", price: 60 },
+                    { name: "Water Melon", price: 50 },
+                    { name: "Musk Melon", price: 60 },
+                    { name: "Pomegranate", price: 90 },
+                    { name: "Lime Juice", price: 40 },
+                    { name: "Lime Soda", price: 50 },
+                    { name: "Rose Milk", price: 50 },
+                    { name: "Lassi", price: 50 }
+                ],
+                foodType: "veg",
+                mealTimes: ["morning", "lunch", "evening", "dinner"]
+            },
+            "MilkShake": {
+                items: [
+                    { name: "Vinilla Milk Shake", price: 120 },
+                    { name: "Strawberry Milk Shake", price: 140 },
+                    { name: "Butterscotch Milk Shake", price: 120 },
+                    { name: "Banana Milk Shake", price: 140 },
+                    { name: "Apple Milk Shake", price: 160 },
+                    { name: "Chocolate Milk Shake", price: 140 },
+                    { name: "Black Wrrant Milk Shake", price: 150 },
+                    { name: "Pisth Milj Shake", price: 160 },
+                    { name: "Mango Milk Shake", price: 150 },
+                    { name: "Gulfi Milk Shake", price: 140 },
+                    { name: "Oreo Milk Shake", price: 140 }
+                ],
+                foodType: "veg",
+                mealTimes: ["morning", "lunch", "evening", "dinner"]
+            },
+            "Mojito": {
+                items: [
+                    { name: "Lime & Mint Mojito", price: 80 },
+                    { name: "Blue Angel Mojito", price: 80 },
+                    { name: "Blue Berry Mojito", price: 80 },
+                    { name: "Pineapple Mojito", price: 80 },
+                    { name: "Strawberry Mojito", price: 80 },
+                    { name: "Kiwi Mojito", price: 80 },
+                    { name: "Mango Mojito", price: 80 }
+                ],
+                foodType: "veg",
+                mealTimes: ["lunch", "evening"]
+            },
+            "Uthappam": {
+                items: [
+                    { name: "Uthappam", price: 70 },
+                    { name: "Malli Uthappam", price: 90 },
+                    { name: "Carrot Uthappam", price: 90 },
+                    { name: "Cocunut Uthappam", price: 120 },
+                    { name: "Onion Uthappam", price: 90 },
+                    { name: "Tomato Uthappam", price: 90 },
+                    { name: "Podi Uthappam", price: 90 },
+                    { name: "Small Onion Uthappam", price: 120 },
+                    { name: "Small Onion Podi Uthappam", price: 130 },
+                    { name: "Egg Uthappam", price: 90 },
+                    { name: "Egg Podi Uthappam", price: 110 },
+                    { name: "Egg Malli Uthappam", price: 120 }
+                ],
+                foodType: "veg", // Base uthappam is veg, egg ones are handled by item-level check
+                mealTimes: ["morning", "evening", "dinner"]
+            }
+        };
+
+        // Flattened menu data structure for easier filtering
+        const allMenuItems = [];
+        for (const categoryName in rawMenuData) {
+            const categoryInfo = rawMenuData[categoryName];
+            categoryInfo.items.forEach(item => {
+                // Determine food type for individual item if it's an egg item within a veg category
+                let itemFoodType = categoryInfo.foodType;
+                if (item.name.toLowerCase().includes("egg") && itemFoodType === "veg") {
+                    itemFoodType = "egg";
+                }
+                // Also check if the category itself is an "Egg Items" category
+                if (categoryName === "Egg Items") {
+                    itemFoodType = "egg";
+                }
+
+                allMenuItems.push({
+                    category: categoryName,
+                    name: item.name,
+                    price: item.price,
+                    foodType: itemFoodType, // Use itemFoodType
+                    mealTimes: categoryInfo.mealTimes // Keep category meal times for now
+                });
+            });
+        }
+
+
+        // Image mapping for categories (using more vibrant placeholders)
+        const categoryImages = {
+            "Veg. Soup": "https://placehold.co/600x200/4CAF50/FFFFFF?text=Delicious+Veg+Soup",
+            "Non Veg Starter - Chicken": "https://placehold.co/600x200/FF5722/FFFFFF?text=Chicken+Starters",
+            "Soup Non - Veg": "https://placehold.co/600x200/8BC34A/FFFFFF?text=Non-Veg+Soups",
+            "Bucket Biryani Combo": "https://placehold.co/600x200/FFC107/333333?text=Bucket+Biryani",
+            "Grill": "https://placehold.co/600x200/E91E63/FFFFFF?text=Grilled+Delights",
+            "Pandhi Biryani Combo": "https://placehold.co/600x200/673AB7/FFFFFF?text=Pandhi+Biryani",
+            "Biryani - Parcel": "https://placehold.co/600x200/00BCD4/FFFFFF?text=Chicken+Biryani+with+Leg+Piece",
+            "Thandoori": "https://placehold.co/600x200/FF9800/FFFFFF?text=Tandoori+Specials",
+            "Mutton": "https://placehold.co/600x200/795548/FFFFFF?text=Mutton+Dishes",
+            "Chicken Gravy": "https://placehold.co/600x200/FFEB3B/333333?text=Chicken+Gravies",
+            "Fish": "https://placehold.co/600x200/2196F3/FFFFFF?text=Fresh+Fish",
+            "Fish Gravy": "https://placehold.co/600x200/03A9F4/FFFFFF?text=Fish+Gravies",
+            "Prawns": "https://placehold.co/600x200/F44336/FFFFFF?text=Prawn+Specials",
+            "Prawn Gravy": "https://placehold.co/600x200/E57373/FFFFFF?text=Prawn+Gravies",
+            "Nattu Kozhi": "https://placehold.co/600x200/CDDC39/FFFFFF?text=Nattu+Kozhi",
+            "Mutton Gravy": "https://placehold.co/600x200/607D8B/FFFFFF?text=Mutton+Gravies",
+            "Veg Gravy": "https://placehold.co/600x200/8BC34A/333333?text=Vegetable+Gravies",
+            "Parotta Special": "https://placehold.co/600x200/FFC107/333333?text=Parotta+Special",
+            "Veg Starter": "https://placehold.co/600x200/4CAF50/FFFFFF?text=Veg+Starters",
+            "Chappathi & Egg Chappathi": "https://placehold.co/600x200/FF5722/FFFFFF?text=Chappathi+Delights",
+            "Veg Parotta": "https://placehold.co/600x200/8BC34A/FFFFFF?text=Veg+Parotta",
+            "Indian Breads": "https://placehold.co/600x200/FFC107/333333?text=Indian+Breads",
+            "Fried Rice (Non.Veg.)": "https://placehold.co/600x200/00BCD4/FFFFFF?text=Non-Veg+Fried+Rice",
+            "Noodles (Non.Veg.)": "https://placehold.co/600x200/E91E63/FFFFFF?text=Non-Veg+Noodles",
+            "Salad": "https://placehold.co/600x200/2196F3/FFFFFF?text=Fresh+Salads",
+            "Egg Items": "https://placehold.co/600x200/FF9800/FFFFFF?text=Egg+Dishes",
+            "Veg. Fried Rice": "https://placehold.co/600x200/CDDC39/FFFFFF?text=Veg+Fried+Rice",
+            "Veg. Noodles": "https://placehold.co/600x200/607D8B/FFFFFF?text=Veg+Noodles",
+            "Dosa Roast": "https://placehold.co/600x200/795548/FFFFFF?text=Dosa+Varieties",
+            "Pulav": "https://placehold.co/600x200/FFEB3B/333333?text=Flavorful+Pulav",
+            "Special Biryani": "https://placehold.co/600x200/4CAF50/FFFFFF?text=Special+Biryani",
+            "Rava Roast": "https://placehold.co/600x200/FF5722/FFFFFF?text=Rava+Roast",
+            "Anandham Special - Non Veg Dosa": "https://placehold.co/600x200/8BC34A/FFFFFF?text=Non-Veg+Dosa",
+            "Fresh Juice": "https://placehold.co/600x200/00BCD4/FFFFFF?text=Fresh+Juices",
+            "MilkShake": "https://placehold.co/600x200/E91E63/FFFFFF?text=Milkshakes",
+            "Mojito": "https://placehold.co/600x200/673AB7/FFFFFF?text=Refreshing+Mojitos",
+            "Uthappam": "https://placehold.co/600x200/FF9800/FFFFFF?text=Uthappam+Delights"
+        };
+
+        const landingPage = document.getElementById('landingPage');
+        const mainMenu = document.getElementById('mainMenu');
+        const viewMenuButton = document.getElementById('viewMenuButton');
+        const homeButton = document.getElementById('homeButton'); // Get the new home button
+        const navButtonsContainer = document.getElementById('navButtons');
+        const menuContentContainer = document.getElementById('menuContent');
+        const filterToggleButton = document.getElementById('filterToggleButton');
+        const filterSearchModal = document.getElementById('filterSearchModal');
+        const modalCloseButton = document.getElementById('modalCloseButton');
+        const modalFoodTypeFilters = document.getElementById('modalFoodTypeFilters');
+        const modalMealTimeFilters = document.getElementById('modalMealTimeFilters');
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const applyFiltersButton = document.getElementById('applyFiltersButton');
+        const clearFiltersButton = document.getElementById('clearFiltersButton');
+
+        // Current filter states
+        let currentFoodTypeFilter = "all";
+        let currentMealTimeFilter = "all-day";
+        let currentSearchQuery = "";
+
+        // Function to render menu categories and items based on filters and search
+        function renderMenu() {
+            // Clear previous content
+            navButtonsContainer.innerHTML = '';
+            menuContentContainer.innerHTML = '';
+
+            // Filter all items first
+            const filteredAndSearchedItems = allMenuItems.filter(item => {
+                const matchesFoodType = currentFoodTypeFilter === "all" || item.foodType === currentFoodTypeFilter;
+                const matchesMealTime = currentMealTimeFilter === "all-day" || item.mealTimes.includes(currentMealTimeFilter);
+                const matchesSearch = item.name.toLowerCase().includes(currentSearchQuery.toLowerCase());
+                return matchesFoodType && matchesMealTime && matchesSearch;
+            });
+
+            // Group filtered items by category
+            const groupedItems = filteredAndSearchedItems.reduce((acc, item) => {
+                if (!acc[item.category]) {
+                    acc[item.category] = [];
+                }
+                acc[item.category].push(item);
+                return acc;
+            }, {});
+
+            let firstCategoryDisplayed = true;
+
+            for (const categoryName in groupedItems) {
+                const items = groupedItems[categoryName];
+
+                // Create navigation button for the category
+                const button = document.createElement('button');
+                button.classList.add('nav-button');
+                button.textContent = categoryName;
+                button.dataset.category = categoryName.replace(/\s+/g, '-').toLowerCase();
+                navButtonsContainer.appendChild(button);
+
+                // Create category section
+                const section = document.createElement('section');
+                section.id = button.dataset.category;
+                section.classList.add('category-section');
+
+                // Activate the first displayed category
+                if (firstCategoryDisplayed) {
+                    section.classList.add('active');
+                    button.classList.add('active');
+                    firstCategoryDisplayed = false;
+                }
+
+                const heading = document.createElement('h2');
+                heading.textContent = categoryName;
+                section.appendChild(heading);
+
+                // Add category image
+                const categoryImage = document.createElement('img');
+                categoryImage.classList.add('category-image');
+                categoryImage.src = categoryImages[categoryName] || 'https://placehold.co/600x200/cccccc/333333?text=Image+Not+Available';
+                categoryImage.alt = categoryName + " image";
+                categoryImage.onerror = function() {
+                    this.src = 'https://placehold.co/600x200/cccccc/333333?text=Image+Not+Available';
+                };
+                section.appendChild(categoryImage);
+
+                const grid = document.createElement('div');
+                grid.classList.add('menu-grid');
+
+                // Add filtered menu items to the grid
+                items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('menu-item');
+                    itemDiv.innerHTML = `
+                        <div>
+                            <h3>${item.name}</h3>
+                        </div>
+                        <span class="price">₹${item.price}</span>
+                    `;
+                    grid.appendChild(itemDiv);
+                });
+
+                section.appendChild(grid);
+                menuContentContainer.appendChild(section);
+            }
+
+            // If no categories are displayed after filtering, show a message
+            if (navButtonsContainer.children.length === 0) {
+                const noResultsMessage = document.createElement('p');
+                noResultsMessage.textContent = "No items found matching your criteria.";
+                noResultsMessage.classList.add('text-center', 'text-gray-600', 'text-lg', 'mt-10');
+                menuContentContainer.appendChild(noResultsMessage);
+            }
+        }
+
+        // Function to update modal filter button active states
+        function updateModalFilterButtons() {
+            document.querySelectorAll('#modalFoodTypeFilters .modal-filter-button').forEach(btn => {
+                if (btn.dataset.filterValue === currentFoodTypeFilter) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            document.querySelectorAll('#modalMealTimeFilters .modal-filter-button').forEach(btn => {
+                if (btn.dataset.filterValue === currentMealTimeFilter) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Event listener for Food Type Filters in modal
+        modalFoodTypeFilters.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal-filter-button')) {
+                currentFoodTypeFilter = event.target.dataset.filterValue;
+                updateModalFilterButtons(); // Update active state immediately
+            }
+        });
+
+        // Event listener for Meal Time Filters in modal
+        modalMealTimeFilters.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal-filter-button')) {
+                currentMealTimeFilter = event.target.dataset.filterValue;
+                updateModalFilterButtons(); // Update active state immediately
+            }
+        });
+
+        // Event listener for Search functionality (now in header)
+        searchButton.addEventListener('click', () => {
+            currentSearchQuery = searchInput.value.trim();
+            renderMenu(); // Re-render menu with search query
+        });
+
+        searchInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                searchButton.click(); // Trigger search on Enter key press
+            }
+        });
+
+        // Event listener for Category Navigation buttons (within the main menu)
+        navButtonsContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('nav-button')) {
+                document.querySelectorAll('#navButtons .nav-button').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+
+                // Hide all category sections
+                document.querySelectorAll('.category-section').forEach(sec => sec.classList.remove('active'));
+
+                // Show the corresponding category section
+                const targetCategory = event.target.dataset.category;
+                const sectionToShow = document.getElementById(targetCategory);
+                if (sectionToShow) {
+                    sectionToShow.classList.add('active');
+                    menuContentContainer.scrollTop = 0;
+                }
+            }
+        });
+
+        // Event listener for the "View Menu" button on landing page
+        viewMenuButton.addEventListener('click', () => {
+            landingPage.classList.add('hidden');
+            mainMenu.classList.remove('hidden');
+            mainMenu.classList.add('flex');
+            renderMenu(); // Initial render of the menu when entering
+        });
+
+        // Event listener for the new "Home" button
+        homeButton.addEventListener('click', () => {
+            mainMenu.classList.add('hidden');
+            landingPage.classList.remove('hidden');
+            // Optionally reset filters and search when going back to home
+            currentFoodTypeFilter = "all";
+            currentMealTimeFilter = "all-day";
+            currentSearchQuery = "";
+            searchInput.value = "";
+        });
+
+
+        // Event listeners for modal
+        filterToggleButton.addEventListener('click', () => {
+            filterSearchModal.classList.add('show');
+            // Sync modal filters with current active filters
+            updateModalFilterButtons();
+        });
+
+        modalCloseButton.addEventListener('click', () => {
+            filterSearchModal.classList.remove('show');
+        });
+
+        applyFiltersButton.addEventListener('click', () => {
+            filterSearchModal.classList.remove('show');
+            renderMenu(); // Apply filters and re-render the main menu
+        });
+
+        clearFiltersButton.addEventListener('click', () => {
+            currentFoodTypeFilter = "all";
+            currentMealTimeFilter = "all-day";
+            currentSearchQuery = ""; // Clear search query as well
+            searchInput.value = ""; // Clear the search input field in the header
+            updateModalFilterButtons(); // Reset active buttons in modal
+            filterSearchModal.classList.remove('show');
+            renderMenu(); // Re-render with all filters cleared
+        });
+
+        // Initial render and display
+        window.onload = function () {
+            // This ensures the landing page is visible and the main menu is hidden when the page first loads.
+            landingPage.classList.remove('hidden');
+            mainMenu.classList.add('hidden');
+        };
+    </script>
+</body>
+</html>

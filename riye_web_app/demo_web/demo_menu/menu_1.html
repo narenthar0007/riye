@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandham Restaurant - Digital Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            perspective: 1000px;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            color: #c5d6c5;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #d4af37;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .menu-book {
+            width: 900px;
+            height: 600px;
+            position: relative;
+            margin: 0 auto;
+            perspective: 2000px;
+            transform-style: preserve-3d;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .book {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, #f5f5dc 0%, #f8f4e5 100%);
+            border-radius: 5px;
+            padding: 30px;
+            overflow: auto;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 30px rgba(210, 180, 140, 0.3);
+            border: 1px solid #d4af37;
+        }
+        
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 100, 0, 0.2), transparent);
+        }
+        
+        .page-cover {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: #ffd700;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 15px solid #d4af37;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+        
+        .page-cover h2 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 3px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .page-cover h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 5px solid #f5f5dc;
+        }
+        
+        .logo i {
+            font-size: 7rem;
+            color: #2e7d32;
+        }
+        
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            max-width: 90%;
+        }
+        
+        .service {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #ffd700;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact {
+            position: absolute;
+            bottom: 30px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: #ffd700;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+        
+        .contact i {
+            margin-right: 8px;
+        }
+        
+        .page-title {
+            color: #2e7d32;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px double #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-section {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .section-title {
+            background: linear-gradient(to right, #2e7d32, #1b5e20);
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: -25px auto 20px;
+            font-size: 1.4rem;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #d4af37;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            border-bottom: 1px dashed #d4af37;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-name {
+            font-weight: 500;
+            color: #2c3e2c;
+            text-align: left;
+            flex: 1;
+        }
+        
+        .item-price {
+            color: #c19b07;
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 80px;
+            text-align: right;
+        }
+        
+        .note {
+            margin-top: 20px;
+            font-style: italic;
+            color: #888;
+            font-size: 0.9rem;
+            text-align: right;
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            display: inline-block;
+            float: right;
+        }
+        
+        .navigation {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #2e7d32, #1b5e20);
+            color: #ffd700;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            border: 2px solid #d4af37;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            color: #999;
+            border-color: #777;
+        }
+        
+        .nav-btn i {
+            font-size: 1.2rem;
+        }
+        
+        .page-counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            color: #d4af37;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .page-counter span {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 0 5px;
+            min-width: 40px;
+            display: inline-block;
+        }
+        
+        .decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .dec-1 {
+            top: 10%;
+            left: 5%;
+            background: radial-gradient(#ffd700, transparent 70%);
+        }
+        
+        .dec-2 {
+            bottom: 15%;
+            right: 7%;
+            background: radial-gradient(#2e7d32, transparent 70%);
+        }
+        
+        @media (max-width: 950px) {
+            .menu-book {
+                width: 95%;
+                height: 500px;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .menu-book {
+                height: 400px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .page-cover h2 {
+                font-size: 2.5rem;
+            }
+            
+            .page {
+                padding: 15px;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .logo i {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decoration dec-1"></div>
+    <div class="decoration dec-2"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-utensils"></i> Anandham Restaurant</h1>
+            <p>Experience the Authentic Taste of South India</p>
+            <div class="tagline">Green • Gold • Yellow Theme | Premium Catering Services</div>
+        </div>
+        
+        <div class="menu-book">
+            <div class="book" id="book">
+                <!-- Page 1 - Cover -->
+                <div class="page page-cover">
+                    <div class="logo">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h2>ANANDHAM</h2>
+                    <h3>Catering Services</h3>
+                    <p style="font-size: 1.6rem; margin-bottom: 10px; color: #ffd700;">3, Taste of Home</p>
+                    
+                    <div class="services">
+                        <div class="service">OUTDOOR CATERING</div>
+                        <div class="service">GET TOGETHER</div>
+                        <div class="service">CORPORATE EVENTS</div>
+                        <div class="service">PRIVATE PARTIES</div>
+                        <div class="service">MARRIAGE FUNCTION</div>
+                        <div class="service">BIRTHDAY PARTIES</div>
+                    </div>
+                    
+                    <div class="contact">
+                        <p><i class="fas fa-phone-alt"></i> 90928 20444 | 90928 20666</p>
+                    </div>
+                </div>
+                
+                <!-- Page 2 - Soups & Starters -->
+                <div class="page">
+                    <h2 class="page-title">Soups & Starters</h2>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Veg Soup</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Veg Soup</span>
+                                <span class="item-price">₹60</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Pepper Soup</span>
+                                <span class="item-price">₹70</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Hot & Sour Soup</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mushroom Soup</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chettinadu Veg Soup</span>
+                                <span class="item-price">₹90</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Sweet Corn Soup</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Non-Veg Soup</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Soup</span>
+                                <span class="item-price">₹90</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Bone Soup</span>
+                                <span class="item-price">₹100</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Nattu Koshi Soup</span>
+                                <span class="item-price">₹100</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Sweet Corn Chicken Soup</span>
+                                <span class="item-price">₹120</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Non-Veg Starter</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken 65 (Boneless)</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Lollipop (3 Pcs)</span>
+                                <span class="item-price">₹140</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Chukka</span>
+                                <span class="item-price">₹210</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Dragon Chicken</span>
+                                <span class="item-price">₹240</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="note">*GST 5% Extra</div>
+                </div>
+                
+                <!-- Page 3 - Biryanis -->
+                <div class="page">
+                    <h2 class="page-title">Biryanis & Combos</h2>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Bucket Biryani Combo</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Biryani Full</span>
+                                <span class="item-price">₹1400</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Biryani Half</span>
+                                <span class="item-price">₹800</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Biryani Full</span>
+                                <span class="item-price">₹2200</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Biryani Half</span>
+                                <span class="item-price">₹1100</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Biryani Parcel</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Biryani</span>
+                                <span class="item-price">₹200</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Biryani</span>
+                                <span class="item-price">₹280</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Prawn Biryani</span>
+                                <span class="item-price">₹260</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Egg Biryani</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Grilled Chicken</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Grill Chicken Full</span>
+                                <span class="item-price">₹440</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Grill Chicken Half</span>
+                                <span class="item-price">₹220</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Pepper Grill Full</span>
+                                <span class="item-price">₹480</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Tandoori Special</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Tandoori Chicken Full</span>
+                                <span class="item-price">₹440</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Tikka</span>
+                                <span class="item-price">₹190</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Tangdi Kabab</span>
+                                <span class="item-price">₹190</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="note">*GST 5% Extra</div>
+                </div>
+                
+                <!-- Page 4 - Main Courses -->
+                <div class="page">
+                    <h2 class="page-title">Main Courses</h2>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Chicken Gravy</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Butter Chicken Masala</span>
+                                <span class="item-price">₹220</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Chettinadu</span>
+                                <span class="item-price">₹210</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Hyderabad Chicken</span>
+                                <span class="item-price">₹210</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Tikka Masala</span>
+                                <span class="item-price">₹220</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Mutton Gravy</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Chettinadu Gravy</span>
+                                <span class="item-price">₹270</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Pepper Gravy</span>
+                                <span class="item-price">₹270</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Masala</span>
+                                <span class="item-price">₹270</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Veg Gravy</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Paneer Butter Masala</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mushroom Masala</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Aloo Gobi Masala</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Paneer Tikka Masala</span>
+                                <span class="item-price">₹200</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Parotta Special</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Bun Parotta</span>
+                                <span class="item-price">₹35</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Veschi Parotta</span>
+                                <span class="item-price">₹60</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Kothu Parotta</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Kothu Parotta</span>
+                                <span class="item-price">₹200</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="note">*GST 5% Extra</div>
+                </div>
+                
+                <!-- Page 5 - Rice & Noodles -->
+                <div class="page">
+                    <h2 class="page-title">Rice, Noodles & More</h2>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Veg Fried Rice</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Veg Fried Rice</span>
+                                <span class="item-price">₹140</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mushroom Fried Rice</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Paneer Fried Rice</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Schezwan Fried Rice</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Non-Veg Fried Rice</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Fried Rice</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mutton Fried Rice</span>
+                                <span class="item-price">₹210</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Prawn Fried Rice</span>
+                                <span class="item-price">₹240</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Egg Fried Rice</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Noodles</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Chicken Noodles</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Veg Noodles</span>
+                                <span class="item-price">₹140</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Prawn Noodles</span>
+                                <span class="item-price">₹200</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Schezwan Noodles</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Special Biryani</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Veg Biryani</span>
+                                <span class="item-price">₹160</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mushroom Biryani</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Paneer Biryani</span>
+                                <span class="item-price">₹180</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="note">*GST 5% Extra</div>
+                </div>
+                
+                <!-- Page 6 - Beverages & Desserts -->
+                <div class="page">
+                    <h2 class="page-title">Beverages & Desserts</h2>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Fresh Juice</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Apple Musambi</span>
+                                <span class="item-price">₹50</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Water Melon</span>
+                                <span class="item-price">₹60</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Pomegranate</span>
+                                <span class="item-price">₹40</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Lime Juice</span>
+                                <span class="item-price">₹50</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Milkshakes</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Vanilla Milkshake</span>
+                                <span class="item-price">₹120</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Strawberry Milkshake</span>
+                                <span class="item-price">₹120</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Chocolate Milkshake</span>
+                                <span class="item-price">₹150</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mango Milkshake</span>
+                                <span class="item-price">₹140</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">Mojito</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Lime & Mint Mojito</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Pineapple Mojito</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Strawberry Mojito</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Mango Mojito</span>
+                                <span class="item-price">₹80</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-section">
+                        <div class="section-title">South Indian Special</div>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <span class="item-name">Plain Dosa</span>
+                                <span class="item-price">₹70</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Masala Dosa</span>
+                                <span class="item-price">₹100</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Onion Uttapam</span>
+                                <span class="item-price">₹90</span>
+                            </div>
+                            <div class="menu-item">
+                                <span class="item-name">Egg Uttapam</span>
+                                <span class="item-price">₹90</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="note">*GST 5% Extra</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-arrow-left"></i> Previous</button>
+            <button class="nav-btn" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+        
+        <div class="page-counter">
+            Page <span id="currentPage">1</span> of <span id="totalPages">6</span>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const book = document.getElementById('book');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const currentPageEl = document.getElementById('currentPage');
+            const totalPages = 6;
+            let currentPage = 1;
+            
+            document.getElementById('totalPages').textContent = totalPages;
+            
+            function updateBook() {
+                // Calculate the rotation for 3D effect
+                const angle = (currentPage - 1) * -180;
+                book.style.transform = `rotateY(${angle}deg)`;
+                
+                // Update page counter
+                currentPageEl.textContent = currentPage;
+                
+                // Update button states
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateBook();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateBook();
+                }
+            });
+            
+            // Initialize
+            updateBook();
+            
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft' && currentPage > 1) {
+                    currentPage--;
+                    updateBook();
+                } else if (e.key === 'ArrowRight' && currentPage < totalPages) {
+                    currentPage++;
+                    updateBook();
+                }
+            });
+            
+            // Add touch swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            book.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            book.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const diff = touchStartX - touchEndX;
+                // Minimum swipe distance
+                if (Math.abs(diff) < 50) return;
+                
+                if (diff > 0 && currentPage < totalPages) {
+                    // Swipe left - next page
+                    currentPage++;
+                } else if (diff < 0 && currentPage > 1) {
+                    // Swipe right - previous page
+                    currentPage--;
+                }
+                updateBook();
+            }
+        });
+    </script>
+</body>
+</html>

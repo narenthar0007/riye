@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Product Calculator</title>
+    <!-- Tailwind CSS CDN for basic styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4; /* Light green background */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for longer content */
+            min-height: 100vh;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 max-w-2xl w-full">
+        <h2 class="text-3xl font-bold text-center text-green-800 mb-8">Multi-Product Price Calculator</h2>
+
+        <h3 class="text-xl font-bold text-green-700 mb-4">Today's Prices (per KG) - Editable</h3>
+        <div id="current-prices" class="grid grid-cols-2 md:grid-cols-3 gap-4 text-left text-gray-700 mb-8">
+            <!-- Prices with input fields will be dynamically inserted here -->
+        </div>
+
+        <h3 class="text-xl font-bold text-green-700 mb-4">Calculate Your Order</h3>
+        <div id="product-calculator-rows" class="space-y-4 mb-6">
+            <!-- Product calculation rows will be dynamically inserted here by JS -->
+        </div>
+
+        <button id="add-product-button" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300">
+            Add Product
+        </button>
+
+        <div class="mt-6 text-3xl font-bold text-green-700 text-right">
+            Grand Total: ₹<span id="grand-total-price">0.00</span>
+        </div>
+
+        <p class="text-gray-600 mt-4 text-sm text-center">
+            *Prices are for demonstration and can be manually updated above.
+        </p>
+    </div>
+
+    <script type="module">
+        // Dummy Firebase variables for local execution outside Canvas, if Firebase was actually needed.
+        // For this calculator's functionality, Firebase is not strictly required as data is hardcoded.
+        window.firebaseApp = null;
+        window.db = null;
+        window.auth = null;
+        window.userId = null;
+        // In a real local setup with Firebase, you'd init it here with your actual config.
+        // For this minimal example, we don't need actual Firebase calls to demonstrate the calculator.
+        // If you were to run this with Firebase, you'd add:
+        /*
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        window.firebaseApp = initializeApp(firebaseConfig);
+        window.auth = getAuth(window.firebaseApp);
+        signInAnonymously(window.auth).then(userCred => window.userId = userCred.user.uid);
+        */
+
+
+        // Daily Prices Data (hardcoded for demonstration)
+        const initialDailyPrices = {
+            "Farm Grown Red Banana": 50, // Price per KG
+            "Farm Grown Normal Banana": 30,
+            "Fresh Tomatoes": 40,
+            "Organic Carrots": 60,
+            "Fresh Spinach": 25,
+            "Cucumber": 35,
+            "Snake Gourd": 45
+        };
+
+        // Array to hold the state of selected products for calculation
+        // Each object will have: { id: uniqueId, productName: string, quantity: number, subtotal: number }
+        let selectedCalculationItems = [];
+        let globalRowCounter = 0; // To ensure unique IDs for new rows
+
+        // Function to render the calculator rows based on selectedCalculationItems array
+        function renderCalculatorRows() {
+            const productCalculatorRows = document.getElementById('product-calculator-rows');
+            if (!productCalculatorRows) {
+                console.error("Error: 'product-calculator-rows' element not found for rendering.");
+                return;
+            }
+
+            // Clear existing rows
+            productCalculatorRows.innerHTML = '';
+
+            // Build new rows from the state array
+            selectedCalculationItems.forEach(item => {
+                const newRow = document.createElement('div');
+                newRow.id = `product-row-${item.id}`;
+                newRow.className = 'flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-4 border-b pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0';
+                newRow.innerHTML = `
+                    <select id="product-select-${item.id}" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full md:w-1/2 product-select">
+                        <option value="">Select a Product</option>
+                        ${Object.keys(initialDailyPrices).map(productName => `
+                            <option value="${productName}" ${item.productName === productName ? 'selected' : ''}>${productName}</option>
+                        `).join('')}
+                    </select>
+                    <input type="number" id="quantity-input-${item.id}" placeholder="Quantity (kg)" step="0.1" min="0.1" value="${item.quantity > 0 ? item.quantity : ''}"
+                           class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full md:w-1/4 quantity-input">
+                    <span id="subtotal-${item.id}" class="text-lg font-semibold text-gray-700 w-full md:w-1/6 text-center md:text-right">₹${item.subtotal.toFixed(2)}</span>
+                    <button type="button" data-id="${item.id}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300 remove-product-button">
+                        Remove
+                    </button>
+                `;
+                productCalculatorRows.appendChild(newRow);
+            });
+
+            // Re-attach event listeners to the newly rendered elements
+            productCalculatorRows.querySelectorAll('.product-select').forEach(select => {
+                select.addEventListener('change', (event) => {
+                    const id = event.target.id.split('-')[2];
+                    const selectedItem = selectedCalculationItems.find(item => item.id == id);
+                    if (selectedItem) {
+                        selectedItem.productName = event.target.value;
+                        calculateSubtotalAndUpdateGrandTotal(id);
+                    }
+                });
+            });
+
+            productCalculatorRows.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('input', (event) => {
+                    const id = event.target.id.split('-')[2];
+                    const selectedItem = selectedCalculationItems.find(item => item.id == id);
+                    if (selectedItem) {
+                        selectedItem.quantity = parseFloat(event.target.value) || 0;
+                        calculateSubtotalAndUpdateGrandTotal(id);
+                    }
+                });
+            });
+
+            productCalculatorRows.querySelectorAll('.remove-product-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const idToRemove = event.target.dataset.id;
+                    selectedCalculationItems = selectedCalculationItems.filter(item => item.id != idToRemove);
+                    renderCalculatorRows(); // Re-render without the removed item
+                    calculateGrandTotal(); // Recalculate grand total
+                });
+            });
+            calculateGrandTotal(); // Ensure total is updated after any re-render
+        }
+
+        // Function to calculate subtotal for a single item and update grand total
+        function calculateSubtotalAndUpdateGrandTotal(id) {
+            const itemToUpdate = selectedCalculationItems.find(item => item.id == id);
+            if (itemToUpdate) {
+                const selectedProduct = itemToUpdate.productName;
+                const quantity = itemToUpdate.quantity;
+
+                if (selectedProduct && !isNaN(quantity) && quantity > 0) {
+                    const priceInputId = `${selectedProduct.replace(/\s/g, '-')}-price`;
+                    const priceInput = document.getElementById(priceInputId);
+
+                    if (priceInput) {
+                        const pricePerKg = parseFloat(priceInput.value);
+                        if (!isNaN(pricePerKg)) {
+                            itemToUpdate.subtotal = pricePerKg * quantity;
+                            document.getElementById(`subtotal-${id}`).textContent = `₹${itemToUpdate.subtotal.toFixed(2)}`;
+                        } else {
+                            itemToUpdate.subtotal = 0;
+                            document.getElementById(`subtotal-${id}`).textContent = '₹0.00';
+                        }
+                    } else {
+                        itemToUpdate.subtotal = 0;
+                        document.getElementById(`subtotal-${id}`).textContent = '₹0.00';
+                    }
+                } else {
+                    itemToUpdate.subtotal = 0;
+                    document.getElementById(`subtotal-${id}`).textContent = '₹0.00';
+                }
+            }
+            calculateGrandTotal(); // Always recalculate grand total after a subtotal changes
+        }
+
+        // Function to calculate the grand total from selectedCalculationItems
+        function calculateGrandTotal() {
+            let grandTotal = 0;
+            selectedCalculationItems.forEach(item => {
+                if (!isNaN(item.subtotal)) {
+                    grandTotal += item.subtotal;
+                }
+            });
+            document.getElementById('grand-total-price').textContent = grandTotal.toFixed(2);
+        }
+
+        // Function to add a new product calculation row to the state
+        function addProductRow() {
+            globalRowCounter++;
+            selectedCalculationItems.push({
+                id: globalRowCounter,
+                productName: '', // Default empty selection
+                quantity: 0,
+                subtotal: 0
+            });
+            renderCalculatorRows(); // Re-render the UI
+        }
+
+        // Function to populate daily prices (input fields)
+        function setupDailyPricesInput() {
+            const currentPricesDiv = document.getElementById('current-prices');
+            if (!currentPricesDiv) {
+                console.error("Error: 'current-prices' element not found.");
+                return;
+            }
+            currentPricesDiv.innerHTML = '';
+            for (const product in initialDailyPrices) {
+                if (initialDailyPrices.hasOwnProperty(product)) {
+                    const priceItem = `
+                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-md">
+                            <label for="${product.replace(/\s/g, '-')}-price" class="font-medium">${product}</label>
+                            <input type="number" id="${product.replace(/\s/g, '-')}-price" value="${initialDailyPrices[product].toFixed(2)}" step="0.01" min="0"
+                                   class="ml-2 p-1 border border-gray-300 rounded-md text-right w-24 text-green-600 font-semibold focus:ring-1 focus:ring-green-500">
+                        </div>
+                    `;
+                    currentPricesDiv.innerHTML += priceItem;
+                }
+            }
+        }
+
+
+        // Event listener for initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            setupDailyPricesInput(); // Populate daily prices input fields
+
+            // Initial add of one product row for the calculator
+            addProductRow();
+
+            // Event listener for "Add Product" button
+            const addProductBtn = document.getElementById('add-product-button');
+            if (addProductBtn) {
+                addProductBtn.addEventListener('click', addProductRow);
+            } else {
+                console.error("Error: 'add-product-button' not found.");
+            }
+        });
+    </script>
+</body>
+</html>

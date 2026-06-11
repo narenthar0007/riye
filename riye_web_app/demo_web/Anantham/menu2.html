@@ -1,0 +1,5778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandham Restaurant - Digital Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3a1a 0%, #2d4a2d 50%, #1a3a1a 100%);
+            background-attachment: fixed;
+            color: #f0f0f0;
+            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 4rem;
+            color: #ffd166;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #9acd32, transparent);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            color: #9acd32;
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .menu-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .search-filter-container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .search-container {
+            display: flex;
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid rgba(154, 205, 50, 0.3);
+            border-radius: 50px 0 0 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #f0f0f0;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .search-input:focus {
+            border-color: #9acd32;
+            box-shadow: 0 0 0 3px rgba(154, 205, 50, 0.2);
+        }
+        
+        .search-input::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .search-btn {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .search-btn:hover {
+            background: #9acd32;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(154, 205, 50, 0.4);
+        }
+        
+        .filter-dropdown {
+            position: relative;
+        }
+        
+        .filter-dropdown-btn {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+            border: 2px solid rgba(76, 175, 80, 0.5);
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 160px;
+            justify-content: space-between;
+        }
+        
+        .filter-dropdown-btn:hover {
+            background: #9acd32;
+            border-color: #9acd32;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(154, 205, 50, 0.4);
+        }
+        
+        .filter-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 58, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .filter-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .filter-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-option:last-child {
+            border-bottom: none;
+        }
+        
+        .filter-option:hover {
+            background: rgba(154, 205, 50, 0.2);
+        }
+        
+        .filter-option.active {
+            background: rgba(154, 205, 50, 0.3);
+            color: #ffd166;
+            font-weight: 600;
+        }
+        
+        .filter-icon {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .filter-buttons-container {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #9acd32 #2d4a2d;
+        }
+        
+        .filter-buttons::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .filter-buttons::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .filter-buttons::-webkit-scrollbar-thumb {
+            background: #9acd32;
+            border-radius: 10px;
+        }
+        
+        .filter-buttons::-webkit-scrollbar-thumb:hover {
+            background: #ffd166;
+        }
+        
+        .filter-btn {
+            background: rgba(76, 175, 80, 0.8);
+            color: white;
+            border: 2px solid transparent;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .filter-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #9acd32;
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+        
+        .filter-btn:hover::before, .filter-btn.active::before {
+            width: 100%;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(154, 205, 50, 0.4);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .scroll-indicator.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .scroll-indicator:hover {
+            background: #9acd32;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .scroll-left {
+            left: -20px;
+        }
+        
+        .scroll-right {
+            right: -20px;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        
+        .menu-card {
+            position: relative;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+        
+        .menu-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.2) 0%, 
+                rgba(0, 0, 0, 0.4) 50%, 
+                rgba(0, 0, 0, 0.8) 100%);
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+        
+        .menu-card:hover::before {
+            background: linear-gradient(to bottom, 
+                rgba(0, 0, 0, 0.1) 0%, 
+                rgba(0, 0, 0, 0.3) 50%, 
+                rgba(0, 0, 0, 0.7) 100%);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.8s ease;
+        }
+        
+        .menu-card:hover .card-background {
+            transform: scale(1.1);
+        }
+        
+        .price-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffd166;
+            color: #333;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 25px;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+        
+        .menu-card:hover .card-content {
+            padding-bottom: 35px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: #ffd166;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card-title::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #9acd32;
+        }
+        
+        .card-description {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .menu-card:hover .card-description {
+            max-height: 100px;
+            opacity: 1;
+            margin-bottom: 15px;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: #f0f0f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .vegetarian {
+            color: #4caf50;
+            border-color: rgba(76, 175, 80, 0.5);
+        }
+        
+        .spicy {
+            color: #ffd166;
+            border-color: rgba(255, 209, 102, 0.5);
+        }
+        
+        .popular {
+            background: #9acd32;
+            color: #333;
+            border-color: #9acd32;
+            text-shadow: none;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.3rem;
+            color: #aaa;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #9acd32;
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            color: #888;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            color: #ffd166;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(76, 175, 80, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .contact-info i {
+            color: #4caf50;
+            font-size: 1.1rem;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: #f0f0f0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links a:hover {
+            background: #4caf50;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .search-filter-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .search-container {
+                min-width: 280px;
+            }
+            
+            .filter-dropdown-btn {
+                min-width: 280px;
+            }
+            
+            .filter-buttons-container {
+                max-width: 100%;
+            }
+            
+            .filter-buttons {
+                padding: 10px 20px;
+            }
+            
+            .scroll-indicator {
+                display: none;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .menu-card {
+                height: 350px;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animation for menu cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .menu-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.2s; }
+        .menu-card:nth-child(3) { animation-delay: 0.3s; }
+        .menu-card:nth-child(4) { animation-delay: 0.4s; }
+        .menu-card:nth-child(5) { animation-delay: 0.5s; }
+        .menu-card:nth-child(6) { animation-delay: 0.6s; }
+        .menu-card:nth-child(7) { animation-delay: 0.7s; }
+        .menu-card:nth-child(8) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><i class="fas fa-utensils"></i> Anandham</div>
+            <div class="tagline">Authentic South Indian Cuisine</div>
+        </header>
+        
+        <div class="menu-controls">
+            <div class="search-filter-container">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-input" placeholder="Search by dish name...">
+                    <button class="search-btn" id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="filter-dropdown" id="diet-filter-container">
+                    <button class="filter-dropdown-btn" id="diet-filter-btn">
+                        <span id="diet-filter-text">All Diets</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="filter-dropdown-menu" id="diet-filter-dropdown">
+                        <div class="filter-option active" data-diet="all">
+                            <span class="filter-icon"><i class="fas fa-utensils"></i></span>
+                            <span>All Diets</span>
+                        </div>
+                        <div class="filter-option" data-diet="veg">
+                            <span class="filter-icon"><i class="fas fa-leaf"></i></span>
+                            <span>Vegetarian</span>
+                        </div>
+                        <div class="filter-option" data-diet="non-veg">
+                            <span class="filter-icon"><i class="fas fa-drumstick-bite"></i></span>
+                            <span>Non-Vegetarian</span>
+                        </div>
+                        <div class="filter-option" data-diet="egg">
+                            <span class="filter-icon"><i class="fas fa-egg"></i></span>
+                            <span>Egg</span>
+                        </div>
+                        <div class="filter-option" data-diet="jain">
+                            <span class="filter-icon"><i class="fas fa-seedling"></i></span>
+                            <span>Jain</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-dropdown" id="timing-filter-container">
+                    <button class="filter-dropdown-btn" id="timing-filter-btn">
+                        <span id="timing-filter-text">All Day</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="filter-dropdown-menu" id="timing-filter-dropdown">
+                        <div class="filter-option active" data-timing="all">
+                            <span class="filter-icon"><i class="fas fa-clock"></i></span>
+                            <span>All Day</span>
+                        </div>
+                        <div class="filter-option" data-timing="breakfast">
+                            <span class="filter-icon"><i class="fas fa-sun"></i></span>
+                            <span>Breakfast</span>
+                        </div>
+                        <div class="filter-option" data-timing="lunch">
+                            <span class="filter-icon"><i class="fas fa-cloud-sun"></i></span>
+                            <span>Lunch</span>
+                        </div>
+                        <div class="filter-option" data-timing="dinner">
+                            <span class="filter-icon"><i class="fas fa-moon"></i></span>
+                            <span>Dinner</span>
+                        </div>
+                        <div class="filter-option" data-timing="brunch">
+                            <span class="filter-icon"><i class="fas fa-coffee"></i></span>
+                            <span>Brunch</span>
+                        </div>
+                        <div class="filter-option" data-timing="snacks">
+                            <span class="filter-icon"><i class="fas fa-cookie-bite"></i></span>
+                            <span>Snacks</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-buttons-container">
+                <div class="scroll-indicator scroll-left" id="scroll-left">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="filter-buttons" id="filter-buttons">
+                    <!-- Filter buttons will be dynamically inserted here -->
+                </div>
+                <div class="scroll-indicator scroll-right" id="scroll-right">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="menu-grid" id="menu-grid">
+            <!-- Menu items will be dynamically inserted here -->
+        </div>
+        
+        <footer>
+            <div class="footer-logo"><i class="fas fa-utensils"></i> Anandham</div>
+            <div>© 2023 Anandham Restaurant. All rights reserved.</div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>123 Food Street, Chennai, India</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@anandham.com</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Sample menu data (replace with your actual menu items)
+        const menuItems = [
+  {
+    "id": 1,
+    "name": "Veg Soup",
+    "description": "A classic, comforting soup with fresh garden vegetables.",
+    "price": "60",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "healthy"
+    ],
+    "image": "https://www.kayawell.com/Data/UserContentImg/2018/6/00149f77-87bc-43d5-9bed-965516d3ee0f.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Pepper Soup",
+    "description": "A spicy and aromatic vegetable soup with a strong pepper flavor.",
+    "price": "70",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "spicy"
+    ],
+    "image": "https://www.kannammacooks.com/wp-content/uploads/2015/10/roasted-red-bell-pepper-soup.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Hot & Sour Soup",
+    "description": "A tangy and spicy soup with a mix of julienned vegetables.",
+    "price": "80",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "spicy",
+      "tangy"
+    ],
+    "image": "https://masalachilli.com/wp-content/uploads/2021/07/Hot-and-Sour-Soup-3.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Mushroom Soup",
+    "description": "A rich and earthy soup made with fresh, savory mushrooms.",
+    "price": "80",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "mushroom"
+    ],
+    "image": "https://simple-veganista.com/wp-content/uploads/2019/10/best-vegan-mushroom-soup-4.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Chettinadu Veg Soup",
+    "description": "A traditional South Indian vegetable soup with authentic Chettinadu spices.",
+    "price": "90",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": "https://drop.ndtv.com/albums/COOKS/5-south-indian-_637762235188401373/637762235208003123.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Sweet Corn Soup",
+    "description": "A comforting, sweet soup with fresh corn kernels and vegetables.",
+    "price": "80",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "sweet"
+    ],
+    "image": "https://www.yummyfoodrecipes.com/resources/picture/org/Sweet-Corn-soup.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Veg Clear Soup",
+    "description": "A light and refreshing clear broth with finely chopped vegetables.",
+    "price": "80",
+    "category": "Veg. Soup",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "soup",
+      "vegetarian",
+      "healthy"
+    ],
+    "image": "https://jeyporedukaan.in/wp-content/uploads/2022/09/Clear-Chicken-Soup-2-3.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Chicken 65 (Boneless)",
+    "description": "Crispy fried boneless chicken marinated in a special spice blend.",
+    "price": "160",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "starter",
+      "spicy"
+    ],
+    "image": "https://paattiskitchen.com/wp-content/uploads/2023/05/kmc_20230501_131310.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Chicken Loli Pop - 3",
+    "description": "Three spicy and juicy chicken lollipops, a popular appetizer.",
+    "price": "140",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "starter"
+    ],
+    "image": ""
+  },
+  {
+    "id": 10,
+    "name": "Chicken Chukka",
+    "description": "A dry, fiery chicken dish prepared with robust spices.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 11,
+    "name": "Garlic Chicken",
+    "description": "A flavorful chicken dish tossed in a generous amount of garlic.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "garlic"
+    ],
+    "image": ""
+  },
+  {
+    "id": 12,
+    "name": "Dragon Chicken",
+    "description": "A sweet and spicy Indo-Chinese starter with tender chicken pieces.",
+    "price": "240",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 13,
+    "name": "Ginger Chicken",
+    "description": "A zesty chicken starter with the pungent flavor of fresh ginger.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "ginger"
+    ],
+    "image": ""
+  },
+  {
+    "id": 14,
+    "name": "Chicken Uppu Curry",
+    "description": "A simple, rustic chicken curry with minimal ingredients and a focus on natural flavors.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "curry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 15,
+    "name": "Chinthamani Chicken",
+    "description": "A spicy and tangy chicken dish from the Chinthamani region.",
+    "price": "240",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 16,
+    "name": "Chicken Pallipalayam (Dry)",
+    "description": "A spicy, dry chicken fry with small pieces of chicken and coconut.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 17,
+    "name": "Chicken Manjurian",
+    "description": "A classic Indo-Chinese dish of chicken dumplings in a Manchurian sauce.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 18,
+    "name": "Chicken Monika",
+    "description": "A special house-favorite chicken preparation with a unique flavor profile.",
+    "price": "240",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "special"
+    ],
+    "image": ""
+  },
+  {
+    "id": 19,
+    "name": "Ghee Podi Chicken",
+    "description": "Chicken pieces fried with clarified butter (ghee) and a special spice mix (podi).",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "ghee",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 20,
+    "name": "Andra Chicken",
+    "description": "A fiery and tangy chicken dish in the style of Andhra cuisine.",
+    "price": "220",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "andra"
+    ],
+    "image": ""
+  },
+  {
+    "id": 21,
+    "name": "Chicken Chettinadu (Dry)",
+    "description": "A robust and spicy dry chicken dish with Chettinadu spices.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "chettinadu",
+      "dry",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 22,
+    "name": "Chicken Pepper Fry",
+    "description": "A delicious and peppery dry chicken fry, great as an appetizer.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 23,
+    "name": "Hot Pepper Chicken",
+    "description": "An extra spicy chicken dish, perfect for those who love heat.",
+    "price": "210",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 24,
+    "name": "Chilly Leg",
+    "description": "A single, spicy chicken leg piece, marinated and fried to perfection.",
+    "price": "100",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "starter"
+    ],
+    "image": ""
+  },
+  {
+    "id": 25,
+    "name": "Pepper Leg",
+    "description": "A single chicken leg piece, generously seasoned with black pepper.",
+    "price": "110",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "starter"
+    ],
+    "image": ""
+  },
+  {
+    "id": 26,
+    "name": "Chicken Soup",
+    "description": "A hearty soup with tender chicken pieces and flavorful broth.",
+    "price": "90",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 27,
+    "name": "Mutton Bone Soup",
+    "description": "A rich and nutritious soup made with mutton bones.",
+    "price": "100",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "mutton",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 28,
+    "name": "Nattu Kozhi Soup",
+    "description": "A traditional soup made with country chicken, known for its health benefits.",
+    "price": "100",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chicken",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 29,
+    "name": "Chettinadu Non Veg Soup",
+    "description": "A spicy and aromatic non-vegetarian soup with Chettinadu spices.",
+    "price": "100",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 30,
+    "name": "Sweet Corn Chicken Soup",
+    "description": "A creamy soup with sweet corn and shredded chicken.",
+    "price": "120",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 31,
+    "name": "Chicken Clear Soup",
+    "description": "A light and flavorful clear broth with tender chicken.",
+    "price": "100",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chicken",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 32,
+    "name": "Chicken Hot & Sour Soup",
+    "description": "A tangy and spicy non-vegetarian soup with shredded chicken.",
+    "price": "120",
+    "category": "Soup Non - Veg",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "soup",
+      "chicken",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 33,
+    "name": "Chicken Biryani Full",
+    "description": "A full bucket of flavorful chicken biryani, perfect for a family.",
+    "price": "1400",
+    "category": "Bucket Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 34,
+    "name": "Chicken Biryani Half",
+    "description": "A half bucket of delicious chicken biryani.",
+    "price": "800",
+    "category": "Bucket Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 35,
+    "name": "Mutton Biryani Full",
+    "description": "A full bucket of aromatic mutton biryani.",
+    "price": "2200",
+    "category": "Bucket Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 36,
+    "name": "Mutton Biryani Half",
+    "description": "A half bucket of flavorful mutton biryani.",
+    "price": "1100",
+    "category": "Bucket Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 37,
+    "name": "Grill Chicken Full",
+    "description": "A whole grilled chicken, marinated in a special spice mix.",
+    "price": "440",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill"
+    ],
+    "image": ""
+  },
+  {
+    "id": 38,
+    "name": "Grill Chicken Half",
+    "description": "A half grilled chicken, perfect for a single meal.",
+    "price": "220",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill"
+    ],
+    "image": ""
+  },
+  {
+    "id": 39,
+    "name": "Pepper Grill Chicken Full",
+    "description": "A whole grilled chicken with a rich, peppery flavor.",
+    "price": "480",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 40,
+    "name": "Pepper Grill Chicken Half",
+    "description": "A half grilled chicken with a spicy pepper seasoning.",
+    "price": "240",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 41,
+    "name": "Schezwan Grill Chicken Full",
+    "description": "A whole grilled chicken with a fiery Schezwan glaze.",
+    "price": "480",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill",
+      "schezwan",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 42,
+    "name": "Schezwan Grill Chicken Half",
+    "description": "A half grilled chicken with a hot and tangy Schezwan flavor.",
+    "price": "240",
+    "category": "Grill",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "grill",
+      "schezwan",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 43,
+    "name": "Chicken Biryani",
+    "description": "A single serving of flavorful chicken biryani.",
+    "price": "249",
+    "category": "Pandhi Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 44,
+    "name": "Mutton Biryani",
+    "description": "A single serving of aromatic mutton biryani.",
+    "price": "349",
+    "category": "Pandhi Biryani Combo",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "combo",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 45,
+    "name": "Chicken Biryani",
+    "description": "A parcel of aromatic chicken biryani.",
+    "price": "200",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 46,
+    "name": "Mutton Biryani",
+    "description": "A parcel of traditional mutton biryani.",
+    "price": "280",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 47,
+    "name": "Nattu Kozhi Biryani",
+    "description": "A parcel of biryani made with country chicken.",
+    "price": "260",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 48,
+    "name": "Prawn Biryani",
+    "description": "A parcel of biryani with succulent prawns.",
+    "price": "260",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "prawn"
+    ],
+    "image": ""
+  },
+  {
+    "id": 49,
+    "name": "Egg Biryani",
+    "description": "A parcel of flavorful biryani with boiled eggs.",
+    "price": "160",
+    "category": "Biryani - Parcel",
+    "diet": "egg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "egg",
+      "biryani",
+      "parcel",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 50,
+    "name": "Plain Biryani",
+    "description": "A parcel of aromatic biryani rice without meat or vegetables.",
+    "price": "140",
+    "category": "Biryani - Parcel",
+    "diet": "veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "vegetarian",
+      "biryani",
+      "parcel",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 51,
+    "name": "Gilma Biryani",
+    "description": "A special Gilma-style biryani with a rich, unique flavor.",
+    "price": "240",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "special"
+    ],
+    "image": ""
+  },
+  {
+    "id": 52,
+    "name": "Chilli Chicken Biryani",
+    "description": "A spicy biryani topped with hot chili chicken.",
+    "price": "240",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 53,
+    "name": "Mutton Chukka Biryani",
+    "description": "A rich biryani with pieces of spicy mutton chukka.",
+    "price": "320",
+    "category": "Biryani - Parcel",
+    "diet": "non-veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "non-vegetarian",
+      "biryani",
+      "parcel",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 54,
+    "name": "Thandoori Chicken Full",
+    "description": "A whole chicken marinated in yogurt and spices, cooked in a tandoor.",
+    "price": "440",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 55,
+    "name": "Thandoori Chicken Half",
+    "description": "A half portion of tandoori chicken, perfect for a single serving.",
+    "price": "220",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 56,
+    "name": "Chicken Tikka",
+    "description": "Succulent boneless chicken pieces marinated in spices and grilled.",
+    "price": "190",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 57,
+    "name": "Malai Tikka",
+    "description": "Creamy and mildly spiced boneless chicken grilled in a tandoor.",
+    "price": "230",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken",
+      "creamy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 58,
+    "name": "Tangdi Kabab",
+    "description": "Chicken drumsticks marinated in aromatic spices and grilled.",
+    "price": "190",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 59,
+    "name": "Malai Kabab",
+    "description": "Soft and succulent chicken kebabs with a creamy marinade.",
+    "price": "230",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken",
+      "creamy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 60,
+    "name": "Chicken Seekh Kabab",
+    "description": "Minced chicken skewers seasoned with herbs and spices, grilled in a tandoor.",
+    "price": "230",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 61,
+    "name": "Mutton Seekh Kabab",
+    "description": "Minced mutton skewers seasoned with spices and grilled to perfection.",
+    "price": "280",
+    "category": "Thandoori",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "tandoori",
+      "mutton"
+    ],
+    "image": ""
+  },
+  {
+    "id": 62,
+    "name": "Mutton Milagu Pirattal",
+    "description": "A fiery and aromatic mutton stir-fry with a heavy dose of black pepper.",
+    "price": "270",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 63,
+    "name": "Mutton Chuka",
+    "description": "A dry preparation of tender mutton pieces with a rich spice mix.",
+    "price": "280",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "dry",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 64,
+    "name": "Mutton Balls (4 Pcs)",
+    "description": "Four savory minced mutton balls, fried and seasoned.",
+    "price": "250",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "starter"
+    ],
+    "image": ""
+  },
+  {
+    "id": 65,
+    "name": "Mutton Chops",
+    "description": "Tender mutton chops marinated and cooked with a spicy masala.",
+    "price": "270",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 66,
+    "name": "Kudal Fry",
+    "description": "A spicy and flavorful fry made from mutton intestines.",
+    "price": "220",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "spicy",
+      "fry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 67,
+    "name": "Mutton Thala Curry",
+    "description": "A special curry made from mutton head meat.",
+    "price": "190",
+    "category": "Non Veg Starter",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "curry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 68,
+    "name": "Butter Chicken Masala",
+    "description": "A classic creamy and rich butter chicken curry.",
+    "price": "220",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "creamy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 69,
+    "name": "Chicken Pepper Masala",
+    "description": "A spicy chicken gravy with a dominant flavor of black pepper.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 70,
+    "name": "Chicken Chettinadu",
+    "description": "A fiery chicken curry prepared with authentic Chettinadu spices.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 71,
+    "name": "Kadai Chicken",
+    "description": "A semi-dry chicken dish cooked with bell peppers and onions in a traditional wok.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 72,
+    "name": "Chicken Masala",
+    "description": "A classic chicken curry with a rich and flavorful gravy.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 73,
+    "name": "Hyderabad Chicken",
+    "description": "A spicy and tangy chicken dish from Hyderabadi cuisine.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "hyderabadi",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 74,
+    "name": "Garlic Chicken Masala",
+    "description": "A delicious chicken curry with a strong, aromatic garlic flavor.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "garlic"
+    ],
+    "image": ""
+  },
+  {
+    "id": 75,
+    "name": "Ginger Chicken Masala",
+    "description": "A flavorful chicken curry with a zesty ginger undertone.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "ginger"
+    ],
+    "image": ""
+  },
+  {
+    "id": 76,
+    "name": "Chicken Tikka Masala",
+    "description": "Grilled chicken tikka pieces in a creamy and spiced gravy.",
+    "price": "220",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy",
+      "tandoori"
+    ],
+    "image": ""
+  },
+  {
+    "id": 77,
+    "name": "Chicken Pallipalayam",
+    "description": "A semi-dry chicken curry with small pieces of chicken and coconut.",
+    "price": "210",
+    "category": "Non Veg Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 78,
+    "name": "Vanjaram Sea Fish",
+    "description": "A delicious preparation of Vanjaram sea fish.",
+    "price": "240",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood"
+    ],
+    "image": ""
+  },
+  {
+    "id": 79,
+    "name": "Fish Finger (5 Pcs)",
+    "description": "Five crispy fish fingers, perfect as a starter.",
+    "price": "210",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "starter"
+    ],
+    "image": ""
+  },
+  {
+    "id": 80,
+    "name": "Nethili Fish Fry",
+    "description": "Crispy fried Nethili fish, a popular South Indian delicacy.",
+    "price": "200",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "fry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 81,
+    "name": "Fish Manjurian",
+    "description": "A classic Indo-Chinese dish of fish dumplings in a Manchurian sauce.",
+    "price": "230",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 82,
+    "name": "Chilly Fish",
+    "description": "A spicy and tangy fish preparation with hot chili sauce.",
+    "price": "230",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 83,
+    "name": "Dragon Fish",
+    "description": "A sweet and spicy Indo-Chinese fish starter.",
+    "price": "230",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "spicy",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 84,
+    "name": "Kerala Fish Curry",
+    "description": "A traditional Kerala-style fish curry with coconut and spices.",
+    "price": "180",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "curry",
+      "kerala"
+    ],
+    "image": ""
+  },
+  {
+    "id": 85,
+    "name": "Fish Masala",
+    "description": "A rich and flavorful fish curry.",
+    "price": "190",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "curry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 86,
+    "name": "Garlic Fish Masala",
+    "description": "A delicious fish curry with a prominent garlic flavor.",
+    "price": "210",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "curry",
+      "garlic"
+    ],
+    "image": ""
+  },
+  {
+    "id": 87,
+    "name": "Aachi Meen Kolambu",
+    "description": "A traditional fish curry with a special Aachi spice mix.",
+    "price": "210",
+    "category": "Fish",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "fish",
+      "seafood",
+      "curry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 88,
+    "name": "Prawn - 65",
+    "description": "Crispy fried prawns marinated in a spicy 65 spice mix.",
+    "price": "200",
+    "category": "Prawn",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 89,
+    "name": "Prawn Manjurian",
+    "description": "Indo-Chinese prawn dish in a savory Manchurian sauce.",
+    "price": "220",
+    "category": "Prawn",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 90,
+    "name": "Chilly Prawn",
+    "description": "A spicy and tangy prawn dish with hot chili sauce.",
+    "price": "220",
+    "category": "Prawn",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 91,
+    "name": "Ginger Prawn (Dry)",
+    "description": "A zesty, dry prawn fry with fresh ginger and spices.",
+    "price": "220",
+    "category": "Prawn",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "dry",
+      "ginger"
+    ],
+    "image": ""
+  },
+  {
+    "id": 92,
+    "name": "Chettinadu (Dry)",
+    "description": "A spicy, dry prawn dish with rich Chettinadu spices.",
+    "price": "220",
+    "category": "Prawn",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 93,
+    "name": "Prawn Masala",
+    "description": "A rich and flavorful prawn curry.",
+    "price": "250",
+    "category": "Prawn Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 94,
+    "name": "Prawn Chettinadu",
+    "description": "A fiery prawn curry prepared with authentic Chettinadu spices.",
+    "price": "250",
+    "category": "Prawn Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "gravy",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 95,
+    "name": "Prawn Pepper Masala",
+    "description": "A spicy prawn curry with a dominant flavor of black pepper.",
+    "price": "250",
+    "category": "Prawn Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 96,
+    "name": "Ginger Prawn Gravy",
+    "description": "A zesty prawn curry with a flavorful ginger base.",
+    "price": "250",
+    "category": "Prawn Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "prawn",
+      "seafood",
+      "gravy",
+      "ginger"
+    ],
+    "image": ""
+  },
+  {
+    "id": 97,
+    "name": "Nattu Kozhi Uppu Curry",
+    "description": "A simple and rustic curry made with country chicken.",
+    "price": "220",
+    "category": "Nattu Kozhi",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "curry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 98,
+    "name": "Nattu Kozhi Chettinad",
+    "description": "A spicy and aromatic Chettinadu curry made with country chicken.",
+    "price": "220",
+    "category": "Nattu Kozhi",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 99,
+    "name": "Nattu Kozhi Pepper Fry",
+    "description": "A peppery and flavorful dry fry made with country chicken.",
+    "price": "220",
+    "category": "Nattu Kozhi",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 100,
+    "name": "Nattu Kozhi Pallipalayam",
+    "description": "A spicy and dry pallipalayam-style fry with country chicken.",
+    "price": "220",
+    "category": "Nattu Kozhi",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "chicken",
+      "spicy",
+      "dry"
+    ],
+    "image": ""
+  },
+  {
+    "id": 101,
+    "name": "Mutton Chettinadu Gravy",
+    "description": "A rich and spicy mutton gravy with Chettinadu spices.",
+    "price": "270",
+    "category": "Mutton Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "gravy",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 102,
+    "name": "Mutton Pepper Gravy",
+    "description": "A spicy mutton gravy with a strong, peppery flavor.",
+    "price": "270",
+    "category": "Mutton Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 103,
+    "name": "Mutton Masala",
+    "description": "A classic mutton curry with a rich and flavorful gravy.",
+    "price": "270",
+    "category": "Mutton Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 104,
+    "name": "Mutton Kudal Kulambu",
+    "description": "A traditional mutton intestine curry with a unique flavor.",
+    "price": "220",
+    "category": "Mutton Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 105,
+    "name": "Mutton Pallipalayam Gravy",
+    "description": "A semi-dry mutton curry with a pallipalayam-style preparation.",
+    "price": "270",
+    "category": "Mutton Gravy",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "mutton",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 106,
+    "name": "Paneer Butter Masala",
+    "description": "Cottage cheese cubes in a rich, creamy, and mildly spiced tomato gravy.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "paneer",
+      "gravy",
+      "creamy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 107,
+    "name": "Mushroom Masala",
+    "description": "Mushrooms cooked in a spicy, flavorful onion-tomato based gravy.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "mushroom",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 108,
+    "name": "Aloo Gobi Masala",
+    "description": "A classic North Indian dish with potatoes and cauliflower in a spiced gravy.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "potato",
+      "cauliflower",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 109,
+    "name": "Gobi Masala",
+    "description": "Cauliflower florets cooked in a spicy onion-tomato gravy.",
+    "price": "170",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "cauliflower",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 110,
+    "name": "Kadai Veg",
+    "description": "Mixed vegetables cooked in a traditional wok with aromatic spices.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "mixed-veg",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 111,
+    "name": "Kadai Paneer",
+    "description": "Cottage cheese cooked with bell peppers and onions in a traditional wok.",
+    "price": "200",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "paneer",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 112,
+    "name": "Kadai Mushroom",
+    "description": "Mushrooms cooked with bell peppers and onions in a traditional wok.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "mushroom",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 113,
+    "name": "Mix Veg Curry",
+    "description": "A medley of vegetables like carrots, beans, and cauliflower in a rich curry.",
+    "price": "210",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "mixed-veg",
+      "gravy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 114,
+    "name": "Veg Chettinadu",
+    "description": "Mixed vegetables cooked in a fiery Chettinadu spice blend.",
+    "price": "180",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "mixed-veg",
+      "gravy",
+      "chettinadu",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 115,
+    "name": "Paneer Tikka Masala",
+    "description": "Grilled paneer tikka pieces in a rich and creamy masala gravy.",
+    "price": "200",
+    "category": "Veg Gravy",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "paneer",
+      "gravy",
+      "tandoori"
+    ],
+    "image": ""
+  },
+  {
+    "id": 116,
+    "name": "Parotta",
+    "description": "A flaky, layered flatbread from South India.",
+    "price": "25",
+    "category": "Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 117,
+    "name": "Bun Parotta",
+    "description": "A soft, fluffy, bun-shaped version of the traditional parotta.",
+    "price": "35",
+    "category": "Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 118,
+    "name": "Nool Parotta",
+    "description": "A unique parotta made with fine strands of dough, resembling noodles.",
+    "price": "35",
+    "category": "Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 119,
+    "name": "Veechu Parotta",
+    "description": "A thin, crispy, and stretched parotta.",
+    "price": "40",
+    "category": "Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "south-indian",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 120,
+    "name": "Egg Veechu Parotta",
+    "description": "A Veechu Parotta with a thin layer of egg cooked on top.",
+    "price": "60",
+    "category": "Parotta",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "bread",
+      "south-indian",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 121,
+    "name": "Egg Kothu Parotta",
+    "description": "Shredded parotta scrambled with egg and spices.",
+    "price": "100",
+    "category": "Parotta",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "bread",
+      "south-indian",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 122,
+    "name": "Egg Lappa",
+    "description": "A soft parotta folded and filled with a spiced egg mixture.",
+    "price": "100",
+    "category": "Parotta",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "bread",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 123,
+    "name": "Chicken Lappa",
+    "description": "A parotta folded and filled with a spicy chicken mixture.",
+    "price": "160",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 124,
+    "name": "Mutton Lappa",
+    "description": "A parotta folded and filled with a spicy mutton mixture.",
+    "price": "200",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "mutton"
+    ],
+    "image": ""
+  },
+  {
+    "id": 125,
+    "name": "Chicken Kothu Parotta",
+    "description": "Shredded parotta scrambled with chicken and spices.",
+    "price": "160",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 126,
+    "name": "Mutton Kothu Parotta",
+    "description": "Shredded parotta scrambled with mutton and spices.",
+    "price": "200",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "mutton"
+    ],
+    "image": ""
+  },
+  {
+    "id": 127,
+    "name": "Chicken Leaf Parotta",
+    "description": "Parotta filled with chicken and spices, wrapped in a banana leaf.",
+    "price": "180",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 128,
+    "name": "Mutton Leaf Parotta",
+    "description": "Parotta filled with mutton and spices, wrapped in a banana leaf.",
+    "price": "220",
+    "category": "Parotta",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "bread",
+      "south-indian",
+      "mutton"
+    ],
+    "image": ""
+  },
+  {
+    "id": 129,
+    "name": "Gobi-65",
+    "description": "Crispy fried cauliflower florets marinated in a spicy 65 masala.",
+    "price": "110",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 130,
+    "name": "Mushroom-65",
+    "description": "Crispy fried mushrooms marinated in a spicy 65 masala.",
+    "price": "140",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 131,
+    "name": "Paneer - 65",
+    "description": "Crispy fried paneer cubes marinated in a spicy 65 masala.",
+    "price": "140",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 132,
+    "name": "Chilly Gobi",
+    "description": "Cauliflower florets tossed in a spicy and tangy chili sauce.",
+    "price": "150",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "cauliflower",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 133,
+    "name": "Chilly Mushroom",
+    "description": "Mushrooms tossed in a spicy and tangy chili sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "mushroom",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 134,
+    "name": "Chilly Paneer",
+    "description": "Paneer cubes tossed in a spicy and tangy chili sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "paneer",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 135,
+    "name": "Gobi Manjurian",
+    "description": "Cauliflower florets in a classic Manchurian sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "cauliflower",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 136,
+    "name": "Mushroom Manjurian",
+    "description": "Mushrooms in a classic Manchurian sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "mushroom",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 137,
+    "name": "Paneer Manjurian",
+    "description": "Paneer cubes in a classic Manchurian sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "paneer",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 138,
+    "name": "Gobi Pepper Fry",
+    "description": "Cauliflower florets sautéed with spices and a generous amount of pepper.",
+    "price": "140",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 139,
+    "name": "Mushroom Pepper Fry",
+    "description": "Mushrooms sautéed with spices and black pepper.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 140,
+    "name": "Paneer Pepper Fry",
+    "description": "Paneer cubes sautéed with spices and black pepper.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 141,
+    "name": "Gobi Pallipalayam",
+    "description": "A spicy, dry fry of cauliflower in a Pallipalayam-style masala.",
+    "price": "160",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 142,
+    "name": "Mushroom Pallipalayam",
+    "description": "A spicy, dry fry of mushrooms in a Pallipalayam-style masala.",
+    "price": "180",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 143,
+    "name": "Paneer Pallipalayam",
+    "description": "A spicy, dry fry of paneer cubes in a Pallipalayam-style masala.",
+    "price": "180",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 144,
+    "name": "Paneer Tikka",
+    "description": "Cubes of paneer marinated in spices and grilled in a tandoor.",
+    "price": "180",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "tandoori",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 145,
+    "name": "Hot Pepper Mushroom",
+    "description": "A fiery mushroom preparation with a heavy dose of hot peppers.",
+    "price": "180",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 146,
+    "name": "Baby Corn -65",
+    "description": "Crispy fried baby corn marinated in a spicy 65 masala.",
+    "price": "130",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "baby corn"
+    ],
+    "image": ""
+  },
+  {
+    "id": 147,
+    "name": "Baby Corn Manjurian",
+    "description": "Baby corn florets in a classic Manchurian sauce.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "baby corn",
+      "chinese"
+    ],
+    "image": ""
+  },
+  {
+    "id": 148,
+    "name": "Baby Corn Pepper Fry",
+    "description": "Baby corn sautéed with spices and a generous amount of pepper.",
+    "price": "170",
+    "category": "Veg Starter",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "starter",
+      "spicy",
+      "baby corn"
+    ],
+    "image": ""
+  },
+  {
+    "id": 149,
+    "name": "Chilly Parotta",
+    "description": "Shredded parotta tossed in a spicy chili sauce.",
+    "price": "120",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "spicy",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 150,
+    "name": "Mushroom Keema Parotta",
+    "description": "Parotta stuffed with a savory mushroom keema filling.",
+    "price": "180",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "mushroom",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 151,
+    "name": "Paneer Keema Parotta",
+    "description": "Parotta stuffed with a savory paneer keema filling.",
+    "price": "180",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "paneer",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 152,
+    "name": "Veg Kothu Parotta",
+    "description": "Shredded parotta scrambled with mixed vegetables and spices.",
+    "price": "90",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 153,
+    "name": "Paneer Leaf Parotta",
+    "description": "Parotta filled with paneer, wrapped and cooked in a banana leaf.",
+    "price": "200",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "paneer",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 154,
+    "name": "Veg Leaf Parotta",
+    "description": "Parotta filled with mixed vegetables, wrapped and cooked in a banana leaf.",
+    "price": "160",
+    "category": "Veg Kothu Parotta",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "parotta",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 155,
+    "name": "Roti",
+    "description": "A traditional unleavened flatbread.",
+    "price": "45",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 156,
+    "name": "Naan",
+    "description": "A soft, fluffy leavened flatbread cooked in a tandoor.",
+    "price": "45",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "tandoori"
+    ],
+    "image": ""
+  },
+  {
+    "id": 157,
+    "name": "Butter Roti",
+    "description": "A traditional roti brushed with melted butter.",
+    "price": "60",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 158,
+    "name": "Butter Naan",
+    "description": "A naan bread brushed with a generous amount of butter.",
+    "price": "60",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "tandoori"
+    ],
+    "image": ""
+  },
+  {
+    "id": 159,
+    "name": "Garlic Naan",
+    "description": "A naan bread infused with the flavor of garlic.",
+    "price": "70",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "tandoori",
+      "garlic"
+    ],
+    "image": ""
+  },
+  {
+    "id": 160,
+    "name": "Kulcha",
+    "description": "A leavened flatbread from North India, soft and fluffy.",
+    "price": "70",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 161,
+    "name": "Butter Kulcha",
+    "description": "A kulcha bread brushed with a generous amount of butter.",
+    "price": "80",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 162,
+    "name": "Stuffed Kulcha",
+    "description": "A kulcha bread stuffed with a savory filling.",
+    "price": "90",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 163,
+    "name": "Aloo Paratha",
+    "description": "A whole wheat flatbread stuffed with a spiced potato mixture.",
+    "price": "90",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian",
+      "potato"
+    ],
+    "image": ""
+  },
+  {
+    "id": 164,
+    "name": "Thandoori Paratha",
+    "description": "A flaky, layered paratha cooked in a tandoor.",
+    "price": "45",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "tandoori"
+    ],
+    "image": ""
+  },
+  {
+    "id": 165,
+    "name": "Pulka",
+    "description": "A soft, puffed whole wheat flatbread.",
+    "price": "35",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 166,
+    "name": "Rumali Roti",
+    "description": "A thin, handkerchief-like flatbread.",
+    "price": "70",
+    "category": "Indian Breads",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "bread",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 167,
+    "name": "Chicken Fried Rice",
+    "description": "Fried rice with tender chicken pieces and mixed vegetables.",
+    "price": "180",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 168,
+    "name": "Mutton Fried Rice",
+    "description": "Fried rice with tender mutton pieces and mixed vegetables.",
+    "price": "210",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 169,
+    "name": "Schezwan Chicken Fried Rice",
+    "description": "A spicy fried rice with chicken in a fiery Schezwan sauce.",
+    "price": "200",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 170,
+    "name": "Egg Fried Rice",
+    "description": "Fried rice with scrambled eggs and vegetables.",
+    "price": "140",
+    "category": "Fried Rice",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 171,
+    "name": "Schezwan Egg Fried Rice",
+    "description": "A spicy fried rice with eggs in a fiery Schezwan sauce.",
+    "price": "160",
+    "category": "Fried Rice",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 172,
+    "name": "Mixed Fried Rice",
+    "description": "Fried rice with a mix of mutton, chicken, prawns, and egg.",
+    "price": "220",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 173,
+    "name": "Prawn Fried Rice",
+    "description": "Fried rice with succulent prawns and vegetables.",
+    "price": "200",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 174,
+    "name": "Schezwan Mixed Fried Rice",
+    "description": "Spicy mixed fried rice with mutton, chicken, prawns, and egg in a Schezwan sauce.",
+    "price": "240",
+    "category": "Fried Rice",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 175,
+    "name": "Chicken Noodles",
+    "description": "Noodles stir-fried with tender chicken pieces and vegetables.",
+    "price": "180",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 176,
+    "name": "Mutton Noodles",
+    "description": "Noodles stir-fried with tender mutton pieces and vegetables.",
+    "price": "210",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 177,
+    "name": "Egg Noodles",
+    "description": "Noodles stir-fried with scrambled eggs and vegetables.",
+    "price": "140",
+    "category": "Noodles",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 178,
+    "name": "Schezwan Chicken Noodles",
+    "description": "Spicy chicken noodles with a fiery Schezwan sauce.",
+    "price": "200",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 179,
+    "name": "Mixed Noodles",
+    "description": "Noodles stir-fried with a mix of mutton, chicken, and prawns.",
+    "price": "220",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 180,
+    "name": "Prawn Noodles",
+    "description": "Noodles stir-fried with succulent prawns and vegetables.",
+    "price": "200",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 181,
+    "name": "Schezwan Mixed Noodles",
+    "description": "Spicy mixed noodles with a blend of mutton and chicken in a Schezwan sauce.",
+    "price": "240",
+    "category": "Noodles",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 182,
+    "name": "Veg Salad",
+    "description": "A fresh and healthy salad with a variety of mixed vegetables.",
+    "price": "70",
+    "category": "Salad",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "salad",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 183,
+    "name": "Onion Salad",
+    "description": "A simple and refreshing salad made with sliced onions.",
+    "price": "60",
+    "category": "Salad",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "salad",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 184,
+    "name": "Cucumber Salad",
+    "description": "A light and hydrating salad with fresh cucumber slices.",
+    "price": "60",
+    "category": "Salad",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "salad",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 185,
+    "name": "Veg Fried Rice",
+    "description": "Fried rice with a colorful medley of fresh vegetables.",
+    "price": "140",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 186,
+    "name": "Mushroom Fried Rice",
+    "description": "Fried rice with savory mushrooms and vegetables.",
+    "price": "160",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 187,
+    "name": "Paneer Fried Rice",
+    "description": "Fried rice with cubes of paneer and mixed vegetables.",
+    "price": "160",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 188,
+    "name": "Gobi Fried Rice",
+    "description": "Fried rice with cauliflower florets and vegetables.",
+    "price": "140",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 189,
+    "name": "Mix Veg Fried Rice",
+    "description": "A combination of mixed vegetables and rice stir-fried to perfection.",
+    "price": "180",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 190,
+    "name": "Schezwan Fried Rice",
+    "description": "A spicy fried rice with vegetables in a fiery Schezwan sauce.",
+    "price": "180",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 191,
+    "name": "Schezwan Mushroom Fried Rice",
+    "description": "Spicy fried rice with mushrooms and vegetables in a Schezwan sauce.",
+    "price": "180",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 192,
+    "name": "Schezwan Paneer Fried Rice",
+    "description": "Spicy fried rice with paneer and vegetables in a Schezwan sauce.",
+    "price": "180",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 193,
+    "name": "Schezwan Mix Fried Rice",
+    "description": "A very spicy fried rice with a mix of vegetables in a Schezwan sauce.",
+    "price": "200",
+    "category": "Fried Rice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 194,
+    "name": "Chicken Kari Omelette",
+    "description": "An omelette with a spicy chicken curry filling.",
+    "price": "120",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "non-vegetarian",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 195,
+    "name": "Mutton Kari Omelette",
+    "description": "An omelette with a rich mutton curry filling.",
+    "price": "160",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "non-vegetarian",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 196,
+    "name": "Double Omelette",
+    "description": "A fluffy omelette made with two eggs.",
+    "price": "50",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 197,
+    "name": "White Omelette",
+    "description": "A healthy omelette made with only egg whites.",
+    "price": "50",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "omelette",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 198,
+    "name": "Omelette",
+    "description": "A single, classic egg omelette.",
+    "price": "25",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 199,
+    "name": "Egg Poriyal",
+    "description": "A South Indian style scrambled egg dish with spices.",
+    "price": "60",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 200,
+    "name": "Egg Podimass",
+    "description": "A spicy and flavorful South Indian style scrambled egg.",
+    "price": "70",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 201,
+    "name": "Kulambu Kalakki",
+    "description": "A spiced, half-cooked egg mixed with a flavorful curry.",
+    "price": "30",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 202,
+    "name": "Double Kalakki",
+    "description": "A half-cooked egg dish with two eggs mixed with a spicy curry.",
+    "price": "50",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 203,
+    "name": "Onion Pepper Kalakki",
+    "description": "A half-cooked egg dish mixed with onions and black pepper.",
+    "price": "30",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 204,
+    "name": "Pepper Kalakki",
+    "description": "A half-cooked egg dish seasoned with black pepper.",
+    "price": "25",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 205,
+    "name": "Kalakki",
+    "description": "A classic, half-cooked egg dish, soft and fluffy.",
+    "price": "25",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "south-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 206,
+    "name": "Egg Masala",
+    "description": "Boiled eggs cooked in a rich and spicy onion-tomato gravy.",
+    "price": "100",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "gravy",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 207,
+    "name": "Egg Bhuriji",
+    "description": "North Indian style scrambled eggs with onions and spices.",
+    "price": "120",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "scrambled-eggs",
+      "north-indian"
+    ],
+    "image": ""
+  },
+  {
+    "id": 208,
+    "name": "Half Boil",
+    "description": "A half-boiled egg, simple and flavorful.",
+    "price": "20",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 209,
+    "name": "Plain Omelette",
+    "description": "A simple omelette without any additional fillings.",
+    "price": "20",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 210,
+    "name": "Plain Double Omelette",
+    "description": "A double omelette without any additional fillings.",
+    "price": "45",
+    "category": "Egg Dishes",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "omelette"
+    ],
+    "image": ""
+  },
+  {
+    "id": 211,
+    "name": "Veg Noodles",
+    "description": "Stir-fried noodles with a variety of fresh vegetables.",
+    "price": "140",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 212,
+    "name": "Mushroom Noodles",
+    "description": "Noodles stir-fried with savory mushrooms and vegetables.",
+    "price": "160",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 213,
+    "name": "Paneer Noodles",
+    "description": "Noodles stir-fried with cubes of paneer and mixed vegetables.",
+    "price": "160",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 214,
+    "name": "Gobi Noodles",
+    "description": "Noodles stir-fried with cauliflower florets and vegetables.",
+    "price": "140",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 215,
+    "name": "Mix Veg Noodles",
+    "description": "A delicious mix of noodles and assorted vegetables.",
+    "price": "180",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 216,
+    "name": "Schezwan Noodles",
+    "description": "Spicy noodles stir-fried with vegetables in a fiery Schezwan sauce.",
+    "price": "180",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 217,
+    "name": "Schezwan Mushroom Noodles",
+    "description": "Spicy noodles with mushrooms and vegetables in a Schezwan sauce.",
+    "price": "180",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 218,
+    "name": "Schezwan Paneer Noodles",
+    "description": "Spicy noodles with paneer and vegetables in a Schezwan sauce.",
+    "price": "180",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 219,
+    "name": "Schezwan Mix Noodles",
+    "description": "A very spicy noodle dish with a mix of vegetables in a Schezwan sauce.",
+    "price": "200",
+    "category": "Noodles",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "noodles",
+      "chinese",
+      "spicy",
+      "schezwan"
+    ],
+    "image": ""
+  },
+  {
+    "id": 220,
+    "name": "Veg. Pulav",
+    "description": "Fragrant rice dish cooked with mixed vegetables and spices.",
+    "price": "160",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "pulav",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 221,
+    "name": "Mushroom Pulav",
+    "description": "Fragrant rice dish with savory mushrooms and spices.",
+    "price": "180",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "pulav",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 222,
+    "name": "Paneer Pulav",
+    "description": "Fragrant rice dish with cubes of paneer and spices.",
+    "price": "180",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "pulav",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 223,
+    "name": "Mixed Pulav",
+    "description": "A fragrant rice dish with a medley of vegetables and spices.",
+    "price": "200",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "pulav",
+      "main course"
+    ],
+    "image": ""
+  },
+  {
+    "id": 224,
+    "name": "Ghee Rice",
+    "description": "A simple and fragrant rice dish cooked with clarified butter.",
+    "price": "140",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "ghee"
+    ],
+    "image": ""
+  },
+  {
+    "id": 225,
+    "name": "Jeera Rice",
+    "description": "Basmati rice cooked with cumin seeds for a simple, aromatic flavor.",
+    "price": "140",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "cumin"
+    ],
+    "image": ""
+  },
+  {
+    "id": 226,
+    "name": "Cashew Nut Pulav",
+    "description": "A rich and flavorful pulav with roasted cashew nuts.",
+    "price": "180",
+    "category": "Pulav",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "rice",
+      "pulav",
+      "nuts"
+    ],
+    "image": ""
+  },
+  {
+    "id": 227,
+    "name": "Veg Biryani",
+    "description": "Fragrant Basmati rice cooked with mixed vegetables and spices.",
+    "price": "160",
+    "category": "Special Biryani (Basmathi Rice)",
+    "diet": "veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "vegetarian",
+      "biryani",
+      "main course",
+      "basmati"
+    ],
+    "image": ""
+  },
+  {
+    "id": 228,
+    "name": "Mushroom Biryani",
+    "description": "Basmati rice cooked with savory mushrooms and biryani spices.",
+    "price": "180",
+    "category": "Special Biryani (Basmathi Rice)",
+    "diet": "veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "vegetarian",
+      "biryani",
+      "mushroom",
+      "basmati"
+    ],
+    "image": ""
+  },
+  {
+    "id": 229,
+    "name": "Paneer Biryani",
+    "description": "Basmati rice cooked with cubes of paneer and biryani spices.",
+    "price": "180",
+    "category": "Special Biryani (Basmathi Rice)",
+    "diet": "veg",
+    "timing": "lunch/dinner",
+    "tags": [
+      "vegetarian",
+      "biryani",
+      "paneer",
+      "basmati"
+    ],
+    "image": ""
+  },
+  {
+    "id": 230,
+    "name": "Ghee Roast",
+    "description": "A thin, crispy dosa roasted with a generous amount of clarified butter.",
+    "price": "90",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 231,
+    "name": "Masala Roast",
+    "description": "A crispy dosa filled with a spiced potato and onion masala.",
+    "price": "100",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 232,
+    "name": "Mushroom Roast",
+    "description": "A crispy dosa filled with a savory mushroom filling.",
+    "price": "140",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 233,
+    "name": "Paneer Roast",
+    "description": "A crispy dosa filled with a spiced paneer filling.",
+    "price": "140",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 234,
+    "name": "Gobi Roast",
+    "description": "A crispy dosa with a filling of spicy cauliflower.",
+    "price": "130",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 235,
+    "name": "Butter Roast",
+    "description": "A crispy dosa roasted with butter for a rich, savory flavor.",
+    "price": "90",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 236,
+    "name": "Podi Roast",
+    "description": "A crispy dosa dusted with a flavorful spice powder (podi).",
+    "price": "90",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 237,
+    "name": "Ghee Podi Rost",
+    "description": "A crispy dosa roasted with ghee and dusted with spicy podi.",
+    "price": "110",
+    "category": "Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "ghee",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 238,
+    "name": "Rava Roast",
+    "description": "A thin and crispy dosa made from semolina batter.",
+    "price": "110",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 239,
+    "name": "Onion Rava Roast",
+    "description": "A thin and crispy rava roast with a topping of sautéed onions.",
+    "price": "130",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 240,
+    "name": "Ghee Rava Roast",
+    "description": "A rava roast cooked with a generous amount of clarified butter.",
+    "price": "130",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "ghee"
+    ],
+    "image": ""
+  },
+  {
+    "id": 241,
+    "name": "Rava Masala Roast",
+    "description": "A crispy rava roast filled with a spiced potato and onion masala.",
+    "price": "140",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 242,
+    "name": "Butter Rava Roast",
+    "description": "A rava roast cooked with a generous amount of butter.",
+    "price": "140",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 243,
+    "name": "Podi Rava Roast",
+    "description": "A crispy rava roast dusted with a flavorful spice powder (podi).",
+    "price": "140",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 244,
+    "name": "Cashew Nut Rava Roast",
+    "description": "A rava roast topped with roasted cashew nuts.",
+    "price": "140",
+    "category": "Rava Roast",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "nuts"
+    ],
+    "image": ""
+  },
+  {
+    "id": 245,
+    "name": "Chicken Kari Uthappam",
+    "description": "A thick, soft uthappam topped with a spicy chicken curry.",
+    "price": "180",
+    "category": "Non Veg Dosa",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 246,
+    "name": "Mutton Kari Uthappam",
+    "description": "A thick, soft uthappam topped with a rich mutton curry.",
+    "price": "220",
+    "category": "Non Veg Dosa",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 247,
+    "name": "Egg Kal Dosa",
+    "description": "A soft, spongy dosa with a layer of scrambled egg.",
+    "price": "80",
+    "category": "Non Veg Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 248,
+    "name": "Egg Roast",
+    "description": "A crispy dosa with a spiced egg filling.",
+    "price": "90",
+    "category": "Non Veg Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 249,
+    "name": "Egg Onion Podi Roast",
+    "description": "A crispy dosa with egg, onions, and spicy podi masala.",
+    "price": "130",
+    "category": "Non Veg Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 250,
+    "name": "Chicken Kima Roast",
+    "description": "A crispy dosa filled with a spicy minced chicken filling.",
+    "price": "180",
+    "category": "Non Veg Dosa",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "dosa",
+      "breakfast",
+      "chicken"
+    ],
+    "image": ""
+  },
+  {
+    "id": 251,
+    "name": "Mutton Kima Roast",
+    "description": "A crispy dosa filled with a savory minced mutton filling.",
+    "price": "220",
+    "category": "Non Veg Dosa",
+    "diet": "non-veg",
+    "timing": "anytime",
+    "tags": [
+      "non-vegetarian",
+      "dosa",
+      "breakfast",
+      "mutton"
+    ],
+    "image": ""
+  },
+  {
+    "id": 252,
+    "name": "Vinilla Milk Shake",
+    "description": "A classic, creamy milkshake with a sweet vanilla flavor.",
+    "price": "120",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 253,
+    "name": "Strawberry Milk Shake",
+    "description": "A refreshing milkshake made with fresh strawberries.",
+    "price": "140",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 254,
+    "name": "Butterscotch Milk Shake",
+    "description": "A rich and creamy milkshake with a distinct butterscotch flavor.",
+    "price": "120",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 255,
+    "name": "Banana Milk Shake",
+    "description": "A thick and wholesome milkshake made with ripe bananas.",
+    "price": "140",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 256,
+    "name": "Apple Milk Shake",
+    "description": "A fruity and creamy milkshake with the fresh taste of apple.",
+    "price": "160",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 257,
+    "name": "Chocolate Milk Shake",
+    "description": "A decadent and rich milkshake with a classic chocolate flavor.",
+    "price": "140",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "chocolate"
+    ],
+    "image": ""
+  },
+  {
+    "id": 258,
+    "name": "Black Currant Milk Shake",
+    "description": "A unique and flavorful milkshake with a black currant essence.",
+    "price": "150",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 259,
+    "name": "Pista Milk Shake",
+    "description": "A rich milkshake with the nutty flavor of pistachio.",
+    "price": "160",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "nuts"
+    ],
+    "image": ""
+  },
+  {
+    "id": 260,
+    "name": "Mango Milk Shake",
+    "description": "A sweet and tropical milkshake made with fresh mango pulp.",
+    "price": "150",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 261,
+    "name": "Kulfi Milk Shake",
+    "description": "A creamy milkshake with the traditional flavor of Indian kulfi.",
+    "price": "140",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 262,
+    "name": "Oreo Milk Shake",
+    "description": "A popular milkshake blended with crushed Oreo cookies.",
+    "price": "140",
+    "category": "MilkShake",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "chocolate"
+    ],
+    "image": ""
+  },
+  {
+    "id": 263,
+    "name": "Apple Fresh Juice",
+    "description": "Freshly squeezed apple juice, a healthy and refreshing choice.",
+    "price": "80",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 264,
+    "name": "Musambi Fresh Juice",
+    "description": "Sweet lime juice, a classic choice for a refreshing drink.",
+    "price": "60",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 265,
+    "name": "Water Melon Fresh Juice",
+    "description": "Cool and hydrating watermelon juice, perfect for a hot day.",
+    "price": "50",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 266,
+    "name": "Musk Melon Fresh Juice",
+    "description": "A sweet and fragrant juice made from musk melon.",
+    "price": "60",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 267,
+    "name": "Pomegranate Fresh Juice",
+    "description": "A vibrant and tangy juice with the goodness of pomegranate.",
+    "price": "90",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 268,
+    "name": "Lime Juice",
+    "description": "A classic lime juice, simple, refreshing and tangy.",
+    "price": "35",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 269,
+    "name": "Lime Mint Juice",
+    "description": "A refreshing blend of lime juice and fresh mint.",
+    "price": "45",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 270,
+    "name": "Ginger Lime Juice",
+    "description": "A zesty and spicy blend of lime juice and ginger.",
+    "price": "55",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy",
+      "fruit",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 271,
+    "name": "Mint Juice",
+    "description": "A cooling and refreshing juice with the flavor of fresh mint.",
+    "price": "45",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "healthy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 272,
+    "name": "Fresh Lime Soda",
+    "description": "A fizzy and refreshing soda with fresh lime juice.",
+    "price": "50",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "soda"
+    ],
+    "image": ""
+  },
+  {
+    "id": 273,
+    "name": "Black Currant",
+    "description": "A sweet and tangy juice made from black currants.",
+    "price": "60",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 274,
+    "name": "Pineapple",
+    "description": "A tangy and sweet juice made from fresh pineapple.",
+    "price": "60",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 275,
+    "name": "Grape",
+    "description": "A classic, sweet, and refreshing juice made from grapes.",
+    "price": "70",
+    "category": "Fresh Juice",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 276,
+    "name": "Badam Milk",
+    "description": "A sweet and nutty milk drink made with almonds.",
+    "price": "60",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 277,
+    "name": "Goli Soda",
+    "description": "A traditional Indian soda with a distinct marble-sealed bottle.",
+    "price": "40",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "soda"
+    ],
+    "image": ""
+  },
+  {
+    "id": 278,
+    "name": "Lassi",
+    "description": "A refreshing yogurt-based drink, sweet and creamy.",
+    "price": "70",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 279,
+    "name": "Mango Lassi",
+    "description": "A sweet, creamy lassi with the flavor of fresh mango.",
+    "price": "80",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet",
+      "fruit"
+    ],
+    "image": ""
+  },
+  {
+    "id": 280,
+    "name": "Salt Lassi",
+    "description": "A savory yogurt-based drink with a hint of salt.",
+    "price": "70",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "savory"
+    ],
+    "image": ""
+  },
+  {
+    "id": 281,
+    "name": "Sweet Lassi",
+    "description": "A classic sweet yogurt-based drink.",
+    "price": "70",
+    "category": "Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "sweet"
+    ],
+    "image": ""
+  },
+  {
+    "id": 282,
+    "name": "Coffee",
+    "description": "A classic, hot coffee.",
+    "price": "25",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot"
+    ],
+    "image": ""
+  },
+  {
+    "id": 283,
+    "name": "Tea",
+    "description": "A classic, hot tea.",
+    "price": "25",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot"
+    ],
+    "image": ""
+  },
+  {
+    "id": 284,
+    "name": "Black Coffee",
+    "description": "A simple, hot black coffee.",
+    "price": "35",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot"
+    ],
+    "image": ""
+  },
+  {
+    "id": 285,
+    "name": "Black Tea",
+    "description": "A simple, hot black tea.",
+    "price": "35",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot"
+    ],
+    "image": ""
+  },
+  {
+    "id": 286,
+    "name": "Ginger Tea",
+    "description": "A hot tea with the zesty flavor of ginger.",
+    "price": "40",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot",
+      "ginger"
+    ],
+    "image": ""
+  },
+  {
+    "id": 287,
+    "name": "Masala Tea",
+    "description": "A spiced, hot tea with a blend of aromatic spices.",
+    "price": "40",
+    "category": "Hot Beverages",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "drink",
+      "hot",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 288,
+    "name": "Mushroom Dosa",
+    "description": "A crispy dosa filled with a savory mushroom filling.",
+    "price": "120",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "mushroom"
+    ],
+    "image": ""
+  },
+  {
+    "id": 289,
+    "name": "Paneer Dosa",
+    "description": "A crispy dosa filled with a spiced paneer filling.",
+    "price": "120",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "paneer"
+    ],
+    "image": ""
+  },
+  {
+    "id": 290,
+    "name": "Gobi Dosa",
+    "description": "A crispy dosa with a filling of spicy cauliflower.",
+    "price": "120",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "cauliflower"
+    ],
+    "image": ""
+  },
+  {
+    "id": 291,
+    "name": "Veg Dosa",
+    "description": "A classic dosa with a mixed vegetable filling.",
+    "price": "100",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "mixed-veg"
+    ],
+    "image": ""
+  },
+  {
+    "id": 292,
+    "name": "Plain Dosa",
+    "description": "A thin, crispy, and classic dosa.",
+    "price": "70",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 293,
+    "name": "Masal Dosa",
+    "description": "A classic crispy dosa with a spiced potato and onion filling.",
+    "price": "80",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 294,
+    "name": "Onion Dosa",
+    "description": "A crispy dosa topped with finely chopped onions.",
+    "price": "90",
+    "category": "Special Dosa",
+    "diet": "veg",
+    "timing": "anytime",
+    "tags": [
+      "vegetarian",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 295,
+    "name": "Egg Kal Dosa",
+    "description": "A soft, spongy dosa topped with a layer of scrambled egg.",
+    "price": "80",
+    "category": "Special Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 296,
+    "name": "Egg Roast",
+    "description": "A crispy dosa with a spiced egg filling.",
+    "price": "90",
+    "category": "Special Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast",
+      "crispy"
+    ],
+    "image": ""
+  },
+  {
+    "id": 297,
+    "name": "Egg Onion Dosa",
+    "description": "A dosa with a spiced egg and onion topping.",
+    "price": "110",
+    "category": "Special Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast"
+    ],
+    "image": ""
+  },
+  {
+    "id": 298,
+    "name": "Egg Podi Dosa",
+    "description": "A dosa with a spiced egg topping and a sprinkle of podi masala.",
+    "price": "110",
+    "category": "Special Dosa",
+    "diet": "egg",
+    "timing": "anytime",
+    "tags": [
+      "egg",
+      "dosa",
+      "breakfast",
+      "spicy"
+    ],
+    "image": ""
+  }
+]
+
+
+        // Function to generate filter buttons dynamically
+        function generateFilterButtons() {
+            const filterButtonsContainer = document.getElementById('filter-buttons');
+            filterButtonsContainer.innerHTML = '';
+            
+            // Get unique categories from menu items
+            const categories = [...new Set(menuItems.map(item => item.category))];
+            
+            // Add "All Items" button first
+            const allButton = document.createElement('button');
+            allButton.className = 'filter-btn active';
+            allButton.dataset.filter = 'all';
+            allButton.textContent = 'All Items';
+            filterButtonsContainer.appendChild(allButton);
+            
+            // Add buttons for each category
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.dataset.filter = category;
+                
+                // Capitalize first letter of category
+                const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+                button.textContent = formattedCategory;
+                
+                filterButtonsContainer.appendChild(button);
+            });
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Clear search input when category filter is selected
+                    document.getElementById('search-input').value = '';
+                    
+                    filterMenu();
+                });
+            });
+            
+            // Check if scrolling is needed and show/hide scroll indicators
+            updateScrollIndicators();
+        }
+
+        // Function to update scroll indicators
+        function updateScrollIndicators() {
+            const filterButtons = document.getElementById('filter-buttons');
+            const scrollLeft = document.getElementById('scroll-left');
+            const scrollRight = document.getElementById('scroll-right');
+            
+            if (filterButtons.scrollWidth > filterButtons.clientWidth) {
+                scrollLeft.classList.add('show');
+                scrollRight.classList.add('show');
+            } else {
+                scrollLeft.classList.remove('show');
+                scrollRight.classList.remove('show');
+            }
+        }
+
+        // Function to render menu items
+        function renderMenu(items) {
+            const menuGrid = document.getElementById('menu-grid');
+            menuGrid.innerHTML = '';
+            
+            if (items.length === 0) {
+                menuGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        No dishes found. Try a different search term or filter.
+                    </div>
+                `;
+                return;
+            }
+            
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                card.dataset.category = item.category;
+                card.dataset.diet = item.diet;
+                card.dataset.timing = item.timing;
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="card-background" style="background-image: url('${item.image}')"></div>
+                    <div class="price-tag">₹${item.price}</div>
+                    <div class="card-content">
+                        <h3 class="card-title">${item.name}</h3>
+                        <p class="card-description">${item.description}</p>
+                        <div class="card-tags">
+                            ${item.tags.map(tag => `<span class="tag ${tag}">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // Function to filter menu items
+        function filterMenu() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            const activeDietFilter = document.querySelector('#diet-filter-dropdown .filter-option.active').dataset.diet;
+            const activeTimingFilter = document.querySelector('#timing-filter-dropdown .filter-option.active').dataset.timing;
+            
+            // Start with all menu items
+            let filteredItems = [...menuItems];
+            
+            // Apply search filter if there's a search term (only search by name)
+            if (searchTerm) {
+                filteredItems = filteredItems.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Apply dietary filter if not "all"
+            if (activeDietFilter !== 'all') {
+                filteredItems = filteredItems.filter(item => item.diet === activeDietFilter);
+            }
+            
+            // Apply timing filter if not "all"
+            if (activeTimingFilter !== 'all') {
+                filteredItems = filteredItems.filter(item => item.timing === activeTimingFilter);
+            }
+            
+            // Apply category filter if not "all"
+            if (activeFilter !== 'all') {
+                filteredItems = filteredItems.filter(item => item.category === activeFilter);
+            }
+            
+            renderMenu(filteredItems);
+        }
+
+        // Dietary filter dropdown functionality
+        document.getElementById('diet-filter-btn').addEventListener('click', () => {
+            const dropdown = document.getElementById('diet-filter-dropdown');
+            dropdown.classList.toggle('active');
+            
+            // Close timing dropdown if open
+            document.getElementById('timing-filter-dropdown').classList.remove('active');
+        });
+
+        // Timing filter dropdown functionality
+        document.getElementById('timing-filter-btn').addEventListener('click', () => {
+            const dropdown = document.getElementById('timing-filter-dropdown');
+            dropdown.classList.toggle('active');
+            
+            // Close diet dropdown if open
+            document.getElementById('diet-filter-dropdown').classList.remove('active');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (event) => {
+            const dietFilterContainer = document.getElementById('diet-filter-container');
+            const timingFilterContainer = document.getElementById('timing-filter-container');
+            
+            if (!dietFilterContainer.contains(event.target)) {
+                document.getElementById('diet-filter-dropdown').classList.remove('active');
+            }
+            
+            if (!timingFilterContainer.contains(event.target)) {
+                document.getElementById('timing-filter-dropdown').classList.remove('active');
+            }
+        });
+
+        // Dietary filter option selection
+        document.querySelectorAll('#diet-filter-dropdown .filter-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Update active option
+                document.querySelectorAll('#diet-filter-dropdown .filter-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Update button text
+                const selectedDiet = option.querySelector('span:last-child').textContent;
+                document.getElementById('diet-filter-text').textContent = selectedDiet;
+                
+                // Clear search input when dietary filter is selected
+                document.getElementById('search-input').value = '';
+                
+                // Close dropdown
+                document.getElementById('diet-filter-dropdown').classList.remove('active');
+                
+                // Apply filters
+                filterMenu();
+            });
+        });
+
+        // Timing filter option selection
+        document.querySelectorAll('#timing-filter-dropdown .filter-option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Update active option
+                document.querySelectorAll('#timing-filter-dropdown .filter-option').forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Update button text
+                const selectedTiming = option.querySelector('span:last-child').textContent;
+                document.getElementById('timing-filter-text').textContent = selectedTiming;
+                
+                // Clear search input when timing filter is selected
+                document.getElementById('search-input').value = '';
+                
+                // Close dropdown
+                document.getElementById('timing-filter-dropdown').classList.remove('active');
+                
+                // Apply filters
+                filterMenu();
+            });
+        });
+
+        // Scroll functionality for filter buttons
+        document.getElementById('scroll-left').addEventListener('click', () => {
+            const filterButtons = document.getElementById('filter-buttons');
+            filterButtons.scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        });
+
+        document.getElementById('scroll-right').addEventListener('click', () => {
+            const filterButtons = document.getElementById('filter-buttons');
+            filterButtons.scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        });
+
+        // Update scroll indicators on scroll
+        document.getElementById('filter-buttons').addEventListener('scroll', () => {
+            const filterButtons = document.getElementById('filter-buttons');
+            const scrollLeft = document.getElementById('scroll-left');
+            const scrollRight = document.getElementById('scroll-right');
+            
+            // Hide left indicator if at the beginning
+            if (filterButtons.scrollLeft <= 0) {
+                scrollLeft.classList.remove('show');
+            } else {
+                scrollLeft.classList.add('show');
+            }
+            
+            // Hide right indicator if at the end
+            if (filterButtons.scrollLeft >= filterButtons.scrollWidth - filterButtons.clientWidth) {
+                scrollRight.classList.remove('show');
+            } else {
+                scrollRight.classList.add('show');
+            }
+        });
+
+        // Search functionality
+        document.getElementById('search-btn').addEventListener('click', filterMenu);
+        document.getElementById('search-input').addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                filterMenu();
+            }
+        });
+
+        // Initialize the menu
+        function initMenu() {
+            generateFilterButtons();
+            renderMenu(menuItems);
+        }
+
+        // Start the application
+        initMenu();
+
+        // Update scroll indicators on window resize
+        window.addEventListener('resize', updateScrollIndicators);
+    </script>
+</body>
+</html>

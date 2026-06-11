@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Project</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+
+</head>
+
+<body>
+    <h1>Creating New Project</h1>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= link_to 'Back to Projects', projects_path, class: 'btn btn-primary', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= link_to 'Show All Projects', projects_path, class: 'btn btn-info', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= render 'form', project: @project %>
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<% @hide_create_button = true %>
+<div class="animate-fade-in">
+
+  <!-- System Overview Stats -->
+  <div class="stats-grid mb-5">
+    <div class="stat-card">
+      <div class="stat-icon text-primary">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= Worker.count %></h3>
+        <p class="stat-label">Total Workers</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-success">
+        <i class="fas fa-project-diagram"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= Project.count %></h3>
+        <p class="stat-label">Active Projects</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-info">
+        <i class="fas fa-building"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= Company.count %></h3>
+        <p class="stat-label">Companies</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-warning">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= Team.count %></h3>
+        <p class="stat-label">Teams</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="card mb-5">
+    <div class="card-header">
+      <h2 class="card-title">
+        <i class="fas fa-bolt"></i>
+        Quick Actions
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= link_to new_worker_path, class: 'btn btn-primary btn-lg w-full' do %>
+            <i class="fas fa-user-plus"></i>
+            Add New Worker
+          <% end %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= link_to new_project_path, class: 'btn btn-success btn-lg w-full' do %>
+            <i class="fas fa-plus-circle"></i>
+            Create Project
+          <% end %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= link_to attendances_path, class: 'btn btn-info btn-lg w-full' do %>
+            <i class="fas fa-clock"></i>
+            View Attendance
+          <% end %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= link_to stocks_path, class: 'btn btn-warning btn-lg w-full' do %>
+            <i class="fas fa-boxes"></i>
+            Manage Stock
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Cards -->
+  <div class="card mb-5">
+    <div class="card-header">
+      <h2 class="card-title">
+        <i class="fas fa-compass"></i>
+        Navigate to
+      </h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <%= link_to companies_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-building fa-3x text-primary mb-3"></i>
+                <h4 class="mb-2">Companies</h4>
+                <p class="text-gray-600 mb-0">Manage company information and details</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <%= link_to projects_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-project-diagram fa-3x text-success mb-3"></i>
+                <h4 class="mb-2">Projects</h4>
+                <p class="text-gray-600 mb-0">View and manage construction projects</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <%= link_to workers_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-info mb-3"></i>
+                <h4 class="mb-2">Workers</h4>
+                <p class="text-gray-600 mb-0">Manage workforce and team assignments</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <%= link_to attendances_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-clock fa-3x text-warning mb-3"></i>
+                <h4 class="mb-2">Attendance</h4>
+                <p class="text-gray-600 mb-0">Track worker attendance and hours</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <%= link_to stocks_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-boxes fa-3x text-secondary mb-3"></i>
+                <h4 class="mb-2">Stock Management</h4>
+                <p class="text-gray-600 mb-0">Monitor inventory and supplies</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <%= link_to daily_updates_path, class: 'text-decoration-none' do %>
+            <div class="card hover-card h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-clipboard-list fa-3x text-danger mb-3"></i>
+                <h4 class="mb-2">Daily Updates</h4>
+                <p class="text-gray-600 mb-0">View daily progress reports</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Info Section -->
+  <div class="card">
+    <div class="card-body text-center">
+      <% if user_signed_in? %>
+        <div class="mb-4">
+          <i class="fas fa-user-circle fa-3x text-primary mb-3"></i>
+          <h4>Welcome back, <%= current_user.email %></h4>
+          <p class="text-gray-600">You are currently signed in and ready to manage your construction projects.</p>
+        </div>
+        
+        <div class="d-flex justify-center gap-3 flex-wrap">
+          <%= link_to edit_user_path(current_user), class: 'btn btn-outline' do %>
+            <i class="fas fa-user-edit"></i>
+            Edit Profile
+          <% end %>
+          
+          <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-danger' do %>
+            <i class="fas fa-sign-out-alt"></i>
+            Logout
+          <% end %>
+        </div>
+      <% else %>
+        <div class="mb-4">
+          <i class="fas fa-sign-in-alt fa-3x text-primary mb-3"></i>
+          <h4>Get Started</h4>
+          <p class="text-gray-600">Sign in to access your construction management dashboard.</p>
+        </div>
+        
+        <div class="d-flex justify-center gap-3 flex-wrap">
+          <%= link_to new_user_registration_path, class: 'btn btn-success' do %>
+            <i class="fas fa-user-plus"></i>
+            Sign Up
+          <% end %>
+          
+          <%= link_to new_user_session_path, class: 'btn btn-primary' do %>
+            <i class="fas fa-sign-in-alt"></i>
+            Login
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+</div>
+
+
+<style>
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  
+  .col-md-3, .col-md-4, .col-md-6 {
+    padding-left: 15px;
+    padding-right: 15px;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  
+  @media (min-width: 768px) {
+    .col-md-3 {
+      flex-basis: 25%;
+      max-width: 25%;
+    }
+    
+    .col-md-4 {
+      flex-basis: 33.333333%;
+      max-width: 33.333333%;
+    }
+    
+    .col-md-6 {
+      flex-basis: 50%;
+      max-width: 50%;
+    }
+  }
+  
+  .hover-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  
+  .gap-3 {
+    gap: 1rem;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .text-decoration-none {
+    text-decoration: none;
+  }
+  
+  .text-decoration-none:hover {
+    text-decoration: none;
+  }
+  
+  .h-100 {
+    height: 100%;
+  }
+</style>

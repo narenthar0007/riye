@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Champ Fitness — Train With Intention</title>
+  <link rel="icon" href="https://placehold.co/32x32/22386E/FFFFFF?text=CF" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: {
+            navyBlue: { DEFAULT: '#22386E', light: '#425D9B', dark: '#14264F' },
+            primaryAccent: '#22386E',
+            backgroundLight: '#F7FAFC',
+            backgroundDark: '#0B1227',
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root{
+      --navy:#22386E;
+      --navy2:#425D9B;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --paper:#ffffff;
+      --bg:#F7FAFC;
+      --line:rgba(148,163,184,.55);
+      --ring:rgba(34,56,110,.20);
+      --shadow: 0 30px 120px rgba(2, 6, 23, 0.10);
+      --shadow2: 0 40px 140px rgba(2, 6, 23, 0.16);
+      --radius: 18px;
+    }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(1100px 700px at 15% 0%, rgba(66, 93, 155, 0.20), transparent 55%),
+        radial-gradient(1100px 700px at 90% 0%, rgba(34, 56, 110, 0.14), transparent 55%),
+        linear-gradient(180deg, #EEF3FB, var(--bg));
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x:hidden;
+    }
+    section[id]{ scroll-margin-top: 92px; }
+    ::selection{ background: rgba(34,56,110,0.20); }
+    :focus-visible{ outline: 3px solid rgba(66,93,155,0.55); outline-offset: 3px; }
+    .glass{
+      background: rgba(255,255,255,0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(203,213,224,0.65);
+      box-shadow: 0 20px 70px rgba(2,6,23,0.10);
+    }
+    .glass.scrolled{
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 26px 90px rgba(2,6,23,0.14);
+    }
+    .navlink{
+      position:relative;
+      font-weight:600;
+      color: rgba(15,23,42,0.78);
+      transition: color 200ms ease;
+    }
+    .navlink:hover{ color: var(--navy); }
+    .navlink::after{
+      content:"";
+      position:absolute;
+      left:0; right:0;
+      bottom:-10px;
+      height:2px;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(66,93,155,0), rgba(34,56,110,1), rgba(66,93,155,0));
+      transform: scaleX(0);
+      transform-origin:center;
+      transition: transform 220ms ease;
+      opacity:.9;
+    }
+    .navlink:hover::after{ transform: scaleX(1); }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.55rem .85rem;
+      border-radius: 999px;
+      background: rgba(34,56,110,0.07);
+      border: 1px solid rgba(34,56,110,0.14);
+      color: rgba(20,38,79,0.92);
+      font-weight:700;
+      letter-spacing: -0.01em;
+      font-size: .9rem;
+    }
+    .title{
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    .title-underline{
+      position:relative;
+      display:inline-block;
+    }
+    .title-underline::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-12px;
+      width:78px;
+      height:6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--navy), var(--navy2));
+      box-shadow: 0 0 0 6px rgba(66,93,155,0.10), 0 18px 60px rgba(34,56,110,0.18);
+    }
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid rgba(203,213,224,0.78);
+      background: rgba(255,255,255,0.86);
+      box-shadow: var(--shadow);
+    }
+    .card{
+      border-radius: calc(var(--radius) + 4px);
+      border: 1px solid rgba(203,213,224,0.75);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 18px 55px rgba(2,6,23,0.08);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+      overflow:hidden;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      border-color: rgba(34,56,110,0.25);
+      box-shadow: var(--shadow2);
+    }
+    .dark-wrap{
+      background:
+        radial-gradient(1000px 800px at 20% 0%, rgba(66,93,155,0.35), transparent 55%),
+        linear-gradient(180deg, #0B1227, #0E1A3A);
+      color: rgba(226,232,240,0.92);
+    }
+    .dark-wrap .title-underline::after{
+      background: linear-gradient(90deg, rgba(66,93,155,1), rgba(34,56,110,1));
+      box-shadow: 0 0 0 6px rgba(66,93,155,0.12), 0 20px 70px rgba(66,93,155,0.24);
+    }
+    .dark-card{
+      border-radius: calc(var(--radius) + 4px);
+      border: 1px solid rgba(66,93,155,0.25);
+      background:
+        linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.03)) padding-box,
+        linear-gradient(135deg, rgba(66,93,155,0.55), rgba(34,56,110,0.18)) border-box;
+      box-shadow: 0 22px 90px rgba(0,0,0,0.35);
+      overflow:hidden;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+    .dark-card:hover{ transform: translateY(-8px); box-shadow: 0 40px 140px rgba(0,0,0,0.45); }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55rem;
+      padding: .95rem 1.25rem;
+      border-radius: 16px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: white;
+      box-shadow: 0 20px 70px rgba(34,56,110,0.26);
+    }
+    .btn-primary:hover{ box-shadow: 0 30px 110px rgba(34,56,110,0.34); transform: translateY(-1px); }
+    .btn-ghost{
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(203,213,224,0.9);
+      color: var(--navy);
+      box-shadow: 0 20px 70px rgba(2,6,23,0.10);
+    }
+    .btn-ghost:hover{ border-color: rgba(34,56,110,0.20); transform: translateY(-1px); }
+    .field{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(203,213,224,0.95);
+      padding: .95rem 1rem;
+      background: rgba(255,255,255,0.95);
+      transition: box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .field:focus{
+      outline:none;
+      border-color: rgba(34,56,110,0.40);
+      box-shadow: 0 0 0 6px var(--ring);
+    }
+    #modal-backdrop{
+      position: fixed;
+      inset: 0;
+      display:none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(2, 6, 23, 0.55);
+      z-index: 1000;
+    }
+    #modal-backdrop.open{ display:flex; }
+    .modal{
+      width: min(920px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(203,213,224,0.35);
+      background: rgba(255,255,255,0.96);
+      box-shadow: 0 50px 180px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+    #cart-drawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(420px, 92vw);
+      background: rgba(255,255,255,0.98);
+      border-left: 1px solid rgba(203,213,224,0.75);
+      box-shadow: -24px 0 90px rgba(0,0,0,0.22);
+      transform: translateX(100%);
+      transition: transform 260ms ease;
+      z-index: 1200;
+      display:flex;
+      flex-direction: column;
+    }
+    #cart-drawer.open{ transform: translateX(0); }
+    #cart-fab{
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 900;
+      border-radius: 999px;
+      padding: .9rem 1.05rem;
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      color: white;
+      box-shadow: 0 22px 90px rgba(34,56,110,0.30);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      cursor: pointer;
+      user-select:none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+    }
+    #cart-fab.show{ opacity: 1; visibility: visible; transform: translateY(0); }
+    #cart-badge{
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: .1rem .55rem;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: .85rem;
+    }
+    #transformations-row{
+      display:flex;
+      gap: 1rem;
+      overflow-x:auto;
+      scroll-snap-type: x mandatory;
+      padding: .25rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    #transformations-row > .t-card{
+      flex: 0 0 auto;
+      width: min(86vw, 360px);
+      scroll-snap-align: start;
+    }
+    #transformations-row::-webkit-scrollbar{ height: 10px; }
+    #transformations-row::-webkit-scrollbar-thumb{ background: rgba(66,93,155,0.35); border-radius: 999px; }
+    #transformations-row::-webkit-scrollbar-track{ background: rgba(255,255,255,0.18); border-radius: 999px; }
+    @media (min-width: 768px){
+      #transformations-row{
+        display:grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: visible;
+        padding: 0;
+      }
+      #transformations-row > .t-card{ width:auto; }
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header" class="fixed top-3 left-3 right-3 z-50">
+    <div class="glass rounded-2xl">
+      <nav class="mx-auto max-w-6xl px-5 py-3 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3">
+          <img src="https://placehold.co/44x44/22386E/FFFFFF?text=CF" alt="Champ Fitness Logo" class="rounded-full w-11 h-11">
+          <div class="leading-tight">
+            <div class="text-xl font-extrabold tracking-tight text-navyBlue">Champ Fitness</div>
+            <div class="text-xs text-slate-500 font-semibold">Unisex Gym • Coimbatore</div>
+          </div>
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a class="navlink" href="#about">About</a>
+          <a class="navlink" href="#services">Services</a>
+          <a class="navlink" href="#pricing">Pricing</a>
+          <a class="navlink" href="#products">Products</a>
+          <a class="navlink" href="#member">Member</a>
+          <a class="navlink" href="#contact">Contact</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <button id="open-cart-top" class="hidden sm:inline-flex btn btn-ghost">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+          </button>
+          <button id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-xl border border-slate-200 bg-white/80">
+            <i class="bi bi-list text-xl text-slate-700"></i>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden px-5 pb-5">
+        <div class="grid grid-cols-2 gap-3 pt-2">
+          <a class="btn btn-ghost justify-start" href="#about"><i class="bi bi-info-circle"></i>About</a>
+          <a class="btn btn-ghost justify-start" href="#services"><i class="bi bi-lightning-charge"></i>Services</a>
+          <a class="btn btn-ghost justify-start" href="#pricing"><i class="bi bi-tags"></i>Pricing</a>
+          <a class="btn btn-ghost justify-start" href="#products"><i class="bi bi-bag"></i>Products</a>
+          <a class="btn btn-ghost justify-start" href="#member"><i class="bi bi-shield-lock"></i>Member</a>
+          <a class="btn btn-ghost justify-start" href="#contact"><i class="bi bi-geo-alt"></i>Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="pt-28">
+    <section id="home" class="px-4">
+      <div class="mx-auto max-w-6xl">
+        <div class="panel p-7 md:p-10 relative overflow-hidden">
+          <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full blur-3xl opacity-30"
+               style="background: radial-gradient(circle, rgba(66,93,155,1), transparent 60%);"></div>
+          <div class="absolute -bottom-28 -left-24 w-96 h-96 rounded-full blur-3xl opacity-20"
+               style="background: radial-gradient(circle, rgba(34,56,110,1), transparent 60%);"></div>
+          <div class="grid lg:grid-cols-12 gap-10 items-center relative">
+            <div class="lg:col-span-7">
+              <div class="kicker mb-6"><i class="bi bi-stars"></i> Train with intention</div>
+              <h1 class="title text-5xl md:text-6xl">
+                Stronger body.
+                <span class="text-navyBlue">Calmer mind.</span>
+              </h1>
+              <p class="mt-5 text-lg text-slate-600 max-w-2xl">
+                Champ Fitness is a premier unisex fitness hub focused on sustainable results—strength training, HIIT,
+                nutrition guidance, and personalized coaching.
+              </p>
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <a class="btn btn-primary" href="#pricing"><i class="bi bi-arrow-right-circle"></i> View plans</a>
+                <a class="btn btn-ghost" href="#contact"><i class="bi bi-calendar2-check"></i> Book a trial</a>
+              </div>
+              <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="card p-4">
+                  <div class="text-2xl font-extrabold text-navyBlue">12+</div>
+                  <div class="text-sm text-slate-600 font-semibold">Years experience</div>
+                </div>
+                <div class="card p-4">
+                  <div class="text-2xl font-extrabold text-navyBlue">PT</div>
+                  <div class="text-sm text-slate-600 font-semibold">Personal training</div>
+                </div>
+                <div class="card p-4">
+                  <div class="text-2xl font-extrabold text-navyBlue">HIIT</div>
+                  <div class="text-sm text-slate-600 font-semibold">Endurance</div>
+                </div>
+                <div class="card p-4">
+                  <div class="text-2xl font-extrabold text-navyBlue">Diet</div>
+                  <div class="text-sm text-slate-600 font-semibold">Guidance</div>
+                </div>
+              </div>
+            </div>
+            <div class="lg:col-span-5">
+              <div class="dark-card p-6 md:p-7">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <div class="text-white/90 font-extrabold text-lg">Today’s Focus</div>
+                    <div class="text-white/75 text-sm mt-1">Pick a goal — we’ll help you build a plan.</div>
+                  </div>
+                  <div class="text-white/75 text-sm font-bold px-3 py-2 rounded-xl border border-white/15 bg-white/5">
+                    Champ Method
+                  </div>
+                </div>
+                <div class="mt-5 grid gap-3">
+                  <div class="p-4 rounded-2xl border border-white/10 bg-white/5">
+                    <div class="text-white font-bold">Fat loss</div>
+                    <div class="text-white/70 text-sm">Strength + steps + protein target.</div>
+                  </div>
+                  <div class="p-4 rounded-2xl border border-white/10 bg-white/5">
+                    <div class="text-white font-bold">Muscle gain</div>
+                    <div class="text-white/70 text-sm">Progressive overload + recovery routine.</div>
+                  </div>
+                  <div class="p-4 rounded-2xl border border-white/10 bg-white/5">
+                    <div class="text-white font-bold">General fitness</div>
+                    <div class="text-white/70 text-sm">Balanced program for energy & consistency.</div>
+                  </div>
+                </div>
+              </div>
+              <p class="text-xs text-slate-500 mt-4">
+                Demo site: includes Products cart + Member login + dynamic sections.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="px-4 mt-14">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-6">
+            <div class="kicker mb-4"><i class="bi bi-heart-pulse"></i> About Champ Fitness</div>
+            <h2 class="title text-4xl md:text-5xl title-underline">A gym built for real life</h2>
+            <p class="mt-7 text-slate-600 text-lg">
+              Welcome to <strong>Champ Fitness</strong>, a leading unisex gym dedicated to helping every individual achieve
+              health and fitness goals. Whether it’s transformation, strength gains, or overall wellness—we tailor your plan.
+            </p>
+            <p class="mt-4 text-slate-600 text-lg">
+              Founded and led by <strong>Karthick Arasu</strong>, we focus on coaching, structure, and community—so you stay consistent.
+            </p>
+            <div class="mt-7 flex flex-col sm:flex-row gap-4">
+              <a class="btn btn-primary" href="#awards"><i class="bi bi-award"></i> Our accolades</a>
+              <a class="btn btn-ghost" href="#contact"><i class="bi bi-geo-alt"></i> Visit us</a>
+            </div>
+          </div>
+          <div class="lg:col-span-6">
+            <div class="card p-3">
+              <img src="abuot_us_img.jpg" alt="Champ Fitness Unisex Gym" class="w-full h-[360px] object-cover rounded-2xl">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="awards" class="px-4 mt-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid lg:grid-cols-12 gap-10">
+          <div class="lg:col-span-6">
+            <div class="kicker mb-4"><i class="bi bi-award"></i> Awards</div>
+            <h2 class="title text-4xl md:text-5xl title-underline">Recognition & trust</h2>
+            <p class="mt-7 text-slate-600 text-lg">
+              We’re proud of the results our members achieve—and the coaching approach that gets them there.
+            </p>
+            <div id="awards-container" class="mt-7 grid gap-4"></div>
+          </div>
+          <div class="lg:col-span-6">
+            <div class="kicker mb-4"><i class="bi bi-person-badge"></i> Trainer</div>
+            <h2 class="title text-4xl md:text-5xl title-underline">Meet Karthick Arasu</h2>
+            <div class="mt-7 card p-6">
+              <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                <img src="trainer_img.jpg" alt="Karthick Arasu" class="w-32 h-32 rounded-full object-cover border-4 border-navyBlue shadow-lg">
+                <div>
+                  <div class="text-2xl font-extrabold text-navyBlue">Karthick Arasu</div>
+                  <p class="text-slate-600 mt-2">
+                    12+ years in personal training, strength conditioning, and nutrition guidance. Holistic coaching for sustainable change.
+                  </p>
+                  <div class="mt-4 grid gap-2 text-slate-700">
+                    <div><span class="font-extrabold text-navyBlue">Specializations:</span> Personal Training, Strength & Conditioning, Nutrition</div>
+                    <div><span class="font-extrabold text-navyBlue">Certifications:</span> CPT, CNC</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="services" class="mt-20 dark-wrap">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="kicker mb-4" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); color: rgba(226,232,240,0.92);">
+          <i class="bi bi-lightning-charge"></i> Services
+        </div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Programs that fit your goal</h2>
+        <p class="mt-7 text-white/70 text-lg max-w-3xl">
+          Choose a path—fat loss, strength, endurance, or overall fitness. We customize and keep you accountable.
+        </p>
+        <div id="services-container" class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+    </section>
+    <section id="products" class="px-4 mt-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="kicker mb-4"><i class="bi bi-bag"></i> Products</div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Gear up for progress</h2>
+        <p class="mt-7 text-slate-600 text-lg max-w-3xl">
+          Supplements, apparel, and training essentials. Tap “Quick view” for details, then add to cart.
+        </p>
+        <div id="products-container" class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+    </section>
+    <section id="gallery" class="mt-20 dark-wrap">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="kicker mb-4" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); color: rgba(226,232,240,0.92);">
+          <i class="bi bi-images"></i> Gallery
+        </div>
+        <h2 class="title text-4xl md:text-5xl title-underline">A look inside Champ Fitness</h2>
+        <p class="mt-7 text-white/70 text-lg max-w-3xl">A glimpse into training sessions, facilities, and the community vibe.</p>
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/425D9B/FFFFFF?text=Gym+Interior+1" alt="Gym Interior 1">
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/425D9B/FFFFFF?text=Group+Class" alt="Group Class">
+          <video controls class="rounded-2xl w-full h-44 object-cover border border-white/10">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/22386E/FFFFFF?text=Personal+Training" alt="Personal Training">
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/425D9B/FFFFFF?text=Weightlifting+Area" alt="Weightlifting Area">
+          <video controls class="rounded-2xl w-full h-44 object-cover border border-white/10">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/425D9B/FFFFFF?text=Cardio+Machines" alt="Cardio Machines">
+          <img class="rounded-2xl w-full h-44 object-cover border border-white/10" src="https://placehold.co/400x300/425D9B/FFFFFF?text=Yoga+Session" alt="Yoga Session">
+        </div>
+      </div>
+    </section>
+    <section id="pricing" class="px-4 mt-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="kicker mb-4"><i class="bi bi-tags"></i> Pricing</div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Simple plans, clear value</h2>
+        <p class="mt-7 text-slate-600 text-lg max-w-3xl">
+          Choose a plan that matches your schedule. Upgrade anytime as your goals evolve.
+        </p>
+        <div id="pricing-container" class="mt-10 grid md:grid-cols-3 gap-5"></div>
+      </div>
+    </section>
+    <section id="testimonials" class="mt-20 dark-wrap">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="kicker mb-4" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); color: rgba(226,232,240,0.92);">
+          <i class="bi bi-chat-quote"></i> Testimonials
+        </div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Members speak</h2>
+        <div id="testimonials-container" class="mt-10 grid md:grid-cols-2 gap-5"></div>
+      </div>
+    </section>
+    <section id="social-activity" class="px-4 mt-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="kicker mb-4"><i class="bi bi-people"></i> Community</div>
+        <h2 class="title text-4xl md:text-5xl title-underline">We train together</h2>
+        <p class="mt-7 text-slate-600 text-lg max-w-3xl">
+          More than a gym—we’re a community that keeps you consistent and motivated.
+        </p>
+        <div id="social-activity-container" class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      </div>
+    </section>
+    <section id="transformation" class="mt-20 dark-wrap">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="kicker mb-4" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.16); color: rgba(226,232,240,0.92);">
+          <i class="bi bi-graph-up-arrow"></i> Transformations
+        </div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Proof of progress</h2>
+        <p class="mt-7 text-white/70 text-lg max-w-3xl">Witness the journeys—consistency, coaching, and commitment.</p>
+        <div id="transformations-row" class="mt-10"></div>
+      </div>
+    </section>
+    <section id="member" class="px-4 mt-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="kicker mb-4"><i class="bi bi-shield-lock"></i> Member Area</div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Your plans, organized</h2>
+        <p class="mt-7 text-slate-600 text-lg max-w-3xl">
+          Demo login to view exercise + diet plans with collapsible sections.
+        </p>
+        <div class="mt-10 grid lg:grid-cols-12 gap-6 items-start">
+          <div class="lg:col-span-5 card p-6">
+            <div id="login-form" class="">
+              <div class="text-xl font-extrabold text-navyBlue">Member Login</div>
+              <p id="login-error" class="text-sm text-red-600 mt-2 hidden"></p>
+              <form id="member-login-form" class="mt-5 grid gap-4">
+                <div>
+                  <label class="text-sm font-bold text-slate-700">Username</label>
+                  <input id="member-username" class="field mt-2" value="member" required />
+                </div>
+                <div>
+                  <label class="text-sm font-bold text-slate-700">Password</label>
+                  <input id="member-password" type="password" class="field mt-2" value="" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-full"><i class="bi bi-box-arrow-in-right"></i> Login</button>
+              </form>
+              <div class="mt-4 text-xs text-slate-500">
+                Demo: Username <code>member</code>, Password <code>champ2025</code>
+              </div>
+            </div>
+            <div id="member-logged-in" class="hidden">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-xl font-extrabold text-navyBlue">Welcome back</div>
+                  <div class="text-sm text-slate-600 mt-1">Your personalized plans are ready.</div>
+                </div>
+                <button id="logout-btn" class="btn btn-ghost"><i class="bi bi-box-arrow-right"></i> Logout</button>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-7 card p-6">
+            <div class="text-xl font-extrabold text-navyBlue">Plans</div>
+            <p class="text-slate-600 mt-2">Exercise plan + diet plan. Click to expand sections.</p>
+            <div id="plans-area" class="mt-6 grid gap-8 hidden">
+              <div>
+                <div class="text-lg font-extrabold text-slate-800">Exercise Plan</div>
+                <div id="exercise-plans-container" class="mt-4 grid gap-3"></div>
+              </div>
+              <div>
+                <div class="text-lg font-extrabold text-slate-800">Diet Plan</div>
+                <div id="diet-plans-container" class="mt-4 grid gap-3"></div>
+              </div>
+            </div>
+            <div id="plans-locked" class="mt-6 p-5 rounded-2xl border border-slate-200 bg-slate-50">
+              <div class="font-extrabold text-slate-800">Login required</div>
+              <div class="text-slate-600 text-sm mt-1">Please login to access your member plans.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="px-4 mt-16 pb-16">
+      <div class="mx-auto max-w-6xl">
+        <div class="kicker mb-4"><i class="bi bi-geo-alt"></i> Contact</div>
+        <h2 class="title text-4xl md:text-5xl title-underline">Let’s talk</h2>
+        <p class="mt-7 text-slate-600 text-lg max-w-3xl">Questions? Reach out by message, WhatsApp, or email.</p>
+        <div class="mt-10 grid lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-7 card p-6">
+            <form id="contact-form" class="grid gap-4">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="text-sm font-bold text-slate-700">Name</label>
+                  <input name="name" class="field mt-2" placeholder="Your name" required />
+                </div>
+                <div>
+                  <label class="text-sm font-bold text-slate-700">Email</label>
+                  <input type="email" name="email" class="field mt-2" placeholder="your@example.com" required />
+                </div>
+              </div>
+              <div>
+                <label class="text-sm font-bold text-slate-700">Mobile</label>
+                <input name="mobile" class="field mt-2" placeholder="10-digit number" pattern="[0-9]{10}" required />
+              </div>
+              <div>
+                <label class="text-sm font-bold text-slate-700">Message</label>
+                <textarea name="message" rows="5" class="field mt-2" placeholder="Tell us what you need..." required></textarea>
+              </div>
+              <button class="btn btn-primary w-full sm:w-auto" type="submit"><i class="bi bi-send"></i> Send message</button>
+              <div id="form-message" class="text-sm font-bold hidden"></div>
+            </form>
+          </div>
+          <div class="lg:col-span-5 grid gap-6">
+            <div class="card p-6">
+              <div class="text-lg font-extrabold text-navyBlue">Quick actions</div>
+              <div class="mt-4 grid gap-3">
+                <button id="send-whatsapp-btn" class="btn btn-primary w-full"><i class="bi bi-whatsapp"></i> WhatsApp</button>
+                <button id="send-gmail-btn" class="btn btn-ghost w-full"><i class="bi bi-envelope"></i> Email</button>
+                <button id="book-trial-btn" class="btn btn-ghost w-full"><i class="bi bi-calendar2-plus"></i> Book trial</button>
+              </div>
+              <div class="mt-6 text-sm text-slate-600">
+                Phone: <span class="font-extrabold text-slate-800">9150690610</span><br>
+                Email: <span class="font-extrabold text-slate-800">littelchampion2111@gmail.com</span>
+              </div>
+            </div>
+            <div class="card p-6 overflow-hidden">
+              <div class="text-lg font-extrabold text-navyBlue">Find us</div>
+              <div class="mt-4 rounded-2xl overflow-hidden border border-slate-200">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15667.6534571995!2d76.93818701045763!3d11.070092162182048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDA0JzEyLjMiTiA3NsKwNTYnMjUuNCJF!5e0!3m2!1sen!2sin!4v1718712000000!5m2!1sen!2sin"
+                  width="600" height="330" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade" title="Champ Fitness Location"></iframe>
+              </div>
+              <div class="text-xs text-slate-500 mt-3">Note: Map shows the specified coordinates.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="mt-8 pb-10">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="glass rounded-2xl px-6 py-7">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <div class="text-lg font-extrabold text-navyBlue">Champ Fitness</div>
+            <div class="text-sm text-slate-600 mt-1">Owned by Karthick Arasu • Contact: 9150690610</div>
+          </div>
+          <div class="text-sm text-slate-500">
+            Maintained by <a class="font-extrabold text-navyBlue" href="https://www.bluevent.com" target="_blank" rel="noopener noreferrer">Bluevent</a>
+          </div>
+        </div>
+        <div class="text-xs text-slate-500 mt-4">&copy; 2025 Champ Fitness. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+  <div id="modal-backdrop" role="dialog" aria-modal="true" aria-label="Product details">
+    <div class="modal">
+      <div class="p-5 md:p-7 border-b border-slate-200 flex items-start justify-between gap-4">
+        <div>
+          <div id="modal-title" class="text-2xl font-extrabold text-navyBlue">Product</div>
+          <div id="modal-subtitle" class="text-slate-600 mt-1">Details</div>
+        </div>
+        <button id="modal-close" class="w-11 h-11 rounded-xl border border-slate-200 bg-white hover:bg-slate-50">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <div class="p-5 md:p-7 grid md:grid-cols-2 gap-6">
+        <div class="card p-3">
+          <img id="modal-image" alt="Product image" class="w-full h-72 object-cover rounded-2xl">
+        </div>
+        <div>
+          <div id="modal-desc" class="text-slate-700 leading-relaxed"></div>
+          <div class="mt-6 flex items-center justify-between gap-4">
+            <div class="text-2xl font-extrabold text-slate-900">$<span id="modal-price">0.00</span></div>
+            <button id="modal-add" class="btn btn-primary"><i class="bi bi-cart-plus"></i> Add to cart</button>
+          </div>
+          <div class="mt-4 text-xs text-slate-500">Demo checkout — cart is stored in memory while the page is open.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="cart-fab">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="font-extrabold">Cart</span>
+    <span id="cart-badge">0</span>
+  </div>
+  <aside id="cart-drawer" aria-label="Cart drawer">
+    <div class="p-5 border-b border-slate-200 flex items-center justify-between">
+      <div class="text-xl font-extrabold text-navyBlue">Your Cart</div>
+      <button id="close-cart" class="w-11 h-11 rounded-xl border border-slate-200 bg-white hover:bg-slate-50">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="p-5 flex-1 overflow-y-auto">
+      <div id="cart-items" class="grid gap-4"></div>
+    </div>
+    <div class="p-5 border-t border-slate-200">
+      <div class="flex items-center justify-between font-extrabold text-slate-900">
+        <span>Total</span>
+        <span>$<span id="cart-total">0.00</span></span>
+      </div>
+      <button id="clear-cart" class="btn btn-ghost w-full mt-4"><i class="bi bi-trash3"></i> Clear cart</button>
+    </div>
+  </aside>
+  <script>
+    const gymPhoneNumber = '919150690610';
+    const gymEmail = 'littelchampion2111@gmail.com';
+    const productsData = [
+      {
+        id: '1',
+        title: 'Premium Protein Powders',
+        shortDescription: 'High-quality protein supplements to support muscle recovery and growth. Available in various flavors.',
+        fullDescription: 'Our premium protein powders are meticulously formulated to provide optimal muscle recovery and growth. Sourced from the finest ingredients, they offer a complete amino acid profile essential for post-workout repair. Available in delicious chocolate, vanilla, and strawberry flavors. Ideal for athletes and fitness enthusiasts looking to maximize performance.',
+        price: 39.99,
+        image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Protein+Supplements'
+      },
+      {
+        id: '2',
+        title: 'Champ Fitness Apparel',
+        shortDescription: 'Comfortable and stylish activewear designed for peak performance during your workouts.',
+        fullDescription: 'Breathable, moisture-wicking fabrics keep you cool through intense sessions. Ergonomic seams for mobility and a sleek aesthetic that transitions from gym to casual wear. Durable and designed for consistency.',
+        price: 29.99,
+        image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Gym+Apparel'
+      },
+      {
+        id: '3',
+        title: 'Essential Fitness Accessories',
+        shortDescription: 'From resistance bands to lifting gloves, find accessories you need for your training.',
+        fullDescription: 'A curated set of essentials: durable resistance bands, ergonomic lifting gloves, and cardio accessories. Built for repeat use, safety, and better training quality—so you can focus on progress.',
+        price: 15.50,
+        image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Fitness+Accessories'
+      }
+    ];
+    const servicesData = [
+      { title: 'Personal Training', description: 'One-on-one sessions tailored to your goals with expert guidance and accountability.', image: 'PT.jpg' },
+      { title: 'Strength Training', description: 'Build muscle, power, and better body composition with structured programming.', image: 'st.jpg' },
+      { title: 'Endurance Training / HIIT', description: 'Boost stamina and cardiovascular health with high-impact conditioning.', image: 'end.jpg' },
+      { title: 'Women Fitness', description: 'Programs designed for women’s goals—strength, confidence, and consistency.', image: 'women.jpg' },
+      { title: 'Nutritional Guidance', description: 'Meal guidance to match your training and support sustainable results.', image: 'nut.jpg' },
+    ];
+    const awardsData = [
+      { title: '"Best Training Institute" — 2023', description: 'Awarded by the Global Fitness Council for exceptional curriculum and client success.', iconClass: 'bi bi-award-fill' },
+      { title: '"Innovator in Fitness Coaching" — 2024', description: 'Recognized by Fitness Insights Magazine for practical, cutting-edge methodologies.', iconClass: 'bi bi-award-fill' }
+    ];
+    const socialActivityData = [
+      { title: 'Annual Community Run', description: 'Join our annual 5K run, fostering fitness and camaraderie among members.', image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Community+Run', buttonText: 'Learn More' },
+      { title: 'Monthly Wellness Workshops', description: 'Expert-led sessions on nutrition, mindfulness, and injury prevention.', image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Wellness+Workshop', buttonText: 'View Schedule' },
+      { title: 'Charity Bootcamp Events', description: 'Get fit for a cause! Participate in charity bootcamps for local initiatives.', image: 'https://placehold.co/700x450/22386E/FFFFFF?text=Charity+Bootcamp', buttonText: 'See Events' }
+    ];
+    const testimonialsData = [
+      { quote: 'I’ve been working out at Champ Fitness for the past 5 months. Coach Mr. Karthik Arasu is very dedicated and teaches really well. They also offer Zumba and trekking. Highly recommend for all fitness levels.', author: 'Mahitha', role: 'Premium Member' },
+      { quote: 'Trainers provide well-structured workouts with follow-ups and explain the science behind routines. Variations keep sessions engaging and effective.', author: 'Praveen Mathan', role: 'Premium Member' },
+      { quote: 'Machines hit every muscle exactly where they should. Solid cardio mix. Trainers are helpful and the vibe is energetic and focused.', author: 'Sri Ram', role: 'Premium Member' },
+      { quote: 'Super clean environment with great natural light. Trainer Karthik guides form and progress. Five-star worthy.', author: 'Shaju', role: 'Premium Member' }
+    ];
+    const transformationsData = [
+      { title: "3 Month's", description: "Lost 20kg and gained immense confidence in just 6 months!", image: 'trn_11.jpg' },
+      { title: "Mike's Strength Gain", description: "Doubled my lifting capacity and feel stronger than ever!", image: 'trn_2.jpg' },
+      { title: "Emily's Wellness Path", description: "Improved my overall well-being and energy levels significantly!", image: 'trn_3.jpg' }
+    ];
+    const pricingPlansData = [
+      {
+        name: 'Monthly Plan',
+        price: '2500',
+        duration: '/month',
+        features: [
+          { text: 'Gym Access', available: true },
+          { text: 'Basic Equipment', available: true },
+          { text: 'Group Classes', available: false },
+          { text: 'Personal Trainer', available: false }
+        ],
+        isPopular: false
+      },
+      {
+        name: '3-Month Plan',
+        price: '4500',
+        duration: '/3 months',
+        features: [
+          { text: 'Gym Access', available: true },
+          { text: 'All Equipment', available: true },
+          { text: 'Group Classes', available: true },
+          { text: 'Personal Trainer', available: false }
+        ],
+        isPopular: true
+      },
+      {
+        name: '6-Month Plan',
+        price: '7500',
+        duration: '/6 months',
+        features: [
+          { text: 'Gym Access', available: true },
+          { text: 'All Equipment', available: true },
+          { text: 'Group Classes', available: true },
+          { text: 'Personal Trainer (2 sessions/month)', available: true }
+        ],
+        isPopular: false
+      }
+    ];
+    const exercisePlansData = [
+      {
+        day: 'Day 1',
+        title: 'Chest, Shoulder, Cardio',
+        sections: [
+          { heading: 'Chest:', items: ['Barbell Bench Press (3 x 8-12)', 'Incline Dumbbell Press (3 x 8-12)', 'Cable Crossovers (3 x 10-15)'] },
+          { heading: 'Shoulder:', items: ['Overhead Dumbbell Press (3 x 8-12)', 'Lateral Raises (3 x 10-15)', 'Front Raises (3 x 10-15)'] },
+          { heading: 'Cardio:', items: ['Treadmill Run (15 min, moderate)', 'Jump Rope (5 min)', 'Dynamic Stretching (5 min)'] }
+        ]
+      },
+      {
+        day: 'Day 2',
+        title: 'Back, Cardio',
+        sections: [
+          { heading: 'Back:', items: ['Pull-ups / Lat Pulldowns (3 x 8-12)', 'Barbell Rows (3 x 8-12)', 'Seated Cable Rows (3 x 10-15)', 'T-Bar Rows (3 x 8-12)', 'Hyperextensions (3 x 10-15)', 'Face Pulls (3 x 12-15)'] },
+          { heading: 'Cardio:', items: ['Elliptical (20 min, moderate)', 'Core Plank (3 sets, 30-60 sec)', 'Cool Down Stretch (5 min)'] }
+        ]
+      },
+      {
+        day: 'Day 3',
+        title: 'Biceps, Triceps, Cardio',
+        sections: [
+          { heading: 'Biceps:', items: ['Barbell Curls (3 x 8-12)', 'Incline Dumbbell Curls (3 x 8-12)', 'Hammer Curls (3 x 10-15)'] },
+          { heading: 'Triceps:', items: ['Close-Grip Bench Press (3 x 8-12)', 'Overhead Dumbbell Extension (3 x 8-12)', 'Rope Pushdowns (3 x 10-15)'] },
+          { heading: 'Cardio:', items: ['Stationary Bike (15 min)', 'Crunches (3 x 15-20)', 'Plank Variations (3 sets)'] }
+        ]
+      },
+      {
+        day: 'Day 4',
+        title: 'Legs, Cardio',
+        sections: [
+          { heading: 'Quads:', items: ['Barbell Squats (3 x 8-12)', 'Leg Press (3 x 10-15)'] },
+          { heading: 'Hamstrings:', items: ['Romanian Deadlifts (3 x 8-12)', 'Leg Curls (3 x 10-15)'] },
+          { heading: 'Calves:', items: ['Standing Calf Raises (3 x 15-20)', 'Seated Calf Raises (3 x 15-20)'] },
+          { heading: 'Cardio:', items: ['Incline Treadmill Walk (20 min)', 'Box Jumps (3 x 10)', 'Cool Down Stretch (5 min)'] }
+        ]
+      }
+    ];
+    const dietPlansData = [
+      {
+        type: 'Vegetarian Diet Plan',
+        id: 'veg-diet-content',
+        sections: [
+          { heading: 'Breakfast:', items: ['1 cup Oatmeal with berries and nuts', '1 glass Skim Milk / Almond Milk', '2 Hard-boiled Eggs (optional) / Tofu Scramble'] },
+          { heading: 'Lunch:', items: ['1.5 cups Brown Rice / Quinoa', '150g Lentil Soup (Dal) or Paneer Curry', 'Large mixed green salad with olive oil dressing'] },
+          { heading: 'Dinner:', items: ['2 whole wheat Rotis / 1 cup Millet', '150g Mixed Vegetable Curry', '1 cup Greek Yogurt'] },
+          { heading: 'Snacks:', items: ['Fruits, a handful of almonds, protein bar'] }
+        ]
+      },
+      {
+        type: 'Non‑Vegetarian Diet Plan',
+        id: 'non-veg-diet-content',
+        sections: [
+          { heading: 'Breakfast:', items: ['3 Egg Whites omelette with vegetables', '1 whole-wheat Toast', '1 scoop Whey Protein Shake'] },
+          { heading: 'Lunch:', items: ['1 cup Brown Rice / Quinoa', '150g Grilled Chicken Breast / Fish', 'Steamed Broccoli and Mixed Vegetables'] },
+          { heading: 'Dinner:', items: ['150g Baked Fish / Lean Beef Stir-fry', 'Large serving of green leafy vegetables', 'Small sweet potato (optional)'] },
+          { heading: 'Snacks:', items: ['Handful of nuts, protein bar, fruit'] }
+        ]
+      }
+    ];
+    function renderAwards(){
+      const el = document.getElementById('awards-container');
+      if(!el) return;
+      el.innerHTML = '';
+      awardsData.forEach(a => {
+        el.insertAdjacentHTML('beforeend', `
+          <div class="card p-5">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white"
+                   style="background: linear-gradient(135deg, #22386E, #425D9B); box-shadow: 0 18px 55px rgba(34,56,110,0.22);">
+                <i class="${a.iconClass} text-2xl"></i>
+              </div>
+              <div>
+                <div class="font-extrabold text-slate-900">${a.title}</div>
+                <div class="text-slate-600 mt-1">${a.description}</div>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+    }
+    function renderServices(){
+      const el = document.getElementById('services-container');
+      if(!el) return;
+      el.innerHTML = '';
+      servicesData.forEach(s => {
+        el.insertAdjacentHTML('beforeend', `
+          <div class="dark-card">
+            <img src="${s.image}" alt="${s.title}" class="w-full h-44 object-cover opacity-95">
+            <div class="p-5">
+              <div class="text-white font-extrabold text-xl">${s.title}</div>
+              <div class="text-white/75 mt-2">${s.description}</div>
+            </div>
+          </div>
+        `);
+      });
+    }
+    function renderProducts(){
+      const el = document.getElementById('products-container');
+      if(!el) return;
+      el.innerHTML = '';
+      productsData.forEach(p => {
+        el.insertAdjacentHTML('beforeend', `
+          <div class="card">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-48 object-cover">
+            <div class="p-5">
+              <div class="text-xl font-extrabold text-navyBlue">${p.title}</div>
+              <p class="text-slate-600 mt-2">${p.shortDescription}</p>
+              <div class="mt-4 flex items-center justify-between gap-3">
+                <div class="text-lg font-extrabold text-slate-900">$${p.price.toFixed(2)}</div>
+                <button class="btn btn-primary py-3 px-4 text-sm quick-view-btn"
+                        data-id="${p.id}">
+                  <i class="bi bi-eye"></i> Quick view
+                </button>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+    }
+    function renderPricing(){
+      const el = document.getElementById('pricing-container');
+      if(!el) return;
+      el.innerHTML = '';
+      pricingPlansData.forEach(plan => {
+        const features = plan.features.map(f => `
+          <li class="flex items-start gap-2">
+            <span class="${f.available ? 'text-emerald-600' : 'text-rose-500'} font-extrabold">${f.available ? '✓' : '✕'}</span>
+            <span class="${f.available ? 'text-slate-700' : 'text-slate-400'}">${f.text}</span>
+          </li>
+        `).join('');
+        el.insertAdjacentHTML('beforeend', `
+          <div class="card p-6 ${plan.isPopular ? 'ring-4 ring-[rgba(34,56,110,0.18)]' : ''}">
+            <div class="flex items-center justify-between gap-3">
+              <div class="text-xl font-extrabold text-navyBlue">${plan.name}</div>
+              ${plan.isPopular ? '<span class="kicker" style="font-size:.8rem">Most popular</span>' : ''}
+            </div>
+            <div class="mt-4 text-5xl font-extrabold text-slate-900">
+              ₹${plan.price}<span class="text-lg font-bold text-slate-500">${plan.duration}</span>
+            </div>
+            <ul class="mt-6 grid gap-2">${features}</ul>
+            <button class="btn btn-primary w-full mt-7 choose-plan-btn" data-plan="${plan.name}">
+              <i class="bi bi-check2-circle"></i> Choose plan
+            </button>
+          </div>
+        `);
+      });
+    }
+    function renderTestimonials(){
+      const el = document.getElementById('testimonials-container');
+      if(!el) return;
+      el.innerHTML = '';
+      testimonialsData.forEach(t => {
+        el.insertAdjacentHTML('beforeend', `
+          <div class="dark-card p-6">
+            <div class="text-white/90 text-lg leading-relaxed">“${t.quote}”</div>
+            <div class="mt-5 flex items-center justify-between gap-4">
+              <div>
+                <div class="text-white font-extrabold">${t.author}</div>
+                <div class="text-white/60 text-sm">${t.role}</div>
+              </div>
+              <div class="text-white/40 text-2xl"><i class="bi bi-chat-quote-fill"></i></div>
+            </div>
+          </div>
+        `);
+      });
+    }
+    function renderSocial(){
+      const el = document.getElementById('social-activity-container');
+      if(!el) return;
+      el.innerHTML = '';
+      socialActivityData.forEach(s => {
+        el.insertAdjacentHTML('beforeend', `
+          <div class="card">
+            <img src="${s.image}" alt="${s.title}" class="w-full h-44 object-cover">
+            <div class="p-5">
+              <div class="text-xl font-extrabold text-navyBlue">${s.title}</div>
+              <div class="text-slate-600 mt-2">${s.description}</div>
+              <button class="btn btn-ghost mt-4 w-full"><i class="bi bi-arrow-right"></i> ${s.buttonText}</button>
+            </div>
+          </div>
+        `);
+      });
+    }
+    function renderTransformations(){
+      const el = document.getElementById('transformations-row');
+      if(!el) return;
+      el.innerHTML = '';
+      transformationsData.forEach(t => {
+        el.insertAdjacentHTML('beforeend', `
+          <article class="t-card dark-card">
+            <div class="relative" style="aspect-ratio: 4 / 5;">
+              <img src="${t.image}" alt="${t.title}" class="absolute inset-0 w-full h-full object-cover opacity-95">
+              <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.72));"></div>
+              <div class="absolute left-4 top-4 px-3 py-2 rounded-xl border border-white/15 bg-white/5 text-white font-extrabold">${t.title}</div>
+            </div>
+            <div class="p-5">
+              <div class="text-white font-extrabold text-xl">${t.title}</div>
+              <div class="text-white/75 mt-2">${t.description}</div>
+            </div>
+          </article>
+        `);
+      });
+    }
+    function renderPlans(){
+      const exEl = document.getElementById('exercise-plans-container');
+      const dietEl = document.getElementById('diet-plans-container');
+      if(!exEl || !dietEl) return;
+      exEl.innerHTML = '';
+      exercisePlansData.forEach((plan, idx) => {
+        const sectionsHtml = plan.sections.map(sec => `
+          <div class="mt-3">
+            <div class="font-extrabold text-slate-800">${sec.heading}</div>
+            <ul class="list-disc ml-6 mt-2 text-slate-700">
+              ${sec.items.map(i => `<li class="mt-1">${i}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
+        exEl.insertAdjacentHTML('beforeend', `
+          <div class="border border-slate-200 rounded-2xl overflow-hidden">
+            <button class="w-full px-4 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 font-extrabold text-slate-800 plan-toggle"
+                    data-target="ex-${idx}">
+              <span>${plan.day}: ${plan.title}</span>
+              <i class="bi bi-chevron-right transition-transform"></i>
+            </button>
+            <div id="ex-${idx}" class="hidden px-4 py-4 bg-white">
+              ${sectionsHtml}
+            </div>
+          </div>
+        `);
+      });
+      dietEl.innerHTML = '';
+      dietPlansData.forEach((plan, idx) => {
+        const sectionsHtml = plan.sections.map(sec => `
+          <div class="mt-3">
+            <div class="font-extrabold text-slate-800">${sec.heading}</div>
+            <ul class="list-disc ml-6 mt-2 text-slate-700">
+              ${sec.items.map(i => `<li class="mt-1">${i}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
+        dietEl.insertAdjacentHTML('beforeend', `
+          <div class="border border-slate-200 rounded-2xl overflow-hidden">
+            <button class="w-full px-4 py-4 flex items-center justify-between bg-slate-50 hover:bg-slate-100 font-extrabold text-slate-800 plan-toggle"
+                    data-target="diet-${idx}">
+              <span>${plan.type}</span>
+              <i class="bi bi-chevron-right transition-transform"></i>
+            </button>
+            <div id="diet-${idx}" class="hidden px-4 py-4 bg-white">
+              ${sectionsHtml}
+            </div>
+          </div>
+        `);
+      });
+    }
+    let cart = [];
+    let modalProduct = null;
+    const cartFab = document.getElementById('cart-fab');
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartBadge = document.getElementById('cart-badge');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotalEl = document.getElementById('cart-total');
+    function openCart(){ cartDrawer.classList.add('open'); }
+    function closeCart(){ cartDrawer.classList.remove('open'); }
+    function updateCart(){
+      cartBadge.textContent = String(cart.length);
+      cartFab.classList.toggle('show', cart.length > 0);
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, idx) => {
+        total += item.price;
+        cartItems.insertAdjacentHTML('beforeend', `
+          <div class="border border-slate-200 rounded-2xl p-3 flex gap-3 items-center">
+            <img src="${item.image}" alt="${item.title}" class="w-16 h-16 rounded-xl object-cover border border-slate-200">
+            <div class="flex-1">
+              <div class="font-extrabold text-slate-900">${item.title}</div>
+              <div class="text-sm text-slate-600">$${item.price.toFixed(2)}</div>
+            </div>
+            <button class="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 remove-item" data-index="${idx}">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+        `);
+      });
+      cartTotalEl.textContent = total.toFixed(2);
+      document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = Number(e.currentTarget.dataset.index);
+          cart.splice(idx, 1);
+          updateCart();
+        });
+      });
+    }
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSubtitle = document.getElementById('modal-subtitle');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalImage = document.getElementById('modal-image');
+    const modalPrice = document.getElementById('modal-price');
+    const modalAdd = document.getElementById('modal-add');
+    function openModal(product){
+      modalProduct = product;
+      modalTitle.textContent = product.title;
+      modalSubtitle.textContent = product.shortDescription;
+      modalDesc.textContent = product.fullDescription;
+      modalImage.src = product.image;
+      modalImage.alt = product.title;
+      modalPrice.textContent = product.price.toFixed(2);
+      modalBackdrop.classList.add('open');
+    }
+    function closeModal(){
+      modalBackdrop.classList.remove('open');
+      modalProduct = null;
+    }
+    const correctUsername = 'member';
+    const correctPassword = 'champ2025';
+    function setLoggedIn(isLoggedIn){
+      sessionStorage.setItem('isLoggedIn', isLoggedIn ? 'true' : 'false');
+      document.getElementById('login-form').classList.toggle('hidden', isLoggedIn);
+      document.getElementById('member-logged-in').classList.toggle('hidden', !isLoggedIn);
+      document.getElementById('plans-area').classList.toggle('hidden', !isLoggedIn);
+      document.getElementById('plans-locked').classList.toggle('hidden', isLoggedIn);
+    }
+    function attachGeneral(){
+      const header = document.getElementById('site-header');
+      const onScroll = () => {
+        const glass = header.querySelector('.glass');
+        if(!glass) return;
+        glass.classList.toggle('scrolled', window.scrollY > 12);
+      };
+      window.addEventListener('scroll', onScroll, { passive:true });
+      onScroll();
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href');
+          if(!href || href === '#') return;
+          const target = document.querySelector(href);
+          if(!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior:'smooth' });
+        });
+      });
+      const contactForm = document.getElementById('contact-form');
+      const formMessage = document.getElementById('form-message');
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formMessage.classList.remove('hidden');
+        formMessage.className = 'text-sm font-extrabold text-emerald-700';
+        formMessage.textContent = "Message sent (demo). We'll get back to you soon.";
+        contactForm.reset();
+        setTimeout(() => formMessage.classList.add('hidden'), 4500);
+      });
+      document.getElementById('send-whatsapp-btn').addEventListener('click', () => {
+        const message = encodeURIComponent("Hello Champ Fitness, I'm reaching out from your website for a general inquiry.");
+        window.open(`https://wa.me/${gymPhoneNumber}?text=${message}`, '_blank');
+      });
+      document.getElementById('send-gmail-btn').addEventListener('click', () => {
+        const subject = encodeURIComponent("General Inquiry from Champ Fitness Website");
+        const body = encodeURIComponent("Hello Champ Fitness,\n\nI am writing to you with a general inquiry based on your website.\n\nBest regards,");
+        window.open(`mailto:${gymEmail}?subject=${subject}&body=${body}`, '_blank');
+      });
+      document.getElementById('book-trial-btn').addEventListener('click', () => {
+        const message = encodeURIComponent("Hello Champ Fitness, I'd like to book a trial/demo session. Please let me know the available slots.");
+        window.open(`https://wa.me/${gymPhoneNumber}?text=${message}`, '_blank');
+      });
+    }
+    function attachProductModalListeners(){
+      document.querySelectorAll('.quick-view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          const product = productsData.find(p => p.id === id);
+          if(product) openModal(product);
+        });
+      });
+    }
+    function attachModalListeners(){
+      modalClose.addEventListener('click', closeModal);
+      modalBackdrop.addEventListener('click', (e) => {
+        if(e.target === modalBackdrop) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape' && modalBackdrop.classList.contains('open')) closeModal();
+      });
+      modalAdd.addEventListener('click', () => {
+        if(!modalProduct) return;
+        cart.push({ id: modalProduct.id, title: modalProduct.title, price: modalProduct.price, image: modalProduct.image });
+        updateCart();
+        closeModal();
+        openCart();
+      });
+    }
+    function attachCartListeners(){
+      document.getElementById('open-cart-top').addEventListener('click', openCart);
+      cartFab.addEventListener('click', openCart);
+      document.getElementById('close-cart').addEventListener('click', closeCart);
+      document.getElementById('clear-cart').addEventListener('click', () => { cart = []; updateCart(); closeCart(); });
+    }
+    function attachMemberListeners(){
+      const loginForm = document.getElementById('member-login-form');
+      const loginError = document.getElementById('login-error');
+      const logoutBtn = document.getElementById('logout-btn');
+      const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+      setLoggedIn(isLoggedIn);
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const u = document.getElementById('member-username').value.trim();
+        const p = document.getElementById('member-password').value.trim();
+        if(u === correctUsername && p === correctPassword){
+          loginError.classList.add('hidden');
+          setLoggedIn(true);
+          document.getElementById('member').scrollIntoView({ behavior:'smooth' });
+        } else {
+          loginError.textContent = 'Invalid username or password. Please try again.';
+          loginError.classList.remove('hidden');
+          setLoggedIn(false);
+        }
+      });
+      logoutBtn.addEventListener('click', () => {
+        setLoggedIn(false);
+        document.getElementById('member').scrollIntoView({ behavior:'smooth' });
+      });
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.plan-toggle');
+        if(!btn) return;
+        const targetId = btn.dataset.target;
+        const panel = document.getElementById(targetId);
+        if(!panel) return;
+        panel.classList.toggle('hidden');
+        const icon = btn.querySelector('i');
+        if(icon) icon.style.transform = panel.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(90deg)';
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAwards();
+      renderServices();
+      renderProducts();
+      renderPricing();
+      renderTestimonials();
+      renderSocial();
+      renderTransformations();
+      renderPlans();
+      attachGeneral();
+      attachModalListeners();
+      attachProductModalListeners();
+      attachCartListeners();
+      attachMemberListeners();
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.choose-plan-btn');
+        if(!btn) return;
+        const plan = btn.dataset.plan || 'Plan';
+        const message = encodeURIComponent(`Hello Champ Fitness, I'd like to join the ${plan}. Please share next steps.`);
+        window.open(`https://wa.me/${gymPhoneNumber}?text=${message}`, '_blank');
+      });
+    });
+  </script>
+</body>
+</html>

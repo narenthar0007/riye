@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Bethanan Associates Engineers & Builders - Premium construction services with 35+ years of expertise in Coimbatore. Professional residential, commercial, and industrial construction solutions.">
+    <meta name="keywords"
+        content="construction, builders, Coimbatore, residential, commercial, industrial, engineering, contractors, Tamil Nadu">
+    <meta name="author" content="Bethanan Associates Engineers & Builders">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta property="og:title" content="Bethanan Associates Engineers & Builders - Premium Construction Excellence">
+    <meta property="og:description"
+        content="Leading construction company in Coimbatore with 35+ years of experience in residential, commercial, and industrial projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bethanan Associates Engineers & Builders">
+    <meta name="twitter:description" content="Premium construction services with 35+ years of expertise in Coimbatore.">
+    <meta name="twitter:image"
+        content="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&h=630&fit=crop">
+    <link rel="canonical" href="">
+    <title>Bethanan Associates Engineers & Builders - Premium Construction Excellence</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        roboto: ['Roboto', 'sans-serif'],
+                        sans: ['Open Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554',
+                        },
+                        accent: {
+                            DEFAULT: '#2563eb',
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        secondary: {
+                            DEFAULT: '#0ea5e9',
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                        'rotate-slow': 'rotateSlow 20s linear infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'heartbeat': 'heartbeat 2s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'typewriter': 'typewriter 4s steps(30) 1s both',
+                        'blink': 'blink 1s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(100px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-100px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        rotateSlow: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        },
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' }
+                        },
+                        heartbeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '14%': { transform: 'scale(1.3)' },
+                            '28%': { transform: 'scale(1)' },
+                            '42%': { transform: 'scale(1.3)' },
+                            '70%': { transform: 'scale(1)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px rgba(217, 119, 6, 0.5)' },
+                            '100%': { boxShadow: '0 0 20px rgba(217, 119, 6, 0.8), 0 0 30px rgba(217, 119, 6, 0.6)' }
+                        },
+                        typewriter: {
+                            '0%': { width: '0ch' },
+                            '100%': { width: '12ch' }
+                        },
+                        blink: {
+                            '0%, 50%': { borderColor: '#d97706' },
+                            '51%, 100%': { borderColor: 'transparent' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent-600 text-white px-4 py-2 rounded-md z-50">Skip
+        to main content</a>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="bi bi-check-circle mr-2 text-lg"></i>
+        <span id="notification-message">Success message</span>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-background-pattern"></div>
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <div class="loading-container">
+            <!-- Premium Logo Section -->
+            <div class="loading-brand-section">
+                <div class="loading-logo-wrapper">
+                    <div class="loading-logo-bg"></div>
+                    <div class="loading-logo-main">
+                        <div class="logo-hexagon">
+                            <i class="bi bi-building-fill"></i>
+                        </div>
+                        <div class="logo-orbit">
+                            <div class="orbit-dot orbit-dot-1"></div>
+                            <div class="orbit-dot orbit-dot-2"></div>
+                            <div class="orbit-dot orbit-dot-3"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="loading-brand-text">
+                    <h1 class="brand-name">
+                        <span class="brand-letter">B</span>
+                        <span class="brand-letter">E</span>
+                        <span class="brand-letter">T</span>
+                        <span class="brand-letter">H</span>
+                        <span class="brand-letter">A</span>
+                        <span class="brand-letter">N</span>
+                        <span class="brand-letter">A</span>
+                        <span class="brand-letter">N</span>
+                    </h1>
+                    <div class="brand-subtitle">
+                        <span class="subtitle-text">ASSOCIATES</span>
+                        <div class="subtitle-line"></div>
+                    </div>
+                    <p class="brand-tagline">Engineers • Builders • Innovators</p>
+                    <div class="brand-legacy">
+                        <div class="legacy-number">35+</div>
+                        <div class="legacy-text">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Progress System -->
+            <div class="loading-progress-section">
+                <div class="progress-label">
+                    <span class="progress-text">Initializing Experience</span>
+                    <span class="progress-percent">0%</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-glow"></div>
+                    <div class="progress-fill"></div>
+                    <div class="progress-indicator"></div>
+                </div>
+                <div class="progress-stages">
+                    <div class="stage stage-1">Loading Assets</div>
+                    <div class="stage stage-2">Preparing Interface</div>
+                    <div class="stage stage-3">Ready to Explore</div>
+                </div>
+            </div>
+
+            <!-- Animated Status -->
+            <div class="loading-status">
+                <div class="status-dots">
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                    <div class="status-dot"></div>
+                </div>
+                <p class="status-message">Crafting your digital blueprint...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <!-- Quick Quote Modal -->
+    <div class="quote-modal-overlay" id="quote-modal">
+        <div class="quote-modal-container">
+            <div class="quote-modal-header">
+                <div class="quote-modal-title">
+                    <i class="bi bi-calculator text-primary-600"></i>
+                    <h2>Quick Quote Request</h2>
+                </div>
+                <button class="quote-modal-close" onclick="closeQuoteModal()" aria-label="Close quote modal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="quote-modal-content">
+                <div class="quote-intro">
+                    <p class="quote-subtitle">Get an instant estimate for your construction project</p>
+                    <div class="quote-features">
+                        <div class="quote-feature">
+                            <i class="bi bi-clock-fill text-green-500"></i>
+                            <span>Quick Response</span>
+                        </div>
+                        <div class="quote-feature">
+                            <i class="bi bi-shield-check-fill text-blue-500"></i>
+                            <span>Professional Service</span>
+                        </div>
+                        <div class="quote-feature">
+                            <i class="bi bi-award-fill text-yellow-500"></i>
+                            <span>35+ Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="quote-form" class="quote-form">
+                    <div class="quote-form-grid">
+                        <div class="form-group">
+                            <label for="quote-name">Full Name *</label>
+                            <input type="text" id="quote-name" name="name" required class="quote-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quote-phone">Phone Number *</label>
+                            <input type="tel" id="quote-phone" name="phone" required class="quote-input">
+                        </div>
+
+                        <div class="form-group quote-form-full">
+                            <label for="quote-email">Email Address *</label>
+                            <input type="email" id="quote-email" name="email" required class="quote-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quote-project-type">Project Type *</label>
+                            <select id="quote-project-type" name="projectType" required class="quote-input">
+                                <option value="">Select Project Type</option>
+                                <option value="residential">Residential Construction</option>
+                                <option value="commercial">Commercial Building</option>
+                                <option value="industrial">Industrial Facility</option>
+                                <option value="renovation">Renovation/Remodeling</option>
+                                <option value="engineering">Engineering Consulting</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quote-budget">Estimated Budget</label>
+                            <select id="quote-budget" name="budget" class="quote-input">
+                                <option value="">Select Budget Range</option>
+                                <option value="under-10l">Under ₹10 Lakhs</option>
+                                <option value="10l-25l">₹10-25 Lakhs</option>
+                                <option value="25l-50l">₹25-50 Lakhs</option>
+                                <option value="50l-1cr">₹50 Lakhs - ₹1 Crore</option>
+                                <option value="1cr-2cr">₹1-2 Crores</option>
+                                <option value="above-2cr">Above ₹2 Crores</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group quote-form-full">
+                            <label for="quote-location">Project Location *</label>
+                            <input type="text" id="quote-location" name="location" required class="quote-input"
+                                placeholder="City, Area">
+                        </div>
+
+                        <div class="form-group quote-form-full">
+                            <label for="quote-timeline">Expected Timeline</label>
+                            <select id="quote-timeline" name="timeline" class="quote-input">
+                                <option value="">Select Timeline</option>
+                                <option value="immediate">Immediate (1-2 months)</option>
+                                <option value="short">Short term (3-6 months)</option>
+                                <option value="medium">Medium term (6-12 months)</option>
+                                <option value="long">Long term (1+ years)</option>
+                                <option value="planning">Still in planning phase</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group quote-form-full">
+                            <label for="quote-details">Project Details</label>
+                            <textarea id="quote-details" name="details" rows="3" class="quote-input"
+                                placeholder="Brief description of your project requirements..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="quote-form-actions">
+                        <button type="button" onclick="closeQuoteModal()" class="quote-btn-secondary">
+                            <i class="bi bi-x-circle"></i>
+                            Cancel
+                        </button>
+                        <button type="button" onclick="submitQuoteRequest()" class="quote-btn-primary">
+                            <i class="bi bi-send-fill"></i>
+                            Request Quote
+                        </button>
+                    </div>
+                </form>
+
+                <div class="quote-contact-info">
+                    <div class="quote-contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>+91 9942223010</span>
+                    </div>
+                    <div class="quote-contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <span>Bethananassociates@gmail.com</span>
+                    </div>
+                    <div class="quote-contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Vilankurichi, Coimbatore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Header -->
+    <header class="fixed w-full z-50 navbar-premium" id="navbar" role="banner">
+        <div class="navbar-container">
+            <nav class="navbar-content" aria-label="Main navigation">
+                <!-- Logo Section -->
+                <div class="navbar-logo-section">
+                    <!-- <div class="navbar-logo-icon">
+                        <i class="bi bi-building"></i>
+                    </div> -->
+                    <div class="navbar-brand-info">
+                        <h1 class="navbar-brand-name">Bethanan Associates</h1>
+                        <span class="navbar-brand-tagline">Engineers & Builders</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="navbar-links-desktop" role="navigation">
+                    <a href="#home" class="navbar-link active">
+                        <span class="navbar-link-text">Home</span>
+                    </a>
+                    <a href="#about" class="navbar-link">
+                        <span class="navbar-link-text">About</span>
+                    </a>
+                    <a href="#services" class="navbar-link">
+                        <span class="navbar-link-text">Services</span>
+                    </a>
+                    <a href="#projects" class="navbar-link">
+                        <span class="navbar-link-text">Projects</span>
+                    </a>
+                    <a href="#why-choose" class="navbar-link">
+                        <span class="navbar-link-text">Why Choose</span>
+                    </a>
+                    <a href="#contact" class="navbar-link">
+                        <span class="navbar-link-text">Contact</span>
+                    </a>
+
+                    <!-- CTA Button -->
+                    <button class="navbar-cta-button" onclick="openQuoteModal()" aria-label="Get quick quote">
+                        <i class="bi bi-calculator"></i>
+                        <span>Get Quote</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="navbar-mobile-toggle" aria-label="Toggle mobile menu">
+                    <span class="navbar-toggle-line"></span>
+                    <span class="navbar-toggle-line"></span>
+                    <span class="navbar-toggle-line"></span>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="navbar-mobile-menu" role="navigation">
+                <div class="navbar-mobile-content">
+                    <a href="#home" class="navbar-mobile-link">
+                        <i class="bi bi-house-door"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#about" class="navbar-mobile-link">
+                        <i class="bi bi-info-circle"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#services" class="navbar-mobile-link">
+                        <i class="bi bi-gear"></i>
+                        <span>Services</span>
+                    </a>
+                    <a href="#projects" class="navbar-mobile-link">
+                        <i class="bi bi-collection"></i>
+                        <span>Projects</span>
+                    </a>
+                    <a href="#why-choose" class="navbar-mobile-link">
+                        <i class="bi bi-star"></i>
+                        <span>Why Choose</span>
+                    </a>
+                    <a href="#contact" class="navbar-mobile-link">
+                        <i class="bi bi-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Enhanced Hero Section -->
+        <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white relative"
+            role="region" aria-label="Hero section">
+            <div class="particles" id="particles"></div>
+            <div class="container mx-auto px-4 md:px-6 text-center relative z-10">
+                <div class="max-w-5xl mx-auto">
+                    <div data-aos="fade-up" data-aos-duration="1000">
+                        <h1
+                            class="font-inter text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white tracking-tight">
+                            Building Excellence
+                            <span
+                                class="block text-white font-semibold text-2xl md:text-3xl lg:text-4xl mt-4 tracking-wide opacity-90">
+                                <span class="inline-flex items-center">
+                                    <span
+                                        class="w-12 h-0.5 bg-gradient-to-r from-transparent via-primary-400 to-primary-400 mr-4"></span>
+                                    Since 2012
+                                    <span
+                                        class="w-12 h-0.5 bg-gradient-to-r from-primary-400 via-primary-400 to-transparent ml-4"></span>
+                                </span>
+                            </span>
+                        </h1>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        <p
+                            class="text-lg md:text-2xl text-white mb-10 max-w-3xl mx-auto leading-relaxed font-inter font-medium">
+                            Premier construction solutions with
+                            <span class="text-accent-400 font-bold animate-pulse">35+ years</span> of engineering
+                            expertise.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12" data-aos="fade-up"
+                        data-aos-delay="400" data-aos-duration="1000">
+                        <button class="btn-premium text-base px-8 py-3" onclick="scrollToSection('projects')"
+                            aria-label="View our projects">
+                            <i class="bi bi-eye mr-2"></i>View Our Projects
+                        </button>
+                        <button class="btn-premium bg-secondary-600 hover:bg-secondary-700 text-base px-8 py-3"
+                            onclick="scrollToSection('services')" aria-label="Our Services">
+                            <i class="bi bi-gear mr-2"></i>Our Services
+                        </button>
+                        <button
+                            class="btn-premium bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary-900 text-base px-8 py-3"
+                            onclick="scrollToSection('contact')" aria-label="Get a consultation">
+                            <i class="bi bi-telephone mr-2"></i>Get Consultation
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto" data-aos="fade-up"
+                        data-aos-delay="600" data-aos-duration="1000">
+                        <div
+                            class="text-center bg-black bg-opacity-40 backdrop-blur-sm rounded-xl p-4 border border-white border-opacity-20">
+                            <div class="text-2xl md:text-3xl font-bold font-inter text-accent-400 mb-2 counter"
+                                data-target="13" aria-label="Years of experience">0</div>
+                            <div class="text-white text-sm font-semibold font-inter tracking-wide">Years Experience
+                            </div>
+                        </div>
+                        <div
+                            class="text-center bg-black bg-opacity-40 backdrop-blur-sm rounded-xl p-4 border border-white border-opacity-20">
+                            <div class="text-2xl md:text-3xl font-bold font-inter text-accent-400 mb-2 counter"
+                                data-target="500" aria-label="Projects completed">0</div>
+                            <div class="text-white text-sm font-semibold font-inter tracking-wide">Projects Completed
+                            </div>
+                        </div>
+                        <div
+                            class="text-center bg-black bg-opacity-40 backdrop-blur-sm rounded-xl p-4 border border-white border-opacity-20">
+                            <div class="text-2xl md:text-3xl font-bold font-inter text-accent-400 mb-2 counter"
+                                data-target="50" aria-label="Expert team members">0</div>
+                            <div class="text-white text-sm font-semibold font-inter tracking-wide">Expert Team</div>
+                        </div>
+                        <div
+                            class="text-center bg-black bg-opacity-40 backdrop-blur-sm rounded-xl p-4 border border-white border-opacity-20">
+                            <div class="text-2xl md:text-3xl font-bold font-inter text-accent-400 mb-2 counter"
+                                data-target="100" aria-label="Client satisfaction percentage">0</div>
+                            <div class="text-white text-sm font-semibold font-inter tracking-wide">Client Satisfaction
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce-slow hidden md:block">
+                <div class="w-5 h-8 border-2 border-white rounded-full flex justify-center">
+                    <div class="w-1 h-2 bg-white rounded-full mt-2 animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Images Gallery Section -->
+        <section class="py-16 bg-gradient-to-br from-gray-50 to-white" role="region" aria-label="Our Work Gallery">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Our Professional Work</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Witness the excellence in our construction projects through these professional images showcasing
+                        quality and craftsmanship.
+                    </p>
+                </div>
+                <div class="image-gallery">
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=600&h=400&fit=crop"
+                            alt="Luxury Villa Construction" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Luxury Villa Construction</h3>
+                            <p class="text-sm">Modern residential villa with premium finishes and landscaping</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=600&h=400&fit=crop"
+                            alt="Corporate Office Building" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Corporate Office Complex</h3>
+                            <p class="text-sm">Multi-story commercial building with modern architecture</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&h=400&fit=crop"
+                            alt="Industrial Facility" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Industrial Manufacturing Plant</h3>
+                            <p class="text-sm">State-of-the-art factory with specialized infrastructure</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=600&h=400&fit=crop"
+                            alt="Residential Complex" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Premium Apartment Complex</h3>
+                            <p class="text-sm">Modern residential complex with amenities and green spaces</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=600&h=400&fit=crop"
+                            alt="Construction Site" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Construction Excellence</h3>
+                            <p class="text-sm">Professional construction management and quality control</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=600&h=400&fit=crop"
+                            alt="Modern Architecture" class="lazy">
+                        <div class="gallery-overlay">
+                            <h3 class="font-playfair text-xl font-bold mb-2">Architectural Innovation</h3>
+                            <p class="text-sm">Cutting-edge design with sustainable construction practices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose" class="py-16 bg-white relative" role="region" aria-label="Why choose us">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Why Choose Bethanan Associates</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Discover what sets us apart in the construction industry with our commitment to quality and
+                        innovation.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="space-y-6">
+                        <div class="premium-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-right"
+                            data-aos-delay="100">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                                <i class="bi bi-award text-white text-xl" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">35+ Years Experience</h3>
+                            <p class="text-gray-600 text-sm">Decades of expertise in delivering high-quality
+                                construction projects across Tamil Nadu.</p>
+                        </div>
+                        <div class="premium-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-right"
+                            data-aos-delay="200">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-700 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                                <i class="bi bi-people text-white text-xl" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Expert Team</h3>
+                            <p class="text-gray-600 text-sm">Certified engineers and skilled craftsmen dedicated to
+                                construction excellence.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=400&h=500&fit=crop"
+                                alt="Construction Excellence"
+                                class="rounded-xl shadow-xl lazy w-full h-80 object-cover">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-primary-900/40 to-transparent rounded-xl">
+                            </div>
+                            <div class="absolute bottom-6 left-6 text-white">
+                                <h4 class="font-playfair text-lg font-bold">Building Excellence</h4>
+                                <p class="text-sm">Quality in every project</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="premium-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-left"
+                            data-aos-delay="100">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                                <i class="bi bi-clock text-white text-xl" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">On-Time Delivery</h3>
+                            <p class="text-gray-600 text-sm">Efficient project management ensures timely completion of
+                                all construction projects.</p>
+                        </div>
+                        <div class="premium-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-left"
+                            data-aos-delay="200">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                                <i class="bi bi-recycle text-white text-xl" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Sustainable Practices</h3>
+                            <p class="text-gray-600 text-sm">Eco-friendly materials and sustainable construction methods
+                                for a greener future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Construction Process Section -->
+        <section id="process" class="py-16 bg-gradient-to-br from-primary-900 to-primary-800 text-white relative"
+            role="region" aria-label="Construction process">
+            <div class="container mx-auto px-4 md:px-6 relative">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="font-playfair text-3xl md:text-5xl font-bold mb-4">Our Construction Process</h2>
+                    <p class="text-gray-300 text-base md:text-lg max-w-3xl mx-auto">
+                        A streamlined process ensuring quality and precision from start to finish.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="relative mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-700 rounded-full flex items-center justify-center mx-auto shadow-lg floating-icon">
+                                <i class="bi bi-lightbulb text-white text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div
+                                class="absolute -top-1 -right-1 w-6 h-6 bg-accent-600 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                1</div>
+                        </div>
+                        <h3 class="font-playfair text-lg font-bold mb-3">Consultation & Planning</h3>
+                        <p class="text-gray-300 text-sm">Understanding your vision and comprehensive project planning.
+                        </p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="relative mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-700 rounded-full flex items-center justify-center mx-auto shadow-lg floating-icon">
+                                <i class="bi bi-pencil-square text-white text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div
+                                class="absolute -top-1 -right-1 w-6 h-6 bg-accent-600 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                2</div>
+                        </div>
+                        <h3 class="font-playfair text-lg font-bold mb-3">Design & Engineering</h3>
+                        <p class="text-gray-300 text-sm">Creating detailed architectural designs and structural
+                            blueprints.</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="relative mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto shadow-lg floating-icon">
+                                <i class="bi bi-file-earmark-check text-white text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div
+                                class="absolute -top-1 -right-1 w-6 h-6 bg-accent-600 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                3</div>
+                        </div>
+                        <h3 class="font-playfair text-lg font-bold mb-3">Permits & Approvals</h3>
+                        <p class="text-gray-300 text-sm">Securing all necessary permits and regulatory compliance.</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="relative mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-full flex items-center justify-center mx-auto shadow-lg floating-icon">
+                                <i class="bi bi-hammer text-white text-2xl" aria-hidden="true"></i>
+                            </div>
+                            <div
+                                class="absolute -top-1 -right-1 w-6 h-6 bg-accent-600 rounded-full flex items-center justify-center text-white text-xs font-bold animate-pulse">
+                                4</div>
+                        </div>
+                        <h3 class="font-playfair text-lg font-bold mb-3">Construction & Execution</h3>
+                        <p class="text-gray-300 text-sm">Building with premium materials and superior craftsmanship.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-16 bg-white relative" role="region" aria-label="Featured projects">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Featured Projects</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Explore our portfolio of completed projects showcasing our construction expertise and quality.
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100"
+                    role="tablist">
+                    <button
+                        class="project-filter active px-4 py-2 rounded-full bg-accent-500 text-white text-sm font-semibold"
+                        data-filter="all" role="tab" aria-selected="true">All Projects</button>
+                    <button
+                        class="project-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold hover:bg-accent-500 hover:text-white transition-all"
+                        data-filter="residential" role="tab" aria-selected="false">Residential</button>
+                    <button
+                        class="project-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold hover:bg-accent-500 hover:text-white transition-all"
+                        data-filter="commercial" role="tab" aria-selected="false">Commercial</button>
+                    <button
+                        class="project-filter px-4 py-2 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold hover:bg-accent-500 hover:text-white transition-all"
+                        data-filter="industrial" role="tab" aria-selected="false">Industrial</button>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid" role="tabpanel"></div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-bg py-16 relative" role="region" aria-label="Our achievements">
+            <div class="container mx-auto px-4 md:px-6 relative z-10">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="font-playfair text-3xl md:text-5xl font-bold text-white mb-4">Our Achievements</h2>
+                    <p class="text-gray-300 text-base md:text-lg max-w-3xl mx-auto">Numbers that reflect our dedication
+                        to construction excellence and client satisfaction.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
+                    <div class="premium-card bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover-lift"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="text-3xl md:text-4xl font-bold font-playfair text-accent-400 mb-3 counter"
+                            data-target="13" aria-label="Years of experience">0</div>
+                        <div class="text-gray-300 text-sm">Years Experience</div>
+                    </div>
+                    <div class="premium-card bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover-lift"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div class="text-3xl md:text-4xl font-bold font-playfair text-accent-400 mb-3 counter"
+                            data-target="500" aria-label="Projects completed">0</div>
+                        <div class="text-gray-300 text-sm">Projects Completed</div>
+                    </div>
+                    <div class="premium-card bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover-lift"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div class="text-3xl md:text-4xl font-bold font-playfair text-accent-400 mb-3 counter"
+                            data-target="50" aria-label="Expert team members">0</div>
+                        <div class="text-gray-300 text-sm">Expert Team</div>
+                    </div>
+                    <div class="premium-card bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20 hover-lift"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <div class="text-3xl md:text-4xl font-bold font-playfair text-accent-400 mb-3 counter"
+                            data-target="100" aria-label="Client satisfaction percentage">0</div>
+                        <div class="text-gray-300 text-sm">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-16 bg-gray-50" role="region" aria-label="Client testimonials">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Client Testimonials</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Hear from our satisfied clients about their experience with Bethanan Associates.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="testimonial-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=80&h=80&fit=crop"
+                                alt="Client Priya Sharma"
+                                class="w-12 h-12 rounded-full mr-3 border-2 border-accent-200 lazy object-cover">
+                            <div>
+                                <h4 class="font-bold text-primary-900 text-base">Priya Sharma</h4>
+                                <p class="text-gray-600 text-sm">Luxury Villa Owner</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-gray-700 text-sm italic mb-4">
+                            "Bethanan Associates turned our dream home into reality with exceptional quality and
+                            attention to detail. Highly recommended!"
+                        </blockquote>
+                        <div class="flex text-accent-500 mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-xs text-gray-500">Luxury Villa Construction, Coimbatore</div>
+                    </div>
+                    <div class="testimonial-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=80&h=80&fit=crop"
+                                alt="Client Ramesh Kumar"
+                                class="w-12 h-12 rounded-full mr-3 border-2 border-accent-200 lazy object-cover">
+                            <div>
+                                <h4 class="font-bold text-primary-900 text-base">Ramesh Kumar</h4>
+                                <p class="text-gray-600 text-sm">Business Owner</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-gray-700 text-sm italic mb-4">
+                            "Professional team, timely delivery, and outstanding quality for our commercial complex.
+                            Exceeded all expectations!"
+                        </blockquote>
+                        <div class="flex text-accent-500 mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-xs text-gray-500">Commercial Complex, Coimbatore</div>
+                    </div>
+                    <div class="testimonial-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="300">
+                        <div class="flex items-center mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=80&h=80&fit=crop"
+                                alt="Client Dr. Arun Krishnan"
+                                class="w-12 h-12 rounded-full mr-3 border-2 border-accent-200 lazy object-cover">
+                            <div>
+                                <h4 class="font-bold text-primary-900 text-base">Dr. Arun Krishnan</h4>
+                                <p class="text-gray-600 text-sm">Medical Professional</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-gray-700 text-sm italic mb-4">
+                            "Exceptional quality and professionalism in our hospital project. The team's expertise is
+                            truly impressive."
+                        </blockquote>
+                        <div class="flex text-accent-500 mb-3">
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            <i class="bi bi-star-fill" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-xs text-gray-500">Medical Facility, Coimbatore</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-white relative" role="region" aria-label="About us">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">About Bethanan Associates</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Excellence in construction backed by decades of expertise and superior craftsmanship.
+                    </p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right" data-aos-duration="1000">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=500&h=400&fit=crop"
+                            alt="Professional Construction Team"
+                            class="rounded-xl shadow-xl w-full lazy object-cover h-96">
+                    </div>
+                    <div data-aos="fade-left" data-aos-duration="1000">
+                        <h3 class="font-playfair text-2xl md:text-3xl font-bold text-primary-900 mb-6">Precision.
+                            Quality. Excellence.</h3>
+                        <p class="text-gray-600 text-base mb-6">
+                            Led by <strong class="text-accent-600">Er. Bethanan M, B.Tech (Civil)</strong> with over 35
+                            years of comprehensive experience,
+                            we deliver innovative and sustainable construction solutions across residential, commercial,
+                            and industrial sectors.
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div
+                                class="p-4 rounded-lg border-l-4 border-accent-500 hover:shadow-lg transition-shadow bg-gray-50 hover-lift">
+                                <h4 class="font-bold text-primary-900 text-sm mb-2">Professional Certification</h4>
+                                <p class="text-gray-600 text-xs">Licensed engineers with comprehensive industry
+                                    accreditations and certifications.</p>
+                            </div>
+                            <div
+                                class="p-4 rounded-lg border-l-4 border-accent-500 hover:shadow-lg transition-shadow bg-gray-50 hover-lift">
+                                <h4 class="font-bold text-primary-900 text-sm mb-2">Quality Assurance</h4>
+                                <p class="text-gray-600 text-xs">ISO certified processes ensuring superior construction
+                                    standards and quality control.</p>
+                            </div>
+                        </div>
+                        <button class="btn-premium text-sm" onclick="scrollToSection('contact')"
+                            aria-label="Contact us">Contact Us Today</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 bg-gray-50 relative" role="region" aria-label="Our services">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Our Professional Services</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Comprehensive construction solutions tailored to meet your specific project requirements and
+                        vision.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-house-fill text-accent-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Residential Construction</h3>
+                        <p class="text-gray-600 text-sm mb-4">Luxury villas, apartment complexes, and custom homes with
+                            modern amenities and sustainable design.</p>
+                        <button class="text-accent-600 text-sm font-semibold hover:text-accent-700 transition-colors"
+                            onclick="openProjectModal('residential')"
+                            aria-label="Learn more about residential construction">Learn More</button>
+                    </div>
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-building text-secondary-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Commercial Projects</h3>
+                        <p class="text-gray-600 text-sm mb-4">Office buildings, retail spaces, and commercial complexes
+                            designed for optimal functionality and aesthetics.</p>
+                        <button class="text-accent-600 text-sm font-semibold hover:text-accent-700 transition-colors"
+                            onclick="openProjectModal('commercial')"
+                            aria-label="Learn more about commercial projects">Learn More</button>
+                    </div>
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="300">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-accent-100 to-accent-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-gear-fill text-accent-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Engineering Consulting</h3>
+                        <p class="text-gray-600 text-sm mb-4">Expert structural design, project management, and
+                            comprehensive engineering consultation services.</p>
+                        <button class="text-accent-600 text-sm font-semibold hover:text-accent-700 transition-colors"
+                            onclick="openProjectModal('consulting')"
+                            aria-label="Learn more about engineering consulting">Learn More</button>
+                    </div>
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="400">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-tools text-blue-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Industrial Construction</h3>
+                        <p class="text-gray-600 text-sm mb-4">Manufacturing facilities, warehouses, and industrial
+                            complexes with specialized infrastructure requirements.</p>
+                        <button class="text-accent-600 text-sm font-semibold hover:text-accent-700 transition-colors"
+                            onclick="openProjectModal('industrial')"
+                            aria-label="Learn more about industrial construction">Learn More</button>
+                    </div>
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="500">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-arrow-clockwise text-green-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Renovation & Remodeling</h3>
+                        <p class="text-gray-600 text-sm mb-4">Complete renovation services for existing structures,
+                            modernization, and space optimization projects.</p>
+                        <button class="text-accent-600 text-sm font-semibold hover:text-accent-700 transition-colors"
+                            onclick="openProjectModal('renovation')"
+                            aria-label="Learn more about renovation services">Learn More</button>
+                    </div>
+                    <div class="service-card p-6 rounded-xl shadow-lg hover-lift" data-aos="fade-up"
+                        data-aos-delay="600">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center mb-4 floating-icon">
+                            <i class="bi bi-shield-check text-purple-600 text-2xl" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-primary-900 mb-3">Quality Assurance</h3>
+                        <p class="text-gray-600 text-sm mb-4">Comprehensive quality control and safety standards
+                            ensuring the highest construction excellence.</p>
+                        <button class="text-purple-600 text-sm font-semibold hover:text-purple-700 transition-colors"
+                            onclick="scrollToSection('contact')" aria-label="Learn more about quality assurance">Learn
+                            More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-white relative" role="region" aria-label="Contact us">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="section-title text-3xl md:text-5xl mb-4">Get In Touch</h2>
+                    <p class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto">
+                        Contact our expert team for professional consultation and comprehensive project planning
+                        services.
+                    </p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div data-aos="fade-right" data-aos-duration="1000">
+                        <h3 class="font-playfair text-2xl font-bold text-primary-900 mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start space-x-4 hover-lift">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg flex items-center justify-center floating-icon">
+                                    <i class="bi bi-geo-alt-fill text-white text-xl" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-900 mb-2 text-base">Office Address</h4>
+                                    <p class="text-gray-600 text-sm">2/8, 7th Cross Kanjimaanagar, Vilankurichi,
+                                        Coimbatore - 641035, Tamil Nadu, India</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 hover-lift">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-secondary-500 to-secondary-700 rounded-lg flex items-center justify-center floating-icon">
+                                    <i class="bi bi-telephone-fill text-white text-xl" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-900 mb-2 text-base">Phone</h4>
+                                    <p class="text-gray-600 text-sm"><a href="tel:+919942223010"
+                                            class="hover:text-accent-600 transition-colors">+91 9942223010</a></p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 hover-lift">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center floating-icon">
+                                    <i class="bi bi-envelope-fill text-white text-xl" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-900 mb-2 text-base">Email</h4>
+                                    <p class="text-gray-600 text-sm"><a href="mailto:Bethananassociates@gmail.com"
+                                            class="hover:text-accent-600 transition-colors">Bethananassociates@gmail.com</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 hover-lift">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-700 rounded-lg flex items-center justify-center floating-icon">
+                                    <i class="bi bi-clock-fill text-white text-xl" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary-900 mb-2 text-base">Business Hours</h4>
+                                    <p class="text-gray-600 text-sm">Monday - Saturday: 9:00 AM - 6:00 PM<br>Sunday:
+                                        Consultation by Appointment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-aos="fade-left" data-aos-duration="1000">
+                        <div class="premium-card p-6 rounded-xl shadow-lg">
+                            <h3 class="font-playfair text-xl font-bold text-primary-900 mb-4">Request Consultation</h3>
+                            <form id="contact-form" class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div class="form-group">
+                                        <label class="block text-sm font-semibold text-primary-900 mb-2" for="name">Full
+                                            Name *</label>
+                                        <input type="text" id="name" required name="name"
+                                            class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-accent-600 focus:outline-none transition-all"
+                                            aria-required="true">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="block text-sm font-semibold text-primary-900 mb-2"
+                                            for="phone">Phone Number *</label>
+                                        <input type="tel" id="phone" required name="phone"
+                                            class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-accent-600 focus:outline-none transition-all"
+                                            aria-required="true">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="block text-sm font-semibold text-primary-900 mb-2" for="email">Email
+                                        Address *</label>
+                                    <input type="email" id="email" required name="email"
+                                        class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-accent-600 focus:outline-none transition-all"
+                                        aria-required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label class="block text-sm font-semibold text-primary-900 mb-2"
+                                        for="projectType">Project Type</label>
+                                    <select id="projectType" name="projectType"
+                                        class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-accent-600 focus:outline-none transition-all">
+                                        <option value="">Select Project Type</option>
+                                        <option value="Residential Construction">Residential Construction</option>
+                                        <option value="Commercial Project">Commercial Project</option>
+                                        <option value="Industrial Construction">Industrial Construction</option>
+                                        <option value="Renovation & Remodeling">Renovation & Remodeling</option>
+                                        <option value="Engineering Consulting">Engineering Consulting</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="block text-sm font-semibold text-primary-900 mb-2"
+                                        for="details">Project Details (Optional)</label>
+                                    <textarea id="details" rows="4" name="details"
+                                        class="form-input w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-accent-600 focus:outline-none transition-all"
+                                        placeholder="Please describe your project requirements, location, timeline, and budget range..."></textarea>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button type="button" onclick="sendWhatsApp()" class="btn-premium flex-1 py-3"
+                                        aria-label="Send via WhatsApp">
+                                        <i class="bi bi-whatsapp mr-2"></i>Send via WhatsApp
+                                    </button>
+                                    <button type="button" onclick="sendEmail()"
+                                        class="btn-premium bg-blue-600 hover:bg-blue-700 flex-1 py-3"
+                                        aria-label="Send via Email">
+                                        <i class="bi bi-envelope mr-2"></i>Send via Email
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="premium-card p-6 rounded-xl shadow-lg">
+                        <h3 class="font-playfair text-xl font-bold text-center text-primary-900 mb-4">Visit Our Office
+                        </h3>
+                        <div class="h-64 rounded-xl overflow-hidden">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.748!2d76.9538!3d11.082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s2%2F8%2C%207th%20Cross%20Kanjimaanagar%2C%20Vilankurichi%2C%20Coimbatore%20-%20641035%2C%20Tamil%20Nadu%2C%20India!5e0!3m2!1sen!2sin!4v1726743600000!5m2!1sen!2sin"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Bethanan Associates Office Location - 2/8, 7th Cross Kanjimaanagar, Vilankurichi, Coimbatore">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg text-white py-12 relative" role="contentinfo">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-br from-accent-500 to-accent-700 rounded-lg flex items-center justify-center floating-icon">
+                            <i class="bi bi-building text-white text-lg" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-playfair font-bold text-lg">Bethanan Associates</h3>
+                            <p class="text-gray-300 text-xs">Engineers & Builders</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Building excellence since 2012 with precision, quality, and innovative construction solutions.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#"
+                            class="w-10 h-10 bg-primary-700 hover:bg-accent-500 rounded-lg flex items-center justify-center transition-all hover:scale-110 floating-btn"
+                            aria-label="Facebook">
+                            <i class="bi bi-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-primary-700 hover:bg-accent-500 rounded-lg flex items-center justify-center transition-all hover:scale-110 floating-btn"
+                            aria-label="LinkedIn">
+                            <i class="bi bi-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-primary-700 hover:bg-accent-500 rounded-lg flex items-center justify-center transition-all hover:scale-110 floating-btn"
+                            aria-label="Instagram">
+                            <i class="bi bi-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://wa.me/919942223010" target="_blank"
+                            class="w-10 h-10 bg-primary-700 hover:bg-green-500 rounded-lg flex items-center justify-center transition-all hover:scale-110 floating-btn"
+                            aria-label="WhatsApp">
+                            <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="font-semibold text-base mb-4 text-accent-400">Our Services</h4>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Residential
+                                Construction</a></li>
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Commercial
+                                Projects</a></li>
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Industrial
+                                Construction</a></li>
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Engineering
+                                Consulting</a></li>
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Renovation &
+                                Remodeling</a></li>
+                    </ul>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="font-semibold text-base mb-4 text-accent-400">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li><a href="#about" class="hover:text-accent-400 transition-colors hover-lift">About Us</a>
+                        </li>
+                        <li><a href="#projects" class="hover:text-accent-400 transition-colors hover-lift">Our
+                                Projects</a></li>
+                        <li><a href="#why-choose" class="hover:text-accent-400 transition-colors hover-lift">Why Choose
+                                Us</a></li>
+                        <li><a href="#process" class="hover:text-accent-400 transition-colors hover-lift">Our
+                                Process</a></li>
+                        <li><a href="#contact" class="hover:text-accent-400 transition-colors hover-lift">Contact Us</a>
+                        </li>
+                        <li><a href="#services" class="hover:text-accent-400 transition-colors hover-lift">Professional
+                                Services</a></li>
+                    </ul>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <h4 class="font-semibold text-base mb-4 text-accent-400">Contact Info</h4>
+                    <div class="space-y-2 text-gray-300 text-sm">
+                        <p class="hover-lift"><i class="bi bi-geo-alt mr-2 text-accent-400"></i>2/8, 7th Cross
+                            Kanjimaanagar, Vilankurichi, Coimbatore - 641035</p>
+                        <p class="hover-lift"><i class="bi bi-telephone mr-2 text-accent-400"></i><a
+                                href="tel:+919942223010" class="hover:text-accent-400 transition-colors">+91
+                                9942223010</a></p>
+                        <p class="hover-lift"><i class="bi bi-envelope mr-2 text-accent-400"></i><a
+                                href="mailto:Bethananassociates@gmail.com"
+                                class="hover:text-accent-400 transition-colors">Bethananassociates@gmail.com</a></p>
+                        <p class="hover-lift"><i class="bi bi-clock mr-2 text-accent-400"></i>Mon-Sat: 9 AM - 6 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-primary-700 mt-8 pt-6 text-center text-gray-300 text-sm">
+                <p>&copy; 2025 Bethanan Associates Engineers & Builders. All rights reserved. | Designed with excellence
+                    for construction industry.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-action-buttons">
+        <div class="flex flex-col space-y-3">
+            <a href="https://wa.me/919942223010" target="_blank"
+                class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg flex items-center justify-center floating-icon hover:scale-110 transition-all floating-btn"
+                aria-label="Contact via WhatsApp">
+                <i class="bi bi-whatsapp text-xl" aria-hidden="true"></i>
+            </a>
+            <a href="tel:+919942223010"
+                class="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center floating-icon hover:scale-110 transition-all floating-btn"
+                aria-label="Call us">
+                <i class="bi bi-telephone text-xl" aria-hidden="true"></i>
+            </a>
+            <a href="mailto:Bethananassociates@gmail.com"
+                class="w-12 h-12 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center floating-icon hover:scale-110 transition-all floating-btn"
+                aria-label="Email us">
+                <i class="bi bi-envelope text-xl" aria-hidden="true"></i>
+            </a>
+            <button id="scroll-top"
+                class="w-12 h-12 bg-accent-500 hover:bg-accent-600 text-white rounded-full shadow-lg opacity-0 invisible transition-all hover:scale-110 floating-btn"
+                aria-label="Scroll to top">
+                <i class="bi bi-arrow-up text-xl" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal" class="modal" role="dialog" aria-label="About Bethanan Associates">
+        <div class="modal-content">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-playfair text-2xl font-bold text-primary-900">About Bethanan Associates</h2>
+                    <button onclick="closeAboutModal()"
+                        class="text-gray-400 hover:text-gray-600 text-3xl transition-colors"
+                        aria-label="Close modal">&times;</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?q=80&w=300&h=200&fit=crop"
+                        alt="Bethanan Associates Team" class="w-full h-48 object-cover rounded-lg mb-4 lazy">
+                </div>
+                <p class="text-gray-600 text-base mb-4">
+                    <strong>Bethanan Associates Engineers & Builders</strong>, established in 2012, has been a trusted
+                    name in construction excellence for over a decade.
+                    Led by <strong>Er. Bethanan M, B.Tech (Civil)</strong> with over 35 years of comprehensive
+                    engineering experience, we have successfully completed
+                    over 500 projects across residential, commercial, and industrial sectors.
+                </p>
+                <p class="text-gray-600 text-base mb-6">
+                    Our commitment to quality, innovation, and client satisfaction has made us one of the most reliable
+                    construction companies in Coimbatore and
+                    surrounding regions. We pride ourselves on using sustainable construction practices, advanced
+                    engineering techniques, and maintaining the highest
+                    standards of craftsmanship in every project we undertake.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg hover-lift">
+                        <div class="text-3xl font-bold text-accent-600 mb-2">500+</div>
+                        <div class="text-sm text-gray-600">Projects Completed</div>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-lg hover-lift">
+                        <div class="text-3xl font-bold text-accent-600 mb-2">35+</div>
+                        <div class="text-sm text-gray-600">Years Experience</div>
+                    </div>
+                </div>
+                <button class="btn-premium w-full py-3" onclick="closeAboutModal()" aria-label="Close about modal">
+                    <i class="bi bi-check-circle mr-2"></i>Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal" role="dialog" aria-label="Project details">
+        <div class="modal-content">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-playfair text-2xl font-bold text-primary-900" id="project-modal-title">Project
+                        Details</h2>
+                    <button onclick="closeProjectModal()"
+                        class="text-gray-400 hover:text-gray-600 text-3xl transition-colors"
+                        aria-label="Close modal">&times;</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <img id="project-modal-image" src="" alt="Project Image"
+                    class="w-full h-48 object-cover rounded-lg mb-4 lazy">
+                <p class="text-gray-600 text-base mb-4" id="project-modal-description"></p>
+                <div class="grid md:grid-cols-3 gap-4 mb-6 text-sm">
+                    <div class="text-center p-3 bg-gray-50 rounded-lg hover-lift">
+                        <div class="font-bold text-primary-900 mb-1">Area</div>
+                        <div class="text-gray-600" id="project-modal-area"></div>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 rounded-lg hover-lift">
+                        <div class="font-bold text-primary-900 mb-1">Location</div>
+                        <div class="text-gray-600" id="project-modal-location"></div>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 rounded-lg hover-lift">
+                        <div class="font-bold text-primary-900 mb-1">Duration</div>
+                        <div class="text-gray-600" id="project-modal-duration"></div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button class="btn-premium w-full py-3" onclick="scrollToSection('contact'); closeProjectModal();"
+                        aria-label="Contact us for this project type">
+                        <i class="bi bi-telephone mr-2"></i>Contact Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification" role="alert">
+        <div class="flex items-center">
+            <i class="bi bi-check-circle mr-2 text-lg" aria-hidden="true"></i>
+            <span id="notification-message">Message sent successfully!</span>
+        </div>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

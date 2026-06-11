@@ -1,0 +1,190 @@
+<div class="animate-fade-in">
+
+  <!-- Stats Cards -->
+  <div class="stats-grid mb-5">
+    <div class="stat-card">
+      <div class="stat-icon text-primary">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @daily_updates.count %></h3>
+        <p class="stat-label">Total Updates</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-success">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @daily_updates.where(approved: true).count %></h3>
+        <p class="stat-label">Approved Updates</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-warning">
+        <i class="fas fa-clock"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @daily_updates.where(approved: false).count %></h3>
+        <p class="stat-label">Pending Approval</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-info">
+        <i class="fas fa-comments"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= Reply.joins(:daily_update).where(daily_updates: { id: @daily_updates.ids }).count %></h3>
+        <p class="stat-label">Total Replies</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Updates Feed -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-list"></i>
+        Recent Updates
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="daily-updates-feed">
+    <% @daily_updates.order(created_at: :desc).each do |update| %>
+    <div class="update-card" style="border:1px solid #ccc; border-radius:8px; margin-bottom:1em; padding:1em;">
+        <div style="font-weight:bold;">Site Engineer: <%= update.user&.email || 'Unknown' %> <span style="float:right; color:#888; font-size:0.9em;"> <%= update.created_at.strftime('%b %d, %Y %H:%M') %> </span></div>
+        <div style="margin:0.5em 0 1em 0; white-space:pre-line;"> <%= update.note %> </div>
+        <div class="reply-form-inline">
+            <%= form_with url: daily_update_replies_path(update), method: :post, local: true, class: 'reply-form-compact', multipart: true do |f| %>
+            <div class="reply-input-group">
+                <%= f.text_area :content, placeholder: 'Write your reply...', class: 'reply-textarea-compact', rows: 2 %>
+                <div class="reply-actions">
+                    <label for="reply_image_<%= update.id %>" class="image-upload-label-compact">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                    <%= f.file_field :image, id: "reply_image_#{update.id}", class: 'image-upload-input', accept: 'image/*' %>
+                    <%= f.submit 'Reply', class: 'btn btn-sm btn-primary' %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+        <div class="replies" style="margin-top:0.5em;">
+            <% update.replies.each do |reply| %>
+            <div style="margin-left:1em; color:#333; padding:0.5em; background:#f8f9fa; border-radius:4px; margin-bottom:0.5em;">
+                <div style="font-weight:bold; margin-bottom:0.25em;">
+                    <%= reply.user&.email || 'Unknown' %>
+                    <span style="color:#aaa; font-size:0.8em; font-weight:normal;"> <%= reply.created_at.strftime('%b %d, %Y %H:%M') %> </span>
+                </div>
+                <% if reply.content.present? %>
+                <div style="margin-bottom:0.5em;"><%= reply.content %></div>
+                <% end %>
+                <% if reply.image.attached? %>
+                <div class="reply-image">
+                    <%= image_tag reply.image, style: 'max-width:150px; height:auto; border-radius:4px; border:1px solid #ced4da;' %>
+                </div>
+                <% end %>
+            </div>
+            <% end %>
+        </div>
+        <div style="margin-top:1em;">
+            <% if update.approved? %>
+            <span class="badge bg-success">Approved</span>
+            <% else %>
+            <%= button_to 'Approve Task', approve_daily_update_path(update), method: :patch, class: 'btn btn-success btn-sm' %>
+            <% end %>
+        </div>
+    </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+    .daily-updates-feed {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .update-card {
+        background: #f9f9f9;
+    }
+
+    .badge.bg-success {
+        background: #28a745;
+        color: #fff;
+        padding: 0.3em 0.7em;
+        border-radius: 0.5em;
+    }
+    
+    .reply-form-inline {
+        margin-top: 0.75em;
+        padding: 0.75em;
+        background: #f8f9fa;
+        border-radius: 6px;
+        border: 1px solid #e9ecef;
+    }
+    
+    .reply-input-group {
+        display: flex;
+        gap: 0.5em;
+        align-items: flex-end;
+    }
+    
+    .reply-textarea-compact {
+        flex: 1;
+        min-height: 60px;
+        padding: 0.5em;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 1.4;
+        resize: vertical;
+        transition: border-color 0.15s ease-in-out;
+    }
+    
+    .reply-textarea-compact:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .reply-input-group .btn {
+        flex-shrink: 0;
+        padding: 0.5em 1em;
+        font-weight: 500;
+    }
+    
+    .reply-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+    
+    .image-upload-label-compact {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: #6c757d;
+    }
+    
+    .image-upload-label-compact:hover {
+        background: #e9ecef;
+        border-color: #007bff;
+        color: #007bff;
+    }
+    
+    .image-upload-input {
+        display: none;
+    }
+</style>

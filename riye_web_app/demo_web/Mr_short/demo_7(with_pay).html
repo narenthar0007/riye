@@ -1,0 +1,3885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Short - Instant Water Heaters at Affordable Prices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-red: #e30613;
+            --dark-red: #b00000;
+            --light-red: #ff4d4d;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-color: #4a4a4a; /* Slightly softer dark gray for general text */
+            --border-color: #e0e0e0; /* A light border color */
+            --shadow-light: rgba(0, 0, 0, 0.05); /* Softer shadow */
+            --shadow-medium: rgba(0, 0, 0, 0.1); /* Softer shadow */
+            --shadow-deep: rgba(0, 0, 0, 0.15); /* Softer shadow */
+
+            /* Futuristic Glow Colors (toned down) */
+            --glow-red: rgba(255, 0, 0, 0.3); /* Less intense */
+            --glow-blue: rgba(0, 123, 255, 0.3); /* Less intense */
+            --glow-purple: rgba(103, 58, 183, 0.3); /* Less intense */
+            --futuristic-glow: 0 0 8px var(--glow-red); /* Default glow for elements, smaller blur */
+            --futuristic-glow-soft: 0 0 5px rgba(255, 0, 0, 0.2); /* Even softer */
+            --ai-chat-bg: rgba(255, 255, 255, 0.9); /* Slightly less transparent */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+            font-size: 16px; /* Base font size */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease-in-out; /* Faster, smoother transition */
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px var(--shadow-light); /* Softer initial shadow */
+            text-shadow: none; /* Removed text shadow for cleaner look */
+        }
+        
+        .btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-2px); /* Less pronounced lift */
+            box-shadow: 0 5px 15px var(--shadow-medium), var(--futuristic-glow-soft); /* Softer shadow + subtle glow */
+        }
+        
+        .btn-large {
+            padding: 18px 35px;
+            font-size: 1.2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-red);
+            font-size: 2.8rem;
+            position: relative;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Softer text shadow */
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px; /* Slightly narrower underline */
+            height: 4px; /* Thinner underline */
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            margin: 15px auto 0; /* Less space below title */
+            border-radius: 2px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95); /* More opaque */
+            backdrop-filter: blur(5px);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 55px;
+            margin-right: 12px;
+            transition: height 0.3s ease;
+        }
+        
+        .logo h1 {
+            color: var(--primary-red);
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            transition: font-size 0.3s ease;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--primary-red);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        
+        nav ul li {
+            margin-left: 35px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-red);
+            transform: translateY(-1px); /* More subtle lift */
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px; /* Thinner underline */
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Header Scrolled State */
+        header.header-scrolled {
+            height: 70px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Softer shadow */
+        }
+        header.header-scrolled .header-container {
+            padding: 10px 0;
+        }
+        header.header-scrolled .logo img {
+            height: 40px;
+        }
+        header.header-scrolled .logo h1 {
+            font-size: 1.8rem;
+        }
+        header.header-scrolled nav ul {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-20px);
+        }
+        
+        /* Floating Circular Navigation */
+        .floating-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Slightly less space */
+        }
+        
+        .floating-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .floating-nav ul li {
+            margin: 0;
+            position: relative;
+        }
+        
+        .floating-nav ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px; /* Slightly smaller */
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 3px 10px var(--shadow-light); /* Softer shadow */
+            transition: all 0.2s ease-in-out;
+            font-size: 1.1rem; /* Slightly smaller icon */
+        }
+        
+        .floating-nav ul li a:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.05); /* More subtle scale */
+            box-shadow: 0 5px 15px var(--shadow-medium); /* Softer hover shadow */
+        }
+        
+        .floating-nav ul li .nav-tooltip {
+            position: absolute;
+            right: 55px; /* Adjusted position */
+            background: var(--dark-gray);
+            color: white;
+            padding: 6px 12px; /* Smaller padding */
+            border-radius: 8px; /* Less rounded */
+            font-size: 0.85rem; /* Smaller font */
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+            transform: translateY(-50%);
+            top: 50%;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        .floating-nav ul li .nav-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -8px; /* Adjusted position */
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 8px solid var(--dark-gray);
+        }
+        
+        .floating-nav ul li a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 60px; /* Adjusted position on hover */
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 95vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 85px;
+            position: relative;
+            overflow: hidden;
+            animation: panBackground 90s linear infinite alternate; /* Slower animation */
+        }
+
+        @keyframes panBackground {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); } /* Slightly less dramatic */
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hero-content {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.15); /* Slightly less opaque */
+            border-radius: 15px; /* Slightly less rounded */
+            box-shadow: 0 10px 30px var(--shadow-medium); /* Softer shadow */
+            animation: fadeInScale 0.8s ease-out forwards; /* Faster animation */
+            backdrop-filter: blur(6px); /* Slightly less blur */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* More subtle white border */
+        }
+        
+        .hero h2 {
+            font-size: 4rem; /* Slightly smaller */
+            margin-bottom: 25px; /* Less space */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Softer shadow */
+            line-height: 1.1;
+            letter-spacing: 1.5px; /* Slightly less letter spacing */
+        }
+        
+        .hero p {
+            font-size: 1.3rem; /* Slightly smaller */
+            margin-bottom: 40px; /* Less space */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Softer shadow */
+            line-height: 1.5;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Less space */
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0; /* Reduced padding */
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min-width */
+            gap: 40px; /* Less space */
+        }
+        
+        .feature-card {
+            background: var(--light-gray);
+            padding: 35px; /* Slightly less padding */
+            border-radius: 15px; /* Less rounded */
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Faster transitions */
+            box-shadow: 0 5px 15px var(--shadow-light); /* Softer initial shadow */
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px); /* Less pronounced lift */
+            box-shadow: 0 10px 25px var(--shadow-medium), var(--futuristic-glow-soft); /* Softer shadow + subtle glow */
+            background-color: #f0f0f0;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px; /* Thinner line */
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-out; /* Faster transition */
+        }
+
+        .feature-card:hover::before {
+            transform: translateY(0);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem; /* Slightly smaller */
+            color: var(--primary-red);
+            margin-bottom: 25px; /* Less space */
+            transition: transform 0.2s ease, text-shadow 0.2s ease; /* Faster transitions */
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.05) rotate(2deg); /* Less dramatic animation */
+            text-shadow: 0 0 10px rgba(227, 6, 19, 0.3); /* Softer glow */
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            letter-spacing: 0.7px;
+        }
+        
+        .feature-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 0; /* Reduced padding */
+            background-color: var(--light-gray);
+        }
+
+        /* Product Controls Wrapper */
+        .product-controls-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px; /* Less space */
+            gap: 15px; /* Less space */
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            flex: 1;
+            min-width: 200px; /* Smaller min-width */
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px 10px 40px; /* Slightly less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            font-size: 0.95rem; /* Slightly smaller font */
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 5px var(--shadow-light); /* Softer shadow */
+            background-color: rgba(255, 255, 255, 0.8); /* More opaque */
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1), var(--futuristic-glow-soft); /* Softer glow */
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 12px; /* Adjusted position */
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            font-size: 1rem; /* Slightly smaller icon */
+        }
+
+        /* Filters and Sort */
+        .filters-sort {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Less space */
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Less space */
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 0.95rem; /* Slightly smaller font */
+        }
+
+        .filters-sort select {
+            padding: 8px 12px; /* Slightly less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            background-color: rgba(255, 255, 255, 0.8); /* More opaque */
+            font-size: 0.95rem; /* Slightly smaller font */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 1px 5px var(--shadow-light); /* Softer shadow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22 viewBox%3D%220 0 292.4 292.4%22%3E%3Cpath fill%3D%22%234a4a4a%22 d%3D%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 4.9 1.8 9.2 5.4 12.8l128 128c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4l128-128c3.6-3.6 5.4-7.8 5.4-12.8 0-4.9-1.8-9.1-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 8px top 50%; /* Adjusted position */
+            background-size: 10px auto; /* Smaller arrow */
+            padding-right: 30px; /* Adjusted padding */
+        }
+
+        .filters-sort select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1), var(--futuristic-glow-soft); /* Softer glow */
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly smaller min-width */
+            gap: 40px; /* Less space */
+        }
+        
+        .product-card-container {
+            perspective: 1000px; /* Less intense perspective */
+            height: 450px; /* Slightly smaller height */
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease-in-out; /* Faster, smoother transition */
+            transform-style: preserve-3d;
+            border-radius: 15px; /* Less rounded */
+            box-shadow: 0 5px 15px var(--shadow-medium); /* Softer shadow */
+            background-color: var(--white);
+        }
+
+        .product-card-container.flipped .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-card-container:hover .product-card-inner {
+            box-shadow: 0 8px 20px var(--shadow-medium), var(--futuristic-glow-soft); /* Softer glow on hover */
+        }
+
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-color: var(--white);
+            border-radius: 15px; /* Less rounded */
+            padding: 25px; /* Less padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            text-align: left;
+            padding-top: 35px; /* Less padding */
+        }
+
+        .product-img {
+            height: 200px; /* Slightly smaller */
+            width: 100%;
+            border-radius: 10px; /* Less rounded */
+            overflow: hidden;
+            margin-bottom: 15px; /* Less space */
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1); /* Softer shadow */
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease-in-out; /* Faster transition */
+        }
+        
+        .product-card-container:hover .product-img img {
+            transform: scale(1.05); /* Less dramatic scale */
+        }
+
+        .product-gallery-dots {
+            position: absolute;
+            bottom: 8px; /* Slightly less space */
+            left: 8px; /* Slightly less space */
+            transform: translateX(0);
+            display: flex;
+            gap: 4px; /* Less space */
+            z-index: 5;
+        }
+
+        .gallery-dot {
+            width: 7px; /* Smaller */
+            height: 7px; /* Smaller */
+            background-color: rgba(255, 255, 255, 0.6); /* Slightly less opaque */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Softer border */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s; /* Faster transitions */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
+
+        .gallery-dot:hover {
+            background-color: var(--primary-red);
+            transform: scale(1.05); /* Less dramatic scale */
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--primary-red);
+            font-size: 1.4rem; /* Slightly smaller */
+            letter-spacing: 0.6px;
+        }
+        
+        .product-info p {
+            font-size: 0.95rem; /* Slightly smaller */
+            line-height: 1.5;
+            flex-grow: 1;
+            margin-bottom: 12px; /* Less space */
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.4rem; /* Slightly smaller */
+            margin: 12px 0 20px; /* Less space */
+            color: var(--dark-red);
+            letter-spacing: 0.5px;
+        }
+
+        /* New styles for color options */
+        .product-colors {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.2), 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .color-option.selected {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.3), 0 2px 5px rgba(0,0,0,0.2);
+            transform: scale(1.15);
+        }
+        
+        .product-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Less space */
+            width: 100%;
+        }
+
+        .product-card-back h3 {
+            font-size: 1.6rem; /* Slightly smaller */
+            margin-bottom: 15px; /* Less space */
+            color: var(--primary-red);
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card-back .product-details-full {
+            flex-grow: 1;
+            margin-bottom: 25px; /* Less space */
+            overflow-y: auto;
+            padding-right: 5px; /* Less padding */
+            font-size: 0.95rem; /* Slightly smaller font */
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .product-card-back .product-details-full p {
+            margin-bottom: 8px; /* Less space */
+        }
+
+        .product-card-back .btn {
+            width: 100%;
+            margin-top: 10px; /* Less space */
+            font-size: 1rem; /* Slightly smaller font */
+        }
+        
+        /* Franchise Section */
+        .franchise {
+            padding: 100px 0; /* Reduced padding */
+            background-color: var(--white);
+        }
+        
+        .franchise-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 60px; /* Less space */
+        }
+        
+        .franchise-text {
+            flex: 1;
+            min-width: 350px; /* Smaller min-width */
+            line-height: 1.6;
+        }
+        
+        .franchise-text h3 {
+            font-size: 2rem; /* Slightly smaller */
+            color: var(--primary-red);
+            margin-bottom: 20px; /* Less space */
+            letter-spacing: 0.7px;
+        }
+        .franchise-text p {
+            font-size: 1.05rem; /* Slightly smaller */
+            margin-bottom: 15px; /* Less space */
+        }
+
+        .franchise-image {
+            flex: 1;
+            min-width: 350px; /* Smaller min-width */
+            border-radius: 15px; /* Less rounded */
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-medium); /* Softer shadow */
+            border: 1px solid var(--border-color); /* Thinner border */
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .franchise-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s ease-in-out; /* Faster transition */
+        }
+        
+        .franchise-image:hover img {
+            transform: scale(1.03); /* Less dramatic scale */
+        }
+        .franchise-image:hover {
+            box-shadow: 0 10px 30px var(--shadow-medium), var(--futuristic-glow-soft); /* Softer glow on hover */
+        }
+        
+        .benefits-list {
+            margin: 25px 0; /* Less space */
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 12px; /* Less space */
+            position: relative;
+            padding-left: 35px; /* Less padding */
+            font-size: 1.1rem; /* Slightly smaller font */
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .benefits-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem; /* Slightly smaller */
+            text-shadow: none; /* Removed glow */
+        }
+        
+        /* Testimonials Section (Grid Layout) */
+        .testimonials {
+            padding: 100px 0; /* Reduced padding */
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly smaller min-width */
+            gap: 30px; /* Less space */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 35px; /* Less padding */
+            border-radius: 15px; /* Less rounded */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Softer shadow */
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Faster transitions */
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px); /* Less pronounced lift */
+            box-shadow: 0 8px 20px var(--shadow-medium), var(--futuristic-glow-soft); /* Softer glow on hover */
+        }
+        
+        .testimonial-card:before {
+            content: '\201C';
+            font-family: Georgia, serif;
+            font-size: 4rem; /* Smaller */
+            color: var(--light-red);
+            position: absolute;
+            top: 10px; /* Adjusted position */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.08; /* More subtle */
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px; /* Less space */
+            padding-top: 15px; /* Less padding */
+            font-size: 1.05rem; /* Slightly smaller font */
+            color: var(--text-color);
+            z-index: 2;
+            position: relative;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px; /* Less space */
+        }
+        
+        .author-img {
+            width: 50px; /* Smaller */
+            height: 50px; /* Smaller */
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 12px; /* Less space */
+            border: 2px solid var(--primary-red); /* Thinner border */
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-red);
+            margin-bottom: 3px; /* Less space */
+            font-size: 1rem; /* Slightly smaller font */
+            letter-spacing: 0.5px;
+        }
+        .author-info p {
+            font-size: 0.85rem; /* Slightly smaller font */
+            color: var(--text-color);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0; /* Reduced padding */
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px; /* Less space */
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px; /* Smaller min-width */
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 25px; /* Less space */
+            font-size: 1.8rem; /* Slightly smaller */
+            letter-spacing: 0.7px;
+        }
+        
+        .contact-details {
+            margin-bottom: 40px; /* Less space */
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px; /* Less space */
+        }
+        
+        .contact-icon {
+            color: var(--primary-red);
+            margin-right: 20px; /* Less space */
+            font-size: 1.6rem; /* Slightly smaller */
+            margin-top: 3px; /* Less space */
+            text-shadow: none; /* Removed glow */
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1rem; /* Slightly smaller font */
+            line-height: 1.5;
+        }
+        .contact-item a:hover {
+            color: var(--primary-red);
+            text-decoration: underline;
+        }
+
+        .social-links a {
+            color: var(--white) !important; /* Force white icon */
+            background: var(--primary-red) !important; /* Force red background */
+            text-decoration: none !important; /* Ensure no underline */
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 350px; /* Smaller min-width */
+            background: rgba(245, 245, 245, 0.9); /* More opaque */
+            backdrop-filter: blur(4px); /* Less blur */
+            padding: 40px; /* Less padding */
+            border-radius: 15px; /* Less rounded */
+            box-shadow: 0 5px 15px var(--shadow-light); /* Softer shadow */
+            border: 1px solid rgba(224, 224, 224, 0.3); /* More subtle border */
+        }
+        
+        .form-group {
+            margin-bottom: 25px; /* Less space */
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px; /* Less space */
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1rem; /* Slightly smaller font */
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px; /* Less padding */
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Less rounded */
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1), var(--futuristic-glow-soft); /* Softer glow */
+        }
+        
+        .form-group textarea {
+            height: 150px; /* Shorter textarea */
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 30px; /* Reduced padding */
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Smaller min-width */
+            gap: 40px; /* Less space */
+            margin-bottom: 40px; /* Less space */
+        }
+        
+        .footer-col h3 {
+            color: var(--primary-red);
+            margin-bottom: 20px; /* Less space */
+            font-size: 1.4rem; /* Slightly smaller */
+            letter-spacing: 0.5px;
+            text-shadow: none; /* Removed glow */
+        }
+        
+        .footer-col p, .footer-col ul li {
+            font-size: 0.95rem; /* Slightly smaller font */
+            color: rgba(255, 255, 255, 0.8); /* Slightly less opaque */
+            line-height: 1.5;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px; /* Less space */
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-red);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px; /* Less space */
+            margin-top: 20px; /* Less space */
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background: var(--primary-red);
+            width: 45px; /* Smaller */
+            height: 45px; /* Smaller */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem; /* Slightly smaller icon */
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15); /* Softer shadow */
+        }
+        
+        .social-links a:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px) scale(1.08); /* Less dramatic lift and scale */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2), var(--futuristic-glow-soft); /* Softer glow */
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px; /* Less padding */
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* More subtle border */
+            font-size: 0.9rem; /* Slightly smaller font */
+            color: rgba(255, 255, 255, 0.6); /* More subtle color */
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 20px; /* Less space from bottom */
+            right: 20px; /* Less space from right */
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Less space */
+            z-index: 999;
+        }
+
+        /* Removed pulse animation for a more professional look */
+        /* @keyframes pulse { ... } */
+        
+        .floating-btn {
+            width: 50px; /* Slightly smaller */
+            height: 50px; /* Slightly smaller */
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem; /* Slightly smaller icon */
+            box-shadow: 0 5px 15px var(--shadow-medium); /* Softer shadow */
+            transition: all 0.2s ease-in-out; /* Faster, smoother transition */
+            text-decoration: none;
+            /* animation: none; Removed pulse animation */
+        }
+        
+        .floating-btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px) scale(1.08); /* Less dramatic lift and scale */
+            box-shadow: 0 8px 20px var(--shadow-deep), var(--futuristic-glow-soft); /* Softer glow on hover */
+            /* animation: none; */
+        }
+        
+        .whatsapp-btn {
+            background: #28a745; /* Standard green */
+        }
+        
+        .whatsapp-btn:hover {
+            background: #218838; /* Darker green */
+            box-shadow: 0 8px 20px var(--shadow-deep), 0 0 10px rgba(40, 167, 69, 0.4); /* Softer green glow */
+        }
+        
+        /* Cart Icon and Sidebar Styles */
+        #cartIcon {
+            position: fixed;
+            bottom: 20px; /* Less space from bottom */
+            left: 20px; /* Less space from left */
+            width: 50px; /* Slightly smaller */
+            height: 50px; /* Slightly smaller */
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem; /* Slightly smaller icon */
+            box-shadow: 0 5px 15px var(--shadow-medium); /* Softer shadow */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            z-index: 999;
+            /* animation: none; Removed pulse animation */
+        }
+
+        #cartIcon:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 20px var(--shadow-deep), 0 0 10px var(--glow-blue); /* Softer blue glow */
+            /* animation: none; */
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -5px; /* Adjusted position */
+            right: -5px; /* Adjusted position */
+            background-color: var(--primary-red);
+            color: white;
+            font-size: 0.75rem; /* Smaller font */
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 3px 7px; /* Smaller padding */
+            min-width: 20px; /* Smaller min-width */
+            text-align: center;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Softer shadow */
+            border: 1px solid var(--white);
+        }
+
+        #cartSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 380px; /* Slightly narrower */
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px); /* Slightly less blur */
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15), 0 0 15px var(--glow-blue); /* Softer shadow + glow */
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+            display: flex;
+            flex-direction: column;
+            padding: 25px; /* Less padding */
+            border-left: 1px solid rgba(0, 123, 255, 0.2); /* More subtle border */
+        }
+
+        #cartSidebar.open {
+            transform: translateX(0);
+        }
+
+        #cartSidebar h3 {
+            color: var(--primary-red);
+            font-size: 2rem; /* Slightly smaller */
+            margin-bottom: 20px; /* Less space */
+            text-align: center;
+            position: relative;
+            letter-spacing: 0.8px;
+            text-shadow: none; /* Removed glow */
+        }
+        #cartSidebar h3::after {
+            content: '';
+            display: block;
+            width: 60px; /* Smaller underline */
+            height: 3px; /* Thinner underline */
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            margin: 10px auto 0; /* Less space */
+            border-radius: 1.5px;
+        }
+
+        #closeCartSidebar {
+            position: absolute;
+            top: 10px; /* Adjusted to be slightly less from top */
+            right: 10px; /* Adjusted to be slightly less from right */
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Smaller icon */
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s, background-color 0.2s ease; /* Faster transitions */
+            z-index: 1200;
+            padding: 8px; /* Smaller padding for touch target */
+            border-radius: 50%;
+        }
+        #closeCartSidebar:hover {
+            color: var(--primary-red);
+            transform: rotate(45deg); /* Less dramatic rotation */
+            background-color: rgba(227, 6, 19, 0.08); /* More subtle background on hover */
+        }
+
+        #cartItems {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px; /* Less padding */
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px; /* Less space */
+            padding-bottom: 15px; /* Less space */
+            border-bottom: 1px solid rgba(224, 224, 224, 0.3); /* More subtle border */
+            position: relative;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 80px; /* Smaller */
+            height: 80px; /* Smaller */
+            object-fit: cover;
+            border-radius: 8px; /* Less rounded */
+            margin-right: 15px; /* Less space */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            border: 1px solid rgba(238, 238, 238, 0.3); /* More subtle border */
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1.1rem; /* Slightly smaller font */
+            color: var(--dark-gray);
+            margin-bottom: 5px; /* Less space */
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+
+        .cart-item-details p {
+            font-size: 0.95rem; /* Slightly smaller font */
+            color: var(--text-color);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-red);
+            font-size: 1.6rem; /* Smaller icon */
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.2s ease, transform 0.1s; /* Faster transitions */
+        }
+        .remove-item-btn:hover {
+            color: var(--dark-red);
+            transform: translateY(-50%) scale(1.05); /* Less dramatic scale */
+        }
+
+        #cartTotal {
+            margin-top: 25px; /* Less space */
+            padding-top: 20px; /* Less space */
+            border-top: 2px solid var(--primary-red); /* Thinner border */
+            font-size: 1.5rem; /* Slightly smaller font */
+            font-weight: bold;
+            text-align: right;
+            color: var(--dark-gray);
+            letter-spacing: 0.5px;
+        }
+        #cartTotal span {
+            color: var(--primary-red);
+        }
+
+        #payNowBtn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            background-color: #28a745; /* Green for payment */
+        }
+        #payNowBtn:hover {
+            background-color: #218838;
+            box-shadow: 0 5px 15px var(--shadow-medium), 0 0 10px rgba(40, 167, 69, 0.4);
+        }
+
+
+        /* Image Lightbox Styles */
+        #imageLightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Slightly less opaque */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out; /* Faster transition */
+        }
+
+        #imageLightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightboxContent {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px); /* Less blur */
+            margin: auto;
+            padding: 15px; /* Less padding */
+            border-radius: 10px; /* Less rounded */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), var(--futuristic-glow-soft); /* Softer glow */
+            max-width: 85%; /* Slightly wider */
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Less space */
+            transform: scale(0.9); /* Less dramatic scale */
+            transition: transform 0.2s ease-in-out; /* Faster transition */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* More subtle border */
+        }
+
+        #imageLightbox.active #lightboxContent {
+            transform: scale(1);
+        }
+
+        #lightboxCloseBtn {
+            position: absolute;
+            top: 10px; /* Less space */
+            right: 10px; /* Less space */
+            color: var(--dark-gray);
+            font-size: 2.5rem; /* Smaller icon */
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s; /* Faster transitions */
+        }
+
+        #lightboxCloseBtn:hover,
+        #lightboxCloseBtn:focus {
+            color: var(--primary-red);
+            transform: rotate(45deg); /* Less dramatic rotation */
+        }
+
+        #lightboxImageContainer {
+            width: 100%;
+            max-width: 600px; /* Smaller max-width */
+            max-height: 65vh; /* Slightly smaller */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px; /* Less rounded */
+        }
+
+        #lightboxImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2); /* More subtle background */
+            backdrop-filter: blur(2px); /* Less blur */
+            color: var(--dark-gray);
+            border: none;
+            padding: 10px 15px; /* Less padding */
+            font-size: 1.5rem; /* Smaller icon */
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.2s, color 0.2s; /* Faster transitions */
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4); /* Slightly more opaque */
+            color: var(--primary-red);
+        }
+
+        #prevLightboxBtn { left: 10px; } /* Less space */
+        #nextLightboxBtn { right: 10px; } /* Less space */
+
+        #lightboxDots {
+            display: flex;
+            gap: 8px; /* Less space */
+            margin-top: 10px; /* Less space */
+        }
+
+        .lightbox-dot {
+            width: 12px; /* Smaller */
+            height: 12px; /* Smaller */
+            background-color: #ccc; /* Lighter color */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s; /* Faster transitions */
+        }
+
+        .lightbox-dot.active {
+            background-color: var(--primary-red);
+            transform: scale(1.1); /* Less dramatic scale */
+        }
+        .lightbox-dot:hover {
+            background-color: var(--light-red);
+        }
+
+
+        /* AI Chat Sidebar Styles */
+        #aiChatIcon {
+            position: fixed;
+            bottom: 80px; /* Adjusted position */
+            left: 20px; /* Less space from left */
+            width: 50px; /* Slightly smaller */
+            height: 50px; /* Slightly smaller */
+            background-color: #673ab7;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem; /* Slightly smaller icon */
+            box-shadow: 0 5px 15px var(--shadow-medium); /* Softer shadow */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            z-index: 999;
+            /* animation: none; Removed pulse animation */
+        }
+
+        #aiChatIcon:hover {
+            background-color: #512da8;
+            transform: translateY(-3px) scale(1.08);
+            box-shadow: 0 8px 20px var(--shadow-deep), 0 0 10px var(--glow-purple); /* Softer purple glow */
+            /* animation: none; */
+        }
+
+        #aiChatSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 380px; /* Slightly narrower */
+            height: 100%;
+            background-color: var(--ai-chat-bg);
+            backdrop-filter: blur(8px); /* Slightly less blur */
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15), 0 0 15px var(--glow-purple); /* Softer shadow + glow */
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+            display: flex;
+            flex-direction: column;
+            padding: 25px; /* Less padding */
+            border-left: 1px solid rgba(103, 58, 183, 0.2); /* More subtle border */
+        }
+
+        #aiChatSidebar.open {
+            transform: translateX(0);
+        }
+
+        #aiChatSidebar h3 {
+            color: #673ab7;
+            font-size: 2rem; /* Slightly smaller */
+            margin-bottom: 20px; /* Less space */
+            text-align: center;
+            position: relative;
+            letter-spacing: 0.8px;
+            text-shadow: none; /* Removed glow */
+        }
+        #aiChatSidebar h3::after {
+            content: '';
+            display: block;
+            width: 60px; /* Smaller underline */
+            height: 3px; /* Thinner underline */
+            background: #673ab7;
+            margin: 10px auto 0; /* Less space */
+            border-radius: 1.5px;
+        }
+
+        #closeAiChatSidebar {
+            position: absolute;
+            top: 10px; /* Adjusted to be slightly less from top */
+            right: 10px; /* Adjusted to be slightly less from right */
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Smaller icon */
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s, background-color 0.2s ease; /* Faster transitions */
+            z-index: 1200;
+            padding: 8px; /* Smaller padding for touch target */
+            border-radius: 50%;
+        }
+        #closeAiChatSidebar:hover {
+            color: #673ab7;
+            transform: rotate(45deg); /* Less dramatic rotation */
+            background-color: rgba(103, 58, 183, 0.08); /* More subtle background on hover */
+        }
+
+        /* Chat Message Area */
+        #chatMessages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 8px; /* Less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            margin-bottom: 15px; /* Less space */
+            background-color: var(--light-gray);
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Less space */
+        }
+
+        .chat-message {
+            max-width: 85%; /* Slightly wider */
+            padding: 8px 12px; /* Less padding */
+            border-radius: 12px; /* Less rounded */
+            line-height: 1.4;
+            font-size: 0.9rem; /* Slightly smaller font */
+            word-wrap: break-word;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* Softer shadow */
+        }
+
+        .chat-message.ai {
+            background-color: #f0ebf8; /* Lighter purple */
+            color: #5e35b1; /* Darker purple */
+            align-self: flex-start;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chat-message.user {
+            background-color: #e6f3f5; /* Lighter teal */
+            color: #00695c; /* Darker teal */
+            align-self: flex-end;
+            border-bottom-right-radius: 3px;
+        }
+
+        .ai-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Less space */
+            margin-bottom: 20px; /* Less space */
+            padding: 12px; /* Less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            background-color: var(--light-gray);
+        }
+
+        .ai-options label {
+            display: flex;
+            align-items: center;
+            font-size: 1rem; /* Slightly smaller font */
+            color: var(--text-color);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .ai-options label:hover {
+            color: var(--dark-gray);
+        }
+
+        .ai-options input[type="radio"] {
+            margin-right: 8px; /* Less space */
+            accent-color: #673ab7;
+        }
+
+        .ai-field-group {
+            display: none;
+            flex-direction: column;
+            gap: 12px; /* Less space */
+            padding: 15px; /* Less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            background-color: var(--white);
+            box-shadow: 0 1px 5px var(--shadow-light); /* Softer shadow */
+            margin-bottom: 15px; /* Less space */
+        }
+
+        .ai-field-group input,
+        .ai-field-group select {
+            width: 100%;
+            padding: 10px; /* Less padding */
+            border: 1px solid #ddd;
+            border-radius: 6px; /* Less rounded */
+            font-size: 0.95rem; /* Slightly smaller font */
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .ai-field-group input:focus,
+        .ai-field-group select:focus {
+            border-color: #673ab7;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(103, 58, 183, 0.1), 0 0 5px rgba(103, 58, 183, 0.3); /* Softer glow */
+        }
+
+        .ai-send-btn {
+            width: 100%;
+            background-color: #673ab7;
+            margin-top: 8px; /* Less space */
+        }
+        .ai-send-btn:hover {
+            background-color: #512da8;
+            box-shadow: 0 5px 15px var(--shadow-medium), 0 0 10px var(--glow-purple); /* Softer purple glow */
+        }
+
+        #recommendedProducts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Smaller min-width */
+            gap: 10px; /* Less space */
+            margin-top: 15px; /* Less space */
+            max-height: 250px; /* Shorter */
+            overflow-y: auto;
+            padding-right: 8px; /* Less padding */
+            max-width: 100%;
+        }
+
+        #recommendedProducts .product-card-container {
+            height: auto;
+            padding: 8px; /* Less padding */
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Less rounded */
+            box-shadow: 0 1px 5px var(--shadow-light); /* Softer shadow */
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #recommendedProducts .product-card-inner {
+            transform: none !important;
+            box-shadow: none;
+            background-color: transparent;
+        }
+        #recommendedProducts .product-card-front,
+        #recommendedProducts .product-card-back {
+            position: static;
+            backface-visibility: visible;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        #recommendedProducts .product-card-back {
+            display: none;
+        }
+        #recommendedProducts .product-img {
+            height: 90px; /* Smaller */
+            margin-bottom: 8px; /* Less space */
+            border-radius: 6px; /* Less rounded */
+        }
+        #recommendedProducts .product-info h3 {
+            font-size: 1rem; /* Smaller font */
+            margin-bottom: 3px; /* Less space */
+            text-align: center;
+        }
+        #recommendedProducts .product-info p {
+            display: none;
+        }
+        #recommendedProducts .product-price {
+            font-size: 1rem; /* Smaller font */
+            margin: 3px 0 8px; /* Less space */
+        }
+        #recommendedProducts .product-btns {
+            flex-direction: column;
+            gap: 4px; /* Less space */
+        }
+        #recommendedProducts .btn {
+            padding: 6px 10px; /* Less padding */
+            font-size: 0.8rem; /* Smaller font */
+            width: 100%;
+        }
+        #recommendedProducts .view-details-btn {
+            display: none;
+        }
+        #recommendedProducts .product-gallery-dots {
+            display: none;
+        }
+
+        /* AI Chat specific controls */
+        .ai-chat-controls {
+            margin-top: auto;
+            padding-top: 15px; /* Less padding */
+            border-top: 1px solid var(--border-color);
+        }
+        .ai-chat-controls .btn {
+            width: 100%;
+            margin-bottom: 8px; /* Less space */
+        }
+
+
+        /* Responsive Styles (Adjusted for Cart Sidebar) */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .section-title:after {
+                width: 100px;
+                height: 5px;
+            }
+            
+            .hero h2 {
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .floating-nav {
+                right: 20px;
+                gap: 12px;
+            }
+            .floating-nav ul li a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .floating-nav ul li a:hover .nav-tooltip {
+                right: 60px;
+            }
+            .floating-nav ul li .nav-tooltip {
+                right: 50px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .product-card-container {
+                height: 450px;
+            }
+            .product-img {
+                height: 200px;
+            }
+
+            .franchise-content, .contact-container {
+                gap: 50px;
+            }
+            .franchise-text, .franchise-image, .contact-info, .contact-form {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+            .testimonial-card {
+                padding: 30px;
+            }
+            .testimonial-text {
+                font-size: 1.05rem;
+            }
+
+            #cartSidebar, #aiChatSidebar {
+                width: 350px; /* Slightly narrower on tablet, but not full width yet */
+                padding: 25px;
+            }
+            #cartIcon {
+                bottom: 25px;
+                left: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-7px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                min-width: 25px;
+            }
+            #aiChatIcon {
+                bottom: 95px;
+                left: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #aiChatIcon:hover {
+                transform: translateY(-7px) scale(1.1);
+            }
+
+            #lightboxContent {
+                max-width: 90%;
+            }
+            #lightboxCloseBtn {
+                font-size: 2.5rem;
+            }
+            .lightbox-nav-btn {
+                padding: 10px 15px;
+                font-size: 1.5rem;
+            }
+            #prevLightboxBtn { left: 5px; }
+            #nextLightboxBtn { right: 5px; }
+
+            /* Responsive adjustments for product controls */
+            .product-controls-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .search-bar {
+                min-width: unset;
+                width: 100%;
+            }
+            .filters-sort {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 15px;
+            }
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 5px;
+            }
+            .filters-sort select {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 85px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero {
+                height: 75vh;
+                margin-top: 75px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-content {
+                padding: 30px;
+            }
+            
+            .floating-nav {
+                display: none;
+            }
+            
+            .floating-btns {
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+            
+            .floating-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+
+            #cartSidebar, #aiChatSidebar {
+                width: 100%; /* Full width on mobile */
+                padding: 20px;
+            }
+            #cartIcon {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.7rem;
+                padding: 3px 7px;
+                min-width: 22px;
+            }
+            #aiChatIcon {
+                bottom: 80px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #aiChatIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            .cart-item-img {
+                width: 70px;
+                height: 70px;
+            }
+            .cart-item-details h4 {
+                font-size: 1.1rem;
+            }
+            .remove-item-btn {
+                font-size: 1.6rem;
+            }
+            #cartTotal {
+                font-size: 1.3rem;
+            }
+
+            #lightboxContent {
+                max-width: 95%;
+                padding: 15px;
+            }
+            #lightboxCloseBtn {
+                font-size: 2rem;
+                top: 10px;
+                right: 10px;
+            }
+            .lightbox-nav-btn {
+                padding: 8px 12px;
+                font-size: 1.2rem;
+            }
+            #prevLightboxBtn { left: 0px; }
+            #nextLightboxBtn { right: 0px; }
+            #lightboxImageContainer {
+                max-height: 60vh;
+            }
+            #recommendedProducts { /* Adjust grid for very small screens if needed */
+                grid-template-columns: 1fr; /* Stack products vertically */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                height: 65vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+            .hero-content {
+                padding: 20px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .franchise-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            .product-card-container {
+                height: 400px;
+            }
+            .product-img {
+                height: 180px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            .section-title:after {
+                width: 80px;
+                height: 4px;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-icon {
+                font-size: 3.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+            .contact-info h3 {
+                font-size: 1.6rem;
+            }
+            .contact-form {
+                padding: 30px;
+            }
+            .footer-col h3 {
+                font-size: 1.3rem;
+            }
+            .job-enquiry-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            }
+            .job-enquiry-section h3 {
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            letter-spacing: 0.7px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' fill='%23e30613'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3EMS%3C/text%3E%3C/svg%3E" alt="Mr Short Logo">
+                <h1>Mr Short</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#franchise">Franchise</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Circular Navigation -->
+    <div class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <i class="fas fa-fire"></i>
+                    <span class="nav-tooltip">Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#franchise">
+                    <i class="fas fa-store"></i>
+                    <span class="nav-tooltip">Franchise</span>
+                </a>
+            </li>
+            <li>
+                <a href="#testimonials">
+                    <i class="fas fa-star"></i>
+                    <span class="nav-tooltip">Testimonials</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-phone"></i>
+                    <span class="nav-tooltip">Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Instant Hot Water at Unbeatable Prices</h2>
+                <p>Mr Short brings you high-quality instant water heaters at the most affordable prices in Tamil Nadu and across India. Perfect for homes and businesses.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-large">View Products</a>
+                    <a href="#franchise" class="btn btn-large">Franchise Opportunity</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Mr Short?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Our direct manufacturing approach allows us to offer the best prices without compromising on quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Heating</h3>
+                    <p>Get hot water instantly with our advanced heating technology that saves both time and electricity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Built with multiple safety features including auto cut-off and thermal protection for complete peace of mind.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>All India Delivery</h3>
+                    <p>We deliver across Tamil Nadu and all other states in India with our extensive dealer network.</p>
+                </div>
+                <!-- New Feature Cards -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>No Time Limit</h3>
+                    <p>Enjoy continuous hot water without waiting for reheating. Our heaters provide an endless supply.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Eco Friendly</h3>
+                    <p>Designed with energy efficiency in mind, reducing your carbon footprint and saving on electricity bills.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Simple controls and intuitive design ensure a hassle-free experience for everyone in your family.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-controls-wrapper container">
+                <div class="search-bar">
+                    <input type="text" id="productSearch" placeholder="Search products...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="filters-sort">
+                    <div class="filter-group">
+                        <label for="sortOptions">Sort by:</label>
+                        <select id="sortOptions">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name-asc">Name: A-Z</option>
+                            <option value="name-desc">Name: Z-A</option>
+                            <option value="bestsellers">Bestsellers</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="tagFilter">Filter by Tag:</label>
+                        <select id="tagFilter">
+                            <option value="all">All Tags</option>
+                            <!-- Tags will be dynamically populated here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section class="franchise" id="franchise">
+        <div class="container">
+            <h2 class="section-title">Franchise Opportunity</h2>
+            <div class="franchise-content">
+                <div class="franchise-text">
+                    <h3>Become a Mr Short Franchise Partner</h3>
+                    <p>Join our growing network of franchise partners across Tamil Nadu and other states. We provide complete support to help you establish and grow your water heater business.</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Low investment with high returns</li>
+                        <li>Exclusive territory rights</li>
+                        <li>Training and marketing support</li>
+                        <li>Established brand recognition</li>
+                        <li>Ongoing product supply</li>
+                        <li>Business operation guidance</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-large">Apply for Franchise</a>
+                </div>
+                <div class="franchise-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mr Short Franchise Opportunity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <!-- Testimonials Grid -->
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonial cards will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Head Office</h4>
+                                <p>123 Industrial Estate, Chennai, Tamil Nadu - 600032</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 9123512626 (Sales)</p>
+                                <p>+91 9123512626 (Franchise)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>sales@mrshot.com</p>
+                                <p>franchise@mrshot.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fas fa-map-marked-alt"></i></a>
+                    </div>
+                    <div class="job-enquiry-section">
+                        <h3>Get Job Enquiry in Mr Short</h3>
+                        <form id="jobEnquiryForm">
+                            <div class="form-group">
+                                <label for="jobEnquiryName">Your Name</label>
+                                <input type="text" id="jobEnquiryName" name="jobEnquiryName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobEnquiryDegree">Your Degree</label>
+                                <input type="text" id="jobEnquiryDegree" name="jobEnquiryDegree" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobEnquiryResume">Tell us about your experience/resume (or paste a link)</label>
+                                <textarea id="jobEnquiryResume" name="jobEnquiryResume" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-large" id="sendJobEnquiryBtn">Send Job Enquiry</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="Product Enquiry">Product Enquiry</option>
+                                <option value="Franchise Opportunity">Franchise Opportunity</option>
+                                <option value="Customer Support">Customer Support</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Mr Short</h3>
+                    <p>Leading manufacturer of affordable instant water heaters in Tamil Nadu and across India. Quality products at unbeatable prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#franchise">Franchise</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Removed the 'Products' footer column as requested -->
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#contact">Customer Support</a></li> <!-- Added hash link for customer support -->
+                        <li><a href="#">Find a Dealer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mr Short. All Rights Reserved. | Maintained by <a href="https://www.instagram.com/bluvent.riye?igsh=NmI0Mjg2cnpiYnFi" target="_blank" style="color: inherit; text-decoration: underline;">Bluvent</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btns">
+        <a href="https://wa.me/9123512626" class="floating-btn whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919123512626" class="floating-btn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <!-- Floating AI Chat Icon -->
+    <div id="aiChatIcon" class="floating-btn">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar">
+        <button id="closeCartSidebar"><i class="fas fa-times"></i></button>
+        <h3>Your Shopping Cart</h3>
+        <ul id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="cartTotal">
+            Total: ₹<span id="cartTotalAmount">0.00</span>
+        </div>
+        <button class="btn" id="payNowBtn">Pay Now</button>
+    </div>
+
+    <!-- AI Chat Sidebar -->
+    <div id="aiChatSidebar">
+        <button id="closeAiChatSidebar"><i class="fas fa-times"></i></button>
+        <h3>Talk with Mr. Shot</h3>
+        <div id="chatMessages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+
+        <!-- Initial options for the user -->
+        <div class="ai-options" id="initialAiOptions">
+            <label><input type="radio" name="aiOption" value="repair"> Need to repair my heater</label>
+            <label><input type="radio" name="aiOption" value="buy"> Need to buy a heater</label>
+            <label><input type="radio" name="aiOption" value="franchise"> Need a franchise</label>
+            <label><input type="radio" name="aiOption" value="support"> Need to talk to customer support</label>
+        </div>
+
+        <!-- Field groups (initially hidden, shown based on conversation flow) -->
+        <div id="repairFields" class="ai-field-group">
+            <input type="text" id="repairHeaterName" placeholder="Heater Name (e.g., Mr Short Basic)">
+            <input type="text" id="repairUserName" placeholder="Your Name">
+            <button class="btn ai-send-btn" data-action="repair">Send Repair Request</button>
+        </div>
+
+        <div id="buyFields" class="ai-field-group">
+            <label for="buyPurpose">Select Purpose:</label>
+            <select id="buyPurpose">
+                <option value="">Select Purpose</option>
+                <option value="compact">Compact / Small Space</option>
+                <option value="kitchen">Kitchen Use</soption>
+                <option value="bathroom">Bathroom Use</option>
+                <option value="small-family">Small Family (1-2 members)</option>
+                <option value="medium-family">Medium Family (3-4 members)</option>
+                <option value="large-family">Large Family (5+ members)</option>
+                <option value="commercial">Commercial / Business</option>
+                <option value="travel">Travel / Portable</option>
+                <option value="eco-friendly">Eco-friendly / Energy Saving</option>
+                <option value="smart-home">Smart Home / App Control</option>
+                <option value="safety">High Safety Features</option>
+                <option value="luxury">Luxury / Designer</option>
+                <option value="high-power">High Power / Fast Heating</option>
+            </select>
+            <button class="btn ai-send-btn" data-action="buy-show-products">Show Related Heaters</button>
+            <div id="recommendedProducts">
+                <!-- Recommended products will be displayed here -->
+            </div>
+        </div>
+
+        <div id="franchiseFields" class="ai-field-group">
+            <input type="text" id="franchiseUserName" placeholder="Your Name">
+            <input type="tel" id="franchiseMobile" placeholder="Mobile Number">
+            <input type="text" id="franchiseLocation" placeholder="Your City/Location">
+            <input type="text" id="franchisePinCode" placeholder="Pin Code">
+            <button class="btn ai-send-btn" data-action="franchise">Send Franchise Enquiry</button>
+        </div>
+
+        <div id="supportFields" class="ai-field-group">
+            <input type="text" id="supportUserName" placeholder="Your Name">
+            <input type="tel" id="supportContactNumber" placeholder="Your Contact Number">
+            <button class="btn ai-send-btn" data-action="support">Contact Support</button>
+        </div>
+
+        <div class="ai-chat-controls">
+            <button class="btn" id="aiStartOverBtn">Start Over</button>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Pop-up -->
+    <div id="imageLightbox">
+        <div id="lightboxContent">
+            <span id="lightboxCloseBtn">&times;</span>
+            <div id="lightboxImageContainer">
+                <img src="" alt="Product Image" id="lightboxImage">
+                <button class="lightbox-nav-btn" id="prevLightboxBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox-nav-btn" id="nextLightboxBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div id="lightboxDots">
+                <!-- Lightbox dots will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.querySelector('ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.querySelector('ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Form Submission
+        const enquiryForm = document.getElementById('enquiryForm');
+        
+        enquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Basic validation
+            if (!name || !email || !phone || !subject || !message) {
+                showCustomMessage('Please fill in all contact form fields before sending.', 'info');
+                return;
+            }
+
+            // Construct WhatsApp message
+            const whatsappMessage = encodeURIComponent(
+                `Mr Short Enquiry:\n` +
+                `Name: ${name}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Subject: ${subject}\n` +
+                `Message: ${message}`
+            );
+            
+            // Open WhatsApp link
+            window.open(`https://wa.me/9123512626?text=${whatsappMessage}`, '_blank');
+
+            showCustomMessage(`Thank you, ${name}! Your ${subject} enquiry has been prepared for WhatsApp. Please click send in your WhatsApp application.`, 'success');
+            
+            // Reset form
+            enquiryForm.reset();
+        });
+
+        // Job Enquiry Form Submission
+        const jobEnquiryForm = document.getElementById('jobEnquiryForm');
+        jobEnquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const jobName = document.getElementById('jobEnquiryName').value;
+            const jobDegree = document.getElementById('jobEnquiryDegree').value;
+            const jobResume = document.getElementById('jobEnquiryResume').value;
+
+            showCustomMessage(`Thank you, ${jobName}! Your job enquiry with degree "${jobDegree}" has been submitted. We will review your experience and get back to you.`, 'success');
+            jobEnquiryForm.reset();
+        });
+        
+        // Custom Message Box (replaces alert)
+        function showCustomMessage(message, type = 'info') {
+            const existingMessage = document.getElementById('customMessageBox');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                font-size: 1rem;
+                text-align: center;
+                max-width: 90%;
+                min-width: 250px;
+            `;
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+
+            // Animate in
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 50);
+
+            // Animate out and remove after 5 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 5000);
+        }
+
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container'); // Added new elements
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                if (elementPosition < windowHeight - 150) { // Adjusted threshold
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                } else {
+                    // Reset if scrolled back up, to re-trigger on scroll down
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                }
+            });
+        }
+        
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Trigger initial check
+        revealOnScroll();
+        
+        // Active link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a, .floating-nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Adjust for fixed header height
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Product Data as Key-Value Pairs (Array of Objects) ---
+        const productsData = [
+            {
+                id: 'basic',
+                name: 'Mr Short Basic',
+                price: 2499,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Basic+Heater',
+                shotDescription: 'Perfect for small households with basic hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '3000 Watts',
+                    features: 'Instant heating, Auto cut-off, Rust-proof body.',
+                    description: 'This compact and efficient water heater is designed for quick hot water delivery, ideal for kitchens, small bathrooms, and single-person use. Its robust build ensures durability and safety.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Basic+Heater',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Basic+Model+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Basic+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Basic+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Basic+Model+View+5'
+                ],
+                isBestseller: true,
+                tags: ['compact', 'budget-friendly', 'small-family', 'kitchen', 'bathroom'],
+                colors: ['#e30613', '#007bff', '#6c757d'] // Red, Blue, Gray
+            },
+            {
+                id: 'premium',
+                name: 'Mr Short Premium',
+                price: 3999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Premium+Heater',
+                shotDescription: 'Advanced features for families with higher hot water demand.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4500 Watts',
+                    features: 'Digital temperature display, Multiple safety layers, Energy-saving mode, Faster heating.',
+                    description: 'Designed for modern homes, the Premium model offers enhanced capacity and smart features for optimal comfort and efficiency. Enjoy precise temperature control and advanced safety mechanisms.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Premium+Heater',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Premium+Model+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Premium+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Premium+Model+View+4',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Premium+Model+View+5'
+                ],
+                isBestseller: true,
+                tags: ['digital-display', 'energy-efficient', 'medium-family', 'bathroom', 'smart-home'],
+                colors: ['#e30613', '#673ab7', '#28a745'] // Red, Purple, Green
+            },
+            {
+                id: 'commercial',
+                name: 'Mr Short Commercial',
+                price: 5999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Commercial+Heater',
+                shotDescription: 'Heavy-duty model for shops, salons, and small businesses.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'High-capacity tank, Industrial-grade heating element, Continuous hot water supply, Robust construction.',
+                    description: 'Built for demanding environments, this model ensures a constant supply of hot water for commercial applications like salons, small hotels, and offices. Its heavy-duty components guarantee long-lasting performance.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Commercial+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Commercial+Model+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Commercial+Model+View+3',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Commercial+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Commercial+Model+View+5'
+                ],
+                isBestseller: false,
+                tags: ['commercial', 'heavy-duty', 'high-capacity'],
+                colors: ['#e30613', '#4a4a4a', '#000000'] // Red, Dark Gray, Black
+            },
+            {
+                id: 'compact-plus',
+                name: 'Mr Short Compact Plus',
+                price: 2999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Compact+Plus',
+                shotDescription: 'Enhanced compact model with faster heating.',
+                fullDetails: {
+                    capacity: '4 Litres',
+                    power: '3500 Watts',
+                    features: 'Rapid heating, Multi-level safety, Compact design.',
+                    description: 'An upgraded compact model, offering quicker hot water and additional safety features, ideal for modern apartments.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Compact+Plus',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Compact+Plus+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Compact+Plus+View+3'
+                ],
+                isBestseller: false,
+                tags: ['compact', 'fast-heating', 'small-space', 'kitchen'],
+                colors: ['#e30613', '#6c757d', '#f8f9fa'] // Red, Gray, Light Gray
+            },
+            {
+                id: 'eco-smart',
+                name: 'Mr Short Eco Smart',
+                price: 4500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Eco+Smart',
+                shotDescription: 'Energy-efficient heater with smart controls.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '4000 Watts',
+                    features: 'Smart thermostat, Eco mode, Overheat protection, LED indicator.',
+                    description: 'Designed for the environmentally conscious, this model optimizes energy consumption without compromising on hot water availability. Smart features ensure convenience and savings.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Eco+Smart',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Eco+Smart+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Eco+Smart+View+3'
+                ],
+                isBestseller: true,
+                tags: ['eco-friendly', 'smart-home', 'large-family', 'energy-saving'],
+                colors: ['#28a745', '#007bff', '#673ab7'] // Green, Blue, Purple
+            },
+            {
+                id: 'elite',
+                name: 'Mr Short Elite',
+                price: 7500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Elite+Model',
+                shotDescription: 'Luxury instant water heater with premium finish.',
+                fullDetails: {
+                    capacity: '15 Litres',
+                    power: '7000 Watts',
+                    features: 'Stainless steel tank, Touch controls, Child lock, Anti-corrosion coating.',
+                    description: 'Experience ultimate comfort with the Elite model. Its sleek design and advanced features provide a luxurious hot water experience for discerning users.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Elite+Model',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Elite+Model+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Elite+Model+View+3'
+                ],
+                isBestseller: false,
+                tags: ['luxury', 'high-end', 'large-capacity', 'smart-home'],
+                colors: ['#000000', '#4a4a4a', '#e30613'] // Black, Dark Gray, Red
+            },
+            {
+                id: 'mini-pro',
+                name: 'Mr Short Mini Pro',
+                price: 2199,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Mini+Pro',
+                shotDescription: 'Ultra-compact for single point use.',
+                fullDetails: {
+                    capacity: '1 Litre',
+                    power: '2000 Watts',
+                    features: 'Point-of-use installation, Energy-saving, Quick heat-up.',
+                    description: 'Ideal for small sinks or washbasins, providing instant hot water exactly where you need it, minimizing waste.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Mini+Pro',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Mini+Pro+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Mini+Pro+View+3'
+                ],
+                isBestseller: true,
+                tags: ['compact', 'single-point', 'kitchen', 'travel', 'small-space'],
+                colors: ['#e30613', '#f8f9fa', '#6c757d'] // Red, Light Gray, Gray
+            },
+            {
+                id: 'smart-flow',
+                name: 'Mr Short Smart Flow',
+                price: 4999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Smart+Flow',
+                shotDescription: 'Consistent hot water with intelligent flow control.',
+                fullDetails: {
+                    capacity: '7 Litres',
+                    power: '5000 Watts',
+                    features: 'Flow sensor, Consistent temperature, Anti-scaling technology.',
+                    description: 'Ensures a steady stream of hot water at your desired temperature, even with varying water pressure. Perfect for a comfortable shower.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Smart+Flow',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Smart+Flow+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Smart+Flow+View+3'
+                ],
+                isBestseller: false,
+                tags: ['intelligent', 'consistent-flow', 'bathroom', 'smart-home'],
+                colors: ['#007bff', '#673ab7', '#e30613'] // Blue, Purple, Red
+            },
+            {
+                id: 'power-heater',
+                name: 'Mr Short Power Heater',
+                price: 6500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Power+Heater',
+                shotDescription: 'High power for rapid large volume heating.',
+                fullDetails: {
+                    capacity: '12 Litres',
+                    power: '8000 Watts',
+                    features: 'High power element, Quick recovery, Multi-point usage.',
+                    description: 'Designed for homes with multiple hot water outlets or high demand, providing powerful and rapid heating for continuous use.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Power+Heater',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Power+Heater+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Power+Heater+View+3'
+                ],
+                isBestseller: false,
+                tags: ['high-power', 'multi-point', 'large-family', 'commercial'],
+                colors: ['#e30613', '#000000', '#4a4a4a'] // Red, Black, Dark Gray
+            },
+            {
+                id: 'solar-hybrid',
+                name: 'Mr Short Solar Hybrid',
+                price: 8999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Solar+Hybrid',
+                shotDescription: 'Eco-friendly heater with solar assist.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '4000 Watts (Electric) + Solar',
+                    features: 'Solar compatibility, Energy saving, Backup electric heating.',
+                    description: 'A cutting-edge hybrid solution that uses solar energy as its primary heat source, with electric backup for cloudy days or high demand.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Solar+Hybrid',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Solar+Hybrid+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Solar+Hybrid+View+3'
+                ],
+                isBestseller: false,
+                tags: ['solar', 'eco-friendly', 'hybrid', 'energy-saving'],
+                colors: ['#28a745', '#007bff', '#673ab7'] // Green, Blue, Purple
+            },
+            {
+                id: 'instant-delight',
+                name: 'Mr Short Instant Delight',
+                price: 3200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Instant+Delight',
+                shotDescription: 'Quick and efficient for daily use.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3000 Watts',
+                    features: 'Compact, Fast heating, Thermal cut-out.',
+                    description: 'A reliable and quick solution for everyday hot water needs, ensuring convenience and safety.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Instant+Delight',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Instant+Delight+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Instant+Delight+View+3'
+                ],
+                isBestseller: true,
+                tags: ['daily-use', 'reliable', 'quick-heating', 'medium-family'],
+                colors: ['#e30613', '#6c757d', '#f8f9fa'] // Red, Gray, Light Gray
+            },
+            {
+                id: 'supreme',
+                name: 'Mr Short Supreme',
+                price: 5500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Supreme+Heater',
+                shotDescription: 'Top-tier performance for discerning users.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '6000 Watts',
+                    features: 'Advanced safety, Digital control, High-grade materials.',
+                    description: 'Combining high performance with premium features, the Supreme model offers an unparalleled hot water experience.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Supreme+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Supreme+Heater+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Supreme+Heater+View+3'
+                ],
+                isBestseller: false,
+                tags: ['premium', 'high-performance', 'advanced-safety', 'luxury', 'large-family'],
+                colors: ['#000000', '#4a4a4a', '#e30613'] // Black, Dark Gray, Red
+            },
+            {
+                id: 'kitchen-master',
+                name: 'Mr Short Kitchen Master',
+                price: 2700,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Kitchen+Master',
+                shotDescription: 'Designed specifically for kitchen hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '2500 Watts',
+                    features: 'Compact, Anti-splash, Quick wash.',
+                    description: 'A specialized heater for kitchen use, providing instant hot water for dishwashing and other culinary tasks efficiently.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Kitchen+Master',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Kitchen+Master+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Kitchen+Master+View+3'
+                ],
+                isBestseller: true,
+                tags: ['kitchen', 'compact', 'anti-splash', 'small-family'],
+                colors: ['#e30613', '#007bff', '#6c757d'] // Red, Blue, Gray
+            },
+            {
+                id: 'bath-bliss',
+                name: 'Mr Short Bath Bliss',
+                price: 4200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Bath+Bliss',
+                shotDescription: 'Ensures a relaxing hot bath experience.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4000 Watts',
+                    features: 'Constant temperature, Overheat protection, Elegant design.',
+                    description: 'Transform your bathroom into a spa with Bath Bliss, delivering consistent hot water for a truly relaxing experience.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Bath+Bliss',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Bath+Bliss+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Bath+Bliss+View+3'
+                ],
+                isBestseller: false,
+                tags: ['bathroom', 'consistent-temp', 'elegant', 'medium-family'],
+                colors: ['#007bff', '#673ab7', '#28a745'] // Blue, Purple, Green
+            },
+            {
+                id: 'industrial-pro',
+                name: 'Mr Short Industrial Pro',
+                price: 9500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Industrial+Pro',
+                shotDescription: 'Robust and high-capacity for industrial use.',
+                fullDetails: {
+                    capacity: '20 Litres',
+                    power: '10000 Watts',
+                    features: 'Heavy-duty construction, Continuous operation, Advanced safety.',
+                    description: 'Built to withstand rigorous industrial demands, offering large volumes of hot water continuously and reliably.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Industrial+Pro',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Industrial+Pro+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Industrial+Pro+View+3'
+                ],
+                isBestseller: false,
+                tags: ['industrial', 'heavy-duty', 'high-capacity', 'commercial'],
+                colors: ['#000000', '#4a4a4a', '#e30613'] // Black, Dark Gray, Red
+            },
+            {
+                id: 'compact-eco',
+                name: 'Mr Short Compact Eco',
+                price: 2600,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Compact+Eco',
+                shotDescription: 'Eco-friendly compact model for small spaces.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '2800 Watts',
+                    features: 'Energy-saving, Space-saving design, Quick heat.',
+                    description: 'A perfect blend of compact size and energy efficiency, ideal for small homes and apartments looking to save on bills.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Compact+Eco',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Compact+Eco+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Compact+Eco+View+3'
+                ],
+                isBestseller: true,
+                tags: ['compact', 'eco-friendly', 'small-space', 'energy-saving', 'kitchen'],
+                colors: ['#28a745', '#007bff', '#6c757d'] // Green, Blue, Gray
+            },
+            {
+                id: 'digital-comfort',
+                name: 'Mr Short Digital Comfort',
+                price: 4800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Digital+Comfort',
+                shotDescription: 'Precise digital control for ultimate comfort.',
+                fullDetails: {
+                    capacity: '7 Litres',
+                    power: '5500 Watts',
+                    features: 'Digital temperature control, Multiple safety features, Fast heating.',
+                    description: 'Enjoy precise control over your hot water temperature with an intuitive digital interface, ensuring maximum comfort.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Digital+Comfort',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Digital+Comfort+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Digital+Comfort+View+3'
+                ],
+                isBestseller: false,
+                tags: ['digital-control', 'comfort', 'fast-heating', 'smart-home', 'large-family'],
+                colors: ['#e30613', '#007bff', '#673ab7'] // Red, Blue, Purple
+            },
+            {
+                id: 'sleek-design',
+                name: 'Mr Short Sleek Design',
+                price: 3700,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Sleek+Design',
+                shotDescription: 'Stylish and efficient, complements modern interiors.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3200 Watts',
+                    features: 'Elegant aesthetics, Space-saving, Durable build.',
+                    description: 'A water heater that not only performs exceptionally but also enhances the aesthetic appeal of your bathroom or kitchen.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Sleek+Design',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Sleek+Design+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Sleek+Design+View+3'
+                ],
+                isBestseller: true,
+                tags: ['stylish', 'modern', 'space-saving', 'bathroom', 'kitchen'],
+                colors: ['#e30613', '#000000', '#f8f9fa'] // Red, Black, Light Gray
+            },
+            {
+                id: 'quick-heat-pro',
+                name: 'Mr Short Quick Heat Pro',
+                price: 3100,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Quick+Heat+Pro',
+                shotDescription: 'Professional-grade rapid heating for busy homes.',
+                fullDetails: {
+                    capacity: '4 Litres',
+                    power: '3800 Watts',
+                    features: 'Ultra-fast heating, High durability, Safety valve.',
+                    description: 'Get hot water in seconds with this powerful and reliable heater, perfect for busy households where time is of the essence.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Quick+Heat+Pro',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Quick+Heat+Pro+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Quick+Heat+Pro+View+3'
+                ],
+                isBestseller: false,
+                tags: ['fast-heating', 'durable', 'professional', 'medium-family'],
+                colors: ['#e30613', '#6c757d', '#000000'] // Red, Gray, Black
+            },
+            {
+                id: 'family-comfort',
+                name: 'Mr Short Family Comfort',
+                price: 5200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Family+Comfort',
+                shotDescription: 'Designed for the hot water needs of a large family.',
+                fullDetails: {
+                    capacity: '9 Litres',
+                    power: '6500 Watts',
+                    features: 'Large capacity, Multi-point delivery, Energy efficient.',
+                    description: 'Ensures ample hot water for all family members, even during peak usage times, with efficient energy consumption.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Family+Comfort',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Family+Comfort+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Family+Comfort+View+3'
+                ],
+                isBestseller: true,
+                tags: ['large-family', 'high-capacity', 'energy-efficient', 'bathroom'],
+                colors: ['#28a745', '#007bff', '#e30613'] // Green, Blue, Red
+            },
+            {
+                id: 'portable-mini',
+                name: 'Mr Short Portable Mini',
+                price: 1800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Portable+Mini',
+                shotDescription: 'Lightweight and portable for temporary needs.',
+                fullDetails: {
+                    capacity: '2 Litres',
+                    power: '1500 Watts',
+                    features: 'Portable, Easy installation, Compact size.',
+                    description: 'A versatile mini-heater perfect for travel, camping, or temporary setups where instant hot water is needed on the go.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Portable+Mini',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Portable+Mini+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Portable+Mini+View+3'
+                ],
+                isBestseller: false,
+                tags: ['portable', 'travel', 'compact', 'small-space'],
+                colors: ['#e30613', '#f8f9fa', '#6c757d'] // Red, Light Gray, Gray
+            },
+            {
+                id: 'smart-app',
+                name: 'Mr Short Smart App',
+                price: 6800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Smart+App+Control',
+                shotDescription: 'Control your water heater from your smartphone.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'Wi-Fi control, Schedule heating, Energy monitoring, Voice assistant compatible.',
+                    description: 'Integrate your water heater into your smart home. Control it remotely, set schedules, and monitor energy usage via a dedicated app.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Smart+App+Control',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Smart+App+Control+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Smart+App+Control+View+3'
+                ],
+                isBestseller: false,
+                tags: ['smart-home', 'wi-fi', 'app-control', 'luxury', 'large-family'],
+                colors: ['#673ab7', '#007bff', '#e30613'] // Purple, Blue, Red
+            },
+            {
+                id: 'ultra-safe',
+                name: 'Mr Short Ultra Safe',
+                price: 4100,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Ultra+Safe+Heater',
+                shotDescription: 'Maximum safety features for complete peace of mind.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3000 Watts',
+                    features: 'Triple safety system, Child lock, Anti-leak, Shock-proof.',
+                    description: 'Prioritizing safety, this model comes with multiple layers of protection, making it ideal for homes with children or elderly.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Ultra+Safe+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Ultra+Safe+Heater+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Ultra+Safe+Heater+View+3'
+                ],
+                isBestseller: true,
+                tags: ['safety', 'child-friendly', 'anti-leak', 'bathroom'],
+                colors: ['#e30613', '#28a745', '#007bff'] // Red, Green, Blue
+            },
+            {
+                id: 'designer-series',
+                name: 'Mr Short Designer Series',
+                price: 6200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Designer+Series',
+                shotDescription: 'Artistically designed for modern, high-end bathrooms.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '4500 Watts',
+                    features: 'Unique design, Premium materials, Silent operation, Touch panel.',
+                    description: 'More than just a water heater, it\'s a statement piece. Blends seamlessly with contemporary bathroom designs while providing efficient heating.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Designer+Series',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Designer+Series+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Designer+Series+View+3'
+                ],
+                isBestseller: false,
+                tags: ['designer', 'luxury', 'silent-operation', 'bathroom'],
+                colors: ['#000000', '#f8f9fa', '#e30613'] // Black, Light Gray, Red
+            }
+        ];
+
+        // Get references to new elements
+        const productSearchInput = document.getElementById('productSearch');
+        const sortOptionsSelect = document.getElementById('sortOptions');
+        const tagFilterSelect = document.getElementById('tagFilter'); // For tags
+
+        // Function to populate unique tags for the filter dropdown
+        function populateTagFilter() {
+            const allTags = new Set();
+            productsData.forEach(product => {
+                if (product.tags && Array.isArray(product.tags)) {
+                    product.tags.forEach(tag => allTags.add(tag));
+                }
+            });
+
+            tagFilterSelect.innerHTML = '<option value="all">All Tags</option>'; // Reset and add 'All' option
+            // Sort tags alphabetically for better UX
+            Array.from(allTags).sort().forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' '); // Capitalize and replace hyphens
+                tagFilterSelect.appendChild(option);
+            });
+        }
+
+        // Main function to filter and sort products
+        function filterAndSortProducts() {
+            let displayedProducts = [...productsData]; // Start with a copy of original data
+
+            // 1. Apply Search Filter
+            const searchQuery = productSearchInput.value.toLowerCase().trim();
+            if (searchQuery) {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.name.toLowerCase().includes(searchQuery) ||
+                    product.shotDescription.toLowerCase().includes(searchQuery) ||
+                    (product.fullDetails && product.fullDetails.description.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            // 2. Apply Tag Filter
+            const selectedTag = tagFilterSelect.value;
+            if (selectedTag !== 'all') {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.tags && product.tags.includes(selectedTag)
+                );
+            }
+
+            // 3. Apply Sorting
+            const sortOption = sortOptionsSelect.value;
+            switch (sortOption) {
+                case 'price-asc':
+                    displayedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    displayedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    displayedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    displayedProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'bestsellers':
+                    // Sort bestsellers first, then by name for consistency
+                    displayedProducts.sort((a, b) => {
+                        if (a.isBestseller && !b.isBestseller) return -1;
+                        if (!a.isBestseller && b.isBestseller) return 1;
+                        return a.name.localeCompare(b.name);
+                    });
+                    break;
+                case 'default':
+                default:
+                    // No specific sorting, maintain original order or a default consistent order
+                    // For simplicity, we'll re-render based on the filtered data as is.
+                    break;
+            }
+
+            renderProducts(displayedProducts); // Pass the filtered and sorted array to render
+        }
+
+        // Modify renderProducts to accept an array to display
+        function renderProducts(productsToDisplay, targetElementId = 'productsGrid') {
+            const targetElement = document.getElementById(targetElementId);
+            if (!targetElement) return; // Exit if target element not found
+
+            targetElement.innerHTML = ''; // Clear existing content
+
+            if (productsToDisplay.length === 0) {
+                targetElement.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px; font-size: 1rem; color: var(--text-color);">No products found matching your criteria.</p>';
+                return;
+            }
+
+            productsToDisplay.forEach(product => {
+                const colorOptionsHtml = (product.colors && product.colors.length > 0) ?
+                    `<div class="product-colors">
+                        ${product.colors.map(color => `<span class="color-option" style="background-color: ${color};" data-color="${color}"></span>`).join('')}
+                    </div>` : '';
+
+                const productCardHtml = `
+                    <div class="product-card-container">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-img">
+                                    <img src="${product.img}" alt="${product.name}">
+                                    <div class="product-gallery-dots" data-product-id="${product.id}">
+                                        <!-- Generate dots only for the first 3 images or actual number if less -->
+                                        ${product.galleryImages.slice(0, 3).map((_, idx) => `<span class="gallery-dot" data-image-index="${idx}"></span>`).join('')}
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p>${product.shotDescription}</p>
+                                    ${colorOptionsHtml} <!-- Added color options here -->
+                                    <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="product-btns">
+                                        <button class="btn view-details-btn" data-product-id="${product.id}">View Details</button>
+                                        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>${product.name} Details</h3>
+                                <div class="product-details-full">
+                                    <p><strong>Capacity:</strong> ${product.fullDetails.capacity}</p>
+                                    <p><strong>Power:</strong> ${product.fullDetails.power}</p>
+                                    <p><strong>Features:</strong> ${product.fullDetails.features}</p>
+                                    <p>${product.fullDetails.description}</p>
+                                </div>
+                                <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-secondary back-to-front-btn" style="background-color: #6c757d; margin-top: 10px;">Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                targetElement.insertAdjacentHTML('beforeend', productCardHtml);
+            });
+
+            // Re-attach event listeners after rendering products
+            attachProductEventListeners();
+            attachGalleryDotListeners();
+        }
+
+        // Add event listeners for search and sort/filter
+        productSearchInput.addEventListener('input', filterAndSortProducts);
+        sortOptionsSelect.addEventListener('change', filterAndSortProducts);
+        tagFilterSelect.addEventListener('change', filterAndSortProducts);
+
+
+        // Attach event listeners for product cards (called after rendering)
+        function attachProductEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.back-to-front-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.remove('flipped');
+                });
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const product = productsData.find(p => p.id === productId);
+                    if (product) {
+                        addItemToCart(product);
+                    }
+                });
+            });
+        }
+
+        // --- Cart Logic ---
+        let cart = []; // Array to store cart items
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartSidebarBtn = document.getElementById('closeCartSidebar');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+        const payNowBtn = document.getElementById('payNowBtn'); // Reference to the new button
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            cartCount.textContent = cart.length;
+            cartItemsList.innerHTML = ''; // Clear current items
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: var(--text-color); margin-top: 20px;">Your cart is empty.</p>';
+                payNowBtn.style.display = 'none'; // Hide pay button if cart is empty
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('cart-item');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${item.id}"><i class="fas fa-times-circle"></i></button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price;
+                });
+                payNowBtn.style.display = 'block'; // Show pay button if items exist
+            }
+            cartTotalAmount.textContent = total.toFixed(2);
+
+            // Re-attach event listeners for remove buttons
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = this.dataset.productId;
+                    removeItemFromCart(productIdToRemove);
+                });
+            });
+        }
+
+        // Function to add item to cart
+        function addItemToCart(product) {
+            cart.push(product);
+            updateCartDisplay();
+            showCustomMessage(`"${product.name}" added to cart!`, 'success');
+            cartSidebar.classList.add('open'); // Open sidebar when item is added
+        }
+
+        // Function to remove item from cart
+        function removeItemFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                const removedItemName = cart[index].name;
+                cart.splice(index, 1); // Remove one item at the found index
+                updateCartDisplay();
+                showCustomMessage(`"${removedItemName}" removed from cart.`, 'info');
+            }
+        }
+
+        // Open/Close Cart Sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+            aiChatSidebar.classList.remove('open'); // Close AI chat if cart opens
+        });
+
+        closeCartSidebarBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+
+        // UPI Payment Logic
+        payNowBtn.addEventListener('click', () => {
+            const totalAmount = parseFloat(cartTotalAmount.textContent);
+            if (totalAmount > 0) {
+                // Construct UPI deep link (example, replace with your actual VPA and details)
+                // Format: upi://pay?pa=yourvpa@bank&pn=YourName&am=TOTAL_AMOUNT&cu=INR
+                const upiUrl = `upi://pay?pa=mrshort@upi&pn=MrShortPayments&am=${totalAmount.toFixed(2)}&cu=INR`;
+                
+                // Attempt to open UPI app
+                window.location.href = upiUrl;
+
+                showCustomMessage('Attempting to open UPI app for payment...', 'info');
+                // In a real scenario, you'd integrate with a payment gateway backend
+                // and verify payment status after redirection.
+            } else {
+                showCustomMessage('Your cart is empty. Please add items before paying.', 'info');
+            }
+        });
+
+        // Close sidebar if clicked outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target) && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+
+
+        // --- Image Lightbox Logic ---
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+        const nextLightboxBtn = document.getElementById('nextLightboxBtn');
+        const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxDotsContainer = document.getElementById('lightboxDots');
+
+        let currentProductGallery = [];
+        let currentImageIndex = 0;
+
+        function attachGalleryDotListeners() {
+            document.querySelectorAll('.product-gallery-dots .gallery-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const productId = this.closest('.product-gallery-dots').dataset.productId;
+                    // FIX: Changed this.dataset.image-index to this.dataset.imageIndex
+                    const initialImageIndex = parseInt(this.dataset.imageIndex); 
+                    
+                    const product = productsData.find(p => p.id === productId);
+                    if (product && product.galleryImages) {
+                        openLightbox(product.galleryImages, initialImageIndex);
+                    }
+                });
+            });
+        }
+
+        function openLightbox(images, initialIndex = 0) {
+            currentProductGallery = images;
+            currentImageIndex = initialIndex;
+
+            lightboxDotsContainer.innerHTML = ''; // Clear previous dots
+            currentProductGallery.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('lightbox-dot');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => showLightboxImage(index));
+                lightboxDotsContainer.appendChild(dot);
+            });
+
+            showLightboxImage(currentImageIndex);
+            imageLightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            imageLightbox.classList.remove('active');
+        }
+
+        function showLightboxImage(index) {
+            if (index >= currentProductGallery.length) {
+                currentImageIndex = 0;
+            } else if (index < 0) {
+                currentImageIndex = currentProductGallery.length - 1;
+            } else {
+                currentImageIndex = index;
+            }
+            lightboxImage.src = currentProductGallery[currentImageIndex];
+
+            // Update active dot in lightbox
+            document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
+                if (i === currentImageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        prevLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
+        nextLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) { // Close only if clicked on the overlay, not the content
+                closeLightbox();
+            }
+        });
+
+
+        // Testimonials Grid Logic
+        const testimonialsData = [
+            {
+                text: "The Mr Short Basic model is a lifesaver! Our old geyser took ages, but now we have hot water instantly for morning showers. It’s compact, efficient, and surprisingly powerful for its size. Highly recommend for small families.",
+                author: "Ramesh Kumar",
+                location: "Chennai, Tamil Nadu",
+                img: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                text: "Joining the Mr Short franchise was one one of the best decisions for my business. The support is incredible, from marketing materials to product training. The demand for these affordable, high-quality heaters is constant, making it a very profitable venture.",
+                author: "Priya Sharma",
+                location: "Franchise Partner, Bangalore",
+                img: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            {
+                text: "Our salon needs a constant supply of hot water for various treatments. We switched to Mr Short Commercial, and it has been flawless. It handles the continuous usage without any drop in temperature or pressure. Our stylists and clients are very happy!",
+                author: "Arun Joshi",
+                location: "Salon Owner, Coimbatore",
+                img: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            {
+                text: "I was hesitant about an instant water heater, but the Mr Short Premium model exceeded all expectations. The digital display is super convenient for precise temperature, and it heats up incredibly fast. Plus, it looks sleek in my bathroom. Excellent value for money!",
+                author: "Anjali Singh",
+                location: "Mumbai, Maharashtra",
+                img: "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            {
+                text: "Installation was a breeze, and the Mr Short team provided excellent customer service throughout. The product itself is fantastic – no more waiting for hot water, and our electricity bill hasn't spiked. A truly smart investment for any home.",
+                author: "Vikram Reddy",
+                location: "Hyderabad, Telangana",
+                img: "https://randomuser.me/api/portraits/men/80.jpg"
+            }
+        ];
+
+        function renderTestimonials() {
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            testimonialsGrid.innerHTML = ''; // Clear existing content
+
+            testimonialsData.forEach(testimonial => {
+                const testimonialCardHtml = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"${testimonial.text}"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="${testimonial.img}" alt="${testimonial.author}">
+                            </div>
+                            <div class="author-info">
+                                <h4>${testimonial.author}</h4>
+                                <p>${testimonial.location}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                testimonialsGrid.insertAdjacentHTML('beforeend', testimonialCardHtml);
+            });
+        }
+
+        // --- Header Scroll Behavior ---
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        const headerHeight = header.offsetHeight; // Get initial height of the header
+        const scrollThreshold = 100; // Distance to scroll before header changes
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling down past threshold
+                header.classList.add('header-scrolled');
+            } else if (scrollTop < lastScrollTop || scrollTop <= scrollThreshold) {
+                // Scrolling up or near the top
+                header.classList.remove('header-scrolled');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // --- AI Chatbot Logic (Mr. Shot) ---
+        const aiChatIcon = document.getElementById('aiChatIcon');
+        const aiChatSidebar = document.getElementById('aiChatSidebar');
+        const closeAiChatSidebarBtn = document.getElementById('closeAiChatSidebar');
+        const aiOptionRadios = document.querySelectorAll('input[name="aiOption"]');
+        const aiFieldGroups = document.querySelectorAll('.ai-field-group');
+        const aiSendButtons = document.querySelectorAll('.ai-send-btn');
+        const recommendedProductsDiv = document.getElementById('recommendedProducts');
+        const chatMessagesDiv = document.getElementById('chatMessages');
+        const initialAiOptions = document.getElementById('initialAiOptions');
+        const aiStartOverBtn = document.getElementById('aiStartOverBtn');
+
+        // Input fields for various options
+        const repairHeaterNameInput = document.getElementById('repairHeaterName');
+        const repairUserNameInput = document.getElementById('repairUserName');
+        const buyPurposeSelect = document.getElementById('buyPurpose');
+        const franchiseUserNameInput = document.getElementById('franchiseUserName');
+        const franchiseMobileInput = document.getElementById('franchiseMobile');
+        const franchiseLocationInput = document.getElementById('franchiseLocation');
+        const franchisePinCodeInput = document.getElementById('franchisePinCode');
+        const supportUserNameInput = document.getElementById('supportUserName');
+        const supportContactNumberInput = document.getElementById('supportContactNumber');
+
+        let currentAiState = 'initial'; // Tracks the current state of the conversation
+
+        // Predefined conversational responses
+        const aiResponses = {
+            initial: "Hello! I'm Mr. Shot, your virtual assistant. How can I help you today?",
+            repair: {
+                prompt: "No problem! To help me understand, could you please tell me the name of your heater model and your name?",
+                confirm: (heater, name) => `Thank you, ${name}! Your repair request for Mr Short ${heater} has been noted. Our team will contact you shotly to schedule a service.`,
+                whatsapp: (heater, name) => `Hello Mr. Short Team, I need assistance with repairing my heater. My name is ${name} and my heater model is Mr Short ${heater}. Please contact me.`,
+                error: "Please fill in both heater name and your name to proceed with the repair request."
+            },
+            buy: {
+                prompt: "Great! To recommend the best heater, please select the primary purpose for its use from the options below:",
+                noProducts: "I couldn't find specific products for that purpose. Please browse our full catalog or try a different purpose.",
+                confirm: "Here are some recommendations based on your selection. You can add them directly to your cart or explore our full product range."
+            },
+            franchise: {
+                prompt: "Excellent! We'd love to have you. Please provide your name, mobile number, city/location, and pin code so our franchise team can get in touch.",
+                confirm: (name, mobile, location, pin) => `Thank you, ${name}! Your franchise enquiry from ${location}, ${pin} with mobile ${mobile} has been sent. Our team will contact you soon to discuss this exciting opportunity.`,
+                whatsapp: (name, mobile, location, pin) => `Hello Mr. Short Franchise Team, I am interested in a franchise opportunity. My name is ${name}, mobile: ${mobile}, location: ${location}, pin code: ${pin}. Please provide more details.`,
+                error: "Please fill in all details (Name, Mobile, Location, Pin Code) for the franchise enquiry."
+            },
+            support: {
+                prompt: "I can connect you with our customer support. Please provide your name and contact number, and they will reach out to you.",
+                confirm: (name, contact) => `Thank you, ${name}! Your support request with contact number ${contact} has been sent. Our customer support team will be in touch shotly.`,
+                whatsapp: (name, contact) => `Hello Mr. Short Customer Support, I need assistance. My name is ${name} and my contact number is ${contact}. Please reach out to me.`,
+                error: "Please provide your name and contact number for support."
+            },
+            general_follow_up: "Is there anything else I can assist you with today? You can choose another option or click 'Start Over'."
+        };
+
+        // Function to display a message in the chat interface
+        function displayMessage(sender, text) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message', sender);
+            messageElement.textContent = text;
+            chatMessagesDiv.appendChild(messageElement);
+            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; // Scroll to bottom
+        }
+
+        // Open/Close AI Chat Sidebar
+        aiChatIcon.addEventListener('click', () => {
+            aiChatSidebar.classList.toggle('open');
+            cartSidebar.classList.remove('open'); // Close cart if AI chat opens
+            if (aiChatSidebar.classList.contains('open')) {
+                resetAiChat(); // Reset chat state when opening
+                displayMessage('ai', aiResponses.initial);
+                initialAiOptions.style.display = 'flex'; // Show initial options
+            }
+        });
+
+        closeAiChatSidebarBtn.addEventListener('click', () => {
+            aiChatSidebar.classList.remove('open');
+        });
+
+        // Hide all field groups and recommendations
+        function hideAllAiFieldGroups() {
+            aiFieldGroups.forEach(group => {
+                group.style.display = 'none';
+            });
+            recommendedProductsDiv.innerHTML = ''; // Clear recommended products
+            initialAiOptions.style.display = 'none'; // Hide initial options
+        }
+
+        // Handle AI option selection (radio buttons)
+        aiOptionRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                hideAllAiFieldGroups(); // Hide all when a new option is selected
+                const selectedOption = this.value;
+                currentAiState = selectedOption; // Update current state
+
+                displayMessage('user', this.parentElement.textContent.trim()); // Display user's choice
+
+                // Display AI's prompt for the selected option
+                displayMessage('ai', aiResponses[selectedOption].prompt);
+
+                // Show the relevant input fields
+                document.getElementById(`${selectedOption}Fields`).style.display = 'flex';
+                
+                // Clear inputs when switching options
+                repairHeaterNameInput.value = '';
+                repairUserNameInput.value = '';
+                buyPurposeSelect.value = '';
+                franchiseUserNameInput.value = '';
+                franchiseMobileInput.value = '';
+                franchiseLocationInput.value = '';
+                franchisePinCodeInput.value = '';
+                supportUserNameInput.value = '';
+                supportContactNumberInput.value = '';
+            });
+        });
+
+        // Function to send WhatsApp message
+        function sendWhatsAppMessage(phoneNumber, message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Handle "Send" button clicks within AI chat
+        aiSendButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.dataset.action;
+                let message = '';
+                let phoneNumber = '9123512626'; // Default to general sales/support
+
+                switch (action) {
+                    case 'repair':
+                        const heaterName = repairHeaterNameInput.value.trim();
+                        const userName = repairUserNameInput.value.trim();
+                        if (heaterName && userName) {
+                            displayMessage('user', `My heater is Mr Short ${heaterName}, and my name is ${userName}.`);
+                            displayMessage('ai', aiResponses.repair.confirm(heaterName, userName));
+                            sendWhatsAppMessage(phoneNumber, aiResponses.repair.whatsapp(heaterName, userName));
+                            showCustomMessage('Repair request sent to Mr. Shot! We will contact you soon.', 'success');
+                            hideAllAiFieldGroups(); // Hide fields after sending
+                            displayMessage('ai', aiResponses.general_follow_up);
+                            aiStartOverBtn.style.display = 'block'; // Show start over button
+                        } else {
+                            showCustomMessage(aiResponses.repair.error, 'info');
+                        }
+                        break;
+                    case 'buy-show-products':
+                        const purpose = buyPurposeSelect.value;
+                        if (purpose) {
+                            displayMessage('user', `I need a heater for: ${buyPurposeSelect.options[buyPurposeSelect.selectedIndex].text}`);
+                            const filteredProducts = productsData.filter(product => product.tags.includes(purpose));
+                            if (filteredProducts.length > 0) {
+                                displayMessage('ai', aiResponses.buy.confirm);
+                                renderProducts(filteredProducts, 'recommendedProducts'); // Render into the AI chat div
+                            } else {
+                                displayMessage('ai', aiResponses.buy.noProducts);
+                                recommendedProductsDiv.innerHTML = ''; // Clear any previous recommendations
+                            }
+                            displayMessage('ai', aiResponses.general_follow_up);
+                            aiStartOverBtn.style.display = 'block'; // Show start over button
+                        } else {
+                            showCustomMessage('Please select a purpose to see recommendations.', 'info');
+                        }
+                        break;
+                    case 'franchise':
+                        const fUserName = franchiseUserNameInput.value.trim();
+                        const fMobile = franchiseMobileInput.value.trim();
+                        const fLocation = franchiseLocationInput.value.trim();
+                        const fPinCode = franchisePinCodeInput.value.trim();
+                        phoneNumber = '9123512626'; // Franchise specific number
+                        if (fUserName && fMobile && fLocation && fPinCode) {
+                            displayMessage('user', `My name is ${fUserName}, mobile: ${fMobile}, location: ${fLocation}, pin code: ${fPinCode}.`);
+                            displayMessage('ai', aiResponses.franchise.confirm(fUserName, fMobile, fLocation, fPinCode));
+                            sendWhatsAppMessage(phoneNumber, aiResponses.franchise.whatsapp(fUserName, fMobile, fLocation, fPinCode));
+                            showCustomMessage('Franchise enquiry sent to Mr. Shot! We will contact you soon.', 'success');
+                            hideAllAiFieldGroups(); // Hide fields after sending
+                            displayMessage('ai', aiResponses.general_follow_up);
+                            aiStartOverBtn.style.display = 'block'; // Show start over button
+                        } else {
+                            showCustomMessage(aiResponses.franchise.error, 'info');
+                        }
+                        break;
+                    case 'support':
+                        const sUserName = supportUserNameInput.value.trim();
+                        const sContactNumber = supportContactNumberInput.value.trim();
+                        if (sUserName && sContactNumber) {
+                            displayMessage('user', `My name is ${sUserName} and my contact number is ${sContactNumber}.`);
+                            displayMessage('ai', aiResponses.support.confirm(sUserName, sContactNumber));
+                            sendWhatsAppMessage(phoneNumber, aiResponses.support.whatsapp(sUserName, sContactNumber));
+                            showCustomMessage('Support request sent to Mr. Shot! We will contact you soon.', 'success');
+                            hideAllAiFieldGroups(); // Hide fields after sending
+                            displayMessage('ai', aiResponses.general_follow_up);
+                            aiStartOverBtn.style.display = 'block'; // Show start over button
+                        } else {
+                            showCustomMessage(aiResponses.support.error, 'info');
+                        }
+                        break;
+                }
+            });
+        });
+
+        // Reset AI chat state
+        function resetAiChat() {
+            chatMessagesDiv.innerHTML = ''; // Clear all messages
+            aiOptionRadios.forEach(radio => radio.checked = false);
+            hideAllAiFieldGroups();
+            initialAiOptions.style.display = 'flex'; // Show initial options again
+            aiStartOverBtn.style.display = 'none'; // Hide start over button
+            currentAiState = 'initial'; // Reset state
+            // Clear all input fields
+            repairHeaterNameInput.value = '';
+            repairUserNameInput.value = '';
+            buyPurposeSelect.value = '';
+            franchiseUserNameInput.value = '';
+            franchiseMobileInput.value = '';
+            franchiseLocationInput.value = '';
+            franchisePinCodeInput.value = '';
+            supportUserNameInput.value = '';
+            supportContactNumberInput.value = '';
+            recommendedProductsDiv.innerHTML = '';
+        }
+
+        // Start Over button listener
+        aiStartOverBtn.addEventListener('click', () => {
+            resetAiChat();
+            displayMessage('ai', aiResponses.initial);
+        });
+
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTagFilter(); // Populate tags before initial render
+            filterAndSortProducts(); // Call this to render products with initial filters/sort
+            updateCartDisplay(); // Initialize cart display
+            renderTestimonials(); // Render testimonials in grid
+            // Trigger scroll event to set initial active section and product controls state
+            window.dispatchEvent(new Event('scroll')); 
+            hideAllAiFieldGroups(); // Ensure AI fields are hidden on load
+            aiStartOverBtn.style.display = 'none'; // Ensure start over button is hidden initially
+        });
+    </script>
+</body>
+</html>

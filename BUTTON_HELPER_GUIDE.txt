@@ -1,0 +1,105 @@
+RIYE BUTTON HELPER SYSTEM
+==========================
+
+The Riye Construction Management app now includes a unified button system using the `riye_button` helper method.
+
+## Basic Usage
+
+```erb
+<%= riye_button("Click Me", "/path", { color: 'primary' }) %>
+```
+
+## Available Options
+
+### Colors:
+- primary (blue gradient)
+- secondary (gray gradient) 
+- success (green gradient)
+- danger (red gradient)
+- warning (orange gradient)
+- info (light blue gradient)
+
+### Sizes:
+- xs (extra small)
+- sm (small)
+- md (medium - default)
+- lg (large)
+- xl (extra large)
+
+### Additional Options:
+- outline: true/false - Creates outlined button instead of filled
+- block: true/false - Makes button full width
+- icon: "fas fa-icon-name" - Adds FontAwesome icon before text
+- disabled: true/false - Disables the button
+- confirm: "Are you sure?" - Adds confirmation dialog
+- method: :post/:delete/:patch - HTTP method for the request
+- class: "additional-classes" - Add custom CSS classes
+
+## Examples
+
+### Basic Primary Button
+```erb
+<%= riye_button("Save", user_path(@user), { color: 'primary', icon: 'fas fa-save' }) %>
+```
+
+### Danger Button with Confirmation
+```erb
+<%= riye_button("Delete", user_path(@user), { 
+  color: 'danger', 
+  method: :delete, 
+  confirm: 'Are you sure?',
+  icon: 'fas fa-trash'
+}) %>
+```
+
+### Large Success Button
+```erb
+<%= riye_button("Create New", new_user_path, { 
+  color: 'success', 
+  size: 'lg',
+  icon: 'fas fa-plus'
+}) %>
+```
+
+### Outlined Secondary Button
+```erb
+<%= riye_button("Cancel", users_path, { 
+  color: 'secondary', 
+  outline: true,
+  icon: 'fas fa-times'
+}) %>
+```
+
+### Button Group
+```erb
+<div class="riye-btn-group">
+  <%= riye_button("Edit", edit_user_path(@user), { color: 'warning', icon: 'fas fa-edit' }) %>
+  <%= riye_button("Delete", user_path(@user), { 
+    color: 'danger', 
+    method: :delete,
+    confirm: 'Are you sure?',
+    icon: 'fas fa-trash'
+  }) %>
+</div>
+```
+
+## Features
+
+1. **Consistent Styling**: All buttons have the same shape, hover effects, and transitions
+2. **Responsive**: Buttons automatically adjust size on mobile devices
+3. **Accessible**: Proper ARIA attributes and keyboard navigation
+4. **Modern Design**: Gradient backgrounds, smooth animations, and professional appearance
+5. **Flexible**: Supports all common button variations and customizations
+
+## Migration from Old Buttons
+
+Replace old Bootstrap buttons:
+```erb
+<!-- OLD -->
+<%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-warning' %>
+
+<!-- NEW -->
+<%= riye_button('Edit', edit_user_path(@user), { color: 'warning', icon: 'fas fa-edit' }) %>
+```
+
+This ensures all buttons across the application have consistent styling and behavior.

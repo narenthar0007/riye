@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venkat Enterprises - Survey, Lab, Construction & Power Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-orange-brown: #D2691E; /* Chocolate */
+            --dark-orange-brown: #A0522D; /* Sienna */
+            --light-orange-brown: #FF8C00; /* DarkOrange */
+            --accent-green: #28a745;
+            --accent-green-dark: #218838;
+            --white: #ffffff;
+            --light-gray: #f8f9fa; /* Keeping light for backgrounds */
+            --medium-gray: #e9ecef; /* Keeping light for borders */
+            --dark-gray: #5A3E2B; /* Darker brown for headings/strong text */
+            --text-color: #6F4F28; /* Slightly lighter brown for general text */
+            --border-color: #E0C8A8; /* A light, warm border color */
+            --shadow-subtle: rgba(0, 0, 0, 0.08);
+            --shadow-soft: rgba(0, 0, 0, 0.12);
+            --shadow-medium: rgba(0, 0, 0, 0.18);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-orange-brown);
+            color: var(--white);
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px; /* Slightly less rounded for a professional look */
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px var(--shadow-subtle);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.4s ease-in-out;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            background: var(--dark-orange-brown);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow-soft);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-large {
+            padding: 18px 40px;
+            font-size: 1.25rem;
+        }
+
+        .btn-secondary {
+            background-color: var(--medium-gray);
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d1d1d1;
+            box-shadow: 0 6px 15px var(--shadow-soft);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--dark-gray);
+            font-size: 3rem;
+            position: relative;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-orange-brown), var(--light-orange-brown));
+            margin: 20px auto 0;
+            border-radius: 3px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 15px var(--shadow-subtle);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+            transition: height 0.3s ease;
+        }
+        
+        .logo h1 {
+            color: var(--primary-orange-brown);
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: 1.8px;
+            transition: font-size 0.3s ease;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2.2rem;
+            color: var(--primary-orange-brown);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            transition: all 0.3s ease; /* Transition for desktop nav shrinking */
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-orange-brown);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: var(--primary-orange-brown);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Header Scrolled State */
+        header.header-scrolled {
+            height: 75px;
+            box-shadow: 0 4px 20px var(--shadow-soft);
+        }
+        header.header-scrolled .logo img {
+            height: 45px;
+        }
+        header.header-scrolled .logo h1 {
+            font-size: 2rem;
+        }
+        /* Desktop nav shrinks but remains visible */
+        header.header-scrolled nav ul {
+            transform: scale(0.9);
+            gap: 20px; /* Reduce gap between items */
+        }
+        header.header-scrolled nav ul li {
+            margin-left: 0; /* Remove fixed margin, use gap */
+        }
+        
+        /* Floating Circular Navigation */
+        .floating-nav {
+            position: fixed;
+            right: 35px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .floating-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .floating-nav ul li {
+            margin: 0;
+            position: relative;
+        }
+        
+        .floating-nav ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-orange-brown);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 12px var(--shadow-subtle);
+            transition: all 0.2s ease-in-out;
+            font-size: 1.2rem;
+        }
+        
+        .floating-nav ul li a:hover {
+            background-color: var(--dark-orange-brown);
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px var(--shadow-soft);
+        }
+        
+        .floating-nav ul li .nav-tooltip {
+            position: absolute;
+            right: 60px;
+            background: var(--dark-gray);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease-in-out;
+            transform: translateY(-50%);
+            top: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .floating-nav ul li .nav-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid var(--dark-gray);
+        }
+        
+        .floating-nav ul li a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 65px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(210, 105, 30, 0.8), rgba(160, 82, 45, 0.8)), url('https://images.unsplash.com/photo-1517032204900-2495b6c3103e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Industrial/tech background with orange/brown overlay */
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 85px;
+            position: relative;
+            overflow: hidden;
+            animation: panBackground 120s linear infinite alternate;
+        }
+
+        @keyframes panBackground {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px; /* Slightly less rounded */
+            box-shadow: 0 15px 40px var(--shadow-medium);
+            animation: fadeInScale 1s ease-out forwards;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero h2 {
+            font-size: 4.2rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            line-height: 1.1;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 120px 0;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .about-us-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-us-content p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 120px 0;
+            background-color: var(--light-gray);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .category-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--shadow-soft);
+        }
+
+        .category-icon {
+            font-size: 3.5rem;
+            color: var(--primary-orange-brown);
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            color: var(--dark-orange-brown);
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .category-card p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+        
+        /* Featured Products Section (reusing product card styles) */
+        .featured-products {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+
+        /* Brands Section */
+        .brands {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+            text-align: center;
+        }
+
+        .brands-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .brand-logo {
+            flex: 0 0 auto; /* Don't grow or shrink, just take content width */
+            width: 150px; /* Fixed width for logos */
+            height: 80px; /* Fixed height for logos */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            cursor: pointer; /* Make it clear it's clickable */
+        }
+
+        .brand-logo:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow-soft);
+        }
+
+        .brand-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%); /* Grayscale for professional look */
+            opacity: 0.7;
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .brand-logo:hover img {
+            filter: grayscale(0%); /* Color on hover */
+            opacity: 1;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 120px 0;
+            background-color: var(--white); /* Changed to white for all products */
+        }
+
+        /* Product Controls Wrapper */
+        .product-controls-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-subtle);
+            background-color: var(--white);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-orange-brown);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(210, 105, 30, 0.15);
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Filters and Sort */
+        .filters-sort {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+
+        .filters-sort select {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-subtle);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22 viewBox%3D%220 0 292.4 292.4%22%3E%3Cpath fill%3D%22%234a4a4a%22 d%3D%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 4.9 1.8 9.2 5.4 12.8l128 128c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4l128-128c3.6-3.6 5.4-7.8 5.4-12.8 0-4.9-1.8-9.1-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 12px auto;
+            padding-right: 35px;
+        }
+
+        .filters-sort select:focus {
+            border-color: var(--primary-orange-brown);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(210, 105, 30, 0.15);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min-width for more items per row */
+            gap: 40px;
+        }
+        
+        .product-card-container {
+            perspective: 1200px;
+            height: 450px; /* Adjusted height */
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease-in-out;
+            transform-style: preserve-3d;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px var(--shadow-soft);
+            background-color: var(--white);
+        }
+
+        .product-card-container.flipped .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-card-container:hover .product-card-inner {
+            box-shadow: 0 12px 35px var(--shadow-medium);
+        }
+
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 25px; /* Adjusted padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            text-align: left;
+            padding-top: 30px; /* Adjusted padding */
+        }
+
+        .product-img {
+            height: 200px; /* Adjusted height */
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .product-card-container:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-gallery-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            display: flex;
+            gap: 5px;
+            z-index: 5;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-dot:hover {
+            background-color: var(--primary-orange-brown);
+            transform: scale(1.1);
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+            font-size: 1.4rem;
+            letter-spacing: 0.7px;
+            font-weight: 700;
+        }
+        
+        .product-info p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin: 15px 0 20px;
+            color: var(--primary-orange-brown);
+            letter-spacing: 0.6px;
+        }
+        
+        .product-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .product-card-back h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card-back .product-details-full {
+            flex-grow: 1;
+            margin-bottom: 25px;
+            overflow-y: auto;
+            padding-right: 8px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .product-card-back .product-details-full p {
+            margin-bottom: 8px;
+        }
+
+        .product-card-back .btn {
+            width: 100%;
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background-color: var(--light-gray); /* Changed to light gray for contact */
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 80px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 350px;
+        }
+        
+        .contact-info h3 {
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            letter-spacing: 0.8px;
+            font-weight: 800;
+        }
+        
+        .contact-details {
+            margin-bottom: 50px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            color: var(--primary-orange-brown);
+            margin-right: 25px;
+            font-size: 1.8rem;
+            margin-top: 5px;
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .contact-item a:hover {
+            color: var(--primary-orange-brown);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 400px;
+            background: var(--white); /* Solid white background */
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-soft);
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-orange-brown);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.15);
+        }
+        
+        .form-group textarea {
+            height: 180px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 70px 0 40px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            color: var(--primary-orange-brown);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            letter-spacing: 0.6px;
+            font-weight: 700;
+        }
+        
+        .footer-col p, .footer-col ul li {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-orange-brown);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background: var(--primary-orange-brown);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .social-links a:hover {
+            background: var(--dark-orange-brown);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--primary-orange-brown);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 18px var(--shadow-soft);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--dark-orange-brown);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+        
+        .whatsapp-btn {
+            background: var(--accent-green);
+        }
+        
+        .whatsapp-btn:hover {
+            background: var(--accent-green-dark);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+        
+        /* Cart Icon and Sidebar Styles */
+        #cartIcon {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary-orange-brown);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 18px var(--shadow-soft);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #cartIcon:hover {
+            background-color: var(--dark-orange-brown);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-green);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 4px 8px;
+            min-width: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            border: 2px solid var(--white);
+        }
+
+        #cartSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: -8px 0 20px var(--shadow-medium);
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            border-left: 1px solid var(--border-color);
+        }
+
+        #cartSidebar.open {
+            transform: translateX(0);
+        }
+
+        #cartSidebar h3 {
+            color: var(--dark-gray);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 0.8px;
+            font-weight: 800;
+        }
+        #cartSidebar h3::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-orange-brown), var(--light-orange-brown));
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        #closeCartSidebar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s, background-color 0.2s ease;
+            z-index: 1200;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        #closeCartSidebar:hover {
+            color: var(--primary-orange-brown);
+            transform: rotate(90deg);
+            background-color: rgba(210, 105, 30, 0.1);
+        }
+
+        #cartItems {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--medium-gray);
+            position: relative;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .cart-item-details p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-orange-brown);
+            font-size: 1.8rem;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.2s ease, transform 0.1s;
+        }
+        .remove-item-btn:hover {
+            color: var(--dark-orange-brown);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #cartTotal {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid var(--primary-orange-brown);
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-align: right;
+            color: var(--dark-gray);
+            letter-spacing: 0.6px;
+        }
+        #cartTotal span {
+            color: var(--primary-orange-brown);
+        }
+
+        /* Image Lightbox Styles */
+        #imageLightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #imageLightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightboxContent {
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            max-height: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        #imageLightbox.active #lightboxContent {
+            transform: scale(1);
+        }
+
+        #lightboxCloseBtn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--dark-gray);
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        #lightboxCloseBtn:hover,
+        #lightboxCloseBtn:focus {
+            color: var(--primary-orange-brown);
+            transform: rotate(90deg);
+        }
+
+        #lightboxImageContainer {
+            width: 100%;
+            max-width: 700px;
+            max-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        #lightboxImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            color: var(--dark-gray);
+            border: none;
+            padding: 12px 18px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: var(--primary-orange-brown);
+        }
+
+        #prevLightboxBtn { left: 15px; }
+        #nextLightboxBtn { right: 15px; }
+
+        #lightboxDots {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .lightbox-dot {
+            width: 14px;
+            height: 14px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .lightbox-dot.active {
+            background-color: var(--primary-orange-brown);
+            transform: scale(1.2);
+        }
+        .lightbox-dot:hover {
+            background-color: var(--light-orange-brown);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.8rem;
+                margin-bottom: 50px;
+            }
+            .section-title:after {
+                width: 90px;
+                height: 4px;
+            }
+            
+            .hero h2 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+            .floating-nav {
+                right: 25px;
+                gap: 10px;
+            }
+            .floating-nav ul li a {
+                width: 48px;
+                height: 48px;
+                font-size: 1.15rem;
+            }
+            .floating-nav ul li a:hover .nav-tooltip {
+                right: 58px;
+            }
+            .floating-nav ul li .nav-tooltip {
+                right: 53px;
+                padding: 7px 14px;
+                font-size: 0.88rem;
+            }
+
+            .product-card-container {
+                height: 420px;
+            }
+            .product-img {
+                height: 180px;
+            }
+
+            .contact-container {
+                gap: 60px;
+            }
+            .contact-info, .contact-form {
+                min-width: unset;
+                width: 100%;
+            }
+
+            /* Responsive adjustments for product controls */
+            .product-controls-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .search-bar {
+                min-width: unset;
+                width: 100%;
+            }
+            .filters-sort {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 15px;
+            }
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 5px;
+            }
+            .filters-sort select {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none; /* Hidden by default for mobile */
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                opacity: 0; /* Start hidden */
+                transform: translateY(-10px); /* Start slightly up */
+                pointer-events: none; /* Disable interaction when hidden */
+            }
+            
+            nav ul.show {
+                display: flex; /* Show when 'show' class is added */
+                opacity: 1; /* Fade in */
+                transform: translateY(0); /* Slide down */
+                pointer-events: all; /* Enable interaction */
+                align-items: center; /* Center items in mobile menu */
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero {
+                height: 70vh;
+                margin-top: 75px;
+            }
+            
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .hero-content {
+                padding: 35px;
+            }
+            
+            .floating-nav {
+                display: none;
+            }
+            
+            .floating-btns {
+                bottom: 15px;
+                right: 15px;
+                gap: 8px;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            #cartSidebar {
+                width: 100%;
+                padding: 20px;
+            }
+            #cartIcon {
+                bottom: 15px;
+                left: 15px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-3px) scale(1.08);
+            }
+            #cartCount {
+                font-size: 0.7rem;
+                padding: 3px 6px;
+                min-width: 20px;
+            }
+            .cart-item-img {
+                width: 75px;
+                height: 75px;
+            }
+            .cart-item-details h4 {
+                font-size: 1.1rem;
+            }
+            .remove-item-btn {
+                font-size: 1.7rem;
+            }
+            #cartTotal {
+                font-size: 1.4rem;
+            }
+
+            #lightboxContent {
+                max-width: 95%;
+                padding: 15px;
+            }
+            #lightboxCloseBtn {
+                font-size: 2.5rem;
+                top: 10px;
+                right: 10px;
+            }
+            .lightbox-nav-btn {
+                padding: 8px 12px;
+                font-size: 1.4rem;
+            }
+            #prevLightboxBtn { left: 5px; }
+            #nextLightboxBtn { right: 5px; }
+            #lightboxImageContainer {
+                max-height: 65vh;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .product-card-container {
+                height: 380px;
+            }
+            .product-img {
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero-content {
+                padding: 25px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .contact-info, .contact-form {
+                min-width: unset;
+            }
+            .product-card-container {
+                height: 350px;
+            }
+            .product-img {
+                height: 140px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .section-title:after {
+                width: 70px;
+                height: 3px;
+            }
+            .category-card {
+                padding: 25px;
+            }
+            .category-icon {
+                font-size: 3rem;
+            }
+            .category-card h3 {
+                font-size: 1.3rem;
+            }
+            .category-card p {
+                font-size: 0.9rem;
+            }
+            .contact-info h3 {
+                font-size: 1.8rem;
+            }
+            .contact-form {
+                padding: 35px;
+            }
+            .footer-col h3 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <!-- Updated SVG fill to use CSS variable -->
+                <svg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50' style="margin-right: 15px; height: 60px; transition: height 0.3s ease;">
+                    <rect width='50' height='50' fill='var(--primary-orange-brown)'/>
+                    <text x='50%' y='50%' font-family='Inter' font-size='24' font-weight='700' fill='white' text-anchor='middle' dominant-baseline='middle'>VE</text>
+                </svg>
+                <h1>Venkat Enterprises</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#brands">Brands</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Circular Navigation -->
+    <div class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <i class="fas fa-tools"></i>
+                    <span class="nav-tooltip">Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#categories">
+                    <i class="fas fa-list"></i>
+                    <span class="nav-tooltip">Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="#brands">
+                    <i class="fas fa-industry"></i>
+                    <span class="nav-tooltip">Brands</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-phone"></i>
+                    <span class="nav-tooltip">Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Your Partner in Precision & Power</h2>
+                <p>Providing top-quality equipment for Survey, Civil QC Lab, Construction, and Power Tools from leading brands.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-large">Explore Products</a>
+                    <a href="#contact" class="btn btn-large btn-secondary" style="background-color: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.4);">Get a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-us" id="about">
+        <div class="container">
+            <h2 class="section-title">About Venkat Enterprises</h2>
+            <div class="about-us-content">
+                <p>Venkat Enterprises, located at 188-B Bhasyakarlu Road East, R.s Puram, Coimbatore 641002, Tamil Nadu, India, is a trusted name in providing high-quality equipment. With years of experience, we specialize in offering a comprehensive range of tools and machinery for various industries.</p>
+                <p>Our commitment to excellence ensures that we deliver reliable products and exceptional service to our clients across the region. We aim to be your go-to source for all your survey, civil QC lab, construction, and power tool needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <h2 class="section-title">Our Product Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Survey Equipment</h3>
+                    <p>Precision instruments for accurate land surveying and mapping.</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Civil QC Lab Equipment</h3>
+                    <p>Tools for quality control and material testing in civil engineering.</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h3>Construction Equipment</h3>
+                    <p>Robust machinery and tools for all types of construction projects.</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-drill"></i></div>
+                    <h3>Power Tools</h3>
+                    <p>High-performance power tools for efficiency and productivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="brands" id="brands">
+        <div class="container">
+            <h2 class="section-title">Brands We Carry</h2>
+            <div class="brands-grid">
+                <div class="brand-logo" data-brand="bosch"><img src="data:image/png;base64,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" alt="Bosch"></div>
+                <div class="brand-logo" data-brand="sokkia"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0NDQ0NDQ0NDQ4NDRAPDQ0QDQ8QDw8PFREWFhUSGBYYHiggGhomGxUVIT0hJS8rLi4vFx8zODMsOigtLisBCgoKDg0OGxAQGi8lICUrLS8tLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAcAAEAAwADAQEAAAAAAAAAAAAAAQYHBAUIAgP/xABHEAABAwIDAwgIAgcFCQEAAAABAAIDBBEFByEGEjETIkFRYXGBkRQyNVJ0obGzQnIjJDRDYoLBU5KTssIXJVRkc6LR0vAV/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAMEBQEGAv/EACsRAQACAQMDAwQCAgMAAAAAAAABAgMEERIFITEyQVETIjNxYYEUIxVSkf/aAAwDAQACEQMRAD8A3FAQEBAQEBBCCUEICAgICCUEICAglAQEBAQEBAQEBAQEBAQEBAQQglBCCUBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQQglAQEEIJQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQQglAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEEIJQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQQuBdAXQQEBBxq2vhp4zLPKyGNvF73BoHmu0rN52iHJmFNr82MHicWsfNUEdMUR3T3E2BVuugzW9kVs9Ycenzgwpxs9lXEPeMQcP+0lfdunZocjUUWvBNp6DEBekqY5SBcsBs8d7TqquTDfH6oSRkrPh24KifaboCAuAgLoLgXXQugICAuAuggIF0BHBHRB1WPY9S4dCZ6uURsGgHFz3e60cSV94sVsttqPm9orG7NMTzodcikoRu9D55NT27rf/ACtTH0qZ9Uq06n4cCPObEAbvo6RzelrTI0+ZJUs9Jr7WfP8AlSuWyeZ9FiEjYJmmjnfoxr3B0b3dTXdfYVQz6G+Lv5TY88W7L4CqKdV9u9socHgDiBLUS3FPBf1rcXu6mhWNNprZrbIsmSKvP+O47V4jKZqyZ0pvzWHSOMdTWcB38V6TFp6Yo2rChe82lycJ2TxOtG9TUcz2HhIQGMPi6118ZNZip5l2uK0ubWZe41C3edRPcLa8m9khHgDdfFeoYZ93Zw2j2V1plgluDJBNG7jzo5GO+oVn7MldvKPvWWvZb5kuneyhxF45V3NgqSAOUPQx9tN7t6VjazQcI50XMWaZ7S1ULJWt+zM6rOOlikkiNFUkxSPYSHxWJa4i/wAlo06dktG8K1tRETsvezmMMxCjgrGMdG2du8GOILm621t3KllxzS3GU9bbxu/LajaGDC6V9VPchtgyNtt+R54MF+ldw4Zy2isOXvFYUSPOene5rGYdVOc4hrWtkjLnOPAAdavX6ZakbzaEMaiJnZbtpdqxhlBFW1FNJeR7GOga5m+xzgTYngbWVTDp5y34VS2vxrvLocBzVpq6sp6NlHURuqH7jXudGWtNibmx7FPl0GTHWbTPh8UzxadmglUImdk6jbV5mUmG1JpeRkqZGtvLybmARk8Gm/E2V7Bob5a8t9kF88VfpsfmAMXqDDBQVEbGN3pZ3vYY2dQ04k9S+dRpJw+bbvrHl5+HF2kzRgw+sno30c8roC0F7XxhrrsDtL6/i+S+sWgvkpFony+b54rOzv8AYnauPGIJZ44ZIRFLyRa9zSSd0G+neodRp5wW4ykpeL94WJQPtW9s9rYcHhjllY+YyybjImFocdLk69AU+DBbPO1UeTJFIU//AG003/AVP+JErf8AxeT5Q/5UNC2dxiLEKSCsiuGTNvukglpBsWm3SCFQy45x34ysVmLRu7JRvpC6PO+bGKyVOLzxOceSpC2KJl+aOaC51usk8exei6fiimLn8s/PabW2WbLTL2jrKNlfXB03LOdyUIeWsa1ri27rakkgqnrddkrk4VSYcMTXeVtxHLDBpmFrKc07rHdkikfdp67EkFVMevzVnffdLOCrC8Yweejqp6Z7ZHOp5S0Pax2ttQ4Edlit3Hnx5KbzPlTtS1bdnoLY3GnTYNT1lUSHRwO5dzhYkx3DneO7fxXns+L/AGzWF+lvt3lgO02NyYjWTVcpPPdaJt9GRD1Wjw+ZXotLhjHjhn5LzazScr8vo3Rx4jXxiRz7Opqd45rW9Ejh0k9A6Fl67XTv9Oizhxe8tbY0AWAsBoAOACyt/lbfVkFW2z2MpcWiO+xsdS1p5GpA5wPQHe83sVjT6q+G38IsmKLQ874lQy0k8tNM0smgkLXgHgRqCD1WsQe1elxXjLWJjxLPtE1l6Byx2iOJYax0pvUU7uQnPS4gDdf4tse+685rMH0cswv4rcqPP+LftdV8TN9xy9Hh3+lH6Z9/U3/Luojh2fo5ZXtjjjgc573Gwa0Odcled1cTbUTWPLRxztTdje3u1b8WqzIN5tNES2mjPQ3+0I94/LgtrSaaMNe/n3U8uTlO0L5lFsTuBuKVbP0jh+pxOHqNP70j3j0dQ71n9Q1c2n6dZT4MW3eXa53+yWfGRfRyi6Z+b+n1qPQyzLr21h3xH+hy1tbP+m36VMPrhsuY+17cKpS2Mh1XUAtp2e71yHsHzNliaPTWzX/iF3LkisMHwrDqnEqtkEV5Z6h5LnuN7a3dI49Q4/Jb18lcOPf2hRiJvZ6P2V2egwukZTQC9hvSSEc6WQ8XH/7Rebz5py25S0aUisMJzS9u1/54vssXoNB+CrPz+uWjZD+z6r4w/baszqn5Y/S3pvS0slZiw8+5v436XijoWm8VC3kh1GU86Q/QeC9F0zDxx8p91DUW3nZV6vCJoqSlrXD9FWOlbH2GM2+evkrVc0WyTj38IZptG7S8i8b/AGnDnu4frEAPUbCRo8bHxKy+qYtrRaFvTW9mvrIWkIMFziwCSnxB1aGk09ZukvA0bMGhpaeq4APmt3puoia/TlR1FNrbw6/Y3MCrwlhgDGVFMSXNicS0sJ47rursU2p0Nc07x5fGLLNY2lf8Ozjw99hUU9TTnrAErflr8lnX6Vljx3Wa6isrjgm0mH4iCaSpimI1czhIB2tOqpXw5Mc/dCWt6y6fNisMGCVW6bGYxw+D3i/yupdDTnmh8Z52ownZugFXX0dMfVmqI2u/Je7h5Ar0GptwxTMKOKPu2epmMDQGt0DQAB1ALyszu1Ifa5sBXRFlz2GKZ64Y2OrpKtoAM8To5D1uYQQfJ1ludLyTMTRS1NYju+ciawtrayC/Nlp2yW/iY61/JydVrvWLS5pp9me4t+11XxM33HLSw/jr+lfJ6pd9i21b5MKocKhLmxRRg1R1HKP3iQz8o0PaqtNN/ttknz7JbZftiHY5V7INxKodUVG66lpXDejvrLJxDSPd6e3gvjqGo+lXjHmX1gxxad2/tbYC2gA4Lz3lfhn2eHsmP4yL6OWh03839K+o9DHtksRjo8QpauXeLKeR0jgBcmzHWA8SFt6nHN8c1j4U8c7WiX5bQYzPiNVJVTm75DZjb82Nl+awdg/qUwYq4abV/svab2bplpsezDKblJN19XUNDpn6HcbxEbT1fUrA1mo+pfaPC9ixxWN10sqaZ5vzS9u1/wCeP7LF6bp/4IZuf1y0XIj2fVfGH7bVl9U/JH6WdN6F32mxZtBRVNW/9zE5zR7zyLNb4mypYMfO8VhPe21d3mGGOWqna315qmYC/vSSO1PmV6mdsdP0zPVZvO2uyzH4B6JE27qGFj4bDUujbzvMb3mvPYNRMZ+c+8r2Sn2MT2Xxc0FdS1bTpFIOUHXE7R4/uk+S3tTjjJhmFLHbjZ6ihla9rXtN2vaHNPQQRcFeVntOzUjvG76uujjVkNPPG6KdsUsbxZ8b91zXDqIK7XlXvDk7T2UXGMpMMnu6mdLRuPQx2/H/AHXdHcVcx9Ry0890NsET4VDFcoK+FrnU08NVb93YxvI7L6Eq/j6nSZ+6NkFtNMeFB/T0s/7ynqKd/EXbJG8K/wBskeN4lBG9ZavtFjDsX2TNUQOVhmjFQBw345A1zh2EEHxWRhxxg1fH2W8k8sbONjqttPilBM/RrKqPePUHEt/qtTVVm2K23wq4p2tD1ECvLNQQSg+VwhjefFY0y0FMDdzGSyu7ASGj6FbXSY2mZUtTPs4GRcBdiVTJ0R0lj3veLf5SpOq2jhEfy5pvdQ8W/aqr4mb7jloYZ+2sfwgv6l1xPZX0jZ7D8TgbeWnhcKhoGr4A93O7S36LPxaqa6i1LeJT2xb03dBsPtK/Ca1k4JMElmVMY/FH71uscR4qzq9PGXH28o8V+MvSlLUsmjZLG4PjkaHMeDcOaRcFeZms1naWjE791Czx9ks+Mi+jlf6b+b+kGp9DJtgYmyYvQRvaHMkmLXtIuHNLHAgrY1kzXFMx8KmKN7w+tutmnYVXPgsTBJeSmf70Z/D3jh5JpM8Zqfz7u5acZ3aRk5tdy0f/AOZUP/SwNvTOcdZIRxZfrbp4dyy+oaXhPOviVjBl3jaWoLLWpecM0vbtf+eP7LF6bQfghm5/XLRcifZ1V8YfttWZ1T8sLWl9Lr89Mas2mw5h1cfSJh/CLhg87nwUnS8O9pvL41FvZXMm8H9JxTl3C8dFGZOzlHc1n+o+Cs9Szcce0e6PT13s3xzQQQdQRYjsWBHZf27PMW2eD+gYlV01rMbIXxf9J/Ob5Xt4L1GkyfUxRLMy12ts2XJ/HPS8LZC515aJ3IuvxLOMZ8tPBYmvw/TyzPyuYLcqryqPdY2eWdoaOWjraqle6QGGZzRznatvdp8QQvVYrVyV5RHllX5Vny2fLbbainoaemnnjhqaeMROZI8N3w3QPaTobiyxNZpL0yTMRvC5izRMbStdftDQUzC+asp2NAvrK257gNSqtcGS07cZTTkq857YYsyvxGqq42lscrxyYOji1oDQT2m1/Fel0tLY8UUlnZbcrdmq5W4Fy2AVEU4Ijr3zbo/gIDQ4eIv5LI12bbUco9lrHX7NmN4jQyUs81NMC2SF7mO7wdHDsPFbmO8ZMcW+VO0TWzdMsttY8QgZTTvDa2Bga5pNuWYBYSN6z1hee1ulnHbePC9hy8vK+Aqin3LoOtx7GqbD6d9TUyBjGDQfie7oY0dJKkxYr5b8avm1orDzXtLjcmJVk1ZLzTIbMZxEcY0azwHzuvT6fDXFWKf+s29udmy5NYE6kw41MrS2WufygB4thAtGPHV38yxOoZueXjHiF3DTjViOLftdV8TN9xy3sP46/pQyep6BywYHYFQtIuDG4EHgRvuuF5zWds8y0sUb0Y9mLsscKrXNjafRagmSmPQ3XWLwPystnQ6j6tO/mFLNTjbdbMm9rtxwwqpfzXEmicTwPEw/1HiFU6jpNv8AZVNgye0rBngf90s+Mi+jlX6Z+b+n3qPQyrLv21hvxI/yuWvrPwW/Srh9cNwzA2XbitC+IACoivJTP6pAPV7nDRYGk1E4bxZdy05Ved6eeejqGSsLoaimlu2+jmSNNiD8x4lektWuWm3yz4maS9JbG7RxYpRR1LLNf6s8d9Y5RxHd0jvXmdRhnFeay0cd4tDDc0vbtf8Anj+yxeg0H4KqOf1y0PI1wbhtY5xADatxJPAARN1WX1ON8sQs6edqbsq2uxg4hiFVVE818hbF2RN0b8tfFa2mw/SxQq5bcrNmycwf0XC2zOFpK15mdpqGeqweQv4rE6hl55to9l3BXaq+EKj7pmS564NdlNiDBqw+jzH+F2rCfG4/mWt0vNtM0lU1Fd+6qZR436HijI3m0VY3kXdQfe7D53HirnUcPPFy+EWC+1tnoSy87yt8NHdSdvcvYcWInieIKtrd3f3bskb0NeB9Vd0msth+2e8IMuGLsprstcbhcR6GJx0OiljcD4EgrWp1DDaO6pOC0eHHhy9xpxsMNlb2uMTR5kr7nXYPlz6V1s2ZyhqHyNficjIogbmCJ++9/YXDQDuVTUdUia7UTU0/y2Smp2RMbFG0MYxoaxgFg1oFgAsWZmZ3lbjt2UHM/YQ4i0VlI0CsibZzOAnjH4b+8Og9pCv6LV/TnjfwgzYuXhh5EtPLYiSCeF+o50ckbh8wVvRxyR8wpd6yu2D5sYpTNDJmw1bRoHSAskt2ubx8lRydNxWnes7Jq6iYc6rzkrnNIhpKeFx/GXvkt4aKOvSqV72s7/kyouN43V18vLVk7pXD1QTZjB1NbwC0cOCuKv2QhtebLflzsBLXyMq6yN0dE0hzWuBa6pI6gddzt6VQ1utrWvGvqTYcMzO8t4YwAAAAACwA4AdAWFP8ruzEK7KXFZJ5pGyUe7JNI8XlkvZzyR+HtW3j6ljrSI2U7aeZlquxOEy0GG01JMWGSFhDiwktJLidCR2rJz5IyZJtC1Ss1jZ87abOR4pRSUz7Nf68En9nKOB7ug9hXdPmnDflBkpyjZk0eUeMMc17JqNrmEOa4SyXa4agjmda1rdTxWrtMKkae0Svu12zmI4phFPSvNM2sZLG+Z2+7knboIJB3b63GllnafPTFl5R4T3pNq7KtspljiVHiFJVyyUhjgmD3hkjy61iNLt7Vc1HUKZMc12RY8Fq23bGQsdcZfmDlrNX1Yq6B0MbpW/rLJC5oc8cHiwOpHHuC1NJr4xV43VcuDlO8PjYHYvGcIrOUdJSuppRuVMTZX3I6HtBb6wPyJXNXq8WavaO5ix2pLibaZbYjiGJVVZA+lEczmFgfI8OFo2t1AaekFSaXqFMWOKzD5yYJtO7tcA2NxOiwavoGSU4qauU7sgkfuNjc1rXG+7e9gfNQZdVjyZovt2hJXHatOKpw5O4nvMD5qQM3hv2fJvbl9bc3ja6uT1SnGY2RRpp924UtO2KNkTBusjY1jR1NAsPosW07zuuRHZ+tl8uuq2owhtfQ1NI636aIhhP4XjVrvAgKXDknHeLPm9eVdmOxZRYw0tc2Wja5pDmuEslw4ag+r1rYt1PFaJiYVI09ondpO5tD/yP+M//ANFm88Pwn2styqJiy6FlwE2EoIsg6DaTY/D8TH61ADIBZs7ObK3+Yce4qfDqcmH0yjtirZn2IZLuufRa8bvQ2aK5Hi0rRp1X/tVXnS/DjU+S9USOVr4A2+u5E8n5lfduqx7Vc/xlv2dywwyic2SVrqyVpuHTW3GnrDBp53VHNr8uTtHaE9cFary1oGnQNAqXeUz6AXRC4AQTZdELm4iyG4g+l0EELghBNkCy6PpAQQQgiy4C5sJX0CCUEICAgWQLICBZAQSgiyCUBAQQgWQSgICAghAQSgICCEBBKAgICAgICAgICAgICAgICAgICAgICAgICAgICAghBKAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAghBKAgICAgICAgICAgICAgICAgICAgICAgICAgICCEEoCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAghBKAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIIQSUBAQEBAQEBAQEBAQEEFBKAgICAgICAgICAgICAg//2Q==" alt="Sokkia"></div>
+                <div class="brand-logo" data-brand="garware"><img src="data:image/png;base64,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" alt="Garware"></div>
+                <div class="brand-logo" data-brand="dewalt"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAmVBMVEX///8AAAD+vRj/+vH+uAD+ugD/5Lb/whn/xRmlew85KgVdRgj/wBgXEQH+zGb+vAnKmBO8jBHmqxXvsxcmHAOsgBDcoxWRbA2AXwyacg5LOAYHBgD0thctIQT4uRcgGAPTnhRoTQnDkRIyJQQ+LgVyVQoZEwF3WQtUPgeHZAz+yVhSPQdFMwbprhaxgxBCMQb/6sdkSgkQDAHEKGtnAAAGZ0lEQVR4nO2bfWOiOBDGF27vgjXuIlRERUQtvlSxq9//wx0JUiYJeHTb09p9fv8ZkpCHTGYmSfvtGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwmb++Dg0Kn79/FZ4bFP74aX8Nfv6AwnsHCu8fKLRtzu4T3lahf+jcJwO/nUIenKw7JeEtFT7eeqS/ySxoq3B56t0jp2lLhXaUuHdK1NLTxJmnkUV24awYb4LZtEGU1809clSV+KIkr5UZtbjvGU2LLlmsPjA60IcZt/U0PcPCJ9P5yI1Kb1yLPyX1U/mueF2V7OT3ZS7ttSM7zJbKq9L4tUs+oA9CJge3al6Hp9brsN7TrLodmzUrjFNSdy/1ROOqZCnf7nRIpZnLDdF5Re+ywgtusL2naezkqd+sUBnOxOOiowkp6Us5c1LpPK1koiV9VtvldRRa1shuMlWezEi9RT4c1ldbCh7okGVXMbVuQercVKG1jXVpJT6xSWuYD9MZ0obzvCH36BJfyCFrRpqvhui2Cq1R01pkIanVFXO4oe2mvj6rhZKt8YZF+YYbKTzJ1KguXtDhL/MZi1T7y9vxEfm9kcPxlc8g2fLbKrS6Ir8d7ccauySi3yHgPFHz2w5T/W2nMNKJpTPObqxQOrvQKJ0s2FipxAZqhTSP1rvq56mIFUPLoHjSpHBmNijp/ZbCl91+qXW0qVXYWzjUBodcX2FPseJud8VM6Z3LtqxZobeeC9In+uhFls3X51D6JoWTRewHAzo5ORmvV7ggFpfG0VGtsAoculLD4l01Aq2nZistUf205v3eptAVTkRzB7mZ1ilk3r76uc88fXoODp3VgxgVI9NOVu3Z2i4oVK17xN+lUBYpo93WK+Q2SU96gRHohg6xhVMmOo6qT7fqVhnneU6uqFBbd/O6dZiHMUazzsVArzCPyDTt5apKqlctB9VX7MZXV8gOtMOdXynsbQdnMnVVDWlkkDzRZSinicbHcVbN8GNxHHFVhYrJ7TP+qvAxcM4nXaIeifFdxdsJVjTHlv3G3aogpVn54PoKE9rhk1cpnLlxJBHVHGK8JzOUk6R079uaJ+3QYHOMP4/Cye4omYshq3lnKbWmzAqFBGXdJg6xk57Hb2qlL0ThKyKAc68mHerWBfXCDEkQWvncJ89lLLmmQk6/tjX2TV86kSlKNDfFdAyXI1Yv1zKwY96ahNPjtRXayka8G5tzWCi0R3p5HjY6Ztk41gWMHIcmBNPsugpZX1lMYU3WVihkrnGK9eDVZGYy81QmfJznlS/ktzDTKylknLFEXUqdupxGKuS+seg2sa+fU+SxgjUs2kqPOYdOuSv9WIV9L+in2gleUJd5F1aqHDVJtiw2FuKjdLxG0kN5yXSFqZ+VxB+o0JqYYe2F20ZO0xkUiZY57DxNNxZiKquau3vKgmkKJ6szvYeAf6DCGjp0f/iYkJSmbjvkcb7QQ6KIFdw3vx1FGGXDLOdJ3f+qUB4ymDnN+YQs1vaSU54vOC2Bm4q0kx+si6x0K72ewgOnCsuc5jg/X95pO/uUqemnYCNvMvWTYJ2Ev0lhdQX8XoVraY+1uyfZuq8an/D6TIuSW1EzoIfDveVUsKTmPHyTQu9wCD5G4bG4Sa7d4xetlXjREzOrX02ImlxJYbdBIgjovG78Jm9rKmRuOByF5QnWuxSm56vyRoV2rBzPjDPpVNSq4hKLKyHELW7UlIOcWdJeoRMe0uEgbHl/eEHh8vXaolmhapLrYhukuJ+NTGioQS6988GMR5OD0RvmcO3u5kmYvVPhaV1dfJkKT6VCZaNVeDmmuB+xvWcLWtI9W4YdUZ+0ab8OnXAwGrlh6xtSU2Fvulkfospb1Z4Il0/pma1bLE6qZyVjheJJh6/9KgP3GgLKzJxDLzz010HLdWhHi77GIgl8m+izeaJX6ff98qTaJYVxsfnyaWd5Gbdppb73elPhKT0qv0gPEecBLQg49103K1Pz//6bKL+WjHKpQk2hWbGh7/pX17yq9ndbK/XGD/fJuPW9xYXLj0/NqrXCC3/u8Klpe/dke2n3Pkm9lgpt515p7UvvHSi8f6Dw/vmDFT5///tr0PifXb/++Sr8alAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPw5/Auk7SfdssdagQAAAABJRU5ErkJggg==" alt="Dewalt"></div>
+                <div class="brand-logo" data-brand="stanley"><img src="data:image/png;base64,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" alt="Stanley"></div>
+                <div class="brand-logo" data-brand="blackdecker"><img src="data:image/png;base64,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" alt="Black & Decker"></div>
+                <div class="brand-logo" data-brand="honda"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAilBMVEX////MIinIAAD78fL++frLGyPJAA7MICfLFyDFAADSTFDKABLuxcbru7zVWFzKEBrKDRjor7DJAArqt7jTUVXz1dbYa27QP0T45ubRREngj5HOLzXnqqzlo6XtwcLhk5Xeh4nwy8zWYWX02NnZcXTPOD3NKjDXZmnjmpzbeHv56+vcf4LPOT/hkpTSDftiAAAFMklEQVR4nO3Y63KqOhgGYIxAqKgc1GrxUBWtVFfv//Y2h+TLAVFc05k1e+Z9frURQl5CQoLjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMD/gNvyuLyxSLL30ToI48F6dMmSxaMaO3/5nYY+Pe+NWd62VfmmXU41zo6MhVHg8YrnBVGYsmlCVbbOnN6/1siZtQ6V4o/vzepJQ1lq3NhObGCJN1VxEtrlrEnoZiwM7N8GgyBke7erxuO9a3lTZ9K6iMS9ssKv7cOGDry0Tze6b6kfaSeV3SH6MPW1IJGfNn04SWMuWxHFpYj+jdNJ04dpqNVY35ytuJYfB/LgsOpD5sdeV8jyoDDeGQ21D47e+/ThdbHLfHlKMJ0tVs2Nuea7C0X0P3f5tSrNmAwUsPWt2GyK25rJwzjLqmPyQ3LzBwaW13Xmu82p/oXzYnZYOe5isp3TRSK/EaognO2poavy4GlzMKd6x30iVu0W95z7Zrnsn0he55MeFX9Kw2R1pDysEGVFbPaGR8/TrbqWPoLOIk9UjCu7XVLM6aYNtIiVOlw59mW9Uc+EMzEe+NIsn4uaQjGNLChgaFx4T+OJiaaP69DqYQ3kbNNciw3VySeRxtf64zqlU41ucn1eday7lhGj734JJz0T/pEVex/mgR/0w1JLGBVqdkhl77YSvsuEu7s18oFWeqqC+xvtVrPDbyZU9fpWvWP1nC5UARuqzqXe7Zlwkd7pxLoB3p/yr2/Zx5y/ltDqGithph4duwbKHv1oCVfOUk0asftKQieU00l0o7L64axnLZd+jm9OD5Twa2r44kbCeddDqj+mUyPhkObeQTB/KeG0fbGiOjXeN01Wz2n+QsJqltLJ1omEnN4UF7uGI70x1kZCZ6yGov/5SsJvqjEWJVdWt1DeAfm79/VKwg7hrD4soIQnu4aT1R5K6NhDsW/CG400OSTqTPFMrEmvVG+YvZCwqw+bhOvuPnynhF9WQueD3m08dP+mD4OmYNc8DbFclaoOYOYK9lFCPpiPNHNrHNKj2H8cloa+Goqj/gmPVGMzfmn50eadeye0W27NpWqh0j2Xxp92QuegDcWsd0Ja/orZeW+ukgxh4TzRM2FOTU2t9+FBvb3yVkLnR61S2WHSL2FuzZWr+v/U3D6p9emz57RnQu1ZHJkHju6uaei6anXNvW3UK6FdY/1iZdaG8Gxf9mnCZ6s2dWPN+StT69L8XkKXHrlyrTzoSqgtQFfzyKxxUz0ktAGgw9Qia+s8JAcYD81yOZlGMo9aaKaXh3uLTVWj2kEsrO2rnlA+GFE2qyXb/ZLRUqjZWjYLB/0scS5tTh+994d5okb1aSEbXu4bj2p/uD0028YfbX94vm2TZHtb2vtDd3XY1BMfP9Nu89PcMMq2DvOxmkGisBFH2v6wqKtrJvXgXbTCEZfJ1OzD/WKct+5AfdwbU7v2spJUfKdJzD1+XJbX50+YvsevmqP+ZWKPTzXyMGXNGkctQfSEkzfmW58DdNz3yhltqRpYtY5abp3LY1/7UU/Y/qrSJPyl7zRy8nKNLxAi4c76FKC114tCdq6H/9z4dKHeU2n7/dh6iYk+fPVbm5tMWUrf2rj81kbPj3mm6EMnD/S6qA878NEtEeNlabbCuX8Zs4mGYUt9mNsu189abPaX6ntpGKxHl735vbTrtK66nuhT3V9UCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/zH+4W1CKcIL9GQAAAABJRU5ErkJggg==" alt="Honda"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-controls-wrapper container">
+                <div class="search-bar">
+                    <input type="text" id="productSearch" placeholder="Search products...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="filters-sort">
+                    <div class="filter-group">
+                        <label for="sortOptions">Sort by:</label>
+                        <select id="sortOptions">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name-asc">Name: A-Z</option>
+                            <option value="name-desc">Name: Z-A</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="categoryFilter">Filter by Category:</label>
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="survey">Survey Equipment</option>
+                            <option value="civil-lab">Civil QC Lab Equipment</option>
+                            <option value="construction">Construction Equipment</option>
+                            <option value="power-tools">Power Tools</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="brandFilter">Filter by Brand:</label>
+                        <select id="brandFilter">
+                            <option value="all">All Brands</option>
+                            <!-- Brands will be dynamically populated here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p>188-B Bhasyakarlu Road East, R.s Puram, Coimbatore 641002, Tamil Nadu, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 9123512626</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>venkatetp@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="product">Product Enquiry</option>
+                                <option value="service">Service Request</option>
+                                <option value="quote">Request a Quote</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Venkat Enterprises</h3>
+                    <p>Your trusted partner for high-quality survey, civil QC lab, construction equipment, and power tools.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#brands">Brands</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty Information</a></li>
+                        <li><a href="#">Service & Repair</a></li>
+                        <li><a href="#contact">Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Venkat Enterprises. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btns">
+        <a href="https://wa.me/919123512626" class="floating-btn whatsapp-btn" aria-label="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919123512626" class="floating-btn" aria-label="Call Us">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div id="cartIcon" aria-label="Shopping Cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar">
+        <button id="closeCartSidebar" aria-label="Close Cart"><i class="fas fa-times"></i></button>
+        <h3>Your Shopping Cart</h3>
+        <ul id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="cartTotal">
+            Total: ₹<span id="cartTotalAmount">0.00</span>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Pop-up -->
+    <div id="imageLightbox" aria-modal="true" role="dialog">
+        <div id="lightboxContent">
+            <span id="lightboxCloseBtn" aria-label="Close Image Lightbox">&times;</span>
+            <div id="lightboxImageContainer">
+                <img src="" alt="Product Image" id="lightboxImage">
+                <button class="lightbox-nav-btn" id="prevLightboxBtn" aria-label="Previous Image"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox-nav-btn" id="nextLightboxBtn" aria-label="Next Image"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div id="lightboxDots">
+                <!-- Lightbox dots will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.querySelector('ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.querySelector('ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Form Submission
+        const enquiryForm = document.getElementById('enquiryForm');
+        
+        enquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            showCustomMessage(`Thank you, ${name}! Your ${subject} enquiry has been received. We'll contact you soon at ${phone} or ${email}.`, 'success');
+            
+            enquiryForm.reset();
+        });
+        
+        // Custom Message Box (replaces alert)
+        function showCustomMessage(message, type = 'info') {
+            const existingMessage = document.getElementById('customMessageBox');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                font-size: 1rem;
+                text-align: center;
+                max-width: 90%;
+                min-width: 250px;
+            `;
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 5000);
+        }
+
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.category-card, .product-card-container, .brand-logo');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                if (elementPosition < windowHeight - 150) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                } else {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                }
+            });
+        }
+        
+        document.querySelectorAll('.category-card, .product-card-container, .brand-logo').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        revealOnScroll();
+        
+        // Active link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a, .floating-nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Product Data ---
+        const productsData = [
+            // Survey Equipment
+            {
+                id: 'total-station-sokkia',
+                name: 'Sokkia Total Station',
+                price: 150000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Total+Station',
+                shortDescription: 'High-precision surveying instrument for accurate measurements.',
+                fullDetails: {
+                    category: 'Survey Equipment',
+                    brand: 'Sokkia',
+                    features: 'Angular accuracy: 2", Distance accuracy: 2mm+2ppm, Laser plummet, Data storage: 10,000 points.',
+                    description: 'The Sokkia Total Station is an advanced surveying instrument designed for professionals who demand high accuracy and reliability. Ideal for construction, land surveying, and civil engineering projects.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Total+Station',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Sokkia+TS+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Sokkia+TS+View+3'
+                ],
+                category: 'survey',
+                brand: 'sokkia'
+            },
+            {
+                id: 'gps-receiver-garware',
+                name: 'Garware GPS Receiver',
+                price: 85000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Garware+GPS+Receiver',
+                shortDescription: 'Robust GPS receiver for precise positioning and mapping.',
+                fullDetails: {
+                    category: 'Survey Equipment',
+                    brand: 'Garware',
+                    features: 'Dual-frequency GNSS, RTK capability, IP67 waterproof, Long battery life.',
+                    description: 'The Garware GPS Receiver offers unparalleled accuracy for all your positioning needs. Its rugged design makes it suitable for harsh outdoor environments, ensuring reliable data collection.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Garware+GPS+Receiver',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Garware+GPS+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Garware+GPS+View+3'
+                ],
+                category: 'survey',
+                brand: 'garware'
+            },
+            {
+                id: 'auto-level-sokkia',
+                name: 'Sokkia Auto Level',
+                price: 25000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Auto+Level',
+                shortDescription: 'Durable auto level for construction and surveying applications.',
+                fullDetails: {
+                    category: 'Survey Equipment',
+                    brand: 'Sokkia',
+                    features: 'Magnification: 32x, Accuracy: 1.0mm, Magnetic damping compensator, Water-resistant design.',
+                    description: 'The Sokkia Auto Level is an essential tool for any construction site or surveying project, providing quick and accurate leveling. Its robust build ensures performance in challenging conditions.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Auto+Level',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Sokkia+AL+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Sokkia+AL+View+3'
+                ],
+                category: 'survey',
+                brand: 'sokkia'
+            },
+            // Civil QC Lab Equipment
+            {
+                id: 'compression-testing-machine',
+                name: 'Compression Testing Machine',
+                price: 250000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Compression+Tester',
+                shortDescription: 'For testing compressive strength of concrete and other materials.',
+                fullDetails: {
+                    category: 'Civil QC Lab Equipment',
+                    brand: 'Generic', /* Assuming generic for lab equipment */
+                    features: 'Capacity: 2000kN, Digital display, Automatic loading, Overload protection.',
+                    description: 'This Compression Testing Machine is vital for civil engineering labs, ensuring the quality and strength of construction materials like concrete cubes and cylinders. Fully automatic with precise controls.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Compression+Tester',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=CTM+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=CTM+View+3'
+                ],
+                category: 'civil-lab',
+                brand: 'generic'
+            },
+            {
+                id: 'soil-testing-kit',
+                name: 'Soil Testing Kit',
+                price: 45000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Soil+Testing+Kit',
+                shortDescription: 'Comprehensive kit for on-site soil analysis.',
+                fullDetails: {
+                    category: 'Civil QC Lab Equipment',
+                    brand: 'Generic',
+                    features: 'Tests for pH, Nitrogen, Phosphorus, Potassium, Moisture, Portable case.',
+                    description: 'A complete solution for rapid and accurate on-site soil testing, crucial for agricultural and construction projects to determine soil properties and suitability.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Soil+Testing+Kit',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Soil+Kit+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Soil+Kit+View+3'
+                ],
+                category: 'civil-lab',
+                brand: 'generic'
+            },
+            // Construction Equipment
+            {
+                id: 'concrete-mixer-honda',
+                name: 'Honda Concrete Mixer',
+                price: 75000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Honda+Concrete+Mixer',
+                shortDescription: 'Reliable and powerful concrete mixer for construction sites.',
+                fullDetails: {
+                    category: 'Construction Equipment',
+                    brand: 'Honda',
+                    features: 'Engine: Honda GX160, Drum capacity: 180 Litres, Heavy-duty chassis, Portable design.',
+                    description: 'Equipped with a genuine Honda engine, this concrete mixer ensures efficient and consistent mixing for various construction tasks. Its durable build guarantees long service life on site.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Honda+Concrete+Mixer',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Honda+Mixer+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Honda+Mixer+View+3'
+                ],
+                category: 'construction',
+                brand: 'honda'
+            },
+            {
+                id: 'jackhammer-dewalt',
+                name: 'Dewalt Jackhammer',
+                price: 40000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Dewalt+Jackhammer',
+                shortDescription: 'High-performance jackhammer for demolition and breaking.',
+                fullDetails: {
+                    category: 'Construction Equipment',
+                    brand: 'Dewalt',
+                    features: 'Power: 15 Joules, Anti-vibration system, SDS-Max chuck, Durable metal casing.',
+                    description: 'The Dewalt Jackhammer delivers exceptional power for heavy-duty demolition tasks. Its ergonomic design with anti-vibration technology reduces user fatigue, enhancing productivity.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Dewalt+Jackhammer',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Dewalt+JH+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Dewalt+JH+View+3'
+                ],
+                category: 'construction',
+                brand: 'dewalt'
+            },
+            // Power Tools
+            {
+                id: 'cordless-drill-bosch',
+                name: 'Bosch Cordless Drill',
+                price: 12000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Cordless+Drill',
+                shortDescription: 'Versatile cordless drill for drilling and screwdriving.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Bosch',
+                    features: 'Voltage: 18V, Torque: 60Nm, 2-speed gearbox, LED light, Ergonomic design.',
+                    description: 'The Bosch Cordless Drill is a powerful and compact tool, perfect for various tasks from furniture assembly to heavy-duty drilling. Its long-lasting battery ensures uninterrupted work.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Cordless+Drill',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Bosch+Drill+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Bosch+Drill+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'bosch'
+            },
+            {
+                id: 'angle-grinder-stanley',
+                name: 'Stanley Angle Grinder',
+                price: 8000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Stanley+Angle+Grinder',
+                shortDescription: 'Durable angle grinder for cutting and grinding metal.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Stanley',
+                    features: 'Power: 850W, Wheel diameter: 100mm, Spindle lock, Safety guard.',
+                    description: 'The Stanley Angle Grinder is a robust tool designed for demanding cutting and grinding applications. Its compact design and powerful motor make it ideal for professional use.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Stanley+Angle+Grinder',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Stanley+AG+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Stanley+AG+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'stanley'
+            },
+            {
+                id: 'circular-saw-blackdecker',
+                name: 'Black & Decker Circular Saw',
+                price: 9500,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Black%26Decker+Circular+Saw',
+                shortDescription: 'Powerful circular saw for fast and accurate cuts in wood.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Black & Decker',
+                    features: 'Power: 1500W, Blade diameter: 185mm, Adjustable depth & bevel, Laser guide.',
+                    description: 'The Black & Decker Circular Saw is a high-performance tool for all your woodworking needs. Its powerful motor and laser guide ensure precise and efficient cuts every time.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Black%26Decker+Circular+Saw',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=B%26D+CS+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=B%26D+CS+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'blackdecker'
+            },
+            {
+                id: 'rotary-hammer-bosch',
+                name: 'Bosch Rotary Hammer',
+                price: 22000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Rotary+Hammer',
+                shortDescription: 'Heavy-duty rotary hammer for concrete drilling and chiseling.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Bosch',
+                    features: 'Impact energy: 3.2 Joules, SDS-Plus chuck, Vibration control, Variable speed.',
+                    description: 'The Bosch Rotary Hammer is engineered for tough drilling and chiseling applications in concrete and masonry. Its superior impact energy and vibration control ensure comfortable and efficient operation.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Rotary+Hammer',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Bosch+RH+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Bosch+RH+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'bosch'
+            },
+            {
+                id: 'laser-level-sokkia',
+                name: 'Sokkia Laser Level',
+                price: 48000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Laser+Level',
+                shortDescription: 'Self-leveling laser for precise alignment in construction.',
+                fullDetails: {
+                    category: 'Survey Equipment',
+                    brand: 'Sokkia',
+                    features: 'Range: 30m, Accuracy: ±0.3mm/m, Green laser beam, Self-leveling, Tripod mountable.',
+                    description: 'The Sokkia Laser Level provides highly visible and accurate horizontal and vertical lines for various indoor and outdoor construction tasks. Its robust design ensures durability on job sites.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Sokkia+Laser+Level',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Sokkia+LL+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Sokkia+LL+View+3'
+                ],
+                category: 'survey',
+                brand: 'sokkia'
+            },
+            {
+                id: 'concrete-vibrator-honda',
+                name: 'Honda Concrete Vibrator',
+                price: 60000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Honda+Concrete+Vibrator',
+                shortDescription: 'Efficient vibrator for compacting fresh concrete.',
+                fullDetails: {
+                    category: 'Construction Equipment',
+                    brand: 'Honda',
+                    features: 'Engine: Honda GX35, Flexible shaft length: 4m, High frequency vibration, Portable.',
+                    description: 'Ensure strong and durable concrete structures with the Honda Concrete Vibrator. Its powerful engine and efficient vibration remove air bubbles, improving concrete quality and finish.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Honda+Concrete+Vibrator',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Honda+CV+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Honda+CV+View+3'
+                ],
+                category: 'construction',
+                brand: 'honda'
+            },
+            {
+                id: 'digital-vernier-caliper-bosch',
+                name: 'Bosch Digital Vernier Caliper',
+                price: 3500,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Digital+Caliper',
+                shortDescription: 'High-accuracy digital caliper for precise measurements.',
+                fullDetails: {
+                    category: 'Civil QC Lab Equipment',
+                    brand: 'Bosch',
+                    features: 'Measuring range: 0-150mm, Accuracy: ±0.02mm, Large LCD display, Stainless steel.',
+                    description: 'The Bosch Digital Vernier Caliper is an indispensable tool for quality control and precision measurement in various lab and workshop settings. Provides quick and accurate readings.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Bosch+Digital+Caliper',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Bosch+DC+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Bosch+DC+View+3'
+                ],
+                category: 'civil-lab',
+                brand: 'bosch'
+            },
+            {
+                id: 'impact-driver-dewalt',
+                name: 'Dewalt Impact Driver',
+                price: 18000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Dewalt+Impact+Driver',
+                shortDescription: 'Powerful impact driver for heavy-duty fastening applications.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Dewalt',
+                    features: 'Voltage: 20V, Max torque: 205Nm, Compact design, LED light, Brushless motor.',
+                    description: 'The Dewalt Impact Driver delivers high torque for driving large fasteners and lag screws with ease. Its compact and lightweight design makes it ideal for working in tight spaces.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Dewalt+Impact+Driver',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Dewalt+ID+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Dewalt+ID+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'dewalt'
+            },
+            {
+                id: 'orbital-sander-blackdecker',
+                name: 'Black & Decker Orbital Sander',
+                price: 6000,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Black%26Decker+Sander',
+                shortDescription: 'Ergonomic orbital sander for smooth finishes on wood and metal.',
+                fullDetails: {
+                    category: 'Power Tools',
+                    brand: 'Black & Decker',
+                    features: 'Power: 270W, Orbital action, Dust collection bag, Comfortable grip.',
+                    description: 'Achieve a flawless finish with the Black & Decker Orbital Sander. Its random orbital action ensures swirl-free sanding, perfect for preparing surfaces for painting or varnishing.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Black%26Decker+Sander',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=B%26D+OS+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=B%26D+OS+View+3'
+                ],
+                category: 'power-tools',
+                brand: 'blackdecker'
+            },
+            {
+                id: 'measuring-tape-stanley',
+                name: 'Stanley Measuring Tape (10m)',
+                price: 800,
+                img: 'https://placehold.co/600x400/D2691E/ffffff?text=Stanley+Measuring+Tape',
+                shortDescription: 'Durable and accurate measuring tape for all applications.',
+                fullDetails: {
+                    category: 'Construction Equipment',
+                    brand: 'Stanley',
+                    features: 'Length: 10 meters, Blade width: 25mm, Mylar polyester film coating, Belt clip.',
+                    description: 'The Stanley Measuring Tape is a reliable and essential tool for construction, DIY, and general measurement tasks. Its durable blade and precise markings ensure accuracy and longevity.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/D2691E/ffffff?text=Stanley+Measuring+Tape',
+                    'https://placehold.co/600x400/A0522D/ffffff?text=Stanley+MT+View+2',
+                    'https://placehold.co/600x400/FF8C00/ffffff?text=Stanley+MT+View+3'
+                ],
+                category: 'construction',
+                brand: 'stanley'
+            }
+        ];
+
+        // Get references to new elements
+        const productSearchInput = document.getElementById('productSearch');
+        const sortOptionsSelect = document.getElementById('sortOptions');
+        const categoryFilterSelect = document.getElementById('categoryFilter');
+        const brandFilterSelect = document.getElementById('brandFilter');
+
+        // Function to populate unique brands for the filter dropdown
+        function populateBrandFilter() {
+            const allBrands = new Set();
+            productsData.forEach(product => {
+                if (product.brand) {
+                    allBrands.add(product.brand);
+                }
+            });
+
+            brandFilterSelect.innerHTML = '<option value="all">All Brands</option>';
+            Array.from(allBrands).sort().forEach(brand => {
+                const option = document.createElement('option');
+                option.value = brand;
+                option.textContent = brand.charAt(0).toUpperCase() + brand.slice(1).replace(/-/g, ' ');
+                brandFilterSelect.appendChild(option);
+            });
+        }
+
+        // Main function to filter and sort products
+        function filterAndSortProducts() {
+            let displayedProducts = [...productsData];
+
+            // 1. Apply Search Filter
+            const searchQuery = productSearchInput.value.toLowerCase().trim();
+            if (searchQuery) {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.name.toLowerCase().includes(searchQuery) ||
+                    product.shortDescription.toLowerCase().includes(searchQuery) ||
+                    (product.fullDetails && product.fullDetails.description.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            // 2. Apply Category Filter
+            const selectedCategory = categoryFilterSelect.value;
+            if (selectedCategory !== 'all') {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.category && product.category === selectedCategory
+                );
+            }
+
+            // 3. Apply Brand Filter
+            const selectedBrand = brandFilterSelect.value;
+            if (selectedBrand !== 'all') {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.brand && product.brand === selectedBrand
+                );
+            }
+
+            // 4. Apply Sorting
+            const sortOption = sortOptionsSelect.value;
+            switch (sortOption) {
+                case 'price-asc':
+                    displayedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    displayedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    displayedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    displayedProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'default':
+                default:
+                    break;
+            }
+
+            renderProducts(displayedProducts, 'productsGrid');
+        }
+
+        // Function to render products into a specified target element
+        function renderProducts(productsToDisplay, targetElementId) {
+            const targetElement = document.getElementById(targetElementId);
+            if (!targetElement) return;
+
+            targetElement.innerHTML = '';
+
+            if (productsToDisplay.length === 0) {
+                targetElement.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px; font-size: 1rem; color: var(--text-color);">No products found matching your criteria.</p>';
+                return;
+            }
+
+            productsToDisplay.forEach(product => {
+                const productCardHtml = `
+                    <div class="product-card-container">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-img">
+                                    <img src="${product.img}" alt="${product.name}">
+                                    <div class="product-gallery-dots" data-product-id="${product.id}">
+                                        ${product.galleryImages.slice(0, 3).map((_, idx) => `<span class="gallery-dot" data-image-index="${idx}"></span>`).join('')}
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p>${product.shortDescription}</p>
+                                    <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="product-btns">
+                                        <button class="btn view-details-btn" data-product-id="${product.id}">View Details</button>
+                                        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>${product.name} Details</h3>
+                                <div class="product-details-full">
+                                    <p><strong>Category:</strong> ${product.fullDetails.category}</p>
+                                    <p><strong>Brand:</strong> ${product.fullDetails.brand}</p>
+                                    <p><strong>Features:</strong> ${product.fullDetails.features}</p>
+                                    <p>${product.fullDetails.description}</p>
+                                </div>
+                                <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-secondary back-to-front-btn">Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                targetElement.insertAdjacentHTML('beforeend', productCardHtml);
+            });
+
+            attachProductEventListeners();
+            attachGalleryDotListeners();
+        }
+
+        // Add event listeners for search and sort/filter
+        productSearchInput.addEventListener('input', filterAndSortProducts);
+        sortOptionsSelect.addEventListener('change', filterAndSortProducts);
+        categoryFilterSelect.addEventListener('change', filterAndSortProducts);
+        brandFilterSelect.addEventListener('change', filterAndSortProducts);
+
+
+        // Attach event listeners for product cards (called after rendering)
+        function attachProductEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.back-to-front-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.remove('flipped');
+                });
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const product = productsData.find(p => p.id === productId);
+                    if (product) {
+                        addItemToCart(product);
+                    }
+                });
+            });
+        }
+
+        // --- Brand Filter Click Logic ---
+        function attachBrandFilterListeners() {
+            document.querySelectorAll('.brand-logo').forEach(logo => {
+                logo.addEventListener('click', function() {
+                    const brandToFilter = this.dataset.brand;
+                    
+                    // Set the brand filter dropdown
+                    brandFilterSelect.value = brandToFilter;
+                    
+                    // Clear category filter to ensure only brand filter is active
+                    categoryFilterSelect.value = 'all';
+
+                    // Trigger the filter and sort function
+                    filterAndSortProducts();
+
+                    // Scroll to the products section
+                    const productsSection = document.getElementById('products');
+                    if (productsSection) {
+                        window.scrollTo({
+                            top: productsSection.offsetTop - 80, // Adjust for fixed header
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // --- Cart Logic ---
+        let cart = [];
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartSidebarBtn = document.getElementById('closeCartSidebar');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+
+        function updateCartDisplay() {
+            cartCount.textContent = cart.length;
+            cartItemsList.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: var(--text-color); margin-top: 20px;">Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('cart-item');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${item.id}"><i class="fas fa-times-circle"></i></button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price;
+                });
+            }
+            cartTotalAmount.textContent = total.toFixed(2);
+
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = this.dataset.productId;
+                    removeItemFromCart(productIdToRemove);
+                });
+            });
+        }
+
+        function addItemToCart(product) {
+            cart.push(product);
+            updateCartDisplay();
+            showCustomMessage(`"${product.name}" added to cart!`, 'success');
+            cartSidebar.classList.add('open');
+        }
+
+        function removeItemFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                const removedItemName = cart[index].name;
+                cart.splice(index, 1);
+                updateCartDisplay();
+                showCustomMessage(`"${removedItemName}" removed from cart.`, 'info');
+            }
+        }
+
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+        });
+
+        closeCartSidebarBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target) && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+
+
+        // --- Image Lightbox Logic ---
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+        const nextLightboxBtn = document.getElementById('nextLightboxBtn');
+        const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxDotsContainer = document.getElementById('lightboxDots');
+
+        let currentProductGallery = [];
+        let currentImageIndex = 0;
+
+        function attachGalleryDotListeners() {
+            document.querySelectorAll('.product-img .product-gallery-dots .gallery-dot').forEach(dot => {
+                dot.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    const productId = this.closest('.product-gallery-dots').dataset.productId;
+                    const initialImageIndex = parseInt(this.dataset.imageIndex); 
+                    
+                    const product = productsData.find(p => p.id === productId);
+                    if (product && product.galleryImages) {
+                        openLightbox(product.galleryImages, initialImageIndex);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.product-img').forEach(imgContainer => {
+                imgContainer.addEventListener('click', function(event) {
+                    if (!event.target.classList.contains('gallery-dot')) {
+                        const productId = this.closest('.product-card-container').querySelector('.add-to-cart-btn').dataset.productId;
+                        const product = productsData.find(p => p.id === productId);
+                        if (product && product.galleryImages) {
+                            openLightbox(product.galleryImages, 0);
+                        }
+                    }
+                });
+            });
+        }
+
+        function openLightbox(images, initialIndex = 0) {
+            currentProductGallery = images;
+            currentImageIndex = initialIndex;
+
+            lightboxDotsContainer.innerHTML = '';
+            currentProductGallery.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('lightbox-dot');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => showLightboxImage(index));
+                lightboxDotsContainer.appendChild(dot);
+            });
+
+            showLightboxImage(currentImageIndex);
+            imageLightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            imageLightbox.classList.remove('active');
+        }
+
+        function showLightboxImage(index) {
+            if (index >= currentProductGallery.length) {
+                currentImageIndex = 0;
+            } else if (index < 0) {
+                currentImageIndex = currentProductGallery.length - 1;
+            } else {
+                currentImageIndex = index;
+            }
+            lightboxImage.src = currentProductGallery[currentImageIndex];
+
+            document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
+                if (i === currentImageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        prevLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
+        nextLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) {
+                closeLightbox();
+            }
+        });
+
+
+        // --- Header Scroll Behavior ---
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        // Get the actual SVG element to change its style
+        const logoSvg = header.querySelector('.logo svg');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) { /* Changed threshold to 100px */
+                header.classList.add('header-scrolled');
+                // Shrink logo SVG
+                if (logoSvg) {
+                    logoSvg.style.height = '45px';
+                }
+            } else if (scrollTop < lastScrollTop || scrollTop <= 100) { /* Changed threshold to 100px */
+                header.classList.remove('header-scrolled');
+                // Restore logo SVG size
+                if (logoSvg) {
+                    logoSvg.style.height = '60px';
+                }
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateBrandFilter();
+            filterAndSortProducts();
+            updateCartDisplay();
+            attachBrandFilterListeners(); // Attach new brand filter listeners
+            window.dispatchEvent(new Event('scroll')); // Trigger scroll event on load to apply initial header state
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBuddy - Find Travel Companions</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> <!-- Added funky font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Basic Reset and Font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Body Styling with Gradient Background */
+        body {
+            background: linear-gradient(135deg, #A8E0FF, #E0C3FC, #FFD3B5); /* Light Blue, Light Purple, Peach */
+            color: #333; /* Darker text for contrast on light background */
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex; /* Ensure body is a flex container for full height content */
+            flex-direction: column;
+        }
+
+        /* Main Container for Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex-grow: 1; /* Allow container to grow and push footer down if present */
+            display: flex;
+            flex-direction: column;
+            gap: 30px; /* Spacing between header and main content */
+        }
+
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Darker border for contrast */
+            flex-wrap: wrap; /* Allow header items to wrap on smaller screens */
+        }
+
+        /* Logo Styling */
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: #333; /* Darker logo text */
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #FF8C69; /* Coral accent */
+        }
+
+        /* Navigation Menu */
+        nav {
+            flex-grow: 1; /* Allow nav to take available space */
+            display: flex;
+            justify-content: center; /* Center the tabs */
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px; /* Spacing between nav items */
+        }
+
+        nav ul li a {
+            color: #333; /* Darker navigation links */
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative; /* For underline effect */
+            padding-bottom: 5px; /* Space for underline */
+        }
+
+        nav ul li a:hover {
+            color: #FF8C69; /* Coral accent */
+        }
+
+        nav ul li a.active::after,
+        nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #FF8C69;
+            border-radius: 2px;
+        }
+
+        /* Authentication Buttons */
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* General Button Styles */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #FF8C69; /* Coral accent */
+            color: #fff; /* White text for contrast */
+            box-shadow: 0 4px 15px rgba(255, 140, 105, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #FF8C69; /* Coral accent */
+            color: #FF8C69; /* Coral accent */
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            margin-top: 0; /* Adjusted as gap is on container */
+            gap: 30px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            align-items: flex-start; /* Align items to the top */
+        }
+
+        /* New combined left panel for globe and travelers and trip planner */
+        .left-panel {
+            flex: 1.5; /* Takes more space than main content area on large screens */
+            min-width: 380px; /* Minimum width to prevent squishing */
+            background: rgba(255, 255, 255, 0.7); /* Consistent background */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px; /* Add padding consistent with other sections */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column; /* Stacks children vertically */
+            gap: 25px; /* Spacing between sections */
+            min-height: 800px; /* Adjusted min-height for the left panel */
+            position: relative; /* Added for absolute positioning of children */
+        }
+
+        /* Globe Container (now inside left-panel) */
+        .globe-container {
+            width: 100%; /* Takes full width of the left panel */
+            height: 450px; /* Increased height for the globe */
+            position: relative; /* Changed to relative for z-index context */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1; /* Ensure globe is behind overlapping elements */
+        }
+
+        #globe-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Container for Nearby Travelers within the left-panel */
+        .travelers-section {
+            display: flex;
+            flex-direction: column; /* Stacks its own content vertically */
+            gap: 15px; /* Spacing between title and user cards */
+            overflow-y: auto; /* Enable scrolling for long lists */
+            padding-right: 10px; /* Add some padding for scrollbar if present */
+            flex-grow: 1; /* Allow this section to grow and take available space */
+        }
+
+        /* Main content area (for feed and trip planner) */
+        .main-content-area {
+            flex: 2; /* Main content takes more space */
+            min-width: 380px; /* Ensure it doesn't get too small */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-height: 600px; /* Example min-height */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 22px; /* Slightly larger title */
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: #FF8C69; /* Accent color for titles */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: #FF8C69;
+        }
+
+        /* User Card Styling */
+        .user-card {
+            background: rgba(255, 255, 255, 0.6); /* Lighter translucent background */
+            border-radius: 18px; /* More rounded */
+            padding: 18px; /* More padding */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Light border */
+        }
+
+        .user-card:hover {
+            background: rgba(255, 255, 255, 0.8); /* Slight change on hover */
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-avatar {
+            width: 65px; /* Slightly larger avatar */
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 18px;
+            border: 3px solid #E0C3FC; /* Thicker accent border */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-info h3 {
+            font-size: 19px; /* Slightly larger name */
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333; /* Dark text */
+        }
+
+        .user-info p {
+            font-size: 14px;
+            color: rgba(51, 51, 51, 0.7); /* Slightly lighter dark for descriptions */
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px; /* More padding */
+            border-radius: 25px; /* More rounded */
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px; /* More space */
+            margin-top: 5px; /* Space from text above */
+        }
+
+        .badge-interest {
+            background: rgba(224, 195, 252, 0.5); /* Lighter translucent background */
+            color: #8A2BE2; /* Darker accent color */
+        }
+
+        .badge-location {
+            background: rgba(168, 224, 255, 0.5); /* Lighter translucent background */
+            color: #0077BE; /* Darker accent color */
+        }
+
+        /* Chat Container */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px; /* Slightly wider */
+            background: rgba(255, 255, 255, 0.95); /* More opaque */
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+            color: #333; /* Dark text */
+        }
+
+        .chat-header {
+            padding: 15px 20px; /* More padding */
+            background: #f0f2f5; /* Light grey header */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .chat-header h3 {
+            font-size: 18px; /* Larger title */
+            margin: 0;
+            color: #333; /* Dark text */
+        }
+
+        .chat-messages {
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* More space between messages */
+        }
+
+        .message {
+            max-width: 85%; /* Wider messages */
+            padding: 12px 18px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            font-size: 15px;
+        }
+
+        .message-received {
+            background: #e0e0e0; /* Light grey for received messages */
+            align-self: flex-start;
+            border-bottom-left-radius: 5px; /* Pointy corner */
+            color: #333;
+        }
+
+        .message-sent {
+            background: #FF8C69;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px; /* Pointy corner */
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: #f0f2f5; /* Light grey input background */
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 18px; /* More padding */
+            border-radius: 30px;
+            border: none;
+            background: #ffffff; /* White input field */
+            color: #333; /* Dark text */
+            outline: none;
+            font-size: 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+        }
+
+        .chat-input input::placeholder {
+            color: #999;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            background: #FF8C69;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px; /* Larger button */
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Trip Planner Form */
+        .trip-planner {
+            background: rgba(255, 255, 255, 0.7); /* Consistent translucent background */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333; /* Dark text */
+        }
+
+        .trip-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; /* More spacing in form */
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0; /* Removed default margin */
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px; /* More space for label */
+            font-weight: 500;
+            color: #333; /* Dark text */
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px; /* More padding */
+            border-radius: 12px; /* More rounded */
+            border: 1px solid rgba(0, 0, 0, 0.2); /* Lighter border */
+            background: rgba(0, 0, 0, 0.1); /* White input field */
+            color: #333; /* Dark text */
+            outline: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            background: rgba(0, 0, 0, 0.2); /* Slightly darker on focus */
+            box-shadow: 0 0 0 2px #FF8C69;
+            border-color: #FF8C69;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px; /* Slightly taller */
+        }
+
+        .trip-form button {
+            grid-column: span 2;
+            padding: 15px; /* More padding */
+            background: #FF8C69;
+            color: white;
+            border: none;
+            border-radius: 12px; /* More rounded */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 140, 105, 0.4);
+        }
+
+        .trip-form button:hover {
+            background: #FF6347;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 105, 0.5);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* Darker overlay */
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #ffffff; /* Solid white modal content */
+            backdrop-filter: blur(15px);
+            border-radius: 25px; /* More rounded */
+            padding: 35px; /* More padding */
+            width: 90%;
+            max-width: 550px; /* Slightly wider */
+            color: #333;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            border: 1px solid #e0e0e0; /* Light border */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px; /* More space */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #333; /* Dark title */
+            font-size: 24px; /* Larger title */
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px; /* Larger close icon */
+            cursor: pointer;
+            color: #666; /* Darker close icon */
+            transition: transform 0.2s ease;
+        }
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Notification Toast */
+        .notification {
+            position: fixed;
+            top: 25px; /* Slightly lower */
+            right: 25px;
+            background: #ffffff; /* White notification */
+            color: #333;
+            padding: 18px 25px; /* More padding */
+            border-radius: 15px; /* More rounded */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transform: translateX(150%);
+            transition: transform 0.4s ease-out; /* Smoother animation */
+            z-index: 1000;
+            border-left: 5px solid #28a745; /* Green for success */
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* User ID Display */
+        #user-id-display {
+            font-size: 12px;
+            color: rgba(51, 51, 51, 0.6); /* Darker text for contrast */
+            margin-top: 10px;
+            word-break: break-all;
+        }
+
+        /* Recommended Sites Section - FULL SCREEN */
+        .recommended-sites {
+            margin-top: 30px;
+            overflow: hidden;
+            position: relative;
+            /* Adjusted height to take more available space */
+            height: calc(100vh - 100px); /* Full screen height minus header/margins */
+            display: flex;
+            flex-direction: column;
+        }
+        .section-title {
+            font-size: 22px; /* Consistent with other section titles */
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: #FF8C69; /* Consistent accent color */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .section-title i {
+            margin-right: 10px;
+            color: #FF8C69;
+        }
+        .scrolling-container {
+            display: flex;
+            flex-direction: column; /* Stack rows one below another */
+            overflow: hidden;
+            position: relative;
+            flex-grow: 1; /* Take remaining space */
+            gap: 0; /* No space between the two rows */
+        }
+        .scrolling-row {
+            display: flex;
+            animation: scroll 60s linear infinite; /* Reduced speed: 30s -> 60s */
+            gap: 0; /* No space between cards */
+            padding: 0; /* No padding */
+            height: 50%; /* Each row takes 50% of the container height */
+            flex-shrink: 0; /* Prevent rows from shrinking */
+            width: max-content; /* Allow content to define width for scrolling */
+        }
+        .scrolling-row:nth-child(2) {
+            animation: scroll-reverse 50s linear infinite; /* Reduced speed: 25s -> 50s */
+        }
+        .site-card {
+            width: 200px;
+            height: 100%; /* Make card fill the height of its row */
+            border-radius: 0; /* Removed border-radius */
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            position: relative; /* Changed to relative for absolute positioning of info */
+        }
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .site-image {
+            width: 100%;
+            height: 100%; /* Make image fill the entire card */
+            object-fit: cover;
+        }
+        .site-info {
+            position: absolute; /* Position absolutely within the card */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25%; /* Occupy bottom 25% */
+            background: rgba(0, 0, 0, 0.5); /* Transparent black */
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center; /* Center text */
+            display: flex; /* Use flex to center content */
+            align-items: center; /* Vertically center */
+            justify-content: center; /* Horizontally center */
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.3s ease; /* Smooth transition */
+        }
+        .site-card:hover .site-info {
+            opacity: 1; /* Visible on hover */
+        }
+        /* Travelers Scroll Section */
+        .travelers-scroll {
+            margin-top: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        .travelers-container {
+            display: flex;
+            gap: 15px;
+            padding: 5px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            scrollbar-color: transparent transparent; /* Firefox */
+        }
+        .travelers-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        .traveler-item {
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: #333; /* Darker text for user cards */
+        }
+        .traveler-item:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .traveler-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 2px solid #E0C3FC;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        .traveler-info h3 {
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+        .traveler-info p {
+            font-size: 12px;
+            color: rgba(51, 51, 51, 0.7);
+        }
+        .scroll-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        .scroll-btn {
+            background: rgba(255, 140, 105, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .scroll-btn:hover {
+            background: rgba(255, 140, 105, 1);
+            transform: scale(1.1);
+        }
+        /* Animations */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Adjusted to 50% for duplicated content */
+        }
+        @keyframes scroll-reverse {
+            0% { transform: translateX(-50%); } /* Adjusted to 50% for duplicated content */
+            100% { transform: translateX(0); }
+        }
+        /* New styles for auto-typing text and user count */
+        .auto-type-container {
+            background: rgba(255, 255, 255, 0.2); /* More transparent */
+            backdrop-filter: none; /* Removed blur for better blending */
+            border-radius: 15px;
+            padding: 20px;
+            position: absolute; /* Absolute positioning */
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            width: calc(50% - 30px); /* Take roughly half width of the panel */
+            box-shadow: none; /* Removed shadow for blending */
+            text-align: center;
+            color: #333;
+            z-index: 10; /* Ensure it's above the globe */
+        }
+
+        .auto-type-text {
+            font-family: 'Permanent Marker', cursive; /* Funky font */
+            font-size: 24px; /* Increased font size */
+            font-weight: 500;
+            min-height: 50px; /* Ensure space for text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+            color: #444; /* Slightly darker text for visibility */
+        }
+
+        .user-count-display {
+            background: rgba(255, 255, 255, 0.2); /* More transparent */
+            backdrop-filter: none; /* Removed blur for better blending */
+            border-radius: 15px;
+            padding: 20px;
+            position: absolute; /* Absolute positioning */
+            top: 20px; /* Adjust as needed */
+            right: 20px; /* Adjust as needed */
+            width: calc(50% - 30px); /* Take roughly half width of the panel */
+            box-shadow: none; /* Removed shadow for blending */
+            text-align: center;
+            color: #333;
+            font-size: 28px; /* Increased font size */
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10; /* Ensure it's above the globe */
+        }
+
+        .user-count-display span {
+            font-family: 'Permanent Marker', cursive; /* Funky font */
+            font-size: 48px; /* Increased font size */
+            font-weight: 700;
+            color: #FF8C69; /* Accent color */
+            margin-top: 5px;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 901px) { /* Apply side-by-side on screens wider than 900px */
+            .main-content {
+                flex-direction: row; /* Side-by-side */
+                justify-content: space-between; /* Distribute space */
+            }
+            .left-panel {
+                flex-direction: column; /* Stack globe, travelers, trip planner vertically */
+                flex: 1.5; /* Takes more space than main content area on large screens */
+                min-height: 800px; /* Adjusted min-height for the left panel */
+            }
+            .main-content-area {
+                flex: 2; /* Main content takes the most space */
+                min-height: 600px;
+            }
+            /* Keep absolute positioning for larger screens */
+            .auto-type-container, .user-count-display {
+                position: absolute;
+                top: 20px;
+                width: calc(50% - 30px);
+            }
+            .auto-type-container {
+                left: 20px;
+                right: auto;
+            }
+            .user-count-display {
+                right: 20px;
+                left: auto;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .left-panel {
+                flex-direction: column; /* Stack globe, travelers, trip planner vertically on small screens */
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width */
+                min-height: unset; /* Remove min-height for stacking */
+                padding-top: 150px; /* Add padding to accommodate overlapping elements */
+            }
+            .globe-container {
+                height: 50vh;
+                width: 100%; /* Take full width when stacked */
+            }
+            .travelers-section {
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width when stacked */
+                padding-right: 0; /* Remove padding if not needed for scrollbar */
+            }
+            .main-content-area {
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width */
+                min-height: unset; /* Remove min-height for stacking */
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding-bottom: 15px;
+                align-items: center; /* Center items when stacked */
+            }
+
+            nav {
+                width: 100%; /* Ensure nav takes full width for centering */
+                justify-content: center; /* Center nav items */
+            }
+
+            nav ul {
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                justify-content: center; /* Center wrapped nav items */
+                gap: 10px;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                flex: 1; /* Make buttons take equal width */
+            }
+
+            .trip-form {
+                grid-template-columns: 1fr; /* Stack form fields */
+            }
+
+            .trip-form button {
+                grid-column: span 1;
+            }
+
+            .chat-container {
+                width: 90%;
+                left: 5%;
+                right: 5%;
+                bottom: 15px;
+            }
+            .recommended-sites {
+                /* Adjusted height for mobile to be more full-screen */
+                height: calc(100vh - 80px); /* Full screen height minus header/margins for mobile */
+            }
+            .site-card {
+                height: 100%; /* Keep card height filling its row */
+            }
+
+            /* Adjust overlapping elements for mobile */
+            .auto-type-container, .user-count-display {
+                position: absolute;
+                top: 20px; /* Keep top position */
+                width: calc(50% - 25px); /* Adjust width for mobile padding */
+                padding: 10px; /* Reduce padding for mobile */
+                font-size: 16px; /* Adjust font size */
+            }
+            .auto-type-text {
+                min-height: 40px; /* Adjust min-height */
+                font-size: 20px; /* Adjusted for mobile */
+            }
+            .user-count-display {
+                font-size: 20px; /* Adjust font size */
+            }
+            .user-count-display span {
+                font-size: 30px; /* Adjust span font size */
+            }
+            .auto-type-container {
+                left: 15px; /* Adjust left position */
+                right: auto;
+            }
+            .user-count-display {
+                right: 15px; /* Adjust right position */
+                left: auto;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .left-panel, .trip-planner, .modal-content, .chat-container {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .user-avatar {
+                width: 55px;
+                height: 55px;
+            }
+
+            .user-info h3 {
+                font-size: 16px;
+            }
+
+            .user-info p {
+                font-size: 13px;
+            }
+
+            .chat-messages {
+                height: 250px;
+            }
+
+            .message {
+                font-size: 13px;
+                padding: 10px 15px;
+            }
+
+            .chat-input input {
+                padding: 10px 15px;
+            }
+
+            .chat-input button {
+                width: 40px;
+                height: 40px;
+            }
+            /* Stack auto-type and user-count on very small screens */
+            .auto-type-container, .user-count-display {
+                position: relative; /* Revert to relative positioning */
+                width: 100%; /* Take full width */
+                top: auto;
+                left: auto;
+                right: auto;
+                margin-bottom: 15px; /* Add space between them */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
+                TravelBuddy
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Explore</a></li>
+                    <li><a href="#">My Trips</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary" id="signup-btn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+        </header>
+        <div class="main-content">
+            <div class="left-panel">
+                <!-- Auto-typing text container -->
+                <div class="auto-type-container">
+                    <div class="auto-type-text" id="auto-type-text"></div>
+                </div>
+
+                <!-- User count display -->
+                <div class="user-count-display">
+                    Travelers Online: <span id="traveler-count">0</span>
+                </div>
+
+                <div class="globe-container">
+                    <canvas id="globe-canvas"></canvas>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-users"></i> Nearby Travelers</h2>
+                
+                <!-- Travelers Scroll Section -->
+                <div class="travelers-scroll">
+                    <div class="travelers-container" id="travelers-container">
+                        <div class="traveler-item" data-user="1">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>Sarah Johnson</h3>
+                                <p><span class="badge badge-location">Paris, France</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="traveler-item" data-user="2">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>Michael Chen</h3>
+                                <p><span class="badge badge-location">Tokyo, Japan</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="traveler-item" data-user="3">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>Elena Petrova</h3>
+                                <p><span class="badge badge-location">Rome, Italy</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="traveler-item" data-user="4">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>Carlos Rodriguez</h3>
+                                <p><span class="badge badge-location">Barcelona, Spain</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="traveler-item" data-user="5">
+                            <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>Emma Wilson</h3>
+                                <p><span class="badge badge-location">London, UK</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="traveler-item" data-user="6">
+                            <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="User" class="traveler-avatar">
+                            <div class="traveler-info">
+                                <h3>James Taylor</h3>
+                                <p><span class="badge badge-location">New York, USA</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-controls">
+                        <button class="scroll-btn" id="scroll-left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="scroll-btn" id="scroll-right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="trip-planner">
+                    <h2 class="section-title"><i class="fas fa-route"></i> Plan a Trip</h2>
+                    
+                    <form class="trip-form" id="trip-form">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" id="destination" placeholder="Where to?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dates">Travel Dates</label>
+                            <input type="text" id="dates" placeholder="MM/DD - MM/DD">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="travelers">Number of Travelers</label>
+                            <select id="travelers">
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5+">5+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget">
+                                <option value="budget">Budget</option>
+                                <option value="moderate" selected>Moderate</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interests">Interests</label>
+                            <textarea id="interests" placeholder="What do you want to experience?"></textarea>
+                        </div>
+                        
+                        <button type="submit">Find Travel Buddies</button>
+                    </form>
+                </div>
+                
+                <!-- Recommended Sites Section - FULL SCREEN -->
+                <div class="recommended-sites">
+                    <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Recommended Sites</h2>
+                    
+                    <div class="scrolling-container">
+                        <div class="scrolling-row">
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/paris/200/250.jpg" alt="Paris" class="site-image">
+                                <div class="site-info">Eiffel Tower, Paris</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/tokyo/200/250.jpg" alt="Tokyo" class="site-image">
+                                <div class="site-info">Tokyo Tower, Japan</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/rome/200/250.jpg" alt="Rome" class="site-image">
+                                <div class="site-info">Colosseum, Rome</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/bali/200/250.jpg" alt="Bali" class="site-image">
+                                <div class="site-info">Bali Beach, Indonesia</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/newyork/200/250.jpg" alt="New York" class="site-image">
+                                <div class="site-info">Statue of Liberty, NYC</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sydney/200/250.jpg" alt="Sydney" class="site-image">
+                                <div class="site-info">Opera House, Sydney</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/london/200/250.jpg" alt="London" class="site-image">
+                                <div class="site-info">Big Ben, London</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/barcelona/200/250.jpg" alt="Barcelona" class="site-image">
+                                <div class="site-info">Sagrada Familia, Barcelona</div>
+                            </div>
+                            <!-- Duplicated content for seamless loop -->
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/paris/200/250.jpg" alt="Paris" class="site-image">
+                                <div class="site-info">Eiffel Tower, Paris</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/tokyo/200/250.jpg" alt="Tokyo" class="site-image">
+                                <div class="site-info">Tokyo Tower, Japan</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/rome/200/250.jpg" alt="Rome" class="site-image">
+                                <div class="site-info">Colosseum, Rome</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/bali/200/250.jpg" alt="Bali" class="site-image">
+                                <div class="site-info">Bali Beach, Indonesia</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/newyork/200/250.jpg" alt="New York" class="site-image">
+                                <div class="site-info">Statue of Liberty, NYC</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sydney/200/250.jpg" alt="Sydney" class="site-image">
+                                <div class="site-info">Opera House, Sydney</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/london/200/250.jpg" alt="London" class="site-image">
+                                <div class="site-info">Big Ben, London</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/barcelona/200/250.jpg" alt="Barcelona" class="site-image">
+                                <div class="site-info">Sagrada Familia, Barcelona</div>
+                            </div>
+                        </div>
+                        <div class="scrolling-row">
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/venice/200/250.jpg" alt="Venice" class="site-image">
+                                <div class="site-info">Grand Canal, Venice</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/kyoto/200/250.jpg" alt="Kyoto" class="site-image">
+                                <div class="site-info">Fushimi Inari, Kyoto</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/santorini/200/250.jpg" alt="Santorini" class="site-image">
+                                <div class="site-info">Oia Village, Santorini</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/machu/200/250.jpg" alt="Machu Picchu" class="site-image">
+                                <div class="site-info">Machu Picchu, Peru</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sydney/200/250.jpg" alt="Sydney" class="site-image">
+                                <div class="site-info">Harbour Bridge, Sydney</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sanfran/200/250.jpg" alt="San Francisco" class="site-image">
+                                <div class="site-info">Golden Gate Bridge, SF</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/athens/200/250.jpg" alt="Athens" class="site-image">
+                                <div class="site-info">Acropolis, Athens</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/dubai/200/250.jpg" alt="Dubai" class="site-image">
+                                <div class="site-info">Burj Khalifa, Dubai</div>
+                            </div>
+                            <!-- Duplicated content for seamless loop -->
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/venice/200/250.jpg" alt="Venice" class="site-image">
+                                <div class="site-info">Grand Canal, Venice</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/kyoto/200/250.jpg" alt="Kyoto" class="site-image">
+                                <div class="site-info">Fushimi Inari, Kyoto</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/santorini/200/250.jpg" alt="Santorini" class="site-image">
+                                <div class="site-info">Oia Village, Santorini</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/machu/200/250.jpg" alt="Machu Picchu" class="site-image">
+                                <div class="site-info">Machu Picchu, Peru</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sydney/200/250.jpg" alt="Sydney" class="site-image">
+                                <div class="site-info">Harbour Bridge, Sydney</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/sanfran/200/250.jpg" alt="San Francisco" class="site-image">
+                                <div class="site-info">Golden Gate Bridge, SF</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/athens/200/250.jpg" alt="Athens" class="site-image">
+                                <div class="site-info">Acropolis, Athens</div>
+                            </div>
+                            <div class="site-card">
+                                <img src="https://picsum.photos/seed/dubai/200/250.jpg" alt="Dubai" class="site-image">
+                                <div class="site-info">Burj Khalifa, Dubai</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3><i class="fas fa-comments"></i> Chat with <span id="chat-name">Sarah Johnson</span></h3>
+            <button class="close-modal" id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message message-received">
+                Hi there! I'm planning a trip to the Swiss Alps next month. Are you interested?
+            </div>
+            <div class="message message-sent">
+                That sounds amazing! I've always wanted to go hiking there. What dates are you thinking?
+            </div>
+            <div class="message message-received">
+                I'm thinking around June 15-22. We could do some amazing trails and stay in mountain huts.
+            </div>
+            <div class="message message-sent">
+                Perfect! I'm free those dates. Let's plan this adventure!
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type a message..." id="chat-input">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to TravelBuddy</h2>
+                <button class="close-modal" id="close-login"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        Trip planned successfully! We'll notify you when we find compatible travel buddies.
+    </div>
+    <script>
+        // Initialize 3D Globe
+        let scene, camera, renderer, globe, controls;
+        let travelers = [];
+        function initGlobe() {
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Get the globe-canvas element and its parent for responsive sizing
+            const globeCanvas = document.getElementById('globe-canvas');
+            const parentWidth = globeCanvas.parentElement.clientWidth;
+            const parentHeight = globeCanvas.parentElement.clientHeight;
+
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, parentWidth / parentHeight, 0.1, 1000);
+            camera.position.z = 2.5;
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, antialias: true, alpha: true });
+            renderer.setSize(parentWidth, parentHeight);
+            
+            // Add controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.rotateSpeed = 0.5;
+            controls.minDistance = 1.5;
+            controls.maxDistance = 4;
+            
+            // Create globe
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
+            const textureLoader = new THREE.TextureLoader();
+            const texture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/land_ocean_ice_cloud_2048.jpg');
+            const material = new THREE.MeshBasicMaterial({ map: texture });
+            globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // Add point light
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(5, 3, 5);
+            scene.add(pointLight);
+            
+            // Add travelers
+            addTravelers();
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                globe.rotation.y += 0.001;
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const updatedParentWidth = globeCanvas.parentElement.clientWidth;
+                const updatedParentHeight = globeCanvas.parentElement.clientHeight;
+                camera.aspect = updatedParentWidth / updatedParentHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(updatedParentWidth, updatedParentHeight);
+            });
+        }
+        
+        function addTravelers() {
+            const travelerPositions = [
+                { lat: 48.8566, lng: 2.3522 },  // Paris
+                { lat: 35.6762, lng: 139.6503 }, // Tokyo
+                { lat: 41.9028, lng: 12.4964 },  // Rome
+                { lat: 41.3851, lng: 2.1734 }    // Barcelona
+            ];
+            
+            travelerPositions.forEach((pos, index) => {
+                const position = latLngToVector3(pos.lat, pos.lng, 1.01);
+                const geometry = new THREE.SphereGeometry(0.02, 16, 16);
+                const material = new THREE.MeshBasicMaterial({ color: 0xFF8C69 });
+                const traveler = new THREE.Mesh(geometry, material);
+                traveler.position.copy(position);
+                scene.add(traveler);
+                travelers.push(traveler);
+                
+                // Add pulse effect
+                const pulseGeometry = new THREE.SphereGeometry(0.02, 16, 16);
+                const pulseMaterial = new THREE.MeshBasicMaterial({ 
+                    color: 0xFF8C69, 
+                    transparent: true, 
+                    opacity: 0.4 
+                });
+                const pulse = new THREE.Mesh(pulseGeometry, pulseMaterial);
+                pulse.position.copy(position);
+                pulse.scale.set(1, 1, 1);
+                pulse.material.opacity = 0.4; // Reset opacity for new pulse
+                scene.add(pulse);
+                
+                // Animate pulse
+                function animatePulse() {
+                    pulse.scale.x += 0.01;
+                    pulse.scale.y += 0.01;
+                    pulse.scale.z += 0.01;
+                    pulse.material.opacity -= 0.01;
+                    
+                    if (pulse.material.opacity <= 0) {
+                        pulse.scale.set(1, 1, 1);
+                        pulse.material.opacity = 0.4;
+                    }
+                    
+                    requestAnimationFrame(animatePulse);
+                }
+                
+                animatePulse();
+            });
+        }
+        
+        function latLngToVector3(lat, lng, radius) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lng + 180) * (Math.PI / 180);
+            
+            const x = -radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.cos(phi);
+            const z = radius * Math.sin(phi) * Math.sin(theta);
+            
+            return new THREE.Vector3(x, y, z);
+        }
+        
+        // Initialize the globe when the page loads
+        window.addEventListener('load', initGlobe);
+        
+        // UI Interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            // User cards click event
+            const userCards = document.querySelectorAll('.traveler-item');
+            userCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const chatContainer = document.getElementById('chat-container');
+                    const chatName = document.getElementById('chat-name');
+                    const userName = card.querySelector('h3').textContent;
+                    chatName.textContent = userName;
+                    chatContainer.style.display = 'flex';
+                });
+            });
+            
+            // Close chat
+            document.getElementById('close-chat').addEventListener('click', () => {
+                document.getElementById('chat-container').style.display = 'none';
+            });
+            
+            // Send message
+            document.getElementById('send-message').addEventListener('click', () => {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                
+                if (message) {
+                    const chatMessages = document.getElementById('chat-messages');
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'message message-sent';
+                    messageElement.textContent = message;
+                    chatMessages.appendChild(messageElement);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    input.value = '';
+                }
+            });
+            
+            // Enter key to send message
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('send-message').click();
+                }
+            });
+            
+            // Login button
+            document.getElementById('login-btn').addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'flex';
+            });
+            
+            // Close login modal
+            document.getElementById('close-login').addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'none';
+            });
+            
+            // Login form submission
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('login-modal').style.display = 'none';
+                showNotification('Login successful! Welcome back.');
+            });
+            
+            // Trip form submission
+            document.getElementById('trip-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showNotification('Trip planned successfully! We\'ll notify you when we find compatible travel buddies.');
+                document.getElementById('trip-form').reset();
+            });
+            
+            // Travelers scroll functionality
+            const travelersContainer = document.getElementById('travelers-container');
+            const scrollLeftBtn = document.getElementById('scroll-left');
+            const scrollRightBtn = document.getElementById('scroll-right');
+            
+            scrollLeftBtn.addEventListener('click', () => {
+                travelersContainer.scrollBy({ left: -250, behavior: 'smooth' });
+            });
+            
+            scrollRightBtn.addEventListener('click', () => {
+                travelersContainer.scrollBy({ left: 250, behavior: 'smooth' });
+            });
+
+            // Auto-typing text logic
+            const autoTypeTextElement = document.getElementById('auto-type-text');
+            const phrases = [
+                "Discover your next adventure!",
+                "Find travel companions worldwide.",
+                "Plan unforgettable journeys.",
+                "Explore hidden gems with new friends.",
+                "Your perfect travel buddy awaits!"
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typingSpeed = 70; // milliseconds per character
+            const deletingSpeed = 40; // milliseconds per character
+            const pauseBeforeDelete = 1500; // milliseconds
+            const pauseBeforeType = 500; // milliseconds
+
+            function typeWriter() {
+                const currentPhrase = phrases[phraseIndex];
+                if (isDeleting) {
+                    autoTypeTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    autoTypeTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = typingSpeed;
+                if (isDeleting) {
+                    typeSpeed = deletingSpeed;
+                }
+
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    typeSpeed = pauseBeforeDelete;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    typeSpeed = pauseBeforeType;
+                }
+
+                setTimeout(typeWriter, typeSpeed);
+            }
+            typeWriter(); // Start the auto-typing effect
+
+            // Increasing user count logic
+            const travelerCountElement = document.getElementById('traveler-count');
+            let currentTravelerCount = 12345; // Starting count
+            const maxTravelerCount = 12500; // Max count to reach
+            const incrementInterval = 200; // milliseconds per increment
+
+            function updateTravelerCount() {
+                if (currentTravelerCount < maxTravelerCount) {
+                    currentTravelerCount++;
+                    travelerCountElement.textContent = currentTravelerCount.toLocaleString(); // Format with commas
+                    setTimeout(updateTravelerCount, incrementInterval);
+                }
+            }
+            updateTravelerCount(); // Start the user count increment
+        });
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= content_for(:title) || "Riye" %></title>
+</head>
+
+<body>
+    <h1>Edit Project</h1>
+    <p>You are editing an existing project.</p>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= link_to 'Back to Projects', projects_path, class: 'btn btn-primary', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= link_to 'Show All Projects', projects_path, class: 'btn btn-info', style: 'margin-bottom: 1em; margin-right: 1em;' %>
+    <%= render 'form', project: @project %>
+</body>
+
+</html>

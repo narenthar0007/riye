@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SitePro Tools - Civil Engineering Equipment & Power Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #FF8C00;  // Darker orange
+            --secondary: #FFA500; // Standard orange
+            --accent: #FFD700;    // Gold accent
+            --dark: #000000;      // Pure black
+            --light: #F5F5F5;     // Slightly darker light color
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF8C00 0%, #FF6B00 50%, #E65100 100%);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            border-color: #FF8C00;
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+            background-color: var(--secondary);
+        }
+
+        .cta-button:hover {
+            background-color: #E67E22;
+            transform: translateY(-2px);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .tool-feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 165, 0, 0.15);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .newsletter-input {
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="bg-primary text-white py-2">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p><i class="fas fa-truck mr-2"></i>Free shipping on orders over $300 | <i class="fas fa-shield-alt mr-2 ml-4"></i>12-month warranty on all tools</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c1df155e-fab5-43d8-9ab7-5dc4b4d52daf.png" alt="SitePro Tools Logo - Industrial tools company specializing in civil engineering equipment" class="h-12">
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-gray-800 hover:text-secondary font-medium">Home</a>
+                <a href="#products" class="nav-link text-gray-800 hover:text-secondary font-medium">Products</a>
+                <a href="#categories" class="nav-link text-gray-800 hover:text-secondary font-medium">Categories</a>
+                <a href="#solutions" class="nav-link text-gray-800 hover:text-secondary font-medium">Solutions</a>
+                <a href="#about" class="nav-link text-gray-800 hover:text-secondary font-medium">About</a>
+                <a href="#contact" class="nav-link text-gray-800 hover:text-secondary font-medium">Contact</a>
+            </div>
+            
+            <!-- Icons -->
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-gray-100">
+                    <i class="fas fa-search text-gray-600"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100">
+                    <i class="fas fa-user text-gray-600"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100 relative">
+                    <i class="fas fa-shopping-cart text-gray-600"></i>
+                    <span class="absolute -top-1 -right-1 bg-secondary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </button>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100" id="mobile-menu-button">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white w-full absolute z-50 shadow-lg" id="mobile-menu">
+            <div class="flex flex-col space-y-2 py-4 px-4">
+                <a href="#home" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">Home</a>
+                <a href="#products" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">Products</a>
+                <a href="#categories" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">Categories</a>
+                <a href="#solutions" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">Solutions</a>
+                <a href="#about" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">About</a>
+                <a href="#contact" class="nav-link text-gray-800 hover:text-secondary font-medium py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white" id="home">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 hero-content mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Professional-Grade Civil Engineering Tools</h1>
+                    <p class="text-xl mb-8 opacity-90">Powering construction sites and engineering projects with reliable, precision tools since 1998. Trusted by professionals worldwide.</p>
+                    <div class="flex hero-buttons space-x-4">
+                        <button class="cta-button px-8 py-3 rounded-lg font-semibold text-white shadow-lg">Shop Now</button>
+                        <button class="bg-white text-primary px-8 py-3 rounded-lg font-semibold shadow-lg hover:bg-gray-100 transition">Learn More</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f09aad5a-3c5b-4b7b-b85f-2617910c9cbe.png" alt="Professional civil engineering team using heavy-duty construction tools at a high-rise building site with cityscape background" class="rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center text-center p-6">
+                    <div class="tool-feature-icon">
+                        <i class="fas fa-tools text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Premium Quality</h3>
+                    <p class="text-gray-600">Industry-leading durability with materials engineered for harsh conditions and extended use.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6">
+                    <div class="tool-feature-icon">
+                        <i class="fas fa-shield-alt text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Extended Warranty</h3>
+                    <p class="text-gray-600">12-month warranty on all tools, with optional extended coverage available.</p>
+                </div>
+                <div class="flex flex-col items-center text-center p-6">
+                    <div class="tool-feature-icon">
+                        <i class="fas fa-headset text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Expert Support</h3>
+                    <p class="text-gray-600">24/7 access to our team of certified tool specialists and engineers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-gray-50" id="categories">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Equipment Categories</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive selection across all civil engineering disciplines</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category Card 1 -->
+                <div class="category-card bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18cf6897-62a7-4393-8f5f-3360b190579d.png" alt="Heavy-duty pneumatic jackhammers and demolition hammers with safety equipment" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Demolition Tools</h3>
+                        <p class="text-gray-600 mb-4">Powerful breakers, jackhammers, and demolition robots</p>
+                        <a href="#" class="text-secondary font-medium flex items-center">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Category Card 2 -->
+                <div class="category-card bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4311a6cb-4014-43ad-a367-7c8278bd01d0.png" alt="Surveying equipment including total stations, theodolites and GPS devices at a construction site" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Surveying Equipment</h3>
+                        <p class="text-gray-600 mb-4">Total stations, levels, GPS, and laser measurement</p>
+                        <a href="#" class="text-secondary font-medium flex items-center">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Category Card 3 -->
+                <div class="category-card bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/036fd382-66fd-437b-91b6-ea5771852648.png" alt="Concrete mixers, vibrators, finishing tools and testing equipment on a construction site" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Concrete Equipment</h3>
+                        <p class="text-gray-600 mb-4">Mixers, vibrators, finishing and testing tools</p>
+                        <a href="#" class="text-secondary font-medium flex items-center">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Category Card 4 -->
+                <div class="category-card bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f44cab2e-6aad-422e-a34c-0b9448ca1b84.png" alt="Safety gear including hard hats, high visibility vests, harnesses and protective eyewear" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Safety Equipment</h3>
+                        <p class="text-gray-600 mb-4">Harnesses, helmets, vests, and protective gear</p>
+                        <a href="#" class="text-secondary font-medium flex items-center">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-16 bg-white" id="products">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Featured Equipment</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Best-selling tools for civil engineering professionals</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product Card 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4ac32d63-4f9b-49a7-920d-43cb8fa1382f.png" alt="Heavy-duty demolition hammer with vibration reduction technology and ergonomic grips" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 left-2 bg-accent text-white text-xs font-bold px-2 py-1 rounded">BESTSELLER</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-bold mb-1">ProDemolish HD50</h3>
+                            <span class="text-secondary font-bold">$899</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">30kg Demolition Hammer</p>
+                        <div class="flex items-center mb-3">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(142 reviews)</span>
+                        </div>
+                        <button class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d1906156-04bd-4c25-b919-afd176b75f86.png" alt="Robotic total station with electronic display and precision surveying accessories" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 left-2 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">NEW</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-bold mb-1">GeoMaster RTK8</h3>
+                            <span class="text-secondary font-bold">$4,299</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Robotic Total Station</p>
+                        <div class="flex items-center mb-3">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(87 reviews)</span>
+                        </div>
+                        <button class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/da594418-4d0f-4e10-93cc-ca101f0c6a39.png" alt="Industrial concrete mixer with heavy-duty steel drum and powerful motor" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-bold mb-1">MixMaster Pro 5000</h3>
+                            <span class="text-secondary font-bold">$1,599</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">500L Concrete Mixer</p>
+                        <div class="flex items-center mb-3">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(64 reviews)</span>
+                        </div>
+                        <button class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7ff3050f-1ecf-4223-be39-d790d77d817a.png" alt="Industrial-grade laser level with tripod and digital calibration display" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">SALE</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-bold mb-1">LaserLine Pro X3</h3>
+                            <span class="text-gray-500 line-through mr-1">$599</span>
+                            <span class="text-secondary font-bold">$449</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">360° Rotary Laser Level</p>
+                        <div class="flex items-center mb-3">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 text-xs ml-2">(218 reviews)</span>
+                        </div>
+                        <button class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition">
+                    View All Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="py-16 bg-gray-100" id="solutions">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Industry-Specific Solutions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Custom toolkits and equipment packages for your specific needs</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Solution Card 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cf03e0e6-2015-413c-a882-231e31e2a906.png" alt="Bridge construction kit including measuring tools, safety gear and specialized equipment" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <h3 class="text-xl font-bold mb-2">Bridge Construction Kit</h3>
+                            <p class="text-gray-600 mb-4">Comprehensive toolkit for bridge construction, including specialized measurement and safety equipment.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary font-bold">Starting at $5,999</span>
+                                <button class="text-primary hover:text-primary-dark font-medium">
+                                    Configure <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solution Card 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bc14fca2-df4d-4fae-983c-3e37367931bc.png" alt="Road construction package with compactors, graders and asphalt testing equipment" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <h3 class="text-xl font-bold mb-2">Road Construction Package</h3>
+                            <p class="text-gray-600 mb-4">Essential tools for road construction projects, from grading to finishing.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary font-bold">Starting at $7,199</span>
+                                <button class="text-primary hover:text-primary-dark font-medium">
+                                    Configure <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solution Card 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/84750d5b-ec46-4c06-8d90-c9fb77660c47.png" alt="Geotechnical engineering equipment set with core drills and field testing tools" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <h3 class="text-xl font-bold mb-2">Geotechnical Engineering Set</h3>
+                            <p class="text-gray-600 mb-4">Specialized tools for soil sampling, testing, and geological surveys.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary font-bold">Starting at $3,899</span>
+                                <button class="text-primary hover:text-primary-dark font-medium">
+                                    Configure <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Solution Card 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="md:w-1/3">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d0c7cbcf-a2ee-47bc-96ee-7a0303b683ab.png" alt="Building construction starter kit with essential tools and safety equipment" class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-2/3 p-6">
+                            <h3 class="text-xl font-bold mb-2">Building Construction Starter</h3>
+                            <p class="text-gray-600 mb-4">Essential tools for new construction projects, from foundation to finish.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary font-bold">Starting at $2,499</span>
+                                <button class="text-primary hover:text-primary-dark font-medium">
+                                    Configure <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Trusted by Professionals</h2>
+                <p class="opacity-90 max-w-2xl mx-auto">Hear from civil engineers and construction managers who rely on our tools</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic opacity-90">"The GeoMaster RTK8 has revolutionized our surveying process. The robotic features save us hours on every site survey."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/87149ead-2098-4f2c-8f77-a38bcde838c3.png" alt="James Rodriguez, Senior Surveyor at Urban Development Inc" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">James Rodriguez</h4>
+                            <p class="text-sm opacity-75">Senior Surveyor, Urban Development Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic opacity-90">"Our SitePro demolition tools withstand conditions that would break other brands. They're built for real construction sites."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1f1e9b04-e238-4b9a-90ac-3931b72c00f8.png" alt="Michelle Zhang, Site Manager at Mega Construction LLC" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Michelle Zhang</h4>
+                            <p class="text-sm opacity-75">Site Manager, Mega Construction LLC</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white bg-opacity-10 rounded-lg p-6">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="mb-6 italic opacity-90">"The road construction package had every tool we needed at a better price than piecing it together ourselves. Excellent value."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/06f4996c-6251-4968-91f8-1f047f48ec8d.png" alt="David Kim, Project Engineer at State Highway Authority" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">David Kim</h4>
+                            <p class="text-sm opacity-75">Project Engineer, State Highway Authority</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Logos -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6c3184e6-d987-4619-9c73-5774e9b0809e.png" alt="Bosch Power Tools logo - Official partner brand" class="h-10 opacity-70 hover:opacity-100 transition">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3edd44ef-cede-46ac-9c75-f86661cf28d8.png" alt="DeWalt Industrial Tools logo - Official partner brand" class="h-10 opacity-70 hover:opacity-100 transition">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/409a754f-6837-4428-8018-91db6e8b7d21.png" alt="Leica Geosystems logo - Official partner brand" class="h-10 opacity-70 hover:opacity-100 transition">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6473f227-ef1e-48a2-93ab-09cb9adbcd0a.png" alt="Makita Professional Tools logo - Official partner brand" class="h-10 opacity-70 hover:opacity-100 transition">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fcb48edc-028a-4576-8102-2f1e15b26766.png" alt="Trimble Construction Technology logo - Official partner brand" class="h-10 opacity-70 hover:opacity-100 transition">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50" id="about">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-12">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/738543d2-081a-4e14-9c9b-f2373732e590.png" alt="SitePro Tools headquarters with modern facility and shipping warehouse for construction equipment" class="rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">Our Commitment to Engineering Excellence</h2>
+                    <p class="text-gray-600 mb-6">Founded in 1998, SitePro Tools has grown from a small tool supplier to the leading distributor of civil engineering equipment in North America. Our team of former engineers understands exactly what professionals need to succeed in today's competitive construction environment.</p>
+                    <p class="text-gray-600 mb-6">Every tool in our catalog is field-tested by our engineering team before we offer it to customers. We reject over 30% of potential products because they don't meet our standards for durability, precision, and safety.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center w-1/2">
+                            <h3 class="text-xl font-bold text-secondary mb-2">25+</h3>
+                            <p class="text-gray-600">Years in Business</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-md text-center w-1/2">
+                            <h3 class="text-xl font-bold text-secondary mb-2">5,000+</h3>
+                            <p class="text-gray-600">Tools Available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Stay Updated with Product Releases</h2>
+                <p class="mb-8 opacity-90">Join our newsletter for the latest tool releases, industry insights, and exclusive offers.</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg newsletter-input focus:outline-none text-gray-900">
+                    <button class="cta-button px-6 py-3 rounded-lg font-semibold shadow-lg">Subscribe</button>
+                </div>
+                <p class="text-sm opacity-75 mt-4">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16 bg-white" id="contact">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 md:pr-12 mb-12 md:mb-0">
+                    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+                    <p class="text-gray-600 mb-8">Have questions about our products? Need help configuring a custom solution? Our tool specialists are ready to assist.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-secondary mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Headquarters</h4>
+                                <p class="text-gray-600">123 Engineering Drive<br>Buildersville, TX 75001</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-secondary mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Phone</h4>
+                                <p class="text-gray-600">(800) 555-TOOL (8665)<br>Mon-Fri: 7am-7pm CST</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-secondary mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Email</h4>
+                                <p class="text-gray-600">support@siteprotools.com<br>Response within 2 business hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <form class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-secondary hover:bg-secondary-dark text-white py-3 rounded-lg font-semibold shadow-lg transition">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0d9b17f5-c69f-4989-8719-f47a633bffd5.png" alt="SitePro Tools Footer Logo" class="h-10 mb-4">
+                    <p class="text-gray-400 mb-4">Professional-grade tools for civil engineering, construction, and surveying professionals.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Track Order</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Returns & Exchanges</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Warranty</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Partnerships</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 SitePro Tools. All rights reserved.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Shipping Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                menu.classList.add('block');
+            } else {
+                menu.classList.remove('block');
+                menu.classList.add('hidden');
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.remove('block');
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

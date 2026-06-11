@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= content_for(:title) || "Riye" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+    <h1>Project Details</h1>
+    <p>
+        <strong>Name:</strong>
+        <%= @project.name %>
+    </p>
+    <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-secondary', style: 'margin-right: 1em;' %>
+    <%= link_to 'Back to Projects', projects_path, class: 'btn btn-primary', style: 'margin-right: 1em;' %>
+    <%= link_to 'Create New Project', new_project_path, class: 'btn btn-success' %>
+</body>
+
+</html>

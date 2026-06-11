@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bluvent | Riye Construction App & Business Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Global Styles - Bluvent Color Scheme */
+    :root {
+      --primary: #00FFFF;       /* Cyan */
+      --secondary: #088F8F;     /* Dark Cyan */
+      --dark: #0a3d3d;         /* Dark teal for text */
+      --light: #f0ffff;        /* Azure white */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 150px 0 100px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero h1 .app-name {
+      font-weight: 800;
+      color: white;
+      background-color: rgba(0,0,0,0.2);
+      padding: 0 10px;
+      border-radius: 5px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: var(--light);
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .btn-primary, .btn-secondary {
+      padding: 12px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--secondary);
+    }
+
+    .btn-secondary {
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      background: var(--light);
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--secondary);
+    }
+
+    /* App Highlight Section */
+    .app-highlight {
+      padding: 80px 0;
+      background: white;
+      text-align: center;
+    }
+
+    .app-highlight .container {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .app-content {
+      flex: 1;
+      min-width: 300px;
+      text-align: left;
+    }
+
+    .app-image {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .app-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(8, 143, 143, 0.2);
+    }
+
+    .app-badge {
+      display: inline-block;
+      background: var(--secondary);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 100px 0;
+      text-align: center;
+      background: var(--light);
+    }
+
+    .services h2, .portfolio h2, .contact h2 {
+      font-size: 2rem;
+      margin-bottom: 50px;
+      color: var(--secondary);
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      border-top: 4px solid var(--primary);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 140, 140, 0.1);
+    }
+
+    .service-card i {
+      font-size: 3rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+
+    /* Portfolio Section */
+    .portfolio {
+      padding: 100px 0;
+      background: white;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .portfolio-item {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+      border: 1px solid rgba(8, 143, 143, 0.1);
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 255, 255, 0.1);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .portfolio-item h3 {
+      padding: 20px;
+      text-align: center;
+      color: var(--secondary);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 100px 0;
+      background: var(--light);
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    form input, form textarea {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    form textarea {
+      height: 150px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .social-links {
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: white;
+      margin: 0 10px;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+
+      nav ul li a {
+        margin-left: 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .app-highlight .container {
+        flex-direction: column;
+      }
+
+      .app-content {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <a href="#" class="logo">Blu<span>vent</span></a>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#riye">Riye App</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>Transform Your Business With <span class="app-name">Riye</span></h1>
+      <p>Bluvent's flagship construction management app with advanced attendance tracking and custom business solutions.</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="btn-primary">Get Riye Demo</a>
+        <a href="#riye" class="btn-secondary">Learn Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Riye App Highlight Section -->
+  <section id="riye" class="app-highlight">
+    <div class="container">
+      <div class="app-content">
+        <span class="app-badge">FLAGSHIP PRODUCT</span>
+        <h2>Riye Construction App</h2>
+        <p>Revolutionize your construction site management with our all-in-one solution:</p>
+        <ul style="margin: 20px 0; list-style-position: inside;">
+          <li>Real-time attendance monitoring</li>
+          <li>Project progress tracking</li>
+          <li>Automated reporting</li>
+          <li>Team communication tools</li>
+          <li>Customizable workflows</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="margin-top: 20px;">Request Demo</a>
+      </div>
+      <div class="app-image">
+        <img src="https://via.placeholder.com/500x400/088F8F/FFFFFF?text=Riye+App+Dashboard" alt="Riye App Dashboard">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Riye Mobile App</h3>
+          <p>Complete construction management solution with attendance tracking, task assignment, and progress monitoring.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-store"></i>
+          <h3>Business Websites</h3>
+          <p>Professional websites for shops, gyms, farms with integrated booking/payment systems.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-cogs"></i>
+          <h3>Custom Software</h3>
+          <p>Tailored digital solutions designed for your specific business requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="portfolio">
+    <div class="container">
+      <h2>Our Work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x300/00FFFF/FFFFFF?text=Riye+App+UI" alt="Riye App Interface">
+          <h3>Riye Mobile App</h3>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x300/088F8F/FFFFFF?text=Gym+Website" alt="Gym Website">
+          <h3>Fitness Center Website</h3>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x300/00FFFF/FFFFFF?text=Farm+Management" alt="Farm Management">
+          <h3>Agricultural Portal</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <select required>
+          <option value="">Select Interest</option>
+          <option value="riye">Riye App Demo</option>
+          <option value="website">Business Website</option>
+          <option value="custom">Custom Solution</option>
+        </select>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Bluvent Technologies. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+      const navMenu = document.getElementById('nav-menu');
+      navMenu.classList.toggle('show');
+    });
+
+    // Smooth Scrolling for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        // Close mobile menu if open
+        document.getElementById('nav-menu').classList.remove('show');
+      });
+    });
+
+    // Form Submission (Demo)
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const interest = this.querySelector('select').value;
+      if (interest === 'riye') {
+        alert('Thank you for your interest in Riye! Our team will contact you shortly to schedule a demo.');
+      } else {
+        alert('Thank you for contacting Bluvent! We will respond within 24 hours.');
+      }
+      this.reset();
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const navMenu = document.getElementById('nav-menu');
+      const menuToggle = document.querySelector('.menu-toggle');
+      if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,624 @@
+<div class="animate-fade-in">
+
+  <!-- Filter Buttons -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="d-flex gap-2 flex-wrap">
+        <%= link_to attendances_path, 
+            class: "btn #{'btn-primary' if params[:filter].blank?} #{'btn-outline-primary' unless params[:filter].blank?}" do %>
+          <i class="fas fa-calendar-day"></i>
+          Today
+        <% end %>
+        <%= link_to attendances_path(filter: 'week'), 
+            class: "btn #{'btn-primary' if params[:filter] == 'week'} #{'btn-outline-primary' unless params[:filter] == 'week'}" do %>
+          <i class="fas fa-calendar-week"></i>
+          This Week
+        <% end %>
+        <%= link_to attendances_path(filter: 'month'), 
+            class: "btn #{'btn-primary' if params[:filter] == 'month'} #{'btn-outline-primary' unless params[:filter] == 'month'}" do %>
+          <i class="fas fa-calendar-alt"></i>
+          This Month
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if defined?(@team_heads_with_workers) && @team_heads_with_workers.present? %>
+    <!-- Team-based Attendance View with Collapsible Tables -->
+    <div class="attendance-teams">
+      <% @team_heads_with_workers.each do |team_head, workers| %>
+        <div class="card mb-4 team-card">
+          <div class="card-header team-header" data-bs-toggle="collapse" data-bs-target="#team-<%= team_head.id %>" aria-expanded="false" style="cursor: pointer;">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="team-info">
+                <h4 class="mb-2">
+                  <i class="fas fa-user-tie text-primary me-2"></i>
+                  <%= team_head.name %>
+                  <small class="text-muted">- Team Head</small>
+                </h4>
+                <div class="team-stats">
+                  <span class="badge bg-info me-2">
+                    <i class="fas fa-users"></i>
+                    <%= workers.count %> Workers
+                  </span>
+                  <span class="badge bg-success me-2">
+                    <i class="fas fa-check-circle"></i>
+                    <%= workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.present? } %> Present
+                  </span>
+                  <span class="badge bg-warning me-2">
+                    <i class="fas fa-clock"></i>
+                    <%= workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.present? && @today_attendance_by_worker[w.id]&.punch_out.blank? } %> Working
+                  </span>
+                  <span class="badge bg-secondary">
+                    <i class="fas fa-user-slash"></i>
+                    <%= workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.blank? } %> Absent
+                  </span>
+                </div>
+              </div>
+              <div class="collapse-indicator">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div id="team-<%= team_head.id %>" class="collapse">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-dark">
+                    <tr>
+                      <th><i class="fas fa-user"></i> Worker</th>
+                      <th><i class="fas fa-sign-in-alt"></i> Punch In</th>
+                      <th><i class="fas fa-sign-out-alt"></i> Punch Out</th>
+                      <th><i class="fas fa-hourglass-half"></i> Hours Worked</th>
+                      <th><i class="fas fa-cogs"></i> Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% workers.each do |worker| %>
+                      <% attendance = @today_attendance_by_worker[worker.id] %>
+                      <% row_class = attendance&.edited? && !attendance.approved? ? 'table-warning' : '' %>
+                      <tr class="<%= row_class %>">
+                        <td>
+                          <div class="worker-info">
+                            <strong><%= worker.name %></strong>
+                            <br>
+                            <small class="text-muted">
+                              <i class="fas fa-id-badge"></i>
+                              <%= worker.worker_id %>
+                              <% if worker.team %>
+                                | <i class="fas fa-users"></i> <%= worker.team.name %>
+                              <% end %>
+                            </small>
+                          </div>
+                        </td>
+                        <td class="punch-in-cell">
+                          <% if attendance&.punch_in.present? %>
+                            <div class="punch-time text-success">
+                              <i class="fas fa-check-circle"></i>
+                              <%= attendance.punch_in.strftime("%I:%M %p") %>
+                            </div>
+                            <% if attendance.punch_in_location.present? %>
+                              <small class="location-info">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <%= attendance.punch_in_location %>
+                              </small>
+                            <% end %>
+                          <% else %>
+                            <%= button_to 'Punch In', attendances_path(attendance: { worker_id: worker.id, punch_in: Time.current }), 
+                                method: :post, class: 'btn btn-success btn-sm' %>
+                          <% end %>
+                        </td>
+                        <td class="punch-out-cell">
+                          <% if attendance&.punch_out.present? %>
+                            <div class="punch-time text-danger">
+                              <i class="fas fa-sign-out-alt"></i>
+                              <%= attendance.punch_out.strftime("%I:%M %p") %>
+                            </div>
+                            <% if attendance.punch_out_location.present? %>
+                              <small class="location-info">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <%= attendance.punch_out_location %>
+                              </small>
+                            <% end %>
+                          <% elsif attendance&.punch_in.present? %>
+                            <%= button_to 'Punch Out', attendance_path(attendance, attendance: { punch_out: Time.current }), 
+                                method: :patch, class: 'btn btn-warning btn-sm' %>
+                          <% else %>
+                            <span class="text-muted">-</span>
+                          <% end %>
+                        </td>
+                        <td class="hours-worked-cell">
+                          <% if attendance&.punch_in.present? && attendance&.punch_out.present? %>
+                            <span class="badge bg-info">
+                              <i class="fas fa-clock"></i>
+                              <%= distance_of_time_in_words(attendance.punch_in, attendance.punch_out) %>
+                            </span>
+                          <% elsif attendance&.punch_in.present? %>
+                            <span class="badge bg-warning">
+                              <i class="fas fa-hourglass-start"></i>
+                              In Progress
+                            </span>
+                          <% else %>
+                            <span class="text-muted">-</span>
+                          <% end %>
+                        </td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <% if attendance&.persisted? %>
+                              <%= link_to attendance_path(attendance), class: 'btn btn-outline-primary', title: 'View Details' do %>
+                                <i class="fas fa-eye"></i>
+                              <% end %>
+                              <%= link_to edit_attendance_path(attendance), class: 'btn btn-outline-warning', title: 'Edit' do %>
+                                <i class="fas fa-edit"></i>
+                              <% end %>
+                              <% if attendance.edited? && !attendance.approved? %>
+                                <%= link_to approve_attendance_path(attendance), method: :patch, 
+                                    class: 'btn btn-outline-success', title: 'Approve Changes' do %>
+                                  <i class="fas fa-check"></i>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      
+      <!-- Unassigned Workers with Collapsible Table -->
+      <% if defined?(@unassigned_workers) && @unassigned_workers.present? %>
+        <div class="card mb-4 team-card">
+          <div class="card-header team-header" data-bs-toggle="collapse" data-bs-target="#unassigned-workers" aria-expanded="false" style="cursor: pointer;">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="team-info">
+                <h4 class="mb-2">
+                  <i class="fas fa-users text-secondary me-2"></i>
+                  Unassigned Workers
+                  <small class="text-muted">- No Team Head</small>
+                </h4>
+                <div class="team-stats">
+                  <span class="badge bg-secondary me-2">
+                    <i class="fas fa-users"></i>
+                    <%= @unassigned_workers.count %> Workers
+                  </span>
+                  <span class="badge bg-success me-2">
+                    <i class="fas fa-check-circle"></i>
+                    <%= @unassigned_workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.present? } %> Present
+                  </span>
+                  <span class="badge bg-warning me-2">
+                    <i class="fas fa-clock"></i>
+                    <%= @unassigned_workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.present? && @today_attendance_by_worker[w.id]&.punch_out.blank? } %> Working
+                  </span>
+                  <span class="badge bg-light text-dark">
+                    <i class="fas fa-user-slash"></i>
+                    <%= @unassigned_workers.count { |w| @today_attendance_by_worker[w.id]&.punch_in.blank? } %> Absent
+                  </span>
+                </div>
+              </div>
+              <div class="collapse-indicator">
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div id="unassigned-workers" class="collapse">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead class="table-dark">
+                    <tr>
+                      <th><i class="fas fa-user"></i> Worker</th>
+                      <th><i class="fas fa-sign-in-alt"></i> Punch In</th>
+                      <th><i class="fas fa-sign-out-alt"></i> Punch Out</th>
+                      <th><i class="fas fa-hourglass-half"></i> Hours Worked</th>
+                      <th><i class="fas fa-cogs"></i> Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @unassigned_workers.each do |worker| %>
+                      <% attendance = @today_attendance_by_worker[worker.id] %>
+                      <% row_class = attendance&.edited? && !attendance.approved? ? 'table-warning' : '' %>
+                      <tr class="<%= row_class %>">
+                        <td>
+                          <div class="worker-info">
+                            <strong><%= worker.name %></strong>
+                            <br>
+                            <small class="text-muted">
+                              <i class="fas fa-id-badge"></i>
+                              <%= worker.worker_id %>
+                            </small>
+                          </div>
+                        </td>
+                        <td class="punch-in-cell">
+                          <% if attendance&.punch_in.present? %>
+                            <div class="punch-time text-success">
+                              <i class="fas fa-check-circle"></i>
+                              <%= attendance.punch_in.strftime("%I:%M %p") %>
+                            </div>
+                            <% if attendance.punch_in_location.present? %>
+                              <small class="location-info">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <%= attendance.punch_in_location %>
+                              </small>
+                            <% end %>
+                          <% else %>
+                            <%= button_to 'Punch In', attendances_path(attendance: { worker_id: worker.id, punch_in: Time.current }), 
+                                method: :post, class: 'btn btn-success btn-sm' %>
+                          <% end %>
+                        </td>
+                        <td class="punch-out-cell">
+                          <% if attendance&.punch_out.present? %>
+                            <div class="punch-time text-danger">
+                              <i class="fas fa-sign-out-alt"></i>
+                              <%= attendance.punch_out.strftime("%I:%M %p") %>
+                            </div>
+                            <% if attendance.punch_out_location.present? %>
+                              <small class="location-info">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                                <%= attendance.punch_out_location %>
+                              </small>
+                            <% end %>
+                          <% elsif attendance&.punch_in.present? %>
+                            <%= button_to 'Punch Out', attendance_path(attendance, attendance: { punch_out: Time.current }), 
+                                method: :patch, class: 'btn btn-warning btn-sm' %>
+                          <% else %>
+                            <span class="text-muted">-</span>
+                          <% end %>
+                        </td>
+                        <td class="hours-worked-cell">
+                          <% if attendance&.punch_in.present? && attendance&.punch_out.present? %>
+                            <span class="badge bg-info">
+                              <i class="fas fa-clock"></i>
+                              <%= distance_of_time_in_words(attendance.punch_in, attendance.punch_out) %>
+                            </span>
+                          <% elsif attendance&.punch_in.present? %>
+                            <span class="badge bg-warning">
+                              <i class="fas fa-hourglass-start"></i>
+                              In Progress
+                            </span>
+                          <% else %>
+                            <span class="text-muted">-</span>
+                          <% end %>
+                        </td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <% if attendance&.persisted? %>
+                              <%= link_to attendance_path(attendance), class: 'btn btn-outline-primary', title: 'View Details' do %>
+                                <i class="fas fa-eye"></i>
+                              <% end %>
+                              <%= link_to edit_attendance_path(attendance), class: 'btn btn-outline-warning', title: 'Edit' do %>
+                                <i class="fas fa-edit"></i>
+                              <% end %>
+                              <% if attendance.edited? && !attendance.approved? %>
+                                <%= link_to approve_attendance_path(attendance), method: :patch, 
+                                    class: 'btn btn-outline-success', title: 'Approve Changes' do %>
+                                  <i class="fas fa-check"></i>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <!-- Legacy View for Week/Month filters -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <i class="fas fa-list"></i>
+          Attendance Records
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th><i class="fas fa-user"></i> Worker</th>
+                <th><i class="fas fa-sign-in-alt"></i> Punch In</th>
+                <th><i class="fas fa-sign-out-alt"></i> Punch Out</th>
+                <th><i class="fas fa-cogs"></i> Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @attendances.includes(:worker).each do |attendance| %>
+                <tr>
+                  <td>
+                    <strong><%= attendance.worker.name %></strong>
+                    <br>
+                    <small class="text-muted">
+                      <i class="fas fa-id-badge"></i>
+                      <%= attendance.worker.worker_id %>
+                    </small>
+                  </td>
+                  <td>
+                    <% if attendance.punch_in.present? %>
+                      <%= attendance.punch_in.strftime("%B %d, %Y - %I:%M %p") %>
+                      <% if attendance.punch_in_location.present? %>
+                        <br>
+                        <small class="text-primary">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <%= attendance.punch_in_location %>
+                        </small>
+                      <% end %>
+                    <% else %>
+                      <span class="text-muted">Not punched in</span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% if attendance.punch_out.present? %>
+                      <%= attendance.punch_out.strftime("%B %d, %Y - %I:%M %p") %>
+                      <% if attendance.punch_out_location.present? %>
+                        <br>
+                        <small class="text-primary">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <%= attendance.punch_out_location %>
+                        </small>
+                      <% end %>
+                      <% if attendance.punch_in.present? %>
+                        <br>
+                        <small class="badge bg-info">
+                          <i class="fas fa-hourglass-half"></i>
+                          <%= distance_of_time_in_words(attendance.punch_in, attendance.punch_out) %>
+                        </small>
+                      <% end %>
+                    <% else %>
+                      <span class="text-muted">Not punched out</span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <%= link_to attendance_path(attendance), class: 'btn btn-outline-primary', title: 'View Details' do %>
+                        <i class="fas fa-eye"></i>
+                      <% end %>
+                      <%= link_to edit_attendance_path(attendance), class: 'btn btn-outline-warning', title: 'Edit' do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                      <%= link_to attendance_path(attendance), method: :delete, 
+                          class: 'btn btn-outline-danger', title: 'Delete',
+                          confirm: 'Are you sure?' do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .team-card {
+    border-left: 4px solid var(--bs-primary);
+    transition: box-shadow 0.2s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .team-header {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+    border: none;
+    transition: all 0.2s ease;
+  }
+  
+  .team-header:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.15) 0%, rgba(0, 123, 255, 0.08) 100%);
+  }
+  
+  .team-header h4 {
+    margin-bottom: 8px;
+    color: var(--bs-dark);
+    font-weight: 600;
+  }
+  
+  .collapse-indicator {
+    transition: transform 0.3s ease;
+    color: var(--bs-primary);
+  }
+  
+  .team-header[aria-expanded="true"] .collapse-indicator i {
+    transform: rotate(180deg);
+  }
+  
+  .team-stats .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  
+  .worker-info strong {
+    color: var(--bs-dark);
+    font-size: 0.95rem;
+  }
+  
+  .worker-info small {
+    font-size: 0.8rem;
+  }
+  
+  .punch-time {
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  
+  .location-info {
+    color: var(--bs-primary) !important;
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 2px;
+  }
+  
+  .hours-worked-cell .badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+  }
+  
+  .table thead th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--bs-dark);
+    padding: 12px 8px;
+  }
+  
+  .table tbody td {
+    padding: 12px 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  
+  .btn-group-sm .btn {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  
+  .table-warning {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+  }
+  
+  /* Animation for collapse */
+  .collapse {
+    transition: height 0.3s ease;
+  }
+  
+  .collapsing {
+    transition: height 0.3s ease;
+  }
+  
+  @media (max-width: 768px) {
+    .d-flex.gap-3 {
+      flex-direction: column;
+      gap: 0.5rem !important;
+    }
+    
+    .team-stats {
+      margin-top: 0.5rem;
+    }
+    
+    .team-stats .badge {
+      font-size: 0.7rem;
+      margin-right: 4px;
+      margin-bottom: 3px;
+    }
+    
+    .team-header h4 {
+      font-size: 1.1rem;
+    }
+    
+    .table thead th {
+      font-size: 0.8rem;
+      padding: 8px 6px;
+    }
+    
+    .table tbody td {
+      padding: 8px 6px;
+      font-size: 0.85rem;
+    }
+    
+    .worker-info strong {
+      font-size: 0.9rem;
+    }
+    
+    .worker-info small {
+      font-size: 0.75rem;
+    }
+    
+    .btn-group-sm .btn {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+    }
+    
+    .location-info {
+      font-size: 0.7rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .team-header {
+      padding: 12px;
+    }
+    
+    .team-stats .badge {
+      font-size: 0.65rem;
+      padding: 3px 6px;
+    }
+    
+    .table-responsive {
+      font-size: 0.8rem;
+    }
+    
+    .table thead th {
+      padding: 6px 4px;
+      font-size: 0.75rem;
+    }
+    
+    .table tbody td {
+      padding: 6px 4px;
+    }
+    
+    .punch-time {
+      font-size: 0.8rem;
+    }
+    
+    .hours-worked-cell .badge {
+      font-size: 0.7rem;
+      padding: 2px 4px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Handle collapse indicator animation
+    const collapseElements = document.querySelectorAll('.collapse');
+    
+    collapseElements.forEach(collapse => {
+      collapse.addEventListener('show.bs.collapse', function() {
+        const header = document.querySelector(`[data-bs-target="#${this.id}"]`);
+        if (header) {
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+      
+      collapse.addEventListener('hide.bs.collapse', function() {
+        const header = document.querySelector(`[data-bs-target="#${this.id}"]`);
+        if (header) {
+          header.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+    
+    // Add smooth animation to team cards
+    const teamHeaders = document.querySelectorAll('.team-header');
+    teamHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        // Add a subtle bounce effect
+        this.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+          this.style.transform = 'scale(1)';
+        }, 100);
+      });
+    });
+  });
+</script>

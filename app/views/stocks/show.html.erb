@@ -1,0 +1,9 @@
+<h1>Stock Details</h1>
+<p>
+    <strong>Name:</strong> <%= @stock.name %><br>
+    <strong>Quantity:</strong> <%= @stock.quantity %><br>
+    <strong>Unit:</strong> <%= @stock.unit %><br>
+    <strong>Company:</strong> <%= @stock.company&.name %>
+</p>
+<%= link_to 'Edit', edit_stock_path(@stock), class: 'btn btn-secondary' %>
+<%= link_to 'Back', stocks_path, class: 'btn btn-primary' %>

@@ -1,0 +1,64 @@
+<h1>Attendance Details</h1>
+<div class="card" style="max-width: 600px; margin: 2em auto;">
+    <p><strong>Worker:</strong> <%= @attendance.worker&.name %></p>
+    <p><strong>Punch In:</strong> <%= @attendance.punch_in %>
+        <% if @attendance.punch_in_location.present? %>
+        <br><span style="font-size: 0.95em; color: #2563eb;">📍 <%= @attendance.punch_in_location %></span>
+        <% end %>
+    </p>
+    <p><strong>Punch Out:</strong> <%= @attendance.punch_out %>
+        <% if @attendance.punch_out_location.present? %>
+        <br><span style="font-size: 0.95em; color: #2563eb;">📍 <%= @attendance.punch_out_location %></span>
+        <% end %>
+    </p>
+    <% if @attendance.punch_in.present? && @attendance.punch_out.present? %>
+    <p><strong>Time Worked:</strong> <%= distance_of_time_in_words(@attendance.punch_in, @attendance.punch_out) %></p>
+    <% end %>
+    <% if @attendance.edited? && !@attendance.approved? %>
+    <p><span class="badge bg-warning">Edited - Pending Approval</span></p>
+    <% elsif @attendance.approved? %>
+    <p><span class="badge bg-success">Approved</span></p>
+    <% end %>
+</div>
+
+<h2>Today's Attendance for <%= @attendance.worker&.name %></h2>
+<table style="max-width: 700px; margin: 2em auto;">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Punch In</th>
+            <th>Punch In Location</th>
+            <th>Punch Out</th>
+            <th>Punch Out Location</th>
+            <th>Time Worked</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% today = Date.today %>
+        <% @attendance.worker.attendances.where(punch_in: today.beginning_of_day..today.end_of_day).order(punch_in: :desc).each do |att| %>
+        <tr>
+            <td><%= att.punch_in&.to_date %></td>
+            <td><%= att.punch_in %></td>
+            <td><%= att.punch_in_location %></td>
+            <td><%= att.punch_out %></td>
+            <td><%= att.punch_out_location %></td>
+            <td>
+                <% if att.punch_in.present? && att.punch_out.present? %>
+                <%= distance_of_time_in_words(att.punch_in, att.punch_out) %>
+                <% end %>
+            </td>
+            <td>
+                <% if att.edited? && !att.approved? %>
+                <span class="badge bg-warning">Edited</span>
+                <% elsif att.approved? %>
+                <span class="badge bg-success">Approved</span>
+                <% end %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance), class: 'btn btn-secondary' %>
+<%= link_to 'Back', attendances_path, class: 'btn btn-primary' %>

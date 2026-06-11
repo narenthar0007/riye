@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBuddy - Find Travel Companions</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6dd5ed, #2193b0); /* A fresh, appealing blue gradient */
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #fdbb2d;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #fdbb2d;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #fdbb2d;
+            color: #1a2a6c;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fdbb2d;
+            color: #fdbb2d;
+        }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content {
+            display: flex;
+            margin-top: 30px;
+            gap: 30px;
+        }
+
+        .left-panel {
+            flex: 1.5; /* Takes more space than main content area on large screens */
+            min-width: 380px; /* Minimum width to prevent squishing */
+            background: rgba(255, 255, 255, 0.1); /* Consistent background */
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px; /* Add padding consistent with other sections */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border for light background */
+            display: flex; /* Changed to flex */
+            flex-direction: row; /* Arranges children horizontally on large screens */
+            gap: 25px; /* Spacing between globe and travelers section */
+            min-height: 800px; /* Increased min-height for the left panel */
+        }
+
+        /* Globe Container (now inside left-panel, taking 60%) */
+        .globe-container {
+            flex: 0 0 60%; /* Takes 60% of the left-panel's width */
+            height: 100%; /* Fills the height of the left-panel */
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #globe-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Container for Nearby Travelers within the left-panel */
+        .travelers-section {
+            flex: 0 0 40%; /* Takes 40% of the left-panel's width */
+            display: flex;
+            flex-direction: column; /* Stacks its own content vertically */
+            gap: 15px; /* Spacing between title and user cards */
+            overflow-y: auto; /* Enable scrolling for long lists */
+            padding-right: 10px; /* Add some padding for scrollbar if present */
+        }
+
+        /* Main content area (for feed and trip planner) */
+        .main-content-area {
+            flex: 2; /* Main content takes more space */
+            min-width: 380px; /* Ensure it doesn't get too small */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 600px; /* Example min-height */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+        .section-title {
+            font-size: 22px; /* Slightly larger title */
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: #fdbb2d; /* Accent color for titles */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: #fdbb2d;
+        }
+
+        /* User Card Styling */
+        .user-card {
+            background: rgba(255, 255, 255, 0.15); /* Slightly more opaque for readability */
+            border-radius: 18px; /* More rounded */
+            padding: 18px; /* More padding */
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Light border */
+        }
+
+        .user-card:hover {
+            background: rgba(255, 255, 255, 0.25); /* Slight change on hover */
+            transform: translateY(-5px); /* More pronounced lift */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-avatar {
+            width: 65px; /* Slightly larger avatar */
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 18px;
+            border: 3px solid #fdbb2d; /* Thicker accent border */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-info h3 {
+            font-size: 19px; /* Slightly larger name */
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #fff; /* White text */
+        }
+
+        .user-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8); /* Slightly lighter white for descriptions */
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px; /* More padding */
+            border-radius: 25px; /* More rounded */
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px; /* More space */
+            margin-top: 5px; /* Space from text above */
+        }
+
+        .badge-interest {
+            background: rgba(253, 187, 45, 0.3); /* Lighter translucent background */
+            color: #fdbb2d; /* Darker accent color */
+        }
+
+        .badge-location {
+            background: rgba(33, 147, 176, 0.3); /* Based on new blue gradient */
+            color: #6dd5ed; /* Based on new blue gradient */
+        }
+
+        /* Chat Container */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 380px; /* Slightly wider */
+            background: rgba(255, 255, 255, 0.95); /* More opaque */
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+            color: #333; /* Dark text */
+        }
+
+        .chat-header {
+            padding: 15px 20px; /* More padding */
+            background: #f0f2f5; /* Light grey header */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .chat-header h3 {
+            font-size: 18px; /* Larger title */
+            margin: 0;
+            color: #333; /* Dark text */
+        }
+
+        .chat-messages {
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* More space between messages */
+        }
+
+        .message {
+            max-width: 85%; /* Wider messages */
+            padding: 12px 18px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            font-size: 15px;
+        }
+
+        .message-received {
+            background: #e0e0e0; /* Light grey for received messages */
+            align-self: flex-start;
+            border-bottom-left-radius: 5px; /* Pointy corner */
+            color: #333;
+        }
+
+        .message-sent {
+            background: #fdbb2d;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px; /* Pointy corner */
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: #f0f2f5; /* Light grey input background */
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 18px; /* More padding */
+            border-radius: 30px;
+            border: none;
+            background: #ffffff; /* White input field */
+            color: #333; /* Dark text */
+            outline: none;
+            font-size: 15px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
+        }
+
+        .chat-input input::placeholder {
+            color: #999;
+        }
+
+        .chat-input button {
+            margin-left: 10px;
+            background: #fdbb2d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px; /* Larger button */
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+        .chat-input button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Trip Planner Form */
+        .trip-planner {
+            background: rgba(255, 255, 255, 0.1); /* Consistent translucent background */
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff; /* White text */
+        }
+
+        .trip-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; /* More spacing in form */
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0; /* Removed default margin */
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px; /* More space for label */
+            font-weight: 500;
+            color: #fff; /* White text */
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px; /* More padding */
+            border-radius: 12px; /* More rounded */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border */
+            background: rgba(255, 255, 255, 0.1); /* White input field */
+            color: #fff; /* White text */
+            outline: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            background: rgba(255, 255, 255, 0.2); /* Slightly darker on focus */
+            box-shadow: 0 0 0 2px #fdbb2d;
+            border-color: #fdbb2d;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px; /* Slightly taller */
+        }
+
+        .trip-form button {
+            grid-column: span 2;
+            padding: 15px; /* More padding */
+            background: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 12px; /* More rounded */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(253, 187, 45, 0.4);
+        }
+
+        .trip-form button:hover {
+            background: #ffcc55;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(253, 187, 45, 0.5);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* Darker overlay */
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #ffffff; /* Solid white modal content */
+            backdrop-filter: blur(15px);
+            border-radius: 25px; /* More rounded */
+            padding: 35px; /* More padding */
+            width: 90%;
+            max-width: 550px; /* Slightly wider */
+            color: #333;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            border: 1px solid #e0e0e0; /* Light border */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px; /* More space */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #333; /* Dark title */
+            font-size: 24px; /* Larger title */
+            font-weight: 700;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 28px; /* Larger close icon */
+            cursor: pointer;
+            color: #666; /* Darker close icon */
+            transition: transform 0.2s ease;
+        }
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Notification Toast */
+        .notification {
+            position: fixed;
+            top: 25px; /* Slightly lower */
+            right: 25px;
+            background: #ffffff; /* White notification */
+            color: #333;
+            padding: 18px 25px; /* More padding */
+            border-radius: 15px; /* More rounded */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            transform: translateX(150%);
+            transition: transform 0.4s ease-out; /* Smoother animation */
+            z-index: 1000;
+            border-left: 5px solid #28a745; /* Green for success */
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 901px) { /* Apply side-by-side on screens wider than 900px */
+            .main-content {
+                flex-direction: row; /* Side-by-side */
+                justify-content: space-between; /* Distribute space */
+            }
+            .left-panel {
+                flex-direction: row; /* Arrange globe and travelers side-by-side */
+                flex: 1.5; /* Takes more space than main content area on large screens */
+                min-height: 800px; /* Adjusted min-height for the left panel */
+            }
+            .main-content-area {
+                flex: 2; /* Main content takes the most space */
+                min-height: 600px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .left-panel {
+                flex-direction: column; /* Stack globe and travelers vertically on small screens */
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width */
+                min-height: unset; /* Remove min-height for stacking */
+            }
+            .globe-container {
+                height: 450px; /* Adjusted fixed height when stacked */
+                width: 100%; /* Take full width when stacked */
+            }
+            .travelers-section {
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width when stacked */
+                padding-right: 0; /* Remove padding if not needed for scrollbar */
+            }
+            .main-content-area {
+                flex: none; /* Remove flex grow */
+                width: 100%; /* Take full width */
+                min-height: unset; /* Remove min-height for stacking */
+            }
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+                padding-bottom: 15px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            .auth-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn {
+                flex: 1; /* Make buttons take equal width */
+            }
+
+            .trip-form {
+                grid-template-columns: 1fr; /* Stack form fields */
+            }
+
+            .trip-form button {
+                grid-column: span 1;
+            }
+
+            .chat-container {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+                bottom: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .left-panel, .trip-planner, .modal-content, .chat-container {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .user-avatar {
+                width: 55px;
+                height: 55px;
+            }
+
+            .user-info h3 {
+                font-size: 16px;
+            }
+
+            .user-info p {
+                font-size: 13px;
+            }
+
+            .chat-messages {
+                height: 250px;
+            }
+
+            .message {
+                font-size: 13px;
+                padding: 10px 15px;
+            }
+
+            .chat-input input {
+                padding: 10px 15px;
+            }
+
+            .chat-input button {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
+                TravelBuddy
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Explore</a></li>
+                    <li><a href="#">My Trips</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary" id="signup-btn">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Combined Left Panel for Globe and Travelers -->
+            <div class="left-panel">
+                <div class="globe-container">
+                    <canvas id="globe-canvas"></canvas>
+                </div>
+
+                <!-- Container for Nearby Travelers -->
+                <div class="travelers-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Nearby Travelers</h2>
+                    
+                    <div class="user-card" data-user="1">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <h3>Sarah Johnson</h3>
+                            <p><span class="badge badge-location">Paris, France</span></p>
+                            <p><span class="badge badge-interest">Hiking</span> <span class="badge badge-interest">Food</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-card" data-user="2">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <h3>Michael Chen</h3>
+                            <p><span class="badge badge-location">Tokyo, Japan</span></p>
+                            <p><span class="badge badge-interest">Photography</span> <span class="badge badge-interest">History</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-card" data-user="3">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <h3>Elena Petrova</h3>
+                            <p><span class="badge badge-location">Rome, Italy</span></p>
+                            <p><span class="badge badge-interest">Art</span> <span class="badge badge-interest">Architecture</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="user-card" data-user="4">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="User" class="user-avatar">
+                        <div class="user-info">
+                            <h3>Carlos Rodriguez</h3>
+                            <p><span class="badge badge-location">Barcelona, Spain</span></p>
+                            <p><span class="badge badge-interest">Beaches</span> <span class="badge badge-interest">Nightlife</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area (Placeholder for feed/other content) -->
+            <div class="main-content-area">
+                <h2 class="section-title"><i class="fas fa-compass"></i> Explore New Adventures</h2>
+                <p style="color: #666;">This is where your main feed or featured trips would go. You can add dynamic content here, like personalized recommendations, trending destinations, or updates from your connections.</p>
+                
+                <!-- Example of a "Post" or "Trip Idea" card -->
+                <div class="user-card" style="background: rgba(255, 255, 255, 0.15); padding: 25px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" class="user-avatar" style="width: 50px; height: 50px; margin-right: 15px; border: none;">
+                        <div>
+                            <h3 style="font-size: 18px; font-weight: 600; color: #fff;">John Doe</h3>
+                            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.8);">Shared a new trip • 2 hours ago</p>
+                        </div>
+                    </div>
+                    <h4 style="font-size: 20px; font-weight: 700; color: #fdbb2d; margin-bottom: 10px;">Adventure to Patagonia!</h4>
+                    <p style="font-size: 15px; color: #fff; line-height: 1.6;">Looking for a travel companion for an epic hiking and wildlife photography trip to Patagonia in November. Planning to explore Torres del Paine and Fitz Roy. Experienced hikers preferred!</p>
+                    <div style="margin-top: 15px;">
+                        <span class="badge badge-interest" style="background: rgba(253, 187, 45, 0.3); color: #fdbb2d;">#Hiking</span>
+                        <span class="badge badge-interest" style="background: rgba(33, 147, 176, 0.3); color: #6dd5ed;">#Wildlife</span>
+                        <span class="badge badge-location" style="background: rgba(253, 187, 45, 0.3); color: #fdbb2d;">#Patagonia</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                        <button style="background: none; border: none; color: rgba(255, 255, 255, 0.8); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: color 0.2s ease;"><i class="far fa-comment"></i> Comment</button>
+                        <button style="background: none; border: none; color: rgba(255, 255, 255, 0.8); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: color 0.2s ease;"><i class="far fa-heart"></i> Like</button>
+                        <button style="background: none; border: none; color: rgba(255, 255, 255, 0.8); font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: color 0.2s ease;"><i class="fas fa-share-alt"></i> Share</button>
+                    </div>
+                </div>
+
+                <p style="color: rgba(255, 255, 255, 0.8); text-align: center;">Scroll down for more adventures...</p>
+
+                <!-- Trip Planner Form - Moved to main content area -->
+                <div class="trip-planner">
+                    <h2 class="section-title"><i class="fas fa-route"></i> Plan a Trip</h2>
+                    
+                    <form class="trip-form" id="trip-form">
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" id="destination" placeholder="Where to?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dates">Travel Dates</label>
+                            <input type="text" id="dates" placeholder="MM/DD - MM/DD">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="travelers">Number of Travelers</label>
+                            <select id="travelers">
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5+">5+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget">
+                                <option value="budget">Budget</option>
+                                <option value="moderate" selected>Moderate</option>
+                                <option value="luxury">Luxury</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" style="grid-column: span 2;">
+                            <label for="interests">Interests</label>
+                            <textarea id="interests" placeholder="What do you want to experience?"></textarea>
+                        </div>
+                        
+                        <button type="submit">Find Travel Buddies</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3><i class="fas fa-comments"></i> Chat with <span id="chat-name">Sarah Johnson</span></h3>
+            <button class="close-modal" id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message message-received">
+                Hi there! I'm planning a trip to the Swiss Alps next month. Are you interested?
+            </div>
+            <div class="message message-sent">
+                That sounds amazing! I've always wanted to go hiking there. What dates are you thinking?
+            </div>
+            <div class="message message-received">
+                I'm thinking around June 15-22. We could do some amazing trails and stay in mountain huts.
+            </div>
+            <div class="message message-sent">
+                Perfect! I'm free those dates. Let's plan this adventure!
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type a message..." id="chat-input">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to TravelBuddy</h2>
+                <button class="close-modal" id="close-login"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="modal-email">Email</label>
+                    <input type="email" id="modal-email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal-password">Password</label>
+                    <input type="password" id="modal-password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        Trip planned successfully! We'll notify you when we find compatible travel buddies.
+    </div>
+
+    <script>
+        // Initialize 3D Globe
+        let scene, camera, renderer, globe, controls;
+        let travelers = [];
+
+        function initGlobe() {
+            // Get the globe-canvas element
+            const globeCanvas = document.getElementById('globe-canvas');
+
+            // Create scene
+            scene = new THREE.Scene();
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, globeCanvas.clientWidth / globeCanvas.clientHeight, 0.1, 1000);
+            camera.position.z = 2.5;
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ canvas: globeCanvas, antialias: true, alpha: true });
+            renderer.setSize(globeCanvas.clientWidth, globeCanvas.clientHeight);
+            
+            // Add controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.rotateSpeed = 0.5;
+            controls.minDistance = 1.5;
+            controls.maxDistance = 4;
+            
+            // Create globe
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
+            const textureLoader = new THREE.TextureLoader();
+            // Using a placeholder image for the globe texture
+            const texture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/land_ocean_ice_cloud_2048.jpg'); 
+            const material = new THREE.MeshBasicMaterial({ map: texture });
+            globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // Add point light
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(5, 3, 5);
+            scene.add(pointLight);
+            
+            // Add travelers
+            addTravelers();
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                globe.rotation.y += 0.001;
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                // Ensure the canvas size is updated correctly on resize
+                const parent = globeCanvas.parentElement; // Get parent to determine new size
+                camera.aspect = parent.clientWidth / parent.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(parent.clientWidth, parent.clientHeight);
+            });
+        }
+        
+        function addTravelers() {
+            const travelerPositions = [
+                { lat: 48.8566, lng: 2.3522 },  // Paris
+                { lat: 35.6762, lng: 139.6503 }, // Tokyo
+                { lat: 41.9028, lng: 12.4964 },  // Rome
+                { lat: 41.3851, lng: 2.1734 }    // Barcelona
+            ];
+            
+            travelerPositions.forEach((pos, index) => {
+                const position = latLngToVector3(pos.lat, pos.lng, 1.01);
+                const geometry = new THREE.SphereGeometry(0.02, 16, 16);
+                const material = new THREE.MeshBasicMaterial({ color: 0xfdbb2d });
+                const traveler = new THREE.Mesh(geometry, material);
+                traveler.position.copy(position);
+                scene.add(traveler);
+                travelers.push(traveler);
+                
+                // Add pulse effect
+                const pulseGeometry = new THREE.SphereGeometry(0.02, 16, 16);
+                const pulseMaterial = new THREE.MeshBasicMaterial({ 
+                    color: 0xfdbb2d, 
+                    transparent: true, 
+                    opacity: 0.4 
+                });
+                const pulse = new THREE.Mesh(pulseGeometry, pulseMaterial);
+                pulse.position.copy(position);
+                pulse.scale.set(1, 1, 1);
+                pulse.material.opacity = 0.4; // Reset opacity for new pulse
+                scene.add(pulse);
+                
+                // Animate pulse
+                function animatePulse() {
+                    if (pulse.material.opacity > 0) {
+                        pulse.scale.x += 0.01;
+                        pulse.scale.y += 0.01;
+                        pulse.scale.z += 0.01;
+                        pulse.material.opacity -= 0.01;
+                    } else {
+                        pulse.scale.set(1, 1, 1);
+                        pulse.material.opacity = 0.4;
+                    }
+                    requestAnimationFrame(animatePulse);
+                }
+                
+                animatePulse();
+            });
+        }
+        
+        function latLngToVector3(lat, lng, radius) {
+            const phi = (90 - lat) * (Math.PI / 180);
+            const theta = (lng + 180) * (Math.PI / 180);
+            
+            const x = -radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.cos(phi);
+            const z = radius * Math.sin(phi) * Math.sin(theta);
+            
+            return new THREE.Vector3(x, y, z);
+        }
+        
+        // Initialize the globe when the page loads
+        window.addEventListener('load', initGlobe);
+        
+        // UI Interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            // User cards click event
+            const userCards = document.querySelectorAll('.user-card');
+            userCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const chatContainer = document.getElementById('chat-container');
+                    const chatName = document.getElementById('chat-name');
+                    const userName = card.querySelector('h3').textContent;
+                    chatName.textContent = userName;
+                    chatContainer.style.display = 'flex';
+                });
+            });
+            
+            // Close chat
+            document.getElementById('close-chat').addEventListener('click', () => {
+                document.getElementById('chat-container').style.display = 'none';
+            });
+            
+            // Send message
+            document.getElementById('send-message').addEventListener('click', () => {
+                const input = document.getElementById('chat-input');
+                const message = input.value.trim();
+                
+                if (message) {
+                    const chatMessages = document.getElementById('chat-messages');
+                    const messageElement = document.createElement('div');
+                    messageElement.className = 'message message-sent';
+                    messageElement.textContent = message;
+                    chatMessages.appendChild(messageElement);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    input.value = '';
+                }
+            });
+            
+            // Enter key to send message
+            document.getElementById('chat-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('send-message').click();
+                }
+            });
+            
+            // Login button
+            document.getElementById('login-btn').addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'flex';
+            });
+            
+            // Close login modal
+            document.getElementById('close-login').addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'none';
+            });
+            
+            // Login form submission
+            document.getElementById('login-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                document.getElementById('login-modal').style.display = 'none';
+                showNotification('Login successful! Welcome back.');
+            });
+            
+            // Trip form submission
+            document.getElementById('trip-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                showNotification('Trip planned successfully! We\'ll notify you when we find compatible travel buddies.');
+                document.getElementById('trip-form').reset();
+            });
+        });
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

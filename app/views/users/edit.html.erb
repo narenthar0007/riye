@@ -1,0 +1,147 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-user-edit"></i>
+            Edit User: <%= @user.email %>
+          </h3>
+          <div class="card-tools">
+            <%= link_to 'View User', user_path(@user), class: 'btn btn-info btn-sm' %>
+            <%= link_to 'All Users', users_path, class: 'btn btn-secondary btn-sm' %>
+          </div>
+        </div>
+        
+        <%= form_with model: @user, local: true, class: 'needs-validation', novalidate: true do |form| %>
+          <div class="card-body">
+            <!-- Display errors if any -->
+            <% if @user.errors.any? %>
+              <div class="alert alert-danger">
+                <h5><i class="fas fa-exclamation-triangle"></i> Please fix the following errors:</h5>
+                <ul class="mb-0">
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="row">
+              <!-- Email Field (Read Only) -->
+              <div class="col-md-12 mb-4">
+                <label for="user_email" class="form-label">
+                  <i class="fas fa-envelope text-muted"></i>
+                  Email Address
+                </label>
+                <%= form.email_field :email, class: 'form-control', readonly: true, 
+                    title: 'Email cannot be changed through this form' %>
+                <small class="text-muted">Email address cannot be modified from this page</small>
+              </div>
+
+              <!-- Role Selection -->
+              <div class="col-md-12 mb-4">
+                <label for="user_role" class="form-label">
+                  <i class="fas fa-user-tag text-muted"></i>
+                  User Role <span class="text-danger">*</span>
+                </label>
+                <% available_roles = [] %>
+                <% available_roles << ['Employee', 'employee'] %>
+                <% available_roles << ['Manager', 'manager'] %>
+                <% available_roles << ['Administrator', 'admin'] if current_user.super_admin? %>
+                <% available_roles << ['Owner', 'owner'] if current_user.owner? %>
+                
+                <%= form.select :role, 
+                    options_for_select(available_roles, @user.role), 
+                    { prompt: 'Select a role...' }, 
+                    { class: 'form-select', required: true, id: 'user_role' } %>
+                    
+                <% unless current_user.super_admin? %>
+                  <small class="text-muted mt-2">
+                    <i class="fas fa-info-circle"></i>
+                    Note: Only users with 'bluvent@gmail.com' in their email can create or assign Administrator roles.
+                  </small>
+                <% end %>
+                <div class="invalid-feedback">
+                  Please select a valid role.
+                </div>
+                
+                <!-- Role descriptions -->
+                <div id="role-descriptions" class="mt-3">
+                  <div id="employee-desc" class="role-description alert alert-light" style="display: none;">
+                    <strong><i class="fas fa-user text-secondary"></i> Employee:</strong>
+                    Basic system access, can manage their own tasks and view assigned projects.
+                  </div>
+                  <div id="manager-desc" class="role-description alert alert-info" style="display: none;">
+                    <strong><i class="fas fa-user-tie text-info"></i> Manager:</strong>
+                    Can manage teams, oversee projects, supervise workers, and approve attendances.
+                  </div>
+                  <div id="admin-desc" class="role-description alert alert-danger" style="display: none;">
+                    <strong><i class="fas fa-user-shield text-danger"></i> Administrator:</strong>
+                    Full system access including user management, role assignments, and system configuration.
+                  </div>
+                  <div id="owner-desc" class="role-description alert alert-warning" style="display: none;">
+                    <strong><i class="fas fa-crown text-warning"></i> Owner:</strong>
+                    Complete system control with access to all features, financial data, and strategic decisions.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="d-flex justify-content-between">
+              <%= link_to 'Cancel', user_path(@user), class: 'btn btn-secondary' %>
+              <%= form.submit 'Update User Role', class: 'btn btn-success' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show role descriptions based on selection
+  document.addEventListener('DOMContentLoaded', function() {
+    const roleSelect = document.getElementById('user_role');
+    const descriptions = document.querySelectorAll('.role-description');
+    
+    function showRoleDescription() {
+      // Hide all descriptions
+      descriptions.forEach(desc => desc.style.display = 'none');
+      
+      // Show selected role description
+      const selectedRole = roleSelect.value;
+      if (selectedRole) {
+        const descElement = document.getElementById(selectedRole + '-desc');
+        if (descElement) {
+          descElement.style.display = 'block';
+        }
+      }
+    }
+    
+    // Show description for current selection
+    showRoleDescription();
+    
+    // Show description when selection changes
+    roleSelect.addEventListener('change', showRoleDescription);
+  });
+
+  // Form validation
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      var forms = document.getElementsByClassName('needs-validation');
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

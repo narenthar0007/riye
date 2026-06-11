@@ -1,0 +1,3531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Shot - Instant Water Heaters at Affordable Prices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-red: #e30613;
+            --dark-red: #b00000;
+            --light-red: #ff4d4d;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-color: #4a4a4a; /* Slightly softer dark gray for general text */
+            --border-color: #e0e0e0; /* A light border color */
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --shadow-deep: rgba(0, 0, 0, 0.25);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+            font-size: 16px; /* Base font size */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 12px 25px; /* Increased padding */
+            border: none;
+            border-radius: 8px; /* More rounded */
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600; /* Slightly less bold */
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px; /* Added letter spacing */
+            box-shadow: 0 4px 10px var(--shadow-light); /* Initial shadow */
+        }
+        
+        .btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 8px 20px var(--shadow-medium); /* Deeper shadow on hover */
+        }
+        
+        .btn-large {
+            padding: 18px 35px; /* Larger padding */
+            font-size: 1.2rem; /* Larger font */
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px; /* More space below title */
+            color: var(--primary-red);
+            font-size: 2.8rem; /* Larger for prominence */
+            position: relative;
+            font-weight: 800; /* Extra bold */
+            letter-spacing: 1px;
+            text-transform: uppercase; /* Uppercase for impact */
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 120px; /* Wider underline */
+            height: 6px; /* Thicker underline */
+            background: var(--primary-red);
+            margin: 20px auto 0; /* More space below title */
+            border-radius: 3px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Smooth transition for header changes */
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s ease; /* Smooth transition for padding */
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 55px; /* Slightly larger logo */
+            margin-right: 12px;
+            transition: height 0.3s ease; /* Smooth transition for logo size */
+        }
+        
+        .logo h1 {
+            color: var(--primary-red);
+            font-size: 2.2rem; /* Slightly larger */
+            font-weight: 900; /* Even bolder */
+            letter-spacing: 1.5px;
+            transition: font-size 0.3s ease; /* Smooth transition for heading size */
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem; /* Larger icon */
+            color: var(--primary-red);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; /* Smooth transition for nav items */
+        }
+        
+        nav ul li {
+            margin-left: 35px; /* More spacing */
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding-bottom: 8px; /* More space for underline effect */
+            font-size: 1.05rem; /* Slightly larger nav links */
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px; /* Thicker underline */
+            background: var(--primary-red);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Header Scrolled State */
+        header.header-scrolled {
+            height: 70px; /* Smaller height for scrolled header */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+        }
+        header.header-scrolled .header-container {
+            padding: 10px 0; /* Smaller padding when nav is hidden */
+        }
+        header.header-scrolled .logo img {
+            height: 40px; /* Make logo smaller */
+        }
+        header.header-scrolled .logo h1 {
+            font-size: 1.8rem; /* Make heading smaller */
+        }
+        header.header-scrolled nav ul {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Disable clicks */
+            transform: translateY(-20px); /* Move out of view */
+        }
+        
+        /* Floating Circular Navigation */
+        .floating-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* More space between items */
+        }
+        
+        .floating-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .floating-nav ul li {
+            margin: 0;
+            position: relative;
+        }
+        
+        .floating-nav ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px; /* Reduced size */
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            transition: all 0.3s ease;
+            font-size: 1.2rem; /* Adjusted icon size */
+        }
+        
+        .floating-nav ul li a:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px var(--shadow-deep);
+        }
+        
+        .floating-nav ul li .nav-tooltip {
+            position: absolute;
+            right: 60px; /* Adjusted position for smaller circle */
+            background: var(--dark-gray);
+            color: white;
+            padding: 8px 15px; /* Adjusted padding */
+            border-radius: 10px; /* More rounded */
+            font-size: 0.9rem; /* Slightly smaller font */
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+            top: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .floating-nav ul li .nav-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px; /* Adjusted position */
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid var(--dark-gray);
+        }
+        
+        .floating-nav ul li a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 70px; /* Adjusted position on hover */
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Removed linear-gradient overlay */
+            background-size: cover;
+            background-position: center;
+            height: 95vh; /* Taller hero */
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 85px; /* Adjust for header height */
+            position: relative;
+            overflow: hidden; /* For subtle background animation */
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hero-content {
+            max-width: 950px; /* Wider content */
+            margin: 0 auto;
+            padding: 40px; /* More padding */
+            background-color: rgba(0, 0, 0, 0.2); /* Made more transparent */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 15px 40px var(--shadow-deep);
+            animation: fadeInScale 1s ease-out forwards;
+        }
+        
+        .hero h2 {
+            font-size: 4.2rem; /* Larger heading */
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.4rem; /* Larger paragraph */
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            line-height: 1.5;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* More spacing */
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0; /* More padding */
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); /* Adjusted minwidth */
+            gap: 50px; /* More spacing */
+        }
+        
+        .feature-card {
+            background: var(--light-gray);
+            padding: 40px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s, background-color 0.3s;
+            box-shadow: 0 10px 25px var(--shadow-light); /* Softer shadow */
+            border: 1px solid var(--border-color); /* Subtle border */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-18px); /* More pronounced lift */
+            box-shadow: 0 20px 45px var(--shadow-medium); /* Deeper shadow */
+            background-color: #f0f0f0; /* Slight background change on hover */
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-out;
+        }
+
+        .feature-card:hover::before {
+            transform: translateY(0);
+        }
+        
+        .feature-icon {
+            font-size: 4rem; /* Larger icon */
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 18px;
+            color: var(--primary-red);
+            font-size: 1.6rem; /* Larger heading */
+            letter-spacing: 0.8px;
+        }
+        
+        .feature-card p {
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 120px 0;
+            background-color: var(--light-gray);
+        }
+
+        /* Product Controls Wrapper */
+        .product-controls-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            gap: 20px; /* Space between search and filters */
+        }
+
+        /* Search Bar */
+        .search-bar {
+            position: relative;
+            flex: 1; /* Takes available space */
+            min-width: 250px; /* Minimum width for search bar */
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px 12px 45px; /* Left padding for icon */
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-light);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.15);
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        /* Filters and Sort */
+        .filters-sort {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between filter groups */
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+
+        .filters-sort select {
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            -webkit-appearance: none; /* Remove default arrow */
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22 viewBox%3D%220 0 292.4 292.4%22%3E%3Cpath fill%3D%22%234a4a4a%22 d%3D%22M287 69.4a17.6 17.6 0 0 0-13-5.4H18.4c-5 0-9.3 1.8-12.9 5.4A17.6 17.6 0 0 0 0 82.2c0 4.9 1.8 9.2 5.4 12.8l128 128c3.6 3.6 7.8 5.4 12.8 5.4s9.2-1.8 12.8-5.4l128-128c3.6-3.6 5.4-7.8 5.4-12.8 0-4.9-1.8-9.1-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 12px auto;
+            padding-right: 35px; /* Space for custom arrow */
+        }
+
+        .filters-sort select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.15);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minwidth */
+            gap: 50px; /* More spacing */
+        }
+        
+        .product-card-container {
+            perspective: 1200px; /* Stronger 3D perspective */
+            height: 480px; /* Taller fixed height for consistent cards */
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* More dynamic flip animation */
+            transform-style: preserve-3d;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px var(--shadow-medium);
+            background-color: var(--white); /* Ensure background for front/back */
+        }
+
+        .product-card-container.flipped .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px; /* Increased padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start; /* Align content to top */
+            text-align: left;
+            padding-top: 40px; /* More padding at top for title */
+        }
+
+        .product-img {
+            height: 220px; /* Taller image area */
+            width: 100%;
+            border-radius: 15px; /* More rounded image */
+            overflow: hidden;
+            margin-bottom: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative; /* For gallery dots */
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth zoom */
+        }
+        
+        .product-card-container:hover .product-img img {
+            transform: scale(1.08); /* Subtle zoom */
+        }
+
+        .product-gallery-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 10px; /* Moved to left corner */
+            transform: translateX(0); /* Removed horizontal centering transform */
+            display: flex;
+            gap: 5px; /* Smaller gap for smaller dots */
+            z-index: 5;
+        }
+
+        .gallery-dot {
+            width: 8px; /* Smaller width */
+            height: 8px; /* Smaller height */
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white */
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-dot:hover {
+            background-color: var(--primary-red);
+            transform: scale(1.1);
+        }
+        
+        .product-info h3 {
+            margin-bottom: 12px;
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            letter-spacing: 0.7px;
+        }
+        
+        .product-info p {
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1; /* Allows description to take space */
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.5rem; /* Larger price */
+            margin: 15px 0 25px; /* More spacing */
+            color: var(--dark-red);
+            letter-spacing: 0.5px;
+        }
+        
+        .product-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px; /* More spacing */
+            width: 100%;
+        }
+
+        .product-card-back h3 {
+            font-size: 1.8rem; /* Larger title on back */
+            margin-bottom: 20px;
+            color: var(--primary-red);
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card-back .product-details-full {
+            flex-grow: 1;
+            margin-bottom: 30px; /* More space before buttons */
+            overflow-y: auto;
+            padding-right: 8px; /* Space for scrollbar */
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .product-card-back .product-details-full p {
+            margin-bottom: 10px;
+        }
+
+        .product-card-back .btn {
+            width: 100%;
+            margin-top: 15px; /* More space between buttons */
+            font-size: 1.05rem;
+        }
+        
+        /* Franchise Section */
+        .franchise {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+        
+        .franchise-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 80px; /* More spacing */
+        }
+        
+        .franchise-text {
+            flex: 1;
+            min-width: 400px; /* Larger min-width */
+            line-height: 1.7;
+        }
+        
+        .franchise-text h3 {
+            font-size: 2.2rem;
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            letter-spacing: 0.8px;
+        }
+        .franchise-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .franchise-image {
+            flex: 1;
+            min-width: 400px;
+            border-radius: 20px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 15px 40px var(--shadow-medium); /* Deeper shadow */
+            border: 2px solid var(--border-color);
+        }
+        
+        .franchise-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .franchise-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .benefits-list {
+            margin: 35px 0; /* More margin */
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 15px; /* More spacing */
+            position: relative;
+            padding-left: 40px; /* Space for icon */
+            font-size: 1.15rem; /* Larger font */
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .benefits-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #28a745; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.3rem; /* Larger icon */
+        }
+        
+        /* Testimonials Section (Grid Layout) */
+        .testimonials {
+            padding: 120px 0;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 40px; /* Spacing between cards */
+            max-width: 1200px; /* Max width for the grid */
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px; /* Adjusted padding */
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space */
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+        
+        .testimonial-card:before {
+            content: '\201C';
+            font-family: Georgia, serif;
+            font-size: 5rem; /* Slightly smaller quote mark */
+            color: var(--light-red);
+            position: absolute;
+            top: 15px; /* Adjusted position */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.1; /* More subtle */
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px; /* Adjusted margin */
+            padding-top: 20px; /* Adjusted padding */
+            font-size: 1.15rem; /* Adjusted text size */
+            color: var(--text-color);
+            z-index: 2;
+            position: relative;
+            line-height: 1.6;
+            flex-grow: 1; /* Allows text to take available space */
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px; /* Adjusted margin */
+        }
+        
+        .author-img {
+            width: 60px; /* Adjusted image size */
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--primary-red); /* Adjusted border thickness */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-red);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Removed slideshow navigation buttons and dots styles */
+        /* .slideshow-nav-btn, .slideshow-dots are no longer needed */
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 80px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 320px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            letter-spacing: 0.7px;
+        }
+        
+        .contact-details {
+            margin-bottom: 50px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px; /* More spacing */
+        }
+        
+        .contact-icon {
+            color: var(--primary-red);
+            margin-right: 25px; /* More spacing */
+            font-size: 1.8rem; /* Larger icon */
+            margin-top: 5px;
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        .contact-item a:hover {
+            color: var(--primary-red);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 400px;
+            background: var(--light-gray);
+            padding: 45px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 10px 25px var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 30px; /* More spacing */
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px; /* More spacing */
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px; /* More padding */
+            border: 1px solid #ddd;
+            border-radius: 10px; /* More rounded */
+            font-size: 1.05rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.25); /* Stronger glow */
+        }
+        
+        .form-group textarea {
+            height: 200px; /* Taller textarea */
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 70px 0 40px; /* More padding */
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted min-width */
+            gap: 50px; /* More spacing */
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            color: var(--primary-red);
+            margin-bottom: 28px;
+            font-size: 1.5rem;
+            letter-spacing: 0.6px;
+        }
+        
+        .footer-col p, .footer-col ul li {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85); /* Slightly brighter text */
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-red);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 25px; /* More spacing */
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background: var(--primary-red); /* Changed to red */
+            width: 50px; /* Larger icons */
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--dark-red); /* Darker red on hover */
+            transform: translateY(-6px) scale(1.15); /* More pronounced hover */
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15); /* Slightly thicker border */
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 25px; /* Reduced space from bottom */
+            right: 25px; /* Reduced space from right */
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Reduced spacing */
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 55px; /* Reduced size */
+            height: 55px; /* Reduced size */
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem; /* Reduced icon size */
+            box-shadow: 0 8px 20px var(--shadow-deep);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-7px) scale(1.1); /* Reduced lift and scale */
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Cart Icon and Sidebar Styles */
+        #cartIcon {
+            position: fixed;
+            bottom: 25px; /* Aligned with other floating buttons */
+            left: 25px;
+            width: 55px; /* Reduced size */
+            height: 55px; /* Reduced size */
+            background-color: #007bff; /* Blue for cart */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem; /* Reduced icon size */
+            box-shadow: 0 8px 20px var(--shadow-deep);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #cartIcon:hover {
+            background-color: #0056b3;
+            transform: translateY(-7px) scale(1.1);
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -6px; /* Adjusted position */
+            right: -6px; /* Adjusted position */
+            background-color: var(--primary-red);
+            color: white;
+            font-size: 0.8rem; /* Slightly smaller */
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 4px 8px; /* Reduced padding */
+            min-width: 24px; /* Reduced min-width */
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--white); /* White border for contrast */
+        }
+
+        #cartSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px; /* Wider sidebar */
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Dynamic slide-in */
+            display: flex;
+            flex-direction: column;
+            padding: 30px; /* More padding */
+        }
+
+        #cartSidebar.open {
+            transform: translateX(0);
+        }
+
+        #cartSidebar h3 {
+            color: var(--primary-red);
+            font-size: 2.2rem; /* Larger title */
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        #cartSidebar h3::after {
+            content: '';
+            display: block;
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: var(--primary-red);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        #closeCartSidebar {
+            position: absolute;
+            top: 20px; /* Adjusted position */
+            right: 20px; /* Adjusted position */
+            background: none;
+            border: none;
+            font-size: 2.2rem; /* Larger icon */
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s;
+            z-index: 1200; /* Increased z-index */
+        }
+        #closeCartSidebar:hover {
+            color: var(--primary-red);
+            transform: rotate(90deg); /* Rotate on hover */
+        }
+
+        #cartItems {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 15px; /* More space for scrollbar */
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* More spacing */
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 90px; /* Larger image */
+            height: 90px;
+            object-fit: cover;
+            border-radius: 10px; /* More rounded */
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1.2rem; /* Larger font */
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .cart-item-details p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-red);
+            font-size: 1.8rem; /* Larger icon */
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.3s ease, transform 0.2s;
+        }
+        .remove-item-btn:hover {
+            color: var(--dark-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #cartTotal {
+            margin-top: 30px; /* More space */
+            padding-top: 25px;
+            border-top: 3px solid var(--primary-red); /* Thicker border */
+            font-size: 1.6rem; /* Larger font */
+            font-weight: bold;
+            text-align: right;
+            color: var(--dark-gray);
+            letter-spacing: 0.5px;
+        }
+        #cartTotal span {
+            color: var(--primary-red);
+        }
+
+        /* Image Lightbox Styles */
+        #imageLightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000; /* Above everything */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #imageLightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightboxContent {
+            position: relative;
+            background-color: var(--white);
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #imageLightbox.active #lightboxContent {
+            transform: scale(1);
+        }
+
+        #lightboxCloseBtn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--dark-gray);
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        #lightboxCloseBtn:hover,
+        #lightboxCloseBtn:focus {
+            color: var(--primary-red);
+            transform: rotate(90deg);
+        }
+
+        #lightboxImageContainer {
+            width: 100%;
+            max-width: 700px; /* Max width for the image */
+            max-height: 70vh; /* Max height for the image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        #lightboxImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure image fits without cropping */
+            display: block;
+            border-radius: 10px;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.3);
+            color: var(--dark-gray);
+            border: none;
+            padding: 15px 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            color: var(--primary-red);
+        }
+
+        #prevLightboxBtn { left: 15px; }
+        #nextLightboxBtn { right: 15px; }
+
+        #lightboxDots {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .lightbox-dot {
+            width: 15px;
+            height: 15px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .lightbox-dot.active {
+            background-color: var(--primary-red);
+            transform: scale(1.2);
+        }
+        .lightbox-dot:hover {
+            background-color: var(--light-red);
+        }
+
+
+        /* AI Chat Sidebar Styles */
+        #aiChatIcon {
+            position: fixed;
+            bottom: 90px; /* Positioned above the cart icon, adjusted for smaller buttons */
+            left: 25px; /* Aligned with cart icon */
+            width: 55px; /* Reduced size */
+            height: 55px; /* Reduced size */
+            background-color: #673ab7; /* Purple for AI */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem; /* Reduced icon size */
+            box-shadow: 0 8px 20px var(--shadow-deep);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #aiChatIcon:hover {
+            background-color: #512da8;
+            transform: translateY(-7px) scale(1.1);
+        }
+
+        #aiChatSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px; /* Wider sidebar */
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Dynamic slide-in */
+            display: flex;
+            flex-direction: column;
+            padding: 30px; /* More padding */
+        }
+
+        #aiChatSidebar.open {
+            transform: translateX(0);
+        }
+
+        #aiChatSidebar h3 {
+            color: #673ab7; /* Purple for AI title */
+            font-size: 2.2rem; /* Larger title */
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        #aiChatSidebar h3::after {
+            content: '';
+            display: block;
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: #673ab7;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        #closeAiChatSidebar {
+            position: absolute;
+            top: 20px; /* Adjusted position */
+            right: 20px; /* Adjusted position */
+            background: none;
+            border: none;
+            font-size: 2.2rem; /* Larger icon */
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s;
+            z-index: 1200; /* Increased z-index */
+        }
+        #closeAiChatSidebar:hover {
+            color: #673ab7;
+            transform: rotate(90deg); /* Rotate on hover */
+        }
+
+        .ai-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--light-gray);
+        }
+
+        .ai-options label {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .ai-options label:hover {
+            color: var(--dark-gray);
+        }
+
+        .ai-options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #673ab7;
+        }
+
+        .ai-field-group {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--white);
+            box-shadow: 0 2px 8px var(--shadow-light);
+            margin-bottom: 20px;
+        }
+
+        .ai-field-group input,
+        .ai-field-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .ai-field-group input:focus,
+        .ai-field-group select:focus {
+            border-color: #673ab7;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(103, 58, 183, 0.2);
+        }
+
+        .ai-send-btn {
+            width: 100%;
+            background-color: #673ab7; /* Purple for AI button */
+            margin-top: 10px;
+        }
+        .ai-send-btn:hover {
+            background-color: #512da8;
+        }
+
+        #recommendedProducts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Smaller grid for modal */
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 300px; /* Limit height for scroll */
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        #recommendedProducts .product-card-container {
+            height: auto; /* Allow height to adjust */
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #recommendedProducts .product-card-inner {
+            transform: none !important; /* Disable flip for smaller cards */
+            box-shadow: none;
+            background-color: transparent;
+        }
+        #recommendedProducts .product-card-front,
+        #recommendedProducts .product-card-back {
+            position: static;
+            backface-visibility: visible;
+            padding: 0;
+            border: none;
+            box-shadow: none;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        #recommendedProducts .product-card-back {
+            display: none; /* Hide back for simplified view */
+        }
+        #recommendedProducts .product-img {
+            height: 100px; /* Smaller image */
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        #recommendedProducts .product-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        #recommendedProducts .product-info p {
+            display: none; /* Hide short description */
+        }
+        #recommendedProducts .product-price {
+            font-size: 1.1rem;
+            margin: 5px 0 10px;
+        }
+        #recommendedProducts .product-btns {
+            flex-direction: column;
+            gap: 5px;
+        }
+        #recommendedProducts .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        #recommendedProducts .view-details-btn {
+            display: none; /* Hide view details in recommendations */
+        }
+        #recommendedProducts .product-gallery-dots {
+            display: none; /* Hide dots in recommended view */
+        }
+
+
+        /* Responsive Styles (Adjusted for Cart Sidebar) */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .section-title:after {
+                width: 100px;
+                height: 5px;
+            }
+            
+            .hero h2 {
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .floating-nav {
+                right: 20px;
+                gap: 12px;
+            }
+            .floating-nav ul li a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .floating-nav ul li a:hover .nav-tooltip {
+                right: 60px;
+            }
+            .floating-nav ul li .nav-tooltip {
+                right: 50px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .product-card-container {
+                height: 450px;
+            }
+            .product-img {
+                height: 200px;
+            }
+
+            .franchise-content, .contact-container {
+                gap: 50px;
+            }
+            .franchise-text, .franchise-image, .contact-info, .contact-form {
+                min-width: unset; /* Allow natural sizing */
+                width: 100%; /* Take full width on smaller screens */
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+            .testimonial-card {
+                padding: 30px;
+            }
+            .testimonial-text {
+                font-size: 1.05rem;
+            }
+
+            #cartSidebar, #aiChatSidebar {
+                width: 300px; /* Slightly narrower on tablet */
+            }
+            #cartIcon {
+                bottom: 25px;
+                left: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-7px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                min-width: 25px;
+            }
+            #aiChatIcon {
+                bottom: 95px; /* Adjusted position for AI button */
+                left: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #aiChatIcon:hover {
+                transform: translateY(-7px) scale(1.1);
+            }
+
+            #lightboxContent {
+                max-width: 90%;
+            }
+            #lightboxCloseBtn {
+                font-size: 2.5rem;
+            }
+            .lightbox-nav-btn {
+                padding: 10px 15px;
+                font-size: 1.5rem;
+            }
+            #prevLightboxBtn { left: 5px; }
+            #nextLightboxBtn { right: 5px; }
+
+            /* Responsive adjustments for product controls */
+            .product-controls-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+            .search-bar {
+                min-width: unset;
+                width: 100%;
+            }
+            .filters-sort {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 15px;
+            }
+            .filter-group {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 5px;
+            }
+            .filters-sort select {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 85px; /* Adjust for header height */
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero {
+                height: 75vh;
+                margin-top: 75px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem; /* Adjusted for better fit */
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-content { /* Added for mobile padding adjustment */
+                padding: 30px;
+            }
+            
+            .floating-nav {
+                display: none; /* Hide floating nav on smaller screens */
+            }
+            
+            .floating-btns {
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+            
+            .floating-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+
+            #cartSidebar, #aiChatSidebar {
+                width: 100%; /* Full width on mobile */
+                padding: 20px;
+            }
+            #cartIcon {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.7rem;
+                padding: 3px 7px;
+                min-width: 22px;
+            }
+            #aiChatIcon {
+                bottom: 80px; /* Adjusted position for AI button */
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #aiChatIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            .cart-item-img {
+                width: 70px;
+                height: 70px;
+            }
+            .cart-item-details h4 {
+                font-size: 1.1rem;
+            }
+            .remove-item-btn {
+                font-size: 1.6rem;
+            }
+            #cartTotal {
+                font-size: 1.3rem;
+            }
+
+            #lightboxContent {
+                max-width: 95%;
+                padding: 15px;
+            }
+            #lightboxCloseBtn {
+                font-size: 2rem;
+                top: 10px;
+                right: 10px;
+            }
+            .lightbox-nav-btn {
+                padding: 8px 12px;
+                font-size: 1.2rem;
+            }
+            #prevLightboxBtn { left: 0px; }
+            #nextLightboxBtn { right: 0px; }
+            #lightboxImageContainer {
+                max-height: 60vh;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                height: 65vh;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 0.95rem; /* Further adjusted for smaller screens */
+            }
+            .hero-content { /* Added for mobile padding adjustment */
+                padding: 20px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .franchise-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            .product-card-container {
+                height: 400px; /* Adjust height for smaller screens */
+            }
+            .product-img {
+                height: 180px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            .section-title:after {
+                width: 80px;
+                height: 4px;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-icon {
+                font-size: 3.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+            .contact-info h3 {
+                font-size: 1.6rem;
+            }
+            .contact-form {
+                padding: 30px;
+            }
+            .footer-col h3 {
+                font-size: 1.3rem;
+            }
+            .job-enquiry-section {
+            margin-top: 50px; /* Space above job enquiry */
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            }
+            .job-enquiry-section h3 {
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            letter-spacing: 0.7px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' fill='%23e30613'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3EMS%3C/text%3E%3C/svg%3E" alt="Mr Shot Logo">
+                <h1>Mr Shot</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#franchise">Franchise</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Circular Navigation -->
+    <div class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <i class="fas fa-fire"></i>
+                    <span class="nav-tooltip">Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#franchise">
+                    <i class="fas fa-store"></i>
+                    <span class="nav-tooltip">Franchise</span>
+                </a>
+            </li>
+            <li>
+                <a href="#testimonials">
+                    <i class="fas fa-star"></i>
+                    <span class="nav-tooltip">Testimonials</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-phone"></i>
+                    <span class="nav-tooltip">Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Instant Hot Water at Unbeatable Prices</h2>
+                <p>Mr Shot brings you high-quality instant water heaters at the most affordable prices in Tamil Nadu and across India. Perfect for homes and businesses.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-large">View Products</a>
+                    <a href="#franchise" class="btn btn-large">Franchise Opportunity</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Mr Shot?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Our direct manufacturing approach allows us to offer the best prices without compromising on quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Heating</h3>
+                    <p>Get hot water instantly with our advanced heating technology that saves both time and electricity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Built with multiple safety features including auto cut-off and thermal protection for complete peace of mind.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>All India Delivery</h3>
+                    <p>We deliver across Tamil Nadu and all other states in India with our extensive dealer network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-controls-wrapper container">
+                <div class="search-bar">
+                    <input type="text" id="productSearch" placeholder="Search products...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="filters-sort">
+                    <div class="filter-group">
+                        <label for="sortOptions">Sort by:</label>
+                        <select id="sortOptions">
+                            <option value="default">Default</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="name-asc">Name: A-Z</option>
+                            <option value="name-desc">Name: Z-A</option>
+                            <option value="bestsellers">Bestsellers</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="tagFilter">Filter by Tag:</label>
+                        <select id="tagFilter">
+                            <option value="all">All Tags</option>
+                            <!-- Tags will be dynamically populated here -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section class="franchise" id="franchise">
+        <div class="container">
+            <h2 class="section-title">Franchise Opportunity</h2>
+            <div class="franchise-content">
+                <div class="franchise-text">
+                    <h3>Become a Mr Shot Franchise Partner</h3>
+                    <p>Join our growing network of franchise partners across Tamil Nadu and other states. We provide complete support to help you establish and grow your water heater business.</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Low investment with high returns</li>
+                        <li>Exclusive territory rights</li>
+                        <li>Training and marketing support</li>
+                        <li>Established brand recognition</li>
+                        <li>Ongoing product supply</li>
+                        <li>Business operation guidance</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-large">Apply for Franchise</a>
+                </div>
+                <div class="franchise-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mr Shot Franchise Opportunity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <!-- Testimonials Grid -->
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonial cards will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Head Office</h4>
+                                <p>123 Industrial Estate, Chennai, Tamil Nadu - 600032</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 9123512626 (Sales)</p>
+                                <p>+91 9123512626 (Franchise)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>sales@mrshort.com</p>
+                                <p>franchise@mrshort.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="job-enquiry-section">
+                        <h3>Get Job Enquiry in Mr Shot</h3>
+                        <form id="jobEnquiryForm">
+                            <div class="form-group">
+                                <label for="jobEnquiryName">Your Name</label>
+                                <input type="text" id="jobEnquiryName" name="jobEnquiryName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobEnquiryDegree">Your Degree</label>
+                                <input type="text" id="jobEnquiryDegree" name="jobEnquiryDegree" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="jobEnquiryResume">Tell us about your experience/resume (or paste a link)</label>
+                                <textarea id="jobEnquiryResume" name="jobEnquiryResume" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-large" id="sendJobEnquiryBtn">Send Job Enquiry</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="product">Product Enquiry</option>
+                                <option value="franchise">Franchise Opportunity</option>
+                                <option value="support">Customer Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Mr Shot</h3>
+                    <p>Leading manufacturer of affordable instant water heaters in Tamil Nadu and across India. Quality products at unbeatable prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#franchise">Franchise</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Mr Shot Basic</a></li>
+                        <li><a href="#">Mr Shot Premium</a></li>
+                        <li><a href="#">Mr Shot Commercial</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#contact">Customer Support</a></li> <!-- Added hash link for customer support -->
+                        <li><a href="#">Find a Dealer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mr Shot. All Rights Reserved. | Maintained by <a href="https://www.instagram.com/bluvent.riye?igsh=NmI0Mjg2cnpiYnFi" target="_blank" style="color: inherit; text-decoration: underline;">Bluvent</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btns">
+        <a href="https://wa.me/9123512626" class="floating-btn whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919123512626" class="floating-btn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <!-- Floating AI Chat Icon -->
+    <div id="aiChatIcon" class="floating-btn">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar">
+        <button id="closeCartSidebar"><i class="fas fa-times"></i></button>
+        <h3>Your Shopping Cart</h3>
+        <ul id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="cartTotal">
+            Total: ₹<span id="cartTotalAmount">0.00</span>
+        </div>
+    </div>
+
+    <!-- AI Chat Sidebar -->
+    <div id="aiChatSidebar">
+        <button id="closeAiChatSidebar"><i class="fas fa-times"></i></button>
+        <h3>Talk with Mr. Shot</h3>
+        <div class="ai-options">
+            <label><input type="radio" name="aiOption" value="repair"> Need to repair my heater</label>
+            <label><input type="radio" name="aiOption" value="buy"> Need to buy a heater</label>
+            <label><input type="radio" name="aiOption" value="franchise"> Need a franchise</label>
+            <label><input type="radio" name="aiOption" value="support"> Need to talk to customer support</label>
+        </div>
+
+        <div id="repairFields" class="ai-field-group">
+            <input type="text" id="repairHeaterName" placeholder="Heater Name (e.g., Mr Shot Basic)">
+            <input type="text" id="repairUserName" placeholder="Your Name">
+            <button class="btn ai-send-btn" data-action="repair">Send Repair Request</button>
+        </div>
+
+        <div id="buyFields" class="ai-field-group">
+            <label for="buyPurpose">Select Purpose:</label>
+            <select id="buyPurpose">
+                <option value="">Select Purpose</option>
+                <option value="compact">Compact / Small Space</option>
+                <option value="kitchen">Kitchen Use</option>
+                <option value="bathroom">Bathroom Use</option>
+                <option value="small-family">Small Family (1-2 members)</option>
+                <option value="medium-family">Medium Family (3-4 members)</option>
+                <option value="large-family">Large Family (5+ members)</option>
+                <option value="commercial">Commercial / Business</option>
+                <option value="travel">Travel / Portable</option>
+                <option value="eco-friendly">Eco-friendly / Energy Saving</option>
+                <option value="smart-home">Smart Home / App Control</option>
+                <option value="safety">High Safety Features</option>
+                <option value="luxury">Luxury / Designer</option>
+                <option value="high-power">High Power / Fast Heating</option>
+            </select>
+            <button class="btn ai-send-btn" data-action="buy-show-products">Show Related Heaters</button>
+            <div id="recommendedProducts">
+                <!-- Recommended products will be displayed here -->
+            </div>
+        </div>
+
+        <div id="franchiseFields" class="ai-field-group">
+            <input type="text" id="franchiseUserName" placeholder="Your Name">
+            <input type="tel" id="franchiseMobile" placeholder="Mobile Number">
+            <input type="text" id="franchiseLocation" placeholder="Your City/Location">
+            <input type="text" id="franchisePinCode" placeholder="Pin Code">
+            <button class="btn ai-send-btn" data-action="franchise">Send Franchise Enquiry</button>
+        </div>
+
+        <div id="supportFields" class="ai-field-group">
+            <input type="text" id="supportUserName" placeholder="Your Name">
+            <input type="tel" id="supportContactNumber" placeholder="Your Contact Number">
+            <button class="btn ai-send-btn" data-action="support">Contact Support</button>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Pop-up -->
+    <div id="imageLightbox">
+        <div id="lightboxContent">
+            <span id="lightboxCloseBtn">&times;</span>
+            <div id="lightboxImageContainer">
+                <img src="" alt="Product Image" id="lightboxImage">
+                <button class="lightbox-nav-btn" id="prevLightboxBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox-nav-btn" id="nextLightboxBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div id="lightboxDots">
+                <!-- Lightbox dots will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.querySelector('ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.querySelector('ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Form Submission
+        const enquiryForm = document.getElementById('enquiryForm');
+        
+        enquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to your server
+            // For demo, we'll just show a custom message box instead of alert
+            showCustomMessage(`Thank you, ${name}! Your ${subject} enquiry has been received. We'll contact you soon at ${phone} or ${email}.`, 'success');
+            
+            // Reset form
+            enquiryForm.reset();
+        });
+        
+        // Custom Message Box (replaces alert)
+        function showCustomMessage(message, type = 'info') {
+            const existingMessage = document.getElementById('customMessageBox');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                font-size: 1rem;
+                text-align: center;
+                max-width: 90%;
+                min-width: 250px;
+            `;
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+
+            // Animate in
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 50);
+
+            // Animate out and remove after 5 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 5000);
+        }
+
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container'); // Added new elements
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                if (elementPosition < windowHeight - 150) { // Adjusted threshold
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                } else {
+                    // Reset if scrolled back up, to re-trigger on scroll down
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                }
+            });
+        }
+        
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Trigger initial check
+        revealOnScroll();
+        
+        // Active link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a, .floating-nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Adjust for fixed header height
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Product Data as Key-Value Pairs (Array of Objects) ---
+        const productsData = [
+            {
+                id: 'basic',
+                name: 'Mr Shot Basic',
+                price: 2499,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Basic+Heater',
+                shortDescription: 'Perfect for small households with basic hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '3000 Watts',
+                    features: 'Instant heating, Auto cut-off, Rust-proof body.',
+                    description: 'This compact and efficient water heater is designed for quick hot water delivery, ideal for kitchens, small bathrooms, and single-person use. Its robust build ensures durability and safety.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Basic+Heater',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Basic+Model+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Basic+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Basic+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Basic+Model+View+5'
+                ],
+                isBestseller: true,
+                tags: ['compact', 'budget-friendly', 'small-family']
+            },
+            {
+                id: 'premium',
+                name: 'Mr Shot Premium',
+                price: 3999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Premium+Heater',
+                shortDescription: 'Advanced features for families with higher hot water demand.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4500 Watts',
+                    features: 'Digital temperature display, Multiple safety layers, Energy-saving mode, Faster heating.',
+                    description: 'Designed for modern homes, the Premium model offers enhanced capacity and smart features for optimal comfort and efficiency. Enjoy precise temperature control and advanced safety mechanisms.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Premium+Heater',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Premium+Model+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Premium+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Premium+Model+View+4',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Premium+Model+View+5'
+                ],
+                isBestseller: true,
+                tags: ['digital-display', 'energy-efficient', 'medium-family']
+            },
+            {
+                id: 'commercial',
+                name: 'Mr Shot Commercial',
+                price: 5999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Commercial+Heater',
+                shortDescription: 'Heavy-duty model for shops, salons, and small businesses.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'High-capacity tank, Industrial-grade heating element, Continuous hot water supply, Robust construction.',
+                    description: 'Built for demanding environments, this model ensures a constant supply of hot water for commercial applications like salons, small hotels, and offices. Its heavy-duty components guarantee long-lasting performance.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Commercial+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Commercial+Model+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Commercial+Model+View+3',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Commercial+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Commercial+Model+View+5'
+                ],
+                isBestseller: false,
+                tags: ['commercial-grade', 'heavy-duty', 'high-capacity']
+            },
+            {
+                id: 'compact-plus',
+                name: 'Mr Shot Compact Plus',
+                price: 2999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Compact+Plus',
+                shortDescription: 'Enhanced compact model with faster heating.',
+                fullDetails: {
+                    capacity: '4 Litres',
+                    power: '3500 Watts',
+                    features: 'Rapid heating, Multi-level safety, Compact design.',
+                    description: 'An upgraded compact model, offering quicker hot water and additional safety features, ideal for modern apartments.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Compact+Plus',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Compact+Plus+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Compact+Plus+View+3'
+                ],
+                isBestseller: false,
+                tags: ['compact', 'fast-heating', 'apartment']
+            },
+            {
+                id: 'eco-smart',
+                name: 'Mr Shot Eco Smart',
+                price: 4500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Eco+Smart',
+                shortDescription: 'Energy-efficient heater with smart controls.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '4000 Watts',
+                    features: 'Smart thermostat, Eco mode, Overheat protection, LED indicator.',
+                    description: 'Designed for the environmentally conscious, this model optimizes energy consumption without compromising on hot water availability. Smart features ensure convenience and savings.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Eco+Smart',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Eco+Smart+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Eco+Smart+View+3'
+                ],
+                isBestseller: true,
+                tags: ['eco-friendly', 'smart-control', 'large-family']
+            },
+            {
+                id: 'elite',
+                name: 'Mr Shot Elite',
+                price: 7500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Elite+Model',
+                shortDescription: 'Luxury instant water heater with premium finish.',
+                fullDetails: {
+                    capacity: '15 Litres',
+                    power: '7000 Watts',
+                    features: 'Stainless steel tank, Touch controls, Child lock, Anti-corrosion coating.',
+                    description: 'Experience ultimate comfort with the Elite model. Its sleek design and advanced features provide a luxurious hot water experience for discerning users.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Elite+Model',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Elite+Model+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Elite+Model+View+3'
+                ],
+                isBestseller: false,
+                tags: ['luxury', 'high-end', 'large-capacity']
+            },
+            {
+                id: 'mini-pro',
+                name: 'Mr Shot Mini Pro',
+                price: 2199,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Mini+Pro',
+                shortDescription: 'Ultra-compact for single point use.',
+                fullDetails: {
+                    capacity: '1 Litre',
+                    power: '2000 Watts',
+                    features: 'Point-of-use installation, Energy-saving, Quick heat-up.',
+                    description: 'Ideal for small sinks or washbasins, providing instant hot water exactly where you need it, minimizing waste.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Mini+Pro',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Mini+Pro+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Mini+Pro+View+3'
+                ],
+                isBestseller: true,
+                tags: ['mini', 'single-point', 'kitchen']
+            },
+            {
+                id: 'smart-flow',
+                name: 'Mr Shot Smart Flow',
+                price: 4999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Smart+Flow',
+                shortDescription: 'Consistent hot water with intelligent flow control.',
+                fullDetails: {
+                    capacity: '7 Litres',
+                    power: '5000 Watts',
+                    features: 'Flow sensor, Consistent temperature, Anti-scaling technology.',
+                    description: 'Ensures a steady stream of hot water at your desired temperature, even with varying water pressure. Perfect for a comfortable shower.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Smart+Flow',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Smart+Flow+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Smart+Flow+View+3'
+                ],
+                isBestseller: false,
+                tags: ['intelligent', 'consistent-flow', 'bathroom']
+            },
+            {
+                id: 'power-heater',
+                name: 'Mr Shot Power Heater',
+                price: 6500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Power+Heater',
+                shortDescription: 'High power for rapid large volume heating.',
+                fullDetails: {
+                    capacity: '12 Litres',
+                    power: '8000 Watts',
+                    features: 'High power element, Quick recovery, Multi-point usage.',
+                    description: 'Designed for homes with multiple hot water outlets or high demand, providing powerful and rapid heating for continuous use.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Power+Heater',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Power+Heater+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Power+Heater+View+3'
+                ],
+                isBestseller: false,
+                tags: ['high-power', 'multi-point', 'large-home']
+            },
+            {
+                id: 'solar-hybrid',
+                name: 'Mr Shot Solar Hybrid',
+                price: 8999,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Solar+Hybrid',
+                shortDescription: 'Eco-friendly heater with solar assist.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '4000 Watts (Electric) + Solar',
+                    features: 'Solar compatibility, Energy saving, Backup electric heating.',
+                    description: 'A cutting-edge hybrid solution that uses solar energy as its primary heat source, with electric backup for cloudy days or high demand.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Solar+Hybrid',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Solar+Hybrid+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Solar+Hybrid+View+3'
+                ],
+                isBestseller: false,
+                tags: ['solar', 'eco-friendly', 'hybrid']
+            },
+            {
+                id: 'instant-delight',
+                name: 'Mr Shot Instant Delight',
+                price: 3200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Instant+Delight',
+                shortDescription: 'Quick and efficient for daily use.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3000 Watts',
+                    features: 'Compact, Fast heating, Thermal cut-out.',
+                    description: 'A reliable and quick solution for everyday hot water needs, ensuring convenience and safety.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Instant+Delight',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Instant+Delight+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Instant+Delight+View+3'
+                ],
+                isBestseller: true,
+                tags: ['daily-use', 'reliable', 'quick-heating']
+            },
+            {
+                id: 'supreme',
+                name: 'Mr Shot Supreme',
+                price: 5500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Supreme+Heater',
+                shortDescription: 'Top-tier performance for discerning users.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '6000 Watts',
+                    features: 'Advanced safety, Digital control, High-grade materials.',
+                    description: 'Combining high performance with premium features, the Supreme model offers an unparalleled hot water experience.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Supreme+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Supreme+Heater+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Supreme+Heater+View+3'
+                ],
+                isBestseller: false,
+                tags: ['premium', 'high-performance', 'advanced-safety']
+            },
+            {
+                id: 'kitchen-master',
+                name: 'Mr Shot Kitchen Master',
+                price: 2700,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Kitchen+Master',
+                shortDescription: 'Designed specifically for kitchen hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '2500 Watts',
+                    features: 'Compact, Anti-splash, Quick wash.',
+                    description: 'A specialized heater for kitchen use, providing instant hot water for dishwashing and other culinary tasks efficiently.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Kitchen+Master',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Kitchen+Master+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Kitchen+Master+View+3'
+                ],
+                isBestseller: true,
+                tags: ['kitchen', 'compact', 'anti-splash']
+            },
+            {
+                id: 'bath-bliss',
+                name: 'Mr Shot Bath Bliss',
+                price: 4200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Bath+Bliss',
+                shortDescription: 'Ensures a relaxing hot bath experience.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4000 Watts',
+                    features: 'Constant temperature, Overheat protection, Elegant design.',
+                    description: 'Transform your bathroom into a spa with Bath Bliss, delivering consistent hot water for a truly relaxing experience.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Bath+Bliss',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Bath+Bliss+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Bath+Bliss+View+3'
+                ],
+                isBestseller: false,
+                tags: ['bathroom', 'consistent-temp', 'elegant']
+            },
+            {
+                id: 'industrial-pro',
+                name: 'Mr Shot Industrial Pro',
+                price: 9500,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Industrial+Pro',
+                shortDescription: 'Robust and high-capacity for industrial use.',
+                fullDetails: {
+                    capacity: '20 Litres',
+                    power: '10000 Watts',
+                    features: 'Heavy-duty construction, Continuous operation, Advanced safety.',
+                    description: 'Built to withstand rigorous industrial demands, offering large volumes of hot water continuously and reliably.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Industrial+Pro',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Industrial+Pro+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Industrial+Pro+View+3'
+                ],
+                isBestseller: false,
+                tags: ['industrial', 'heavy-duty', 'high-capacity']
+            },
+            {
+                id: 'compact-eco',
+                name: 'Mr Shot Compact Eco',
+                price: 2600,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Compact+Eco',
+                shortDescription: 'Eco-friendly compact model for small spaces.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '2800 Watts',
+                    features: 'Energy-saving, Space-saving design, Quick heat.',
+                    description: 'A perfect blend of compact size and energy efficiency, ideal for small homes and apartments looking to save on bills.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Compact+Eco',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Compact+Eco+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Compact+Eco+View+3'
+                ],
+                isBestseller: true,
+                tags: ['compact', 'eco-friendly', 'small-space']
+            },
+            {
+                id: 'digital-comfort',
+                name: 'Mr Shot Digital Comfort',
+                price: 4800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Digital+Comfort',
+                shortDescription: 'Precise digital control for ultimate comfort.',
+                fullDetails: {
+                    capacity: '7 Litres',
+                    power: '5500 Watts',
+                    features: 'Digital temperature control, Multiple safety features, Fast heating.',
+                    description: 'Enjoy precise control over your hot water temperature with an intuitive digital interface, ensuring maximum comfort.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Digital+Comfort',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Digital+Comfort+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Digital+Comfort+View+3'
+                ],
+                isBestseller: false,
+                tags: ['digital-control', 'comfort', 'fast-heating']
+            },
+            {
+                id: 'sleek-design',
+                name: 'Mr Shot Sleek Design',
+                price: 3700,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Sleek+Design',
+                shortDescription: 'Stylish and efficient, complements modern interiors.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3200 Watts',
+                    features: 'Elegant aesthetics, Space-saving, Durable build.',
+                    description: 'A water heater that not only performs exceptionally but also enhances the aesthetic appeal of your bathroom or kitchen.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Sleek+Design',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Sleek+Design+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Sleek+Design+View+3'
+                ],
+                isBestseller: true,
+                tags: ['stylish', 'modern', 'space-saving']
+            },
+            {
+                id: 'quick-heat-pro',
+                name: 'Mr Shot Quick Heat Pro',
+                price: 3100,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Quick+Heat+Pro',
+                shortDescription: 'Professional-grade rapid heating for busy homes.',
+                fullDetails: {
+                    capacity: '4 Litres',
+                    power: '3800 Watts',
+                    features: 'Ultra-fast heating, High durability, Safety valve.',
+                    description: 'Get hot water in seconds with this powerful and reliable heater, perfect for busy households where time is of the essence.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Quick+Heat+Pro',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Quick+Heat+Pro+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Quick+Heat+Pro+View+3'
+                ],
+                isBestseller: false,
+                tags: ['fast-heating', 'durable', 'professional']
+            },
+            {
+                id: 'family-comfort',
+                name: 'Mr Shot Family Comfort',
+                price: 5200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Family+Comfort',
+                shortDescription: 'Designed for the hot water needs of a large family.',
+                fullDetails: {
+                    capacity: '9 Litres',
+                    power: '6500 Watts',
+                    features: 'Large capacity, Multi-point delivery, Energy efficient.',
+                    description: 'Ensures ample hot water for all family members, even during peak usage times, with efficient energy consumption.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Family+Comfort',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Family+Comfort+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Family+Comfort+View+3'
+                ],
+                isBestseller: true,
+                tags: ['large-family', 'high-capacity', 'energy-efficient']
+            },
+            {
+                id: 'portable-mini',
+                name: 'Mr Shot Portable Mini',
+                price: 1800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Portable+Mini',
+                shortDescription: 'Lightweight and portable for temporary needs.',
+                fullDetails: {
+                    capacity: '2 Litres',
+                    power: '1500 Watts',
+                    features: 'Portable, Easy installation, Compact size.',
+                    description: 'A versatile mini-heater perfect for travel, camping, or temporary setups where instant hot water is needed on the go.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Portable+Mini',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Portable+Mini+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Portable+Mini+View+3'
+                ],
+                isBestseller: false,
+                tags: ['portable', 'travel', 'mini']
+            },
+            {
+                id: 'smart-app',
+                name: 'Mr Shot Smart App',
+                price: 6800,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Smart+App+Control',
+                shortDescription: 'Control your water heater from your smartphone.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'Wi-Fi control, Schedule heating, Energy monitoring, Voice assistant compatible.',
+                    description: 'Integrate your water heater into your smart home. Control it remotely, set schedules, and monitor energy usage via a dedicated app.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Smart+App+Control',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Smart+App+Control+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Smart+App+Control+View+3'
+                ],
+                isBestseller: false,
+                tags: ['smart-home', 'wi-fi', 'app-control']
+            },
+            {
+                id: 'ultra-safe',
+                name: 'Mr Shot Ultra Safe',
+                price: 4100,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Ultra+Safe+Heater',
+                shortDescription: 'Maximum safety features for complete peace of mind.',
+                fullDetails: {
+                    capacity: '5 Litres',
+                    power: '3000 Watts',
+                    features: 'Triple safety system, Child lock, Anti-leak, Shock-proof.',
+                    description: 'Prioritizing safety, this model comes with multiple layers of protection, making it ideal for homes with children or elderly.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Ultra+Safe+Heater',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Ultra+Safe+Heater+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Ultra+Safe+Heater+View+3'
+                ],
+                isBestseller: true,
+                tags: ['safety', 'child-friendly', 'anti-leak']
+            },
+            {
+                id: 'designer-series',
+                name: 'Mr Shot Designer Series',
+                price: 6200,
+                img: 'https://placehold.co/600x400/e30613/ffffff?text=Designer+Series',
+                shortDescription: 'Artistically designed for modern, high-end bathrooms.',
+                fullDetails: {
+                    capacity: '8 Litres',
+                    power: '4500 Watts',
+                    features: 'Unique design, Premium materials, Silent operation, Touch panel.',
+                    description: 'More than just a water heater, it\'s a statement piece. Blends seamlessly with contemporary bathroom designs while providing efficient heating.'
+                },
+                galleryImages: [
+                    'https://placehold.co/600x400/e30613/ffffff?text=Designer+Series',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Designer+Series+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Designer+Series+View+3'
+                ],
+                isBestseller: false,
+                tags: ['designer', 'luxury', 'silent-operation']
+            }
+        ];
+
+        // Get references to new elements
+        const productSearchInput = document.getElementById('productSearch');
+        const sortOptionsSelect = document.getElementById('sortOptions');
+        const tagFilterSelect = document.getElementById('tagFilter'); // For tags
+
+        // Function to populate unique tags for the filter dropdown
+        function populateTagFilter() {
+            const allTags = new Set();
+            productsData.forEach(product => {
+                if (product.tags && Array.isArray(product.tags)) {
+                    product.tags.forEach(tag => allTags.add(tag));
+                }
+            });
+
+            tagFilterSelect.innerHTML = '<option value="all">All Tags</option>'; // Reset and add 'All' option
+            // Sort tags alphabetically for better UX
+            Array.from(allTags).sort().forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' '); // Capitalize and replace hyphens
+                tagFilterSelect.appendChild(option);
+            });
+        }
+
+        // Main function to filter and sort products
+        function filterAndSortProducts() {
+            let displayedProducts = [...productsData]; // Start with a copy of original data
+
+            // 1. Apply Search Filter
+            const searchQuery = productSearchInput.value.toLowerCase().trim();
+            if (searchQuery) {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.name.toLowerCase().includes(searchQuery) ||
+                    product.shortDescription.toLowerCase().includes(searchQuery) ||
+                    (product.fullDetails && product.fullDetails.description.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            // 2. Apply Tag Filter
+            const selectedTag = tagFilterSelect.value;
+            if (selectedTag !== 'all') {
+                displayedProducts = displayedProducts.filter(product =>
+                    product.tags && product.tags.includes(selectedTag)
+                );
+            }
+
+            // 3. Apply Sorting
+            const sortOption = sortOptionsSelect.value;
+            switch (sortOption) {
+                case 'price-asc':
+                    displayedProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    displayedProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    displayedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    displayedProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'bestsellers':
+                    // Sort bestsellers first, then by name for consistency
+                    displayedProducts.sort((a, b) => {
+                        if (a.isBestseller && !b.isBestseller) return -1;
+                        if (!a.isBestseller && b.isBestseller) return 1;
+                        return a.name.localeCompare(b.name);
+                    });
+                    break;
+                case 'default':
+                default:
+                    // No specific sorting, maintain original order or a default consistent order
+                    // For simplicity, we'll re-render based on the filtered data as is.
+                    break;
+            }
+
+            renderProducts(displayedProducts); // Pass the filtered and sorted array to render
+        }
+
+        // Modify renderProducts to accept an array to display
+        function renderProducts(productsToDisplay, targetElementId = 'productsGrid') {
+            const targetElement = document.getElementById(targetElementId);
+            if (!targetElement) return; // Exit if target element not found
+
+            targetElement.innerHTML = ''; // Clear existing content
+
+            if (productsToDisplay.length === 0) {
+                targetElement.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px; font-size: 1rem; color: var(--text-color);">No products found matching your criteria.</p>';
+                return;
+            }
+
+            productsToDisplay.forEach(product => {
+                const productCardHtml = `
+                    <div class="product-card-container">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-img">
+                                    <img src="${product.img}" alt="${product.name}">
+                                    <div class="product-gallery-dots" data-product-id="${product.id}">
+                                        <!-- Generate dots only for the first 3 images or actual number if less -->
+                                        ${product.galleryImages.slice(0, 3).map((_, idx) => `<span class="gallery-dot" data-image-index="${idx}"></span>`).join('')}
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p>${product.shortDescription}</p>
+                                    <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="product-btns">
+                                        <button class="btn view-details-btn" data-product-id="${product.id}">View Details</button>
+                                        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>${product.name} Details</h3>
+                                <div class="product-details-full">
+                                    <p><strong>Capacity:</strong> ${product.fullDetails.capacity}</p>
+                                    <p><strong>Power:</strong> ${product.fullDetails.power}</p>
+                                    <p><strong>Features:</strong> ${product.fullDetails.features}</p>
+                                    <p>${product.fullDetails.description}</p>
+                                </div>
+                                <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-secondary back-to-front-btn" style="background-color: #6c757d; margin-top: 10px;">Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                targetElement.insertAdjacentHTML('beforeend', productCardHtml);
+            });
+
+            // Re-attach event listeners after rendering products
+            attachProductEventListeners();
+            attachGalleryDotListeners();
+        }
+
+        // Add event listeners for search and sort/filter
+        productSearchInput.addEventListener('input', filterAndSortProducts);
+        sortOptionsSelect.addEventListener('change', filterAndSortProducts);
+        tagFilterSelect.addEventListener('change', filterAndSortProducts);
+
+
+        // Attach event listeners for product cards (called after rendering)
+        function attachProductEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.back-to-front-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.remove('flipped');
+                });
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const product = productsData.find(p => p.id === productId);
+                    if (product) {
+                        addItemToCart(product);
+                    }
+                });
+            });
+        }
+
+        // --- Cart Logic ---
+        let cart = []; // Array to store cart items
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartSidebarBtn = document.getElementById('closeCartSidebar');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            cartCount.textContent = cart.length;
+            cartItemsList.innerHTML = ''; // Clear current items
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: var(--text-color); margin-top: 20px;">Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('cart-item');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${item.id}"><i class="fas fa-times-circle"></i></button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price;
+                });
+            }
+            cartTotalAmount.textContent = total.toFixed(2);
+
+            // Re-attach event listeners for remove buttons
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = this.dataset.productId;
+                    removeItemFromCart(productIdToRemove);
+                });
+            });
+        }
+
+        // Function to add item to cart
+        function addItemToCart(product) {
+            cart.push(product);
+            updateCartDisplay();
+            showCustomMessage(`"${product.name}" added to cart!`, 'success');
+            cartSidebar.classList.add('open'); // Open sidebar when item is added
+        }
+
+        // Function to remove item from cart
+        function removeItemFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                const removedItemName = cart[index].name;
+                cart.splice(index, 1); // Remove one item at the found index
+                updateCartDisplay();
+                showCustomMessage(`"${removedItemName}" removed from cart.`, 'info');
+            }
+        }
+
+        // Open/Close Cart Sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+            aiChatSidebar.classList.remove('open'); // Close AI chat if cart opens
+        });
+
+        closeCartSidebarBtn.addEventListener('click', () => {
+            console.log('Close Cart button clicked!'); // Debugging log
+            cartSidebar.classList.remove('open');
+        });
+
+        // Close sidebar if clicked outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target) && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+
+
+        // --- Image Lightbox Logic ---
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+        const nextLightboxBtn = document.getElementById('nextLightboxBtn');
+        const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxDotsContainer = document.getElementById('lightboxDots');
+
+        let currentProductGallery = [];
+        let currentImageIndex = 0;
+
+        function attachGalleryDotListeners() {
+            document.querySelectorAll('.product-gallery-dots .gallery-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const productId = this.closest('.product-gallery-dots').dataset.productId;
+                    const initialImageIndex = parseInt(this.dataset.imageIndex);
+                    
+                    const product = productsData.find(p => p.id === productId);
+                    if (product && product.galleryImages) {
+                        openLightbox(product.galleryImages, initialImageIndex);
+                    }
+                });
+            });
+        }
+
+        function openLightbox(images, initialIndex = 0) {
+            currentProductGallery = images;
+            currentImageIndex = initialIndex;
+
+            lightboxDotsContainer.innerHTML = ''; // Clear previous dots
+            currentProductGallery.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('lightbox-dot');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => showLightboxImage(index));
+                lightboxDotsContainer.appendChild(dot);
+            });
+
+            showLightboxImage(currentImageIndex);
+            imageLightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            imageLightbox.classList.remove('active');
+        }
+
+        function showLightboxImage(index) {
+            if (index >= currentProductGallery.length) {
+                currentImageIndex = 0;
+            } else if (index < 0) {
+                currentImageIndex = currentProductGallery.length - 1;
+            } else {
+                currentImageIndex = index;
+            }
+            lightboxImage.src = currentProductGallery[currentImageIndex];
+
+            // Update active dot in lightbox
+            document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
+                if (i === currentImageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        prevLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
+        nextLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) { // Close only if clicked on the overlay, not the content
+                closeLightbox();
+            }
+        });
+
+
+        // Testimonials Grid Logic
+        const testimonialsData = [
+            {
+                text: "The Mr Shot Basic model is a lifesaver! Our old geyser took ages, but now we have hot water instantly for morning showers. It’s compact, efficient, and surprisingly powerful for its size. Highly recommend for small families.",
+                author: "Ramesh Kumar",
+                location: "Chennai, Tamil Nadu",
+                img: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                text: "Joining the Mr Shot franchise was one one of the best decisions for my business. The support is incredible, from marketing materials to product training. The demand for these affordable, high-quality heaters is constant, making it a very profitable venture.",
+                author: "Priya Sharma",
+                location: "Franchise Partner, Bangalore",
+                img: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            {
+                text: "Our salon needs a constant supply of hot water for various treatments. We switched to Mr Shot Commercial, and it has been flawless. It handles the continuous usage without any drop in temperature or pressure. Our stylists and clients are very happy!",
+                author: "Arun Joshi",
+                location: "Salon Owner, Coimbatore",
+                img: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            {
+                text: "I was hesitant about an instant water heater, but the Mr Shot Premium model exceeded all expectations. The digital display is super convenient for precise temperature, and it heats up incredibly fast. Plus, it looks sleek in my bathroom. Excellent value for money!",
+                author: "Anjali Singh",
+                location: "Mumbai, Maharashtra",
+                img: "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            {
+                text: "Installation was a breeze, and the Mr Shot team provided excellent customer service throughout. The product itself is fantastic – no more waiting for hot water, and our electricity bill hasn't spiked. A truly smart investment for any home.",
+                author: "Vikram Reddy",
+                location: "Hyderabad, Telangana",
+                img: "https://randomuser.me/api/portraits/men/80.jpg"
+            }
+        ];
+
+        function renderTestimonials() {
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            testimonialsGrid.innerHTML = ''; // Clear existing content
+
+            testimonialsData.forEach(testimonial => {
+                const testimonialCardHtml = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"${testimonial.text}"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="${testimonial.img}" alt="${testimonial.author}">
+                            </div>
+                            <div class="author-info">
+                                <h4>${testimonial.author}</h4>
+                                <p>${testimonial.location}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                testimonialsGrid.insertAdjacentHTML('beforeend', testimonialCardHtml);
+            });
+        }
+
+        // --- Header Scroll Behavior ---
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        const headerHeight = header.offsetHeight; // Get initial height of the header
+        const scrollThreshold = 100; // Distance to scroll before header changes
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                // Scrolling down past threshold
+                header.classList.add('header-scrolled');
+            } else if (scrollTop < lastScrollTop || scrollTop <= scrollThreshold) {
+                // Scrolling up or near the top
+                header.classList.remove('header-scrolled');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // --- AI Chatbot Logic (Mr. Shot) ---
+        const aiChatIcon = document.getElementById('aiChatIcon');
+        const aiChatSidebar = document.getElementById('aiChatSidebar');
+        const closeAiChatSidebarBtn = document.getElementById('closeAiChatSidebar');
+        const aiOptionRadios = document.querySelectorAll('input[name="aiOption"]');
+        const aiFieldGroups = document.querySelectorAll('.ai-field-group');
+        const aiSendButtons = document.querySelectorAll('.ai-send-btn');
+        const recommendedProductsDiv = document.getElementById('recommendedProducts');
+
+        // Input fields for various options
+        const repairHeaterNameInput = document.getElementById('repairHeaterName');
+        const repairUserNameInput = document.getElementById('repairUserName');
+        const buyPurposeSelect = document.getElementById('buyPurpose');
+        const franchiseUserNameInput = document.getElementById('franchiseUserName');
+        const franchiseMobileInput = document.getElementById('franchiseMobile');
+        const franchiseLocationInput = document.getElementById('franchiseLocation');
+        const franchisePinCodeInput = document.getElementById('franchisePinCode');
+        const supportUserNameInput = document.getElementById('supportUserName');
+        const supportContactNumberInput = document.getElementById('supportContactNumber');
+
+        // Open/Close AI Chat Sidebar
+        aiChatIcon.addEventListener('click', () => {
+            aiChatSidebar.classList.toggle('open');
+            cartSidebar.classList.remove('open'); // Close cart if AI chat opens
+            resetAiChat(); // Reset chat state when opening
+        });
+
+        closeAiChatSidebarBtn.addEventListener('click', () => {
+            console.log('Close AI Chat button clicked!'); // Debugging log
+            aiChatSidebar.classList.remove('open');
+        });
+
+        // Hide all field groups initially
+        function hideAllAiFieldGroups() {
+            aiFieldGroups.forEach(group => {
+                group.style.display = 'none';
+            });
+            recommendedProductsDiv.innerHTML = ''; // Clear recommended products
+        }
+
+        // Handle AI option selection
+        aiOptionRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                hideAllAiFieldGroups(); // Hide all when a new option is selected
+                const selectedOption = this.value;
+                document.getElementById(`${selectedOption}Fields`).style.display = 'flex'; // Show selected group
+                
+                // Clear inputs when switching options
+                repairHeaterNameInput.value = '';
+                repairUserNameInput.value = '';
+                buyPurposeSelect.value = '';
+                franchiseUserNameInput.value = '';
+                franchiseMobileInput.value = '';
+                franchiseLocationInput.value = '';
+                franchisePinCodeInput.value = '';
+                supportUserNameInput.value = '';
+                supportContactNumberInput.value = '';
+            });
+        });
+
+        // Function to send WhatsApp message
+        function sendWhatsAppMessage(phoneNumber, message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Handle "Send" button clicks within AI chat
+        aiSendButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const action = this.dataset.action;
+                let message = '';
+                let phoneNumber = '9123512626'; // Default to general sales/support
+
+                switch (action) {
+                    case 'repair':
+                        const heaterName = repairHeaterNameInput.value.trim();
+                        const userName = repairUserNameInput.value.trim();
+                        if (heaterName && userName) {
+                            message = `Hello Mr. Short Team, I need assistance with repairing my heater. My name is ${userName} and my heater model is ${heaterName}. Please contact me.`;
+                            sendWhatsAppMessage(phoneNumber, message);
+                            showCustomMessage('Repair request sent to Mr. Shot! We will contact you soon.', 'success');
+                            aiChatSidebar.classList.remove('open');
+                        } else {
+                            showCustomMessage('Please fill in both heater name and your name for repair request.', 'info');
+                        }
+                        break;
+                    case 'buy-show-products':
+                        const purpose = buyPurposeSelect.value;
+                        if (purpose) {
+                            const filteredProducts = productsData.filter(product => product.tags.includes(purpose));
+                            renderProducts(filteredProducts, 'recommendedProducts'); // Render into the AI chat div
+                            if (filteredProducts.length === 0) {
+                                recommendedProductsDiv.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px; font-size: 0.9rem; color: var(--text-color);">No specific products found for this purpose. Please browse our full catalog.</p>';
+                            }
+                        } else {
+                            showCustomMessage('Please select a purpose to see recommendations.', 'info');
+                        }
+                        break;
+                    case 'franchise':
+                        const fUserName = franchiseUserNameInput.value.trim();
+                        const fMobile = franchiseMobileInput.value.trim();
+                        const fLocation = franchiseLocationInput.value.trim();
+                        const fPinCode = franchisePinCodeInput.value.trim();
+                        phoneNumber = '9123512626'; // Franchise specific number
+                        if (fUserName && fMobile && fLocation && fPinCode) {
+                            message = `Hello Mr. Short Franchise Team, I am interested in a franchise opportunity. My name is ${fUserName}, mobile: ${fMobile}, location: ${fLocation}, pin code: ${fPinCode}. Please provide more details.`;
+                            sendWhatsAppMessage(phoneNumber, message);
+                            showCustomMessage('Franchise enquiry sent to Mr. Shot! We will contact you soon.', 'success');
+                            aiChatSidebar.classList.remove('open');
+                        } else {
+                            showCustomMessage('Please fill in all details for franchise enquiry.', 'info');
+                        }
+                        break;
+                    case 'support':
+                        const sUserName = supportUserNameInput.value.trim();
+                        const sContactNumber = supportContactNumberInput.value.trim();
+                        if (sUserName && sContactNumber) {
+                            message = `Hello Mr. Short Customer Support, I need assistance. My name is ${sUserName} and my contact number is ${sContactNumber}. Please reach out to me.`;
+                            sendWhatsAppMessage(phoneNumber, message);
+                            showCustomMessage('Support request sent to Mr. Shot! We will contact you soon.', 'success');
+                            aiChatSidebar.classList.remove('open');
+                        } else {
+                            showCustomMessage('Please provide your name and contact number for support.', 'info');
+                        }
+                        break;
+                }
+            });
+        });
+
+        // Reset AI chat state
+        function resetAiChat() {
+            aiOptionRadios.forEach(radio => radio.checked = false);
+            hideAllAiFieldGroups();
+            // Clear all input fields
+            repairHeaterNameInput.value = '';
+            repairUserNameInput.value = '';
+            buyPurposeSelect.value = '';
+            franchiseUserNameInput.value = '';
+            franchiseMobileInput.value = '';
+            franchiseLocationInput.value = '';
+            franchisePinCodeInput.value = '';
+            supportUserNameInput.value = '';
+            supportContactNumberInput.value = '';
+            recommendedProductsDiv.innerHTML = '';
+        }
+
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTagFilter(); // Populate tags before initial render
+            filterAndSortProducts(); // Call this to render products with initial filters/sort
+            updateCartDisplay(); // Initialize cart display
+            renderTestimonials(); // Render testimonials in grid
+            // Trigger scroll event to set initial active section and product controls state
+            window.dispatchEvent(new Event('scroll')); 
+            hideAllAiFieldGroups(); // Ensure AI fields are hidden on load
+        });
+    </script>
+</body>
+</html>

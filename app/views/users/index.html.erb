@@ -1,0 +1,116 @@
+<div class="animate-fade-in">
+
+  <!-- Stats Cards -->
+  <div class="stats-grid mb-5">
+    <div class="stat-card">
+      <div class="stat-icon text-primary">
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @users.count %></h3>
+        <p class="stat-label">Total Users</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-danger">
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @users.where(role: 'admin').count %></h3>
+        <p class="stat-label">Administrators</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-info">
+        <i class="fas fa-user-tie"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @users.where(role: 'manager').count %></h3>
+        <p class="stat-label">Managers</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon text-warning">
+        <i class="fas fa-crown"></i>
+      </div>
+      <div class="stat-content">
+        <h3 class="stat-number"><%= @users.where(role: 'owner').count %></h3>
+        <p class="stat-label">Owners</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fas fa-list"></i>
+        All Users
+      </h3>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th><i class="fas fa-envelope"></i> Email</th>
+              <th><i class="fas fa-user-tag"></i> Role</th>
+              <th><i class="fas fa-calendar"></i> Created</th>
+              <th class="text-end"><i class="fas fa-cogs"></i> Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <% case user.role %>
+                  <% when 'admin' %>
+                    <span class="badge bg-danger"><i class="fas fa-user-shield"></i> Admin</span>
+                  <% when 'manager' %>
+                    <span class="badge bg-info"><i class="fas fa-user-tie"></i> Manager</span>
+                  <% when 'owner' %>
+                    <span class="badge bg-warning"><i class="fas fa-crown"></i> Owner</span>
+                  <% else %>
+                    <span class="badge bg-secondary"><i class="fas fa-user"></i> Employee</span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= user.created_at.strftime("%B %d, %Y") %>
+                </td>
+                <td class="text-end">
+                  <div class="btn-group btn-group-sm">
+                    <% if current_user == user || current_user.can_edit_users? %>
+                      <%= link_to user_path(user), class: 'btn btn-outline-primary', title: 'View Details' do %>
+                        <i class="fas fa-eye"></i>
+                      <% end %>
+                    <% end %>
+                    
+                    <% if current_user.can_edit_user?(user) %>
+                      <%= link_to edit_user_path(user), class: 'btn btn-outline-warning', title: 'Edit User' do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                    <% end %>
+                    
+                    <% if current_user.can_delete_user?(user) %>
+                      <%= link_to user_path(user), method: :delete, 
+                          class: 'btn btn-outline-danger', title: 'Delete User',
+                          confirm: "Are you sure you want to delete user '#{user.email}'?" do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

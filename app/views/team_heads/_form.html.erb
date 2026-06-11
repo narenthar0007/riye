@@ -1,0 +1,92 @@
+<%= form_with(model: team_head, local: true, class: 'modern-form') do |form| %>
+  <% if team_head.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(team_head.errors.count, "error") %> prohibited this team head from being saved:</h4>
+      <ul>
+        <% team_head.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :dob, 'Date of Birth' %>
+        <%= form.date_field :dob, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :age %>
+        <%= form.number_field :age, class: 'form-control', min: 18, max: 100 %>
+        <small class="form-text text-muted">Age will be calculated automatically from date of birth if left empty</small>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :gender %>
+        <%= form.select :gender, 
+            options_for_select([
+              ['Male', 'Male'], 
+              ['Female', 'Female'], 
+              ['Other', 'Other']
+            ], team_head.gender), 
+            { prompt: 'Select Gender' }, 
+            { class: 'form-control' } %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :contact_number %>
+        <%= form.text_field :contact_number, class: 'form-control', placeholder: '10 digit mobile number' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :aadhaar_number %>
+        <%= form.text_field :aadhaar_number, class: 'form-control', placeholder: '12 digit Aadhaar number', maxlength: 12 %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :address %>
+        <%= form.text_area :address, class: 'form-control', rows: 4 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', team_heads_path, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
+
+<script>
+  // Auto-calculate age when date of birth changes
+  document.getElementById('team_head_dob').addEventListener('change', function() {
+    const dob = new Date(this.value);
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const monthDiff = today.getMonth() - dob.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+    }
+    
+    document.getElementById('team_head_age').value = age;
+  });
+
+  // Format Aadhaar number input
+  document.getElementById('team_head_aadhaar_number').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '');
+  });
+
+  // Format contact number input
+  document.getElementById('team_head_contact_number').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '');
+  });
+</script>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluvent - Innovating Construction & Empowering Businesses</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        /* Animation for fade-in-up */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+            opacity: 0; /* Hidden by default */
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX transformation in browser (for development, consider build step for production) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        // Explicitly pull useState and useEffect from the global React object
+        const { useState, useEffect } = React;
+
+        // Main App component
+        const App = () => {
+          const [activeSection, setActiveSection] = useState('home');
+
+          // Function to navigate between sections
+          const navigateTo = (section) => {
+            setActiveSection(section);
+            // Scroll to the section if it's not the home section (already scrolled to top by nav)
+            const element = document.getElementById(section);
+            if (element && section !== 'home') {
+              window.scrollTo({
+                top: element.offsetTop - 80, // Adjust for fixed header height
+                behavior: 'smooth'
+              });
+            } else if (section === 'home') {
+                 window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+          };
+
+          return (
+            <div className="min-h-screen bg-gray-50 font-sans text-gray-800">
+              {/* Navigation Bar */}
+              <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg p-4 md:px-8 flex flex-wrap justify-between items-center rounded-b-xl">
+                <div className="flex items-center space-x-3">
+                  {/* Logo/Brand Name (Image Logo Added) */}
+                  <img
+                    src="www.jpg" /* Placeholder for ing_1.png */
+                    alt="Bluvent Logo"
+                    className="h-8 w-8 rounded-md" /* Adjusted size and added rounded corners */
+                    onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/40x40/6366F1/FFFFFF?text=B"; }} /* Fallback to text 'B' */
+                  />
+                  <span className="text-2xl font-bold text-gray-900">Bluvent</span>
+                </div>
+                {/* Navigation Links */}
+                <div className="hidden md:flex space-x-6">
+                  <NavLink section="home" current={activeSection} onClick={() => navigateTo('home')}>Home</NavLink>
+                  <NavLink section="about" current={activeSection} onClick={() => navigateTo('about')}>About Us</NavLink>
+                  <NavLink section="services" current={activeSection} onClick={() => navigateTo('services')}>Services</NavLink>
+                  <NavLink section="app-features" current={activeSection} onClick={() => navigateTo('app-features')}>Riye App</NavLink>
+                  <NavLink section="contact" current={activeSection} onClick={() => navigateTo('contact')}>Contact</NavLink>
+                </div>
+                {/* Mobile Menu Button */}
+                <div className="md:hidden">
+                  <button
+                    onClick={() => document.getElementById('mobile-menu').classList.toggle('hidden')}
+                    className="text-gray-600 hover:text-gray-900 focus:outline-none"
+                  >
+                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
+
+              {/* Mobile Menu */}
+              <div id="mobile-menu" className="md:hidden hidden bg-white shadow-lg fixed top-16 left-0 right-0 z-40 rounded-b-xl">
+                <div className="flex flex-col p-4 space-y-2">
+                  <NavLink section="home" current={activeSection} onClick={() => { navigateTo('home'); document.getElementById('mobile-menu').classList.add('hidden'); }}>Home</NavLink>
+                  <NavLink section="about" current={activeSection} onClick={() => { navigateTo('about'); document.getElementById('mobile-menu').classList.add('hidden'); }}>About Us</NavLink>
+                  <NavLink section="services" current={activeSection} onClick={() => { navigateTo('services'); document.getElementById('mobile-menu').classList.add('hidden'); }}>Services</NavLink>
+                  <NavLink section="app-features" current={activeSection} onClick={() => { navigateTo('app-features'); document.getElementById('mobile-menu').classList.add('hidden'); }}>Riye App</NavLink>
+                  <NavLink section="contact" current={activeSection} onClick={() => { navigateTo('contact'); document.getElementById('mobile-menu').classList.add('hidden'); }}>Contact</NavLink>
+                </div>
+              </div>
+
+              {/* Main Content Sections */}
+              <main className="pt-24 pb-8">
+                {activeSection === 'home' && <HomeSection />}
+                {activeSection === 'about' && <AboutSection />}
+                {activeSection === 'services' && <ServicesSection />}
+                {activeSection === 'app-features' && <AppFeaturesSection />}
+                {activeSection === 'contact' && <ContactSection />}
+              </main>
+
+              {/* Footer */}
+              <footer className="bg-gray-900 text-white p-6 md:p-8 text-center rounded-t-xl">
+                <p>&copy; {new Date().getFullYear()} Bluvent. All rights reserved.</p>
+                <div className="mt-4 flex justify-center space-x-6">
+                  <a href="#" className="hover:text-indigo-400 transition-colors duration-300">Privacy Policy</a>
+                  <a href="#" className="hover:text-indigo-400 transition-colors duration-300">Terms of Service</a>
+                </div>
+              </footer>
+            </div>
+          );
+        };
+
+        // NavLink Component for consistent styling
+        const NavLink = ({ section, current, onClick, children }) => (
+          <a
+            href={`#${section}`}
+            onClick={onClick}
+            className={`font-medium px-3 py-2 rounded-lg transition-colors duration-300
+              ${current === section ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'}`}
+          >
+            {children}
+          </a>
+        );
+
+        // Home Section Component
+        const HomeSection = () => (
+          <section id="home" className="py-20 px-4 md:px-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-center rounded-xl mx-4 md:mx-8">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
+                Innovating Construction & Empowering Businesses
+              </h1>
+              <p className="text-lg md:text-xl mb-10 opacity-90 animate-fade-in-up delay-100">
+                Streamlining operations with cutting-edge construction technology and bespoke web solutions.
+              </p>
+              <div className="flex justify-center space-x-4 animate-fade-in-up delay-200">
+                <button className="bg-white text-indigo-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300">
+                  Explore Riye App
+                </button>
+                <button className="border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-indigo-700 transform hover:scale-105 transition-all duration-300">
+                  Our Services
+                </button>
+              </div>
+            </div>
+          </section>
+        );
+
+        // About Section Component
+        const AboutSection = () => (
+          <section id="about" className="py-16 px-4 md:px-8 bg-white rounded-xl mx-4 md:mx-8 shadow-lg mt-8">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">About Our Vision</h2>
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                  <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                    At Bluvent, we are driven by a passion for innovation and a commitment to transforming the way businesses operate. Our journey began with a focus on revolutionizing the construction industry through smart technological solutions. We observed the unique challenges faced by construction companies, especially in managing field operations and personnel, which led us to develop our flagship app, Riye.
+                  </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Beyond construction, we recognized a broader need for accessible and effective digital presence for small to medium-sized businesses. This insight expanded our mission to include crafting tailored websites for a diverse range of clients, from local shops and gyms to farms and other specialized enterprises, helping them thrive in the digital landscape.
+                  </p>
+                </div>
+                <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl">
+                  <img
+                    src="https://placehold.co/600x400/818CF8/FFFFFF?text=Team+Working"
+                    alt="Team working on a project"
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/600x400/818CF8/FFFFFF?text=Image+Not+Found"; }}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+
+        // Services Section Component
+        const ServicesSection = () => (
+          <section id="services" className="py-16 px-4 md:px-8 bg-gray-100 rounded-xl mx-4 md:mx-8 shadow-lg mt-8">
+            <div className="max-w-6xl mx-auto text-center">
+              <h2 className="text-4xl font-bold text-gray-900 mb-12">Our Comprehensive Services</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Service Card 1: Riye App */}
+                <ServiceCard
+                  icon="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m7 0V5a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h-2"
+                  title="Advanced Riye App"
+                  description="Our flagship app, Riye, offers comprehensive tools for project management, resource allocation, and real-time field attendance monitoring to boost efficiency on site."
+                />
+                {/* Service Card 2: Custom Web Development */}
+                <ServiceCard
+                  icon="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                  title="Custom Web Development"
+                  description="We craft bespoke, responsive websites tailored to the unique needs and brand identity of small shops, gyms, farms, and other local businesses."
+                />
+                {/* Service Card 3: Digital Presence & Branding */}
+                <ServiceCard
+                  icon="M5 12h14M12 5l7 7-7 7"
+                  title="Digital Presence & Branding"
+                  description="Beyond development, we help establish a strong online presence and coherent brand identity, ensuring your business stands out in the digital world."
+                />
+                {/* Service Card 4: UI/UX Design */}
+                <ServiceCard
+                  icon="M9.75 17L13 10.5 16.25 17m0 0h-6.5m6.5 0a2.25 2.25 0 002.25-2.25v-10.5a2.25 2.25 0 00-2.25-2.25h-6.5a2.25 2.25 0 00-2.25 2.25v10.5a2.25 2.25 0 002.25 2.25H16.25z"
+                  title="Intuitive UI/UX Design"
+                  description="We focus on creating user-friendly interfaces and engaging user experiences that are both functional and delightful for your audience."
+                />
+                {/* Service Card 5: Maintenance & Support */}
+                <ServiceCard
+                  icon="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37a1.724 1.724 0 002.572-1.065z"
+                  title="Ongoing Maintenance & Support"
+                  description="We provide reliable post-launch support, regular updates, and maintenance to ensure your digital solutions remain secure, efficient, and up-to-date."
+                />
+                {/* Service Card 6: Consultation & Strategy */}
+                <ServiceCard
+                  icon="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                  title="Digital Strategy & Consultation"
+                  description="Leverage our expertise to develop a robust digital strategy tailored to your business goals, offering consultation services from concept to execution."
+                />
+              </div>
+            </div>
+          </section>
+        );
+
+        // Service Card Component
+        const ServiceCard = ({ icon, title, description }) => (
+          <div className="bg-white rounded-xl shadow-md p-8 transform hover:scale-105 transition-transform duration-300">
+            <div className="flex justify-center mb-6">
+              <svg className="h-16 w-16 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={icon}></path>
+              </svg>
+            </div>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">{title}</h3>
+            <p className="text-gray-600">{description}</p>
+          </div>
+        );
+
+        // Construction App Features Section Component
+        const AppFeaturesSection = () => (
+          <section id="app-features" className="py-16 px-4 md:px-8 bg-white rounded-xl mx-4 md:mx-8 shadow-lg mt-8">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Our Riye App: Features & Benefits</h2>
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl">
+                  <img
+                    src="https://placehold.co/600x400/818CF8/FFFFFF?text=Riye+App+Screenshot"
+                    alt="Riye App Screenshot"
+                    className="w-full h-full object-cover"
+                    onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/600x400/818CF8/FFFFFF?text=Image+Not+Found"; }}
+                  />
+                </div>
+                <div>
+                  <h3 className="text-3xl font-semibold text-gray-900 mb-6">Key Features Designed for Efficiency</h3>
+                  <ul className="space-y-4 text-lg text-gray-700">
+                    <li className="flex items-start">
+                      <svg className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <div>
+                        <span className="font-semibold text-gray-800">Real-time Attendance Monitoring:</span> Track field personnel attendance with GPS and facial recognition for accurate records and payroll.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <div>
+                        <span className="font-semibold text-gray-800">Project Progress Tracking:</span> Monitor milestones, tasks, and overall project status from anywhere, ensuring projects stay on schedule.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <div>
+                        <span className="font-semibold text-gray-800">Resource Management:</span> Efficiently manage equipment, materials, and workforce allocation for optimal utilization.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="h-6 w-6 text-green-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <div>
+                        <span className="font-semibold text-gray-800">Reporting & Analytics:</span> Generate detailed reports on attendance, project performance, and more for informed decision-making.
+                      </div>
+                    </li>
+                  </ul>
+                  <div className="mt-8">
+                    <button className="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300">
+                      Request a Demo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+
+        // Contact Section Component
+        const ContactSection = () => {
+          const { useState } = React;
+          const [formData, setFormData] = useState({
+            name: '',
+            email: '',
+            message: '',
+          });
+          const [statusMessage, setStatusMessage] = useState('');
+          const [isError, setIsError] = useState(false);
+
+          const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData((prev) => ({ ...prev, [name]: value }));
+          };
+
+          const handleSubmit = async (e) => {
+            e.preventDefault();
+            setStatusMessage('');
+            setIsError(false);
+
+            // Basic validation
+            if (!formData.name || !formData.email || !formData.message) {
+              setStatusMessage('Please fill in all fields.');
+              setIsError(true);
+              return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+              setStatusMessage('Please enter a valid email address.');
+              setIsError(true);
+              return;
+            }
+
+            // Simulate API call
+            try {
+              // In a real application, you would send this data to your backend
+              // Example:
+              // const response = await fetch('/api/contact', {
+              //   method: 'POST',
+              //   headers: { 'Content-Type': 'application/json' },
+              //   body: JSON.stringify(formData),
+              // });
+              // const data = await response.json();
+              // if (response.ok) {
+              //   setStatusMessage('Thank you for your message! We will get back to you soon.');
+              //   setIsError(false);
+              //   setFormData({ name: '', email: '', message: '' }); // Clear form
+              // } else {
+              //   setStatusMessage(data.message || 'Failed to send message. Please try again.');
+              //   setIsError(true);
+              // }
+
+              // For this demo, we'll just simulate success
+              await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate network delay
+              setStatusMessage('Thank you for your message! We will get back to you soon.');
+              setIsError(false);
+              setFormData({ name: '', email: '', message: '' });
+
+            } catch (error) {
+              setStatusMessage('An unexpected error occurred. Please try again later.');
+              setIsError(true);
+              console.error('Contact form submission error:', error);
+            }
+          };
+
+          return (
+            <section id="contact" className="py-16 px-4 md:px-8 bg-gray-100 rounded-xl mx-4 md:mx-8 shadow-lg mt-8">
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-4xl font-bold text-gray-900 mb-12">Get in Touch With Us</h2>
+                <p className="text-lg text-gray-700 mb-8">
+                  Have a question about our Riye app, need a custom website, or want to discuss a project? Reach out to us!
+                </p>
+
+                <div className="bg-white p-8 rounded-xl shadow-md">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div>
+                      <label htmlFor="name" className="block text-left text-gray-700 text-sm font-bold mb-2">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        placeholder="John Doe"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-left text-gray-700 text-sm font-bold mb-2">
+                        Your Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        placeholder="you@example.com"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-left text-gray-700 text-sm font-bold mb-2">
+                        Your Message
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows="6"
+                        className="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        placeholder="Tell us about your project or inquiry..."
+                        required
+                      ></textarea>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <button
+                        type="submit"
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
+                        Send Message
+                      </button>
+                      {statusMessage && (
+                        <div className={`mt-4 text-sm ${isError ? 'text-red-600' : 'text-green-600'}`}>
+                          {statusMessage}
+                        </div>
+                      )}
+                    </div>
+                  </form>
+                </div>
+
+                <div className="mt-12 text-gray-700 text-lg">
+                  <p className="mb-2"><strong>Email:</strong> info@bluvent.com</p>
+                  <p className="mb-2"><strong>Phone:</strong> +1 (555) 123-4567</p>
+                  <p><strong>Address:</strong> 123 Tech Avenue, Innovation City, ST 98765</p>
+                </div>
+              </div>
+            </section>
+          );
+        };
+
+        // Render the App component into the root div
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

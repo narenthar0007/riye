@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Construction Image Generator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            color: #334155; /* Slate-700 */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 100%;
+            width: 100%;
+            padding: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 48rem; /* md:max-w-2xl */
+                padding: 2.5rem;
+            }
+        }
+
+        /* Custom focus styles for inputs and buttons */
+        input:focus, textarea:focus, button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4); /* Blue-500 ring */
+        }
+
+        /* Custom button styling */
+        .btn-primary {
+            background-image: linear-gradient(to right, #3b82f6 0%, #2563eb 50%, #3b82f6 100%);
+            background-size: 200% auto;
+            color: white;
+            transition: all 0.4s ease-in-out;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+            background-position: right center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Loading spinner animation */
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3b82f6; /* Blue */
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-white rounded-xl shadow-lg border border-gray-100 container">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center text-blue-800 mb-6 sm:mb-8">AI Construction Image Generator</h2>
+
+        <p class="text-gray-600 text-center mb-6">
+            Enter a detailed prompt describing the construction scene or architectural design you want to generate.
+        </p>
+
+        <div class="space-y-6">
+            <div>
+                <label for="image-prompt" class="block text-gray-700 text-base font-semibold mb-2">Image Prompt:</label>
+                <textarea
+                    id="image-prompt"
+                    rows="4"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-gray-800 resize-y"
+                    placeholder="e.g., 'Modern skyscraper with glass facade under construction at sunset, city skyline in background, realistic, high detail'"
+                ></textarea>
+            </div>
+
+            <button
+                id="generate-image-button"
+                class="btn-primary w-full py-3 px-6 rounded-lg font-bold text-lg flex items-center justify-center space-x-2"
+            >
+                <span id="button-text">Generate Image</span>
+                <div id="loading-spinner" class="loader hidden"></div>
+            </button>
+
+            <div id="status-message" class="text-center text-sm mt-4 hidden"></div>
+
+            <div id="image-output-container" class="mt-8 text-center bg-gray-50 p-4 rounded-lg border border-gray-200 min-h-[200px] flex items-center justify-center overflow-hidden">
+                <img id="generated-image" src="" alt="Generated Image" class="max-w-full h-auto rounded-lg shadow-md hidden" onerror="this.classList.add('hidden');">
+                <p id="image-placeholder" class="text-gray-400 text-lg">Your generated image will appear here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        const generateButton = document.getElementById('generate-image-button');
+        const promptInput = document.getElementById('image-prompt');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const buttonText = document.getElementById('button-text');
+        const statusMessage = document.getElementById('status-message');
+        const generatedImage = document.getElementById('generated-image');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+        const apiKey = ""; // Leave this empty. Canvas will provide the API key at runtime.
+
+        // Function to display a message to the user
+        function showMessage(message, isError = false) {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('hidden', 'text-red-600', 'text-green-600');
+            if (isError) {
+                statusMessage.classList.add('text-red-600');
+            } else {
+                statusMessage.classList.add('text-gray-600'); // General info/success
+            }
+        }
+
+        // Function to hide the message
+        function hideMessage() {
+            statusMessage.classList.add('hidden');
+            statusMessage.textContent = '';
+        }
+
+        // Function to show loading state
+        function showLoading() {
+            buttonText.textContent = 'Generating...';
+            loadingSpinner.classList.remove('hidden');
+            generateButton.disabled = true;
+            generatedImage.classList.add('hidden');
+            imagePlaceholder.classList.remove('hidden');
+            imagePlaceholder.textContent = 'Generating image, please wait...';
+            hideMessage(); // Clear previous messages
+        }
+
+        // Function to hide loading state
+        function hideLoading() {
+            buttonText.textContent = 'Generate Image';
+            loadingSpinner.classList.add('hidden');
+            generateButton.disabled = false;
+        }
+
+        generateButton.addEventListener('click', async () => {
+            const prompt = promptInput.value.trim();
+
+            if (!prompt) {
+                showMessage('Please enter a prompt to generate an image.', true);
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const payload = { instances: { prompt: prompt }, parameters: { "sampleCount": 1} };
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                    const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                    generatedImage.src = imageUrl;
+                    generatedImage.classList.remove('hidden');
+                    imagePlaceholder.classList.add('hidden');
+                    showMessage('Image generated successfully!', false);
+                } else {
+                    showMessage('Failed to generate image. Please try a different prompt.', true);
+                    console.error('Image generation failed:', result);
+                    generatedImage.classList.add('hidden');
+                    imagePlaceholder.classList.remove('hidden');
+                    imagePlaceholder.textContent = 'Failed to load image.';
+                }
+            } catch (error) {
+                showMessage('An error occurred during image generation. Please try again.', true);
+                console.error('Fetch error:', error);
+                generatedImage.classList.add('hidden');
+                imagePlaceholder.classList.remove('hidden');
+                imagePlaceholder.textContent = 'Error generating image.';
+            } finally {
+                hideLoading();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venkat Enterprises - Survey & Construction Equipment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-orange: #E67E22;
+            --dark-orange: #D35400;
+            --light-orange: #F39C12;
+            --brown: #7E5109;
+            --dark-brown: #5D4037;
+            --light-brown: #A1887F;
+            --accent: #2C3E50;
+            --light: #F5F5F5;
+            --dark: #222;
+        }
+        
+        body {
+            background-color: #FFF8F0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--brown), var(--dark-brown));
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            background-color: var(--dark-brown);
+            color: white;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info a {
+            color: var(--light-orange);
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+        
+        .contact-info a:hover {
+            color: white;
+        }
+        
+        .contact-info i {
+            margin-right: 5px;
+        }
+        
+        .social-links a {
+            color: var(--light-orange);
+            margin-left: 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: white;
+        }
+        
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            background: var(--primary-orange);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .logo-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--primary-orange);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-orange);
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-orange);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover::after, .nav-menu a.active::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-cart {
+            display: flex;
+            margin-right: 20px;
+        }
+        
+        .search-cart a {
+            color: white;
+            font-size: 1.2rem;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        
+        .search-cart a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .cta-button {
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(94, 64, 55, 0.85), rgba(94, 64, 55, 0.85)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3') center/cover no-repeat;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-orange);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-orange);
+            color: white;
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            transform: translateY(-5px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--brown);
+            transform: translateY(-5px);
+        }
+        
+        /* Categories Section */
+        .section {
+            padding: 90px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--brown);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--brown), var(--primary-orange));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .section-title p {
+            color: var(--accent);
+            max-width: 700px;
+            margin: 25px auto 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(126, 81, 9, 0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: rgba(230, 126, 34, 0.3);
+        }
+        
+        .category-img {
+            height: 220px;
+            background: linear-gradient(to bottom right, var(--light-brown), var(--brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .category-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 15px;
+            color: var(--brown);
+            font-size: 1.5rem;
+        }
+        
+        .category-content p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .category-link {
+            display: inline-block;
+            color: var(--primary-orange);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .category-link:hover {
+            color: var(--dark-orange);
+        }
+        
+        /* Brands Section */
+        .brands {
+            background: linear-gradient(to bottom, #FFF8F0, #F5EBE0);
+        }
+        
+        .brand-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .brand-logo {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 130px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            transition: all 0.3s;
+            border: 1px solid rgba(126, 81, 9, 0.1);
+        }
+        
+        .brand-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: var(--primary-orange);
+        }
+        
+        .brand-logo:nth-child(1) { color: #e3000f; }
+        .brand-logo:nth-child(2) { color: #0d4e96; }
+        .brand-logo:nth-child(3) { color: #0033a0; }
+        .brand-logo:nth-child(4) { color: #fecb00; }
+        .brand-logo:nth-child(5) { color: #000; }
+        .brand-logo:nth-child(6) { color: #000; }
+        .brand-logo:nth-child(7) { color: #e3000f; }
+        
+        /* Featured Products */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            position: relative;
+            border: 1px solid rgba(126, 81, 9, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: rgba(230, 126, 34, 0.3);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+        
+        .product-img {
+            height: 240px;
+            background: linear-gradient(to bottom, #F5EBE0, #E6D5C4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--brown);
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-category {
+            color: var(--primary-orange);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark-brown);
+            min-height: 66px;
+        }
+        
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--brown);
+            margin-bottom: 20px;
+        }
+        
+        .product-price span {
+            font-size: 1.2rem;
+            color: #888;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(to right, var(--primary-orange), var(--dark-orange));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            flex-grow: 1;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(to right, var(--dark-orange), var(--brown));
+            transform: translateY(-3px);
+        }
+        
+        .wishlist {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light);
+            border: 2px solid var(--light-brown);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--brown);
+            font-size: 1.2rem;
+        }
+        
+        .wishlist:hover {
+            background-color: var(--light-orange);
+            color: white;
+            border-color: var(--light-orange);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(rgba(126, 81, 9, 0.05), rgba(126, 81, 9, 0.05)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3') center/cover no-repeat;
+            position: relative;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .contact .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info {
+            background: linear-gradient(to bottom right, var(--brown), var(--dark-brown));
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            color: white;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-orange);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            border-radius: 2px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            min-width: 55px;
+            height: 55px;
+            background-color: rgba(230, 126, 34, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary-orange);
+            margin-right: 20px;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 8px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+        
+        .contact-form {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h3 {
+            color: var(--brown);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-form h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            border-radius: 2px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--brown);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+            background-color: white;
+        }
+        
+        textarea.form-control {
+            height: 160px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary-orange), var(--dark-orange));
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            width: auto;
+            box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--brown), var(--dark-brown));
+            color: white;
+            padding: 70px 0 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            color: var(--primary-orange);
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-orange);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-orange);
+            transform: translateX(5px);
+        }
+        
+        .footer-contact li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .footer-contact i {
+            color: var(--primary-orange);
+            margin-right: 15px;
+            min-width: 25px;
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+        
+        .footer-contact p {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0,0,0,0.15);
+            padding: 25px 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .footer-bottom p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .footer-bottom a {
+            color: var(--primary-orange);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                font-size: 1.8rem;
+                color: white;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="contact-info">
+                    <a href="tel:9123512626"><i class="fas fa-phone"></i> +91 9123512626</a>
+                    <a href="mailto:venkatetp@gmail.com"><i class="fas fa-envelope"></i> venkatetp@gmail.com</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container main-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="logo-text">VENKAT <span>ENTERPRISES</span></div>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#brands">Brands</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-cart">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>
+                </div>
+                <a href="#contact" class="cta-button">Get Quote</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>PREMIUM <span>EQUIPMENT</span> FOR PROFESSIONALS</h1>
+            <p>Supplying top-quality survey instruments, construction tools, and lab equipment from leading global brands</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Product Categories</h2>
+                <p>We provide specialized equipment across multiple industry sectors with the highest quality standards</p>
+            </div>
+            
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>Survey Equipment</h3>
+                        <p>Precision instruments for land surveying, mapping, and geospatial data collection</p>
+                        <a href="#" class="category-link">Explore Products <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>Civil QC Lab</h3>
+                        <p>Quality control equipment for construction materials testing and analysis</p>
+                        <a href="#" class="category-link">Explore Products <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>Construction Tools</h3>
+                        <p>Durable tools and equipment for building and infrastructure projects</p>
+                        <a href="#" class="category-link">Explore Products <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3>Power Tools</h3>
+                        <p>Efficient, reliable and safe power tools for professional applications</p>
+                        <a href="#" class="category-link">Explore Products <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section class="section brands" id="brands">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Brands</h2>
+                <p>We partner with the world's leading manufacturers to bring you quality products</p>
+            </div>
+            
+            <div class="brand-logos">
+                <div class="brand-logo">BOSCH</div>
+                <div class="brand-logo">SOKKIA</div>
+                <div class="brand-logo">GARWARE</div>
+                <div class="brand-logo">DEWALT</div>
+                <div class="brand-logo">STANLEY</div>
+                <div class="brand-logo">BLACK&DECKER</div>
+                <div class="brand-logo">HONDA</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Explore our top-quality equipment for professional applications</p>
+            </div>
+            
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-img">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-category">Survey Equipment</div>
+                        <h3 class="product-title">Digital Theodolite with Laser Distance Meter</h3>
+                        <div class="product-price">₹42,500 <span>₹48,000</span></div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Best Seller</div>
+                    <div class="product-img">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-category">Power Tools</div>
+                        <h3 class="product-title">Rotary Hammer Drill with 3 Function Settings</h3>
+                        <div class="product-price">₹15,300 <span>₹17,500</span></div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Special Offer</div>
+                    <div class="product-img">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="product-content">
+                        <div class="product-category">Lab Equipment</div>
+                        <h3 class="product-title">Concrete Slump Tester with Accessories Kit</h3>
+                        <div class="product-price">₹8,750 <span>₹10,200</span></div>
+                        <div class="product-actions">
+                            <button class="add-to-cart"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Reach out to us for inquiries, quotes, or support</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Our Location</h4>
+                            <p>188-B Bhasyakarlu Road East, R.s Puram,<br> Coimbatore 641002, Tamil Nadu, India</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone Number</h4>
+                            <p>+91 9123512626</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email Address</h4>
+                            <p>venkatetp@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Working Hours</h4>
+                            <p>Monday - Saturday: 9:00 AM - 6:00 PM<br>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Venkat Enterprises</h3>
+                    <p>Your trusted partner for professional survey equipment, construction tools, and lab instruments since 2005.</p>
+                    <div class="social-links" style="margin-top: 25px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#brands">Brands</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Survey Equipment</a></li>
+                        <li><a href="#">Civil QC Lab</a></li>
+                        <li><a href="#">Construction Tools</a></li>
+                        <li><a href="#">Power Tools</a></li>
+                        <li><a href="#">Safety Equipment</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> <p>188-B Bhasyakarlu Road East, R.s Puram, Coimbatore 641002</p></li>
+                        <li><i class="fas fa-phone-alt"></i> <p>+91 9123512626</p></li>
+                        <li><i class="fas fa-envelope"></i> <p>venkatetp@gmail.com</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Venkat Enterprises. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary-orange);"></i> for Professionals</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add to cart functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        let count = 0;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').textContent;
+                
+                // Change button text and style
+                button.innerHTML = '<i class="fas fa-check"></i> Added';
+                button.style.background = 'linear-gradient(to right, #27ae60, #2ecc71)';
+                
+                // Update cart count
+                count++;
+                cartCount.textContent = count;
+                cartCount.style.animation = 'bounce 0.5s';
+                setTimeout(() => {
+                    cartCount.style.animation = '';
+                }, 500);
+                
+                // Revert after 2 seconds
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+                    button.style.background = 'linear-gradient(to right, var(--primary-orange), var(--dark-orange))';
+                }, 2000);
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.querySelector('.contact-form form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will contact you soon.');
+            contactForm.reset();
+        });
+        
+        // Wishlist functionality
+        const wishlistButtons = document.querySelectorAll('.wishlist');
+        wishlistButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.innerHTML.includes('far')) {
+                    button.innerHTML = '<i class="fas fa-heart"></i>';
+                    button.style.color = 'white';
+                    button.style.backgroundColor = 'var(--primary-orange)';
+                    button.style.borderColor = 'var(--primary-orange)';
+                } else {
+                    button.innerHTML = '<i class="far fa-heart"></i>';
+                    button.style.color = 'var(--brown)';
+                    button.style.backgroundColor = 'var(--light)';
+                    button.style.borderColor = 'var(--light-brown)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

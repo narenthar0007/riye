@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Shot - Instant Water Heaters at Affordable Prices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-red: #e30613;
+            --dark-red: #b00000;
+            --light-red: #ff4d4d;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333333;
+            --text-color: #4a4a4a; /* Slightly softer dark gray for general text */
+            --border-color: #e0e0e0; /* A light border color */
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --shadow-deep: rgba(0, 0, 0, 0.25);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+            font-size: 16px; /* Base font size */
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--white);
+            padding: 12px 25px; /* Increased padding */
+            border: none;
+            border-radius: 8px; /* More rounded */
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600; /* Slightly less bold */
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px; /* Added letter spacing */
+            box-shadow: 0 4px 10px var(--shadow-light); /* Initial shadow */
+        }
+        
+        .btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px); /* More pronounced lift */
+            box-shadow: 0 8px 20px var(--shadow-medium); /* Deeper shadow on hover */
+        }
+        
+        .btn-large {
+            padding: 18px 35px; /* Larger padding */
+            font-size: 1.2rem; /* Larger font */
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px; /* More space below title */
+            color: var(--primary-red);
+            font-size: 2.8rem; /* Larger for prominence */
+            position: relative;
+            font-weight: 800; /* Extra bold */
+            letter-spacing: 1px;
+            text-transform: uppercase; /* Uppercase for impact */
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 120px; /* Wider underline */
+            height: 6px; /* Thicker underline */
+            background: var(--primary-red);
+            margin: 20px auto 0; /* More space below title */
+            border-radius: 3px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease; /* Smooth transition for header changes */
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            transition: all 0.3s ease; /* Smooth transition for padding */
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 55px; /* Slightly larger logo */
+            margin-right: 12px;
+            transition: height 0.3s ease; /* Smooth transition for logo size */
+        }
+        
+        .logo h1 {
+            color: var(--primary-red);
+            font-size: 2.2rem; /* Slightly larger */
+            font-weight: 900; /* Even bolder */
+            letter-spacing: 1.5px;
+            transition: font-size 0.3s ease; /* Smooth transition for heading size */
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem; /* Larger icon */
+            color: var(--primary-red);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition for nav items */
+        }
+        
+        nav ul li {
+            margin-left: 35px; /* More spacing */
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding-bottom: 8px; /* More space for underline effect */
+            font-size: 1.05rem; /* Slightly larger nav links */
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px; /* Thicker underline */
+            background: var(--primary-red);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        /* Header Scrolled State */
+        header.header-scrolled .header-container {
+            padding: 10px 0; /* Smaller padding when nav is hidden */
+        }
+        header.header-scrolled .logo img {
+            height: 40px; /* Make logo smaller */
+        }
+        header.header-scrolled .logo h1 {
+            font-size: 1.8rem; /* Make heading smaller */
+        }
+        header.header-scrolled nav ul {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Disable clicks */
+        }
+        
+        /* Floating Circular Navigation */
+        .floating-nav {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* More space between items */
+        }
+        
+        .floating-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .floating-nav ul li {
+            margin: 0;
+            position: relative;
+        }
+        
+        .floating-nav ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px; /* Reduced size */
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-red);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 5px 15px var(--shadow-medium);
+            transition: all 0.3s ease;
+            font-size: 1.2rem; /* Adjusted icon size */
+        }
+        
+        .floating-nav ul li a:hover {
+            background-color: var(--dark-red);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px var(--shadow-deep);
+        }
+        
+        .floating-nav ul li .nav-tooltip {
+            position: absolute;
+            right: 60px; /* Adjusted position for smaller circle */
+            background: var(--dark-gray);
+            color: white;
+            padding: 8px 15px; /* Adjusted padding */
+            border-radius: 10px; /* More rounded */
+            font-size: 0.9rem; /* Slightly smaller font */
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+            top: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .floating-nav ul li .nav-tooltip:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -10px; /* Adjusted position */
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid var(--dark-gray);
+        }
+        
+        .floating-nav ul li a:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 70px; /* Adjusted position on hover */
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Removed linear-gradient overlay */
+            background-size: cover;
+            background-position: center;
+            height: 95vh; /* Taller hero */
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 85px; /* Adjust for header height */
+            position: relative;
+            overflow: hidden; /* For subtle background animation */
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hero-content {
+            max-width: 950px; /* Wider content */
+            margin: 0 auto;
+            padding: 40px; /* More padding */
+            background-color: rgba(0, 0, 0, 0.2); /* Made more transparent */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 15px 40px var(--shadow-deep);
+            animation: fadeInScale 1s ease-out forwards;
+        }
+        
+        .hero h2 {
+            font-size: 4.2rem; /* Larger heading */
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.4rem; /* Larger paragraph */
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            line-height: 1.5;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* More spacing */
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0; /* More padding */
+            background-color: var(--white);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); /* Adjusted minwidth */
+            gap: 50px; /* More spacing */
+        }
+        
+        .feature-card {
+            background: var(--light-gray);
+            padding: 40px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s, background-color 0.3s;
+            box-shadow: 0 10px 25px var(--shadow-light); /* Softer shadow */
+            border: 1px solid var(--border-color); /* Subtle border */
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-18px); /* More pronounced lift */
+            box-shadow: 0 20px 45px var(--shadow-medium); /* Deeper shadow */
+            background-color: #f0f0f0; /* Slight background change on hover */
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-red), var(--light-red));
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-out;
+        }
+
+        .feature-card:hover::before {
+            transform: translateY(0);
+        }
+        
+        .feature-icon {
+            font-size: 4rem; /* Larger icon */
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 18px;
+            color: var(--primary-red);
+            font-size: 1.6rem; /* Larger heading */
+            letter-spacing: 0.8px;
+        }
+        
+        .feature-card p {
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 120px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minwidth */
+            gap: 50px; /* More spacing */
+        }
+        
+        .product-card-container {
+            perspective: 1200px; /* Stronger 3D perspective */
+            height: 480px; /* Taller fixed height for consistent cards */
+        }
+
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* More dynamic flip animation */
+            transform-style: preserve-3d;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px var(--shadow-medium);
+            background-color: var(--white); /* Ensure background for front/back */
+        }
+
+        .product-card-container.flipped .product-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 30px; /* Increased padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .product-card-back {
+            transform: rotateY(180deg);
+            justify-content: flex-start; /* Align content to top */
+            text-align: left;
+            padding-top: 40px; /* More padding at top for title */
+        }
+
+        .product-img {
+            height: 220px; /* Taller image area */
+            width: 100%;
+            border-radius: 15px; /* More rounded image */
+            overflow: hidden;
+            margin-bottom: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative; /* For gallery dots */
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth zoom */
+        }
+        
+        .product-card-container:hover .product-img img {
+            transform: scale(1.08); /* Subtle zoom */
+        }
+
+        .product-gallery-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 10px; /* Moved to left corner */
+            transform: translateX(0); /* Removed horizontal centering transform */
+            display: flex;
+            gap: 5px; /* Smaller gap for smaller dots */
+            z-index: 5;
+        }
+
+        .gallery-dot {
+            width: 8px; /* Smaller width */
+            height: 8px; /* Smaller height */
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white */
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-dot:hover {
+            background-color: var(--primary-red);
+            transform: scale(1.1);
+        }
+        
+        .product-info h3 {
+            margin-bottom: 12px;
+            color: var(--primary-red);
+            font-size: 1.5rem;
+            letter-spacing: 0.7px;
+        }
+        
+        .product-info p {
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1; /* Allows description to take space */
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            font-size: 1.5rem; /* Larger price */
+            margin: 15px 0 25px; /* More spacing */
+            color: var(--dark-red);
+            letter-spacing: 0.5px;
+        }
+        
+        .product-btns {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px; /* More spacing */
+            width: 100%;
+        }
+
+        .product-card-back h3 {
+            font-size: 1.8rem; /* Larger title on back */
+            margin-bottom: 20px;
+            color: var(--primary-red);
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card-back .product-details-full {
+            flex-grow: 1;
+            margin-bottom: 30px; /* More space before buttons */
+            overflow-y: auto;
+            padding-right: 8px; /* Space for scrollbar */
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .product-card-back .product-details-full p {
+            margin-bottom: 10px;
+        }
+
+        .product-card-back .btn {
+            width: 100%;
+            margin-top: 15px; /* More space between buttons */
+            font-size: 1.05rem;
+        }
+        
+        /* Franchise Section */
+        .franchise {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+        
+        .franchise-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 80px; /* More spacing */
+        }
+        
+        .franchise-text {
+            flex: 1;
+            min-width: 400px; /* Larger min-width */
+            line-height: 1.7;
+        }
+        
+        .franchise-text h3 {
+            font-size: 2.2rem;
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            letter-spacing: 0.8px;
+        }
+        .franchise-text p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .franchise-image {
+            flex: 1;
+            min-width: 400px;
+            border-radius: 20px; /* More rounded */
+            overflow: hidden;
+            box-shadow: 0 15px 40px var(--shadow-medium); /* Deeper shadow */
+            border: 2px solid var(--border-color);
+        }
+        
+        .franchise-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .franchise-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .benefits-list {
+            margin: 35px 0; /* More margin */
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 15px; /* More spacing */
+            position: relative;
+            padding-left: 40px; /* Space for icon */
+            font-size: 1.15rem; /* Larger font */
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .benefits-list li:before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            color: #28a745; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.3rem; /* Larger icon */
+        }
+        
+        /* Testimonials Section (Grid Layout) */
+        .testimonials {
+            padding: 120px 0;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 40px; /* Spacing between cards */
+            max-width: 1200px; /* Max width for the grid */
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px; /* Adjusted padding */
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space */
+            align-items: center;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+        
+        .testimonial-card:before {
+            content: '\201C';
+            font-family: Georgia, serif;
+            font-size: 5rem; /* Slightly smaller quote mark */
+            color: var(--light-red);
+            position: absolute;
+            top: 15px; /* Adjusted position */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.1; /* More subtle */
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px; /* Adjusted margin */
+            padding-top: 20px; /* Adjusted padding */
+            font-size: 1.15rem; /* Adjusted text size */
+            color: var(--text-color);
+            z-index: 2;
+            position: relative;
+            line-height: 1.6;
+            flex-grow: 1; /* Allows text to take available space */
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px; /* Adjusted margin */
+        }
+        
+        .author-img {
+            width: 60px; /* Adjusted image size */
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 3px solid var(--primary-red); /* Adjusted border thickness */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--primary-red);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        .author-info p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Removed slideshow navigation buttons and dots styles */
+        /* .slideshow-nav-btn, .slideshow-dots are no longer needed */
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 80px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 320px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-red);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            letter-spacing: 0.7px;
+        }
+        
+        .contact-details {
+            margin-bottom: 50px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px; /* More spacing */
+        }
+        
+        .contact-icon {
+            color: var(--primary-red);
+            margin-right: 25px; /* More spacing */
+            font-size: 1.8rem; /* Larger icon */
+            margin-top: 5px;
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        .contact-item a:hover {
+            color: var(--primary-red);
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 400px;
+            background: var(--light-gray);
+            padding: 45px; /* More padding */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 10px 25px var(--shadow-light);
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 30px; /* More spacing */
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px; /* More spacing */
+            font-weight: 600;
+            color: var(--dark-gray);
+            font-size: 1.05rem;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px; /* More padding */
+            border: 1px solid #ddd;
+            border-radius: 10px; /* More rounded */
+            font-size: 1.05rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.25); /* Stronger glow */
+        }
+        
+        .form-group textarea {
+            height: 200px; /* Taller textarea */
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 70px 0 40px; /* More padding */
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Adjusted min-width */
+            gap: 50px; /* More spacing */
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            color: var(--primary-red);
+            margin-bottom: 28px;
+            font-size: 1.5rem;
+            letter-spacing: 0.6px;
+        }
+        
+        .footer-col p, .footer-col ul li {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85); /* Slightly brighter text */
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--primary-red);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 25px; /* More spacing */
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background: var(--primary-red); /* Changed to red */
+            width: 50px; /* Larger icons */
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--dark-red); /* Darker red on hover */
+            transform: translateY(-6px) scale(1.15); /* More pronounced hover */
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15); /* Slightly thicker border */
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Floating Action Buttons */
+        .floating-btns {
+            position: fixed;
+            bottom: 35px; /* More space from bottom */
+            right: 35px; /* More space from right */
+            display: flex;
+            flex-direction: column;
+            gap: 18px; /* More spacing */
+            z-index: 999;
+        }
+        
+        .floating-btn {
+            width: 70px; /* Larger buttons */
+            height: 70px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem; /* Larger icons */
+            box-shadow: 0 10px 25px var(--shadow-deep); /* Deeper shadow */
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--dark-red);
+            transform: translateY(-10px) scale(1.15); /* More pronounced lift and scale */
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Cart Icon and Sidebar Styles */
+        #cartIcon {
+            position: fixed;
+            bottom: 35px; /* Aligned with other floating buttons */
+            left: 35px;
+            width: 70px;
+            height: 70px;
+            background-color: #007bff; /* Blue for cart */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px var(--shadow-deep);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        #cartIcon:hover {
+            background-color: #0056b3;
+            transform: translateY(-10px) scale(1.15);
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -8px; /* Adjusted position */
+            right: -8px; /* Adjusted position */
+            background-color: var(--primary-red);
+            color: white;
+            font-size: 0.9rem; /* Slightly larger */
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px; /* More padding */
+            min-width: 28px; /* Larger min-width */
+            text-align: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--white); /* White border for contrast */
+        }
+
+        #cartSidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px; /* Wider sidebar */
+            height: 100%;
+            background-color: var(--white);
+            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+            z-index: 1100;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Dynamic slide-in */
+            display: flex;
+            flex-direction: column;
+            padding: 30px; /* More padding */
+        }
+
+        #cartSidebar.open {
+            transform: translateX(0);
+        }
+
+        #cartSidebar h3 {
+            color: var(--primary-red);
+            font-size: 2.2rem; /* Larger title */
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            letter-spacing: 1px;
+        }
+        #cartSidebar h3::after {
+            content: '';
+            display: block;
+            width: 80px; /* Wider underline */
+            height: 4px; /* Thicker underline */
+            background: var(--primary-red);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        #closeCartSidebar {
+            position: absolute;
+            top: 20px; /* Adjusted position */
+            right: 20px; /* Adjusted position */
+            background: none;
+            border: none;
+            font-size: 2.2rem; /* Larger icon */
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.3s;
+        }
+        #closeCartSidebar:hover {
+            color: var(--primary-red);
+            transform: rotate(90deg); /* Rotate on hover */
+        }
+
+        #cartItems {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 15px; /* More space for scrollbar */
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* More spacing */
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 90px; /* Larger image */
+            height: 90px;
+            object-fit: cover;
+            border-radius: 10px; /* More rounded */
+            margin-right: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1.2rem; /* Larger font */
+            color: var(--dark-gray);
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .cart-item-details p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            color: var(--primary-red);
+            font-size: 1.8rem; /* Larger icon */
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: color 0.3s ease, transform 0.2s;
+        }
+        .remove-item-btn:hover {
+            color: var(--dark-red);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #cartTotal {
+            margin-top: 30px; /* More space */
+            padding-top: 25px;
+            border-top: 3px solid var(--primary-red); /* Thicker border */
+            font-size: 1.6rem; /* Larger font */
+            font-weight: bold;
+            text-align: right;
+            color: var(--dark-gray);
+            letter-spacing: 0.5px;
+        }
+        #cartTotal span {
+            color: var(--primary-red);
+        }
+
+        /* Image Lightbox Styles */
+        #imageLightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 2000; /* Above everything */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #imageLightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightboxContent {
+            position: relative;
+            background-color: var(--white);
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 80%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transform: scale(0.8);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #imageLightbox.active #lightboxContent {
+            transform: scale(1);
+        }
+
+        #lightboxCloseBtn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--dark-gray);
+            font-size: 3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        #lightboxCloseBtn:hover,
+        #lightboxCloseBtn:focus {
+            color: var(--primary-red);
+            transform: rotate(90deg);
+        }
+
+        #lightboxImageContainer {
+            width: 100%;
+            max-width: 700px; /* Max width for the image */
+            max-height: 70vh; /* Max height for the image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        #lightboxImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure image fits without cropping */
+            display: block;
+            border-radius: 10px;
+        }
+
+        .lightbox-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.3);
+            color: var(--dark-gray);
+            border: none;
+            padding: 15px 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .lightbox-nav-btn:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            color: var(--primary-red);
+        }
+
+        #prevLightboxBtn { left: 15px; }
+        #nextLightboxBtn { right: 15px; }
+
+        #lightboxDots {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .lightbox-dot {
+            width: 15px;
+            height: 15px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .lightbox-dot.active {
+            background-color: var(--primary-red);
+            transform: scale(1.2);
+        }
+        .lightbox-dot:hover {
+            background-color: var(--light-red);
+        }
+
+
+        /* Responsive Styles (Adjusted for Cart Sidebar) */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            .section-title:after {
+                width: 100px;
+                height: 5px;
+            }
+            
+            .hero h2 {
+                font-size: 3.2rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .floating-nav {
+                right: 20px;
+                gap: 12px;
+            }
+            .floating-nav ul li a {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .floating-nav ul li a:hover .nav-tooltip {
+                right: 60px;
+            }
+            .floating-nav ul li .nav-tooltip {
+                right: 50px;
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .product-card-container {
+                height: 450px;
+            }
+            .product-img {
+                height: 200px;
+            }
+
+            .franchise-content, .contact-container {
+                gap: 50px;
+            }
+            .franchise-text, .franchise-image, .contact-info, .contact-form {
+                min-width: unset; /* Allow natural sizing */
+                width: 100%; /* Take full width on smaller screens */
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+            .testimonial-card {
+                padding: 30px;
+            }
+            .testimonial-text {
+                font-size: 1.05rem;
+            }
+
+            #cartSidebar {
+                width: 300px; /* Slightly narrower on tablet */
+            }
+            #cartIcon {
+                bottom: 25px;
+                left: 25px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-7px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+                min-width: 25px;
+            }
+
+            #lightboxContent {
+                max-width: 90%;
+            }
+            #lightboxCloseBtn {
+                font-size: 2.5rem;
+            }
+            .lightbox-nav-btn {
+                padding: 10px 15px;
+                font-size: 1.5rem;
+            }
+            #prevLightboxBtn { left: 5px; }
+            #nextLightboxBtn { right: 5px; }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 85px; /* Adjust for header height */
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero {
+                height: 75vh;
+                margin-top: 75px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem; /* Adjusted for better fit */
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .hero-content { /* Added for mobile padding adjustment */
+                padding: 30px;
+            }
+            
+            .floating-nav {
+                display: none; /* Hide floating nav on smaller screens */
+            }
+            
+            .floating-btns {
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+            
+            .floating-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+
+            #cartSidebar {
+                width: 100%; /* Full width on mobile */
+                padding: 20px;
+            }
+            #cartIcon {
+                bottom: 20px;
+                left: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+            #cartIcon:hover {
+                transform: translateY(-5px) scale(1.1);
+            }
+            #cartCount {
+                font-size: 0.7rem;
+                padding: 3px 7px;
+                min-width: 22px;
+            }
+            .cart-item-img {
+                width: 70px;
+                height: 70px;
+            }
+            .cart-item-details h4 {
+                font-size: 1.1rem;
+            }
+            .remove-item-btn {
+                font-size: 1.6rem;
+            }
+            #cartTotal {
+                font-size: 1.3rem;
+            }
+
+            #lightboxContent {
+                max-width: 95%;
+                padding: 15px;
+            }
+            #lightboxCloseBtn {
+                font-size: 2rem;
+                top: 10px;
+                right: 10px;
+            }
+            .lightbox-nav-btn {
+                padding: 8px 12px;
+                font-size: 1.2rem;
+            }
+            #prevLightboxBtn { left: 0px; }
+            #nextLightboxBtn { right: 0px; }
+            #lightboxImageContainer {
+                max-height: 60vh;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                height: 65vh;
+            }
+            
+            .hero h2 {
+                font-size: 2rem; /* Further adjusted for smaller screens */
+            }
+            .hero p {
+                font-size: 0.95rem; /* Further adjusted for smaller screens */
+            }
+            .hero-content { /* Added for mobile padding adjustment */
+                padding: 20px;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .franchise-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            .product-card-container {
+                height: 400px; /* Adjust height for smaller screens */
+            }
+            .product-img {
+                height: 180px;
+            }
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            .section-title:after {
+                width: 80px;
+                height: 4px;
+            }
+            .feature-card {
+                padding: 30px;
+            }
+            .feature-icon {
+                font-size: 3.5rem;
+            }
+            .feature-card h3 {
+                font-size: 1.4rem;
+            }
+            .feature-card p {
+                font-size: 0.95rem;
+            }
+            .contact-info h3 {
+                font-size: 1.6rem;
+            }
+            .contact-form {
+                padding: 30px;
+            }
+            .footer-col h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' fill='%23e30613'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3EMS%3C/text%3E%3C/svg%3E" alt="Mr Shot Logo">
+                <h1>Mr Shot</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#franchise">Franchise</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Floating Circular Navigation -->
+    <div class="floating-nav">
+        <ul>
+            <li>
+                <a href="#home">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-tooltip">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <i class="fas fa-fire"></i>
+                    <span class="nav-tooltip">Products</span>
+                </a>
+            </li>
+            <li>
+                <a href="#franchise">
+                    <i class="fas fa-store"></i>
+                    <span class="nav-tooltip">Franchise</span>
+                </a>
+            </li>
+            <li>
+                <a href="#testimonials">
+                    <i class="fas fa-star"></i>
+                    <span class="nav-tooltip">Testimonials</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    <i class="fas fa-phone"></i>
+                    <span class="nav-tooltip">Contact</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Instant Hot Water at Unbeatable Prices</h2>
+                <p>Mr Shot brings you high-quality instant water heaters at the most affordable prices in Tamil Nadu and across India. Perfect for homes and businesses.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-large">View Products</a>
+                    <a href="#franchise" class="btn btn-large">Franchise Opportunity</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Mr Shot?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Affordable Prices</h3>
+                    <p>Our direct manufacturing approach allows us to offer the best prices without compromising on quality.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Heating</h3>
+                    <p>Get hot water instantly with our advanced heating technology that saves both time and electricity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Built with multiple safety features including auto cut-off and thermal protection for complete peace of mind.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>All India Delivery</h3>
+                    <p>We deliver across Tamil Nadu and all other states in India with our extensive dealer network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section class="franchise" id="franchise">
+        <div class="container">
+            <h2 class="section-title">Franchise Opportunity</h2>
+            <div class="franchise-content">
+                <div class="franchise-text">
+                    <h3>Become a Mr Shot Franchise Partner</h3>
+                    <p>Join our growing network of franchise partners across Tamil Nadu and other states. We provide complete support to help you establish and grow your water heater business.</p>
+                    
+                    <ul class="benefits-list">
+                        <li>Low investment with high returns</li>
+                        <li>Exclusive territory rights</li>
+                        <li>Training and marketing support</li>
+                        <li>Established brand recognition</li>
+                        <li>Ongoing product supply</li>
+                        <li>Business operation guidance</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-large">Apply for Franchise</a>
+                </div>
+                <div class="franchise-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mr Shot Franchise Opportunity">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <!-- Testimonials Grid -->
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonial cards will be dynamically generated here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Head Office</h4>
+                                <p>123 Industrial Estate, Chennai, Tamil Nadu - 600032</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 9876543210 (Sales)</p>
+                                <p>+91 9876543211 (Franchise)</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>sales@mrshort.com</p>
+                                <p>franchise@mrshort.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="enquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
+                                <option value="product">Product Enquiry</option>
+                                <option value="franchise">Franchise Opportunity</option>
+                                <option value="support">Customer Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-large">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Mr Shot</h3>
+                    <p>Leading manufacturer of affordable instant water heaters in Tamil Nadu and across India. Quality products at unbeatable prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#franchise">Franchise</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Mr Shot Basic</a></li>
+                        <li><a href="#">Mr Shot Premium</a></li>
+                        <li><a href="#">Mr Shot Commercial</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Installation Guide</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#contact">Customer Support</a></li> <!-- Added hash link for customer support -->
+                        <li><a href="#">Find a Dealer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Mr Shot. All Rights Reserved. | Maintained by <a href="https://www.instagram.com/bluvent.riye?igsh=NmI0Mjg2cnpiYnFi" target="_blank" style="color: inherit; text-decoration: underline;">Bluvent</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-btns">
+        <a href="https://wa.me/919876543210" class="floating-btn whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919876543210" class="floating-btn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar">
+        <button id="closeCartSidebar"><i class="fas fa-times"></i></button>
+        <h3>Your Shopping Cart</h3>
+        <ul id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+        <div id="cartTotal">
+            Total: ₹<span id="cartTotalAmount">0.00</span>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Pop-up -->
+    <div id="imageLightbox">
+        <div id="lightboxContent">
+            <span id="lightboxCloseBtn">&times;</span>
+            <div id="lightboxImageContainer">
+                <img src="" alt="Product Image" id="lightboxImage">
+                <button class="lightbox-nav-btn" id="prevLightboxBtn"><i class="fas fa-chevron-left"></i></button>
+                <button class="lightbox-nav-btn" id="nextLightboxBtn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div id="lightboxDots">
+                <!-- Lightbox dots will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.querySelector('ul').classList.toggle('show');
+        });
+        
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.querySelector('ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Form Submission
+        const enquiryForm = document.getElementById('enquiryForm');
+        
+        enquiryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send this data to your server
+            // For demo, we'll just show a custom message box instead of alert
+            showCustomMessage(`Thank you, ${name}! Your ${subject} enquiry has been received. We'll contact you soon at ${phone} or ${email}.`, 'success');
+            
+            // Reset form
+            enquiryForm.reset();
+        });
+        
+        // Custom Message Box (replaces alert)
+        function showCustomMessage(message, type = 'info') {
+            const existingMessage = document.getElementById('customMessageBox');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const messageBox = document.createElement('div');
+            messageBox.id = 'customMessageBox';
+            messageBox.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                font-size: 1rem;
+                text-align: center;
+                max-width: 90%;
+                min-width: 250px;
+            `;
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+
+            // Animate in
+            setTimeout(() => {
+                messageBox.style.opacity = '1';
+            }, 50);
+
+            // Animate out and remove after 5 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.addEventListener('transitionend', () => messageBox.remove());
+            }, 5000);
+        }
+
+        // Scroll Reveal Animation
+        window.addEventListener('scroll', revealOnScroll);
+        
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container'); // Added new elements
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                if (elementPosition < windowHeight - 150) { // Adjusted threshold
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                } else {
+                    // Reset if scrolled back up, to re-trigger on scroll down
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                }
+            });
+        }
+        
+        // Initialize elements with opacity 0 for animation
+        document.querySelectorAll('.feature-card, .product-card-container, .franchise-content, .contact-container').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        // Trigger initial check
+        revealOnScroll();
+        
+        // Active link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav ul li a, .floating-nav ul li a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Adjust for fixed header height
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Product Data as Key-Value Pairs (Array of Objects) ---
+        const productsData = [
+            {
+                id: 'basic',
+                name: 'Mr Shot Basic',
+                price: 2499,
+                img: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Perfect for small households with basic hot water needs.',
+                fullDetails: {
+                    capacity: '3 Litres',
+                    power: '3000 Watts',
+                    features: 'Instant heating, Auto cut-off, Rust-proof body.',
+                    description: 'This compact and efficient water heater is designed for quick hot water delivery, ideal for kitchens, small bathrooms, and single-person use. Its robust build ensures durability and safety.'
+                },
+                galleryImages: [
+                    'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Basic+Model+View+2',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Basic+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Basic+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Basic+Model+View+5'
+                ]
+            },
+            {
+                id: 'premium',
+                name: 'Mr Shot Premium',
+                price: 3999,
+                img: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Advanced features for families with higher hot water demand.',
+                fullDetails: {
+                    capacity: '6 Litres',
+                    power: '4500 Watts',
+                    features: 'Digital temperature display, Multiple safety layers, Energy-saving mode, Faster heating.',
+                    description: 'Designed for modern homes, the Premium model offers enhanced capacity and smart features for optimal comfort and efficiency. Enjoy precise temperature control and advanced safety mechanisms.'
+                },
+                galleryImages: [
+                    'https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Premium+Model+View+2',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Premium+Model+View+3',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Premium+Model+View+4',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Premium+Model+View+5'
+                ]
+            },
+            {
+                id: 'commercial',
+                name: 'Mr Shot Commercial',
+                price: 5999,
+                img: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                shortDescription: 'Heavy-duty model for shops, salons, and small businesses.',
+                fullDetails: {
+                    capacity: '10 Litres',
+                    power: '6000 Watts',
+                    features: 'High-capacity tank, Industrial-grade heating element, Continuous hot water supply, Robust construction.',
+                    description: 'Built for demanding environments, this model ensures a constant supply of hot water for commercial applications like salons, small hotels, and offices. Its heavy-duty components guarantee long-lasting performance.'
+                },
+                galleryImages: [
+                    'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+                    'https://placehold.co/600x400/3357FF/FFFFFF?text=Commercial+Model+View+2',
+                    'https://placehold.co/600x400/FF5733/FFFFFF?text=Commercial+Model+View+3',
+                    'https://placehold.co/600x400/33FF57/FFFFFF?text=Commercial+Model+View+4',
+                    'https://placehold.co/600x400/FF33DA/FFFFFF?text=Commercial+Model+View+5'
+                ]
+            }
+        ];
+
+        // Function to render products dynamically
+        function renderProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = ''; // Clear existing content
+
+            productsData.forEach(product => {
+                const productCardHtml = `
+                    <div class="product-card-container">
+                        <div class="product-card-inner">
+                            <div class="product-card-front">
+                                <div class="product-img">
+                                    <img src="${product.img}" alt="${product.name}">
+                                    <div class="product-gallery-dots" data-product-id="${product.id}">
+                                        <span class="gallery-dot" data-image-index="0"></span>
+                                        <span class="gallery-dot" data-image-index="1"></span>
+                                        <span class="gallery-dot" data-image-index="2"></span>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p>${product.shortDescription}</p>
+                                    <div class="product-price">₹${product.price.toLocaleString('en-IN')}</div>
+                                    <div class="product-btns">
+                                        <button class="btn view-details-btn" data-product-id="${product.id}">View Details</button>
+                                        <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-card-back">
+                                <h3>${product.name} Details</h3>
+                                <div class="product-details-full">
+                                    <p><strong>Capacity:</strong> ${product.fullDetails.capacity}</p>
+                                    <p><strong>Power:</strong> ${product.fullDetails.power}</p>
+                                    <p><strong>Features:</strong> ${product.fullDetails.features}</p>
+                                    <p>${product.fullDetails.description}</p>
+                                </div>
+                                <button class="btn add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+                                <button class="btn btn-secondary back-to-front-btn" style="background-color: #6c757d; margin-top: 10px;">Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsGrid.insertAdjacentHTML('beforeend', productCardHtml);
+            });
+
+            // Re-attach event listeners after rendering products
+            attachProductEventListeners();
+            attachGalleryDotListeners(); // Attach listeners for new gallery dots
+        }
+
+        // Attach event listeners for product cards (called after rendering)
+        function attachProductEventListeners() {
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.add('flipped');
+                });
+            });
+
+            document.querySelectorAll('.back-to-front-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.product-card-container').classList.remove('flipped');
+                });
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    const product = productsData.find(p => p.id === productId);
+                    if (product) {
+                        addItemToCart(product);
+                    }
+                });
+            });
+        }
+
+        // --- Cart Logic ---
+        let cart = []; // Array to store cart items
+
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCartSidebarBtn = document.getElementById('closeCartSidebar');
+        const cartItemsList = document.getElementById('cartItems');
+        const cartTotalAmount = document.getElementById('cartTotalAmount');
+
+        // Function to update cart display
+        function updateCartDisplay() {
+            cartCount.textContent = cart.length;
+            cartItemsList.innerHTML = ''; // Clear current items
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="text-align: center; color: var(--text-color); margin-top: 20px;">Your cart is empty.</p>';
+            } else {
+                cart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('cart-item');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₹${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item-btn" data-product-id="${item.id}"><i class="fas fa-times-circle"></i></button>
+                    `;
+                    cartItemsList.appendChild(listItem);
+                    total += item.price;
+                });
+            }
+            cartTotalAmount.textContent = total.toFixed(2);
+
+            // Re-attach event listeners for remove buttons
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIdToRemove = this.dataset.productId;
+                    removeItemFromCart(productIdToRemove);
+                });
+            });
+        }
+
+        // Function to add item to cart
+        function addItemToCart(product) {
+            cart.push(product);
+            updateCartDisplay();
+            showCustomMessage(`"${product.name}" added to cart!`, 'success');
+            cartSidebar.classList.add('open'); // Open sidebar when item is added
+        }
+
+        // Function to remove item from cart
+        function removeItemFromCart(productId) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index > -1) {
+                const removedItemName = cart[index].name;
+                cart.splice(index, 1); // Remove one item at the found index
+                updateCartDisplay();
+                showCustomMessage(`"${removedItemName}" removed from cart.`, 'info');
+            }
+        }
+
+        // Open/Close Cart Sidebar
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.toggle('open');
+        });
+
+        closeCartSidebarBtn.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+        });
+
+        // Close sidebar if clicked outside (optional, but good UX)
+        document.addEventListener('click', (event) => {
+            if (!cartSidebar.contains(event.target) && !cartIcon.contains(event.target) && cartSidebar.classList.contains('open')) {
+                cartSidebar.classList.remove('open');
+            }
+        });
+
+
+        // --- Image Lightbox Logic ---
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const prevLightboxBtn = document.getElementById('prevLightboxBtn');
+        const nextLightboxBtn = document.getElementById('nextLightboxBtn');
+        const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxDotsContainer = document.getElementById('lightboxDots');
+
+        let currentProductGallery = [];
+        let currentImageIndex = 0;
+
+        function attachGalleryDotListeners() {
+            document.querySelectorAll('.product-gallery-dots .gallery-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const productId = this.closest('.product-gallery-dots').dataset.productId;
+                    const initialImageIndex = parseInt(this.dataset.imageIndex);
+                    
+                    const product = productsData.find(p => p.id === productId);
+                    if (product && product.galleryImages) {
+                        openLightbox(product.galleryImages, initialImageIndex);
+                    }
+                });
+            });
+        }
+
+        function openLightbox(images, initialIndex = 0) {
+            currentProductGallery = images;
+            currentImageIndex = initialIndex;
+
+            lightboxDotsContainer.innerHTML = ''; // Clear previous dots
+            currentProductGallery.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.classList.add('lightbox-dot');
+                dot.dataset.index = index;
+                dot.addEventListener('click', () => showLightboxImage(index));
+                lightboxDotsContainer.appendChild(dot);
+            });
+
+            showLightboxImage(currentImageIndex);
+            imageLightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            imageLightbox.classList.remove('active');
+        }
+
+        function showLightboxImage(index) {
+            if (index >= currentProductGallery.length) {
+                currentImageIndex = 0;
+            } else if (index < 0) {
+                currentImageIndex = currentProductGallery.length - 1;
+            } else {
+                currentImageIndex = index;
+            }
+            lightboxImage.src = currentProductGallery[currentImageIndex];
+
+            // Update active dot in lightbox
+            document.querySelectorAll('.lightbox-dot').forEach((dot, i) => {
+                if (i === currentImageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        prevLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex - 1));
+        nextLightboxBtn.addEventListener('click', () => showLightboxImage(currentImageIndex + 1));
+        lightboxCloseBtn.addEventListener('click', closeLightbox);
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) { // Close only if clicked on the overlay, not the content
+                closeLightbox();
+            }
+        });
+
+
+        // Testimonials Grid Logic
+        const testimonialsData = [
+            {
+                text: "The Mr Shot Basic model is a lifesaver! Our old geyser took ages, but now we have hot water instantly for morning showers. It’s compact, efficient, and surprisingly powerful for its size. Highly recommend for small families.",
+                author: "Ramesh Kumar",
+                location: "Chennai, Tamil Nadu",
+                img: "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            {
+                text: "Joining the Mr Shot franchise was one of the best decisions for my business. The support is incredible, from marketing materials to product training. The demand for these affordable, high-quality heaters is constant, making it a very profitable venture.",
+                author: "Priya Sharma",
+                location: "Franchise Partner, Bangalore",
+                img: "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            {
+                text: "Our salon needs a constant supply of hot water for various treatments. We switched to Mr Shot Commercial, and it has been flawless. It handles the continuous usage without any drop in temperature or pressure. Our stylists and clients are very happy!",
+                author: "Arun Joshi",
+                location: "Salon Owner, Coimbatore",
+                img: "https://randomuser.me/api/portraits/men/75.jpg"
+            },
+            {
+                text: "I was hesitant about an instant water heater, but the Mr Shot Premium model exceeded all expectations. The digital display is super convenient for precise temperature, and it heats up incredibly fast. Plus, it looks sleek in my bathroom. Excellent value for money!",
+                author: "Anjali Singh",
+                location: "Mumbai, Maharashtra",
+                img: "https://randomuser.me/api/portraits/women/68.jpg"
+            },
+            {
+                text: "Installation was a breeze, and the Mr Shot team provided excellent customer service throughout. The product itself is fantastic – no more waiting for hot water, and our electricity bill hasn't spiked. A truly smart investment for any home.",
+                author: "Vikram Reddy",
+                location: "Hyderabad, Telangana",
+                img: "https://randomuser.me/api/portraits/men/80.jpg"
+            }
+        ];
+
+        function renderTestimonials() {
+            const testimonialsGrid = document.getElementById('testimonialsGrid');
+            testimonialsGrid.innerHTML = ''; // Clear existing content
+
+            testimonialsData.forEach(testimonial => {
+                const testimonialCardHtml = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            <p>"${testimonial.text}"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-img">
+                                <img src="${testimonial.img}" alt="${testimonial.author}">
+                            </div>
+                            <div class="author-info">
+                                <h4>${testimonial.author}</h4>
+                                <p>${testimonial.location}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                testimonialsGrid.insertAdjacentHTML('beforeend', testimonialCardHtml);
+            });
+        }
+
+        // --- Header Scroll Behavior ---
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        const headerHeight = header.offsetHeight; // Get initial height of the header
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > headerHeight + 50) { // If scrolled past header + a buffer
+                header.classList.add('header-scrolled');
+            } else if (scrollTop < headerHeight / 2) { // If scrolled back near top
+                header.classList.remove('header-scrolled');
+            }
+            lastScrollTop = scrollTop;
+        });
+
+
+        // Initial calls on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(); // Render products from data
+            updateCartDisplay(); // Initialize cart display
+            renderTestimonials(); // Render testimonials in grid
+        });
+    </script>
+</body>
+</html>

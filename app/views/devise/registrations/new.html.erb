@@ -1,0 +1,75 @@
+<% content_for :title, "Sign Up - Riye Construction" %>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-logo">
+        <i class="fas fa-hard-hat"></i>
+        <h1>Riye</h1>
+      </div>
+      <h2>Create Account</h2>
+      <p>Join our construction management system</p>
+    </div>
+
+    <div class="auth-form">
+      <%= form_with model: resource, as: resource_name, url: registration_path(resource_name), class: "modern-form", local: true do |form| %>
+        <% if resource.errors.any? %>
+          <div class="form-errors">
+            <h4><%= pluralize(resource.errors.count, "error") %> prohibited this account from being created:</h4>
+            <ul>
+              <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :email, class: "form-label" do %>
+            <i class="fas fa-envelope"></i>
+            Email Address
+          <% end %>
+          <%= form.email_field :email, autofocus: true, autocomplete: "email", 
+              class: "form-control", placeholder: "your.email@company.com",
+              value: resource.email %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password, class: "form-label" do %>
+            <i class="fas fa-lock"></i>
+            Password
+            <span class="field-hint">(<%= @minimum_password_length %> characters minimum)</span>
+          <% end %>
+          <%= form.password_field :password, autocomplete: "new-password", 
+              class: "form-control", placeholder: "Create a strong password" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password_confirmation, class: "form-label" do %>
+            <i class="fas fa-lock"></i>
+            Confirm Password
+          <% end %>
+          <%= form.password_field :password_confirmation, autocomplete: "new-password", 
+              class: "form-control", placeholder: "Confirm your password" %>
+        </div>
+
+        <div class="form-actions">
+          <%= form.submit "Create Account", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="auth-footer">
+      <div class="auth-links">
+        <p>Already have an account? 
+          <%= link_to "Sign In", new_session_path(resource_name), class: "auth-link primary" %>
+        </p>
+      </div>
+      
+      <div class="auth-info">
+        <p><small>Construction Management System</small></p>
+        <p><small>&copy; <%= Date.current.year %> Riye. All rights reserved.</small></p>
+      </div>
+    </div>
+  </div>
+</div>

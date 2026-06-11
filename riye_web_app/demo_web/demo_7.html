@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bluvent | Construction App & Web Dev</title>
+    <style>
+        :root {
+            --primary: #00FFFF;
+            --primary-dark: #00cccc;
+            --secondary: #088F8F;
+            --bg: #f8f9fa;
+            --light: #e9ecef;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(19, 196, 196, 0.85);
+            backdrop-filter: blur(6px);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+        }
+
+        header nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 100px;
+            background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+            color: #000;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            height: 1.5em;
+            font-weight: 500;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #000;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 76, 255, 0.598);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 16px rgba(0, 255, 255, 0.6);
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 4px;
+        }
+
+        .features,
+        .portfolio {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature,
+        .portfolio-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature:hover,
+        .portfolio-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact {
+            text-align: center;
+            background: var(--light);
+            padding: 80px 20px;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact input,
+        .contact textarea {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .contact input:focus,
+        .contact textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+            outline: none;
+        }
+
+        #formMessage {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: var(--secondary);
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header nav {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div><strong>Bluvent</strong></div>
+        <nav>
+            <a href="#app">App</a>
+            <a href="#webdev">Web Dev</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Empowering Construction & Small Businesses</h1>
+        <p id="typedText">|</p>
+        <a href="#contact" class="btn">Get Started</a>
+    </section>
+
+    <section class="section" id="app">
+        <h2>Construction App Features</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Real-Time Attendance</h3>
+                <p>Monitor job sites and workforce status from anywhere.</p>
+            </div>
+            <div class="feature">
+                <h3>GPS Worker Tracking</h3>
+                <p>Verify worker locations live with full transparency.</p>
+            </div>
+            <div class="feature">
+                <h3>Reports & Logs</h3>
+                <p>Export reports for payroll, safety, and compliance tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="webdev">
+        <h2>Website Development</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Industry-Specific Sites</h3>
+                <p>Custom websites for shops, gyms, farms, and service businesses.</p>
+            </div>
+            <div class="feature">
+                <h3>Mobile Optimized</h3>
+                <p>Fast, responsive designs built to look great on all devices.</p>
+            </div>
+            <div class="feature">
+                <h3>SEO-Ready</h3>
+                <p>Rank higher with built-in best practices for search engines.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="portfolio">
+        <h2>Our Work</h2>
+        <div class="portfolio">
+            <div class="portfolio-item">
+                <h4>Gym Website</h4>
+                <p>High-energy layout with booking and trainer sections.</p>
+            </div>
+            <div class="portfolio-item">
+                <h4>Farm Website</h4>
+                <p>Organic-focused design with harvest calendar and shop.</p>
+            </div>
+            <div class="portfolio-item">
+                <h4>Retail Website</h4>
+                <p>Product pages, cart, and payment ready storefront.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="Your Name" id="name" required />
+            <input type="email" placeholder="Email Address" id="email" required />
+            <textarea rows="5" placeholder="Tell us what you need..." id="message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+            <p id="formMessage"></p>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Bluvent. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll animation for sections
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+        // Typing effect
+        const text = "Construction app. Website services. All-in-one platform.";
+        const typed = document.getElementById("typedText");
+        let index = 0;
+        function typeText() {
+            if (index < text.length) {
+                typed.textContent += text.charAt(index);
+                index++;
+                setTimeout(typeText, 50);
+            }
+        }
+        typeText();
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const formMessage = document.getElementById('formMessage');
+
+            if (name && email && message) {
+                formMessage.style.color = 'green';
+                formMessage.textContent = "Thanks! We'll be in touch soon.";
+                this.reset();
+            } else {
+                formMessage.style.color = 'red';
+                formMessage.textContent = "Please fill out all fields.";
+            }
+        });
+    </script>
+</body>
+
+</html>

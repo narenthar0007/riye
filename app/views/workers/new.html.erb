@@ -1,0 +1,33 @@
+<div class="animate-fade-in">
+  <!-- Page Header -->
+  <div class="d-flex justify-between align-center mb-4">
+    <div>
+      <h1 class="mb-2">
+        <i class="fas fa-user-plus"></i>
+        Add New Worker
+      </h1>
+      <p class="text-gray-600 mb-0">Create a new worker profile and assign them to a project and team</p>
+    </div>
+  </div>
+
+  <!-- Form Card -->
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title mb-0">
+        <i class="fas fa-user-edit"></i>
+        Worker Information
+      </h2>
+    </div>
+    <div class="card-body">
+      <%= render 'form', worker: @worker %>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="text-center mt-4">
+    <%= link_to workers_path, class: 'btn btn-secondary' do %>
+      <i class="fas fa-arrow-left"></i>
+      Back to Workers
+    <% end %>
+  </div>
+</div>

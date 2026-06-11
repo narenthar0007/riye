@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Team Head Details</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <table class="table table-bordered">
+                <tr>
+                  <th>Name</th>
+                  <td><%= @team_head.name %></td>
+                </tr>
+                <tr>
+                  <th>Date of Birth</th>
+                  <td><%= @team_head.dob.strftime('%B %d, %Y') if @team_head.dob %></td>
+                </tr>
+                <tr>
+                  <th>Age</th>
+                  <td><%= @team_head.age %></td>
+                </tr>
+                <tr>
+                  <th>Gender</th>
+                  <td><%= @team_head.gender %></td>
+                </tr>
+                <tr>
+                  <th>Contact Number</th>
+                  <td><%= @team_head.contact_number %></td>
+                </tr>
+                <tr>
+                  <th>Aadhaar Number</th>
+                  <td><%= @team_head.aadhaar_number %></td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-6">
+              <h5>Address</h5>
+              <p class="border p-3"><%= simple_format(@team_head.address) %></p>
+              
+              <h5>Teams Managed</h5>
+              <% if @team_head.teams.any? %>
+                <% @team_head.teams.each do |team| %>
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <h6 class="card-title"><%= team.name %></h6>
+                      <p class="card-text">
+                        <small class="text-muted">
+                          Nature: <%= team.nature_of_skill&.titleize %><br>
+                          Workers: <%= team.workers.count %>
+                        </small>
+                      </p>
+                    </div>
+                  </div>
+                <% end %>
+              <% else %>
+                <p class="text-muted">No teams assigned to this team head.</p>
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <%= link_to 'Edit', edit_team_head_path(@team_head), class: 'btn btn-warning' %>
+            <%= link_to 'Back', team_heads_path, class: 'btn btn-secondary' %>
+            <%= link_to 'Delete', @team_head, method: :delete, 
+                confirm: 'Are you sure?', class: 'btn btn-danger' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

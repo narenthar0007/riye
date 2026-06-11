@@ -1,0 +1,82 @@
+<h1>API Access Key Details</h1>
+
+<p>
+    <strong>Name:</strong>
+    <%= @api_access.name %>
+</p>
+
+<p>
+    <strong>Access Key:</strong>
+    <code><%= @api_access.access_key %></code>
+    <button class="btn btn-sm btn-outline-secondary ms-2" onclick="copyToClipboard('<%= @api_access.access_key %>')">Copy</button>
+</p>
+
+<p>
+    <strong>Secret Key:</strong>
+    <code><%= @api_access.secret_key %></code>
+    <button class="btn btn-sm btn-outline-secondary ms-2" onclick="copyToClipboard('<%= @api_access.secret_key %>')">Copy</button>
+</p>
+
+<p>
+    <strong>User:</strong>
+    <%= @api_access.user&.email || 'System' %>
+</p>
+
+<p>
+    <strong>Permissions:</strong>
+    <% if @api_access.permissions.present? %>
+    <%= @api_access.permissions_array.join(', ') %>
+    <% else %>
+    <em>All permissions</em>
+    <% end %>
+</p>
+
+<p>
+    <strong>Status:</strong>
+    <% if @api_access.active? %>
+    <span class="badge bg-success">Active</span>
+    <% else %>
+    <span class="badge bg-danger">Inactive</span>
+    <% end %>
+</p>
+
+<p>
+    <strong>Last Used:</strong>
+    <%= @api_access.last_used_at&.strftime('%Y-%m-%d %H:%M:%S') || 'Never' %>
+</p>
+
+<p>
+    <strong>Expires At:</strong>
+    <%= @api_access.expires_at&.strftime('%Y-%m-%d %H:%M:%S') || 'Never' %>
+</p>
+
+<p>
+    <strong>Created At:</strong>
+    <%= @api_access.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+</p>
+
+<p>
+    <strong>Updated At:</strong>
+    <%= @api_access.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
+</p>
+
+<%= link_to 'Edit', edit_api_access_path(@api_access), class: 'btn btn-warning' %> |
+<%= link_to 'Back to API Access Keys', api_accesses_path, class: 'btn btn-secondary' %>
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            // Show success message
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = 'Copied!';
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+        });
+    }
+</script>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anandham Restaurant Website - Sales Presentation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            line-height: 1.6;
+            color: #333;
+        }
+        .section-container {
+            background: linear-gradient(135deg, #6a0dad 0%, #8a2be2 100%); /* Purple gradient */
+            color: white;
+            border-radius: 2rem; /* More rounded corners */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            padding: 3rem 4rem;
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem auto; /* Center with margin */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-container:nth-child(even) {
+            background: linear-gradient(135deg, #4a0d8a 0%, #6a2be2 100%); /* Slightly darker purple for alternating sections */
+        }
+        .section-container .content-area {
+            position: relative;
+            z-index: 1;
+        }
+        .section-title {
+            font-size: 3.5rem; /* Larger heading */
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            color: #ffeb3b; /* Yellow accent */
+        }
+        .section-subtitle {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+            color: white;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+        @media (min-width: 768px) {
+            .feature-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.15); /* Slightly transparent white */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: left;
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        .feature-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #ffeb3b;
+        }
+        .feature-item p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .qr-code-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .qr-code-section img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            border: 4px solid #6a0dad; /* Border matching primary color */
+        }
+        .call-to-action {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #6a0dad;
+            margin-bottom: 1rem;
+        }
+        .website-link {
+            font-size: 1.25rem;
+            color: #4a4a4a;
+            word-break: break-all; /* Ensures long URL wraps */
+        }
+        .intro-text {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Introduction & The Digital Imperative -->
+    <section class="section-container">
+        <div class="content-area">
+            <h1 class="section-title">Welcome to the Future of Dining.</h1>
+            <p class="section-subtitle">A Digital Transformation for Anandham Restaurant.</p>
+            <p class="intro-text">
+                In today's fast-paced world, a strong online presence isn't just an advantage—it's a necessity.
+                Customers discover, engage, and make decisions online. Is your restaurant ready?
+            </p>
+            <p class="intro-text">
+                We've crafted a modern, intuitive, and highly effective website to ensure Anandham Restaurant
+                stands out, attracts more patrons, and thrives in the digital age.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2: Introducing Your New Digital Hub -->
+    <section class="section-container">
+        <div class="content-area">
+            <h2 class="section-title">Introducing Your New Digital Hub</h2>
+            <p class="section-subtitle">Anandham Restaurant's Dedicated Online Home</p>
+            <p class="intro-text mb-8">
+                Your new website, <a href="https://anandhamrestaurant.netlify.app/" target="_blank" class="text-blue-300 hover:underline font-bold">anandhamrestaurant.netlify.app</a>,
+                is designed to be the central point for all your online interactions. It's not just a website; it's a powerful tool to
+                grow your business and enhance the customer experience.
+            </p>
+            <div class="flex justify-center">
+                <img src="home_1.png" alt="Website Homepage Preview" class="rounded-xl shadow-xl border-4 border-white w-full max-w-lg">
+            </div>
+            <p class="intro-text mt-8">
+                This sleek, responsive design ensures your restaurant looks fantastic on any device, from desktops to mobile phones.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3: Key Features - What You Get -->
+    <section class="section-container">
+        <div class="content-area">
+            <h2 class="section-title">Key Features: What You Get</h2>
+            <p class="section-subtitle">Powerful tools designed to elevate your business.</p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>Enhanced Online Visibility</h3>
+                    <p>Attract new customers by appearing prominently in search results and online directories, reaching a wider audience 24/7.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Stunning Menu Presentation</h3>
+                    <p>Showcase your culinary masterpieces with beautiful images and detailed descriptions, making every dish irresistible.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <h3>Direct Customer Engagement</h3>
+                    <p>Foster loyalty with easy-to-use contact forms, customer feedback options, and a platform for testimonials.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Stronger Brand Identity</h3>
+                    <p>Reinforce Anandham's unique charm and ambiance online, creating a consistent and memorable experience that sets you apart.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Mobile-First Responsiveness</h3>
+                    <p>Your website looks and functions perfectly on any device, ensuring a smooth experience whether customers are on a phone, tablet, or desktop.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Easy Updates & Management</h3>
+                    <p>A user-friendly structure allows for simple content updates, keeping your menu and offers current without hassle.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: The Value Proposition - Why This Matters -->
+    <section class="section-container">
+        <div class="content-area">
+            <h2 class="section-title">The Value Proposition</h2>
+            <p class="section-subtitle">Real Benefits for Anandham Restaurant</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div class="feature-item">
+                    <h3>Increase Revenue</h3>
+                    <p>More online visibility and easier ordering/reservations directly translate to more customers and higher sales.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Enhance Customer Experience</h3>
+                    <p>Provide convenience and accessibility, making it easier for your customers to connect with your restaurant.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Boost Efficiency</h3>
+                    <p>Automate reservations and inquiries, freeing up your staff to focus on delivering exceptional in-person service.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Stay Competitive</h3>
+                    <p>Position Anandham as a modern, forward-thinking establishment ready to meet the demands of today's digital consumer.</p>
+                </div>
+            </div>
+            <p class="intro-text mt-8">
+                Investing in a professional website is investing in the future growth and success of Anandham Restaurant.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 5: See It Live! -->
+    <section class="section-container">
+        <div class="content-area">
+            <h2 class="section-title">Experience It Live!</h2>
+            <p class="section-subtitle">See Your New Website in Action.</p>
+            <p class="intro-text mb-8">
+                The best way to understand the power of this website is to explore it yourself.
+                Scan the QR code below or visit the link to navigate through Anandham Restaurant's new digital home.
+            </p>
+            <div class="qr-code-section">
+                <p class="call-to-action">Scan with Your Phone</p>
+                <img src="qrcode_227721617_51d6a937f2f0eaa70f89a7dd6664d0ba.png" alt="QR Code Scan Me">
+                <p class="website-link">Or visit directly: <a href="https://anandhamrestaurant.netlify.app/" target="_blank" class="text-blue-600 hover:underline">anandhamrestaurant.netlify.app</a></p>
+            </div>
+            <p class="intro-text mt-8">
+                We are confident that this website will be a valuable asset for Anandham Restaurant.
+                Let's discuss how it can best serve your specific needs.
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>

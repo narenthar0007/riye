@@ -1,0 +1,45 @@
+<%= form_with(model: api_access) do |form| %>
+<% if api_access.errors.any? %>
+<div class="alert alert-danger">
+    <h4><%= pluralize(api_access.errors.count, "error") %> prohibited this api_access from being saved:</h4>
+    <ul>
+        <% api_access.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
+</div>
+
+<div class="mb-3">
+    <%= form.label :user_id, class: 'form-label' %>
+    <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: 'System (no user)' }, class: 'form-select' %>
+</div>
+
+<div class="mb-3">
+    <%= form.label :permissions, class: 'form-label' %>
+    <%= form.text_area :permissions, class: 'form-control', placeholder: 'Comma-separated permissions (e.g., attendances,workers,projects) or leave blank for all permissions' %>
+    <div class="form-text">
+        Available permissions: attendances, companies, projects, workers, stocks, daily_updates, bank_details, teams, team_heads, users, replies
+    </div>
+</div>
+
+<div class="mb-3">
+    <%= form.label :expires_at, class: 'form-label' %>
+    <%= form.datetime_local_field :expires_at, class: 'form-control' %>
+    <div class="form-text">Leave blank for no expiration</div>
+</div>
+
+<div class="mb-3">
+    <%= form.label :active, class: 'form-check-label' %>
+    <%= form.check_box :active, class: 'form-check-input' %>
+</div>
+
+<div class="mb-3">
+    <%= form.submit class: 'btn btn-primary' %>
+</div>
+<% end %>

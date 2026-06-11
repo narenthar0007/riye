@@ -1,0 +1,148 @@
+<%= form_with(model: [@worker, bank_detail], local: true, class: 'modern-form') do |form| %>
+  <% if bank_detail.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <div class="d-flex align-center gap-2 mb-3">
+        <i class="fas fa-exclamation-triangle fa-lg"></i>
+        <h3 class="mb-0">Please fix the following errors:</h3>
+      </div>
+      <ul class="mb-0">
+        <% bank_detail.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <!-- Bank Account Information Section -->
+    <div class="col-md-6 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-university"></i>
+          Account Details
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :name_of_beneficiary, class: 'form-label required' do %>
+            <i class="fas fa-user"></i>
+            Name of Beneficiary
+          <% end %>
+          <%= form.text_field :name_of_beneficiary, class: 'form-control', 
+              placeholder: 'Full name as per bank account',
+              required: true %>
+          <small class="form-text">Name exactly as it appears in the bank account</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :account_number, class: 'form-label required' do %>
+            <i class="fas fa-credit-card"></i>
+            Account Number
+          <% end %>
+          <%= form.text_field :account_number, class: 'form-control', 
+              placeholder: 'Enter account number',
+              pattern: '[0-9]{9,18}',
+              required: true %>
+          <small class="form-text">9-18 digit bank account number</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :bank_name, class: 'form-label required' do %>
+            <i class="fas fa-building"></i>
+            Bank Name
+          <% end %>
+          <%= form.text_field :bank_name, class: 'form-control', 
+              placeholder: 'Enter bank name',
+              required: true %>
+          <small class="form-text">Full name of the bank (e.g., State Bank of India)</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch Information Section -->
+    <div class="col-md-6 mb-4">
+      <div class="form-section">
+        <h3 class="form-section-title">
+          <i class="fas fa-map-marker-alt"></i>
+          Branch Details
+        </h3>
+        
+        <div class="form-group">
+          <%= form.label :ifsc_code, class: 'form-label required' do %>
+            <i class="fas fa-code"></i>
+            IFSC Code
+          <% end %>
+          <%= form.text_field :ifsc_code, class: 'form-control', 
+              placeholder: 'Enter IFSC code (e.g., SBIN0001234)',
+              pattern: '[A-Z]{4}0[A-Z0-9]{6}',
+              maxlength: 11,
+              style: 'text-transform: uppercase;',
+              required: true %>
+          <small class="form-text">11-character Indian Financial System Code</small>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :branch_name, class: 'form-label required' do %>
+            <i class="fas fa-home"></i>
+            Branch Name
+          <% end %>
+          <%= form.text_field :branch_name, class: 'form-control', 
+              placeholder: 'Enter branch name',
+              required: true %>
+          <small class="form-text">Name of the bank branch</small>
+        </div>
+
+        <div class="info-panel">
+          <h4 class="info-title">
+            <i class="fas fa-info-circle"></i>
+            Banking Guidelines
+          </h4>
+          <ul class="info-list">
+            <li><strong>Beneficiary:</strong> Must match bank account exactly</li>
+            <li><strong>Account Number:</strong> Double-check for accuracy</li>
+            <li><strong>IFSC Code:</strong> Required for electronic transfers</li>
+            <li><strong>Security:</strong> This information is encrypted and secure</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Worker Information Display -->
+  <% if @worker %>
+    <div class="alert alert-info mb-4">
+      <div class="d-flex align-center gap-2">
+        <i class="fas fa-user fa-lg"></i>
+        <div>
+          <strong>Worker:</strong> <%= @worker.name %> (<%= @worker.worker_id %>)<br>
+          <small>Contact: <%= @worker.contact %> | Project: <%= @worker.project&.name %></small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Form Actions -->
+  <div class="form-actions">
+    <div class="d-flex gap-3">
+      <%= form.submit class: 'btn btn-primary btn-lg' do %>
+        <i class="fas fa-save"></i>
+        Save Bank Details
+      <% end %>
+      <%= link_to @worker ? worker_path(@worker) : workers_path, class: 'btn btn-secondary btn-lg' do %>
+        <i class="fas fa-times"></i>
+        Cancel
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  // Auto-format IFSC code to uppercase
+  document.getElementById('bank_detail_ifsc_code').addEventListener('input', function() {
+    this.value = this.value.toUpperCase();
+  });
+
+  // Validate account number (numbers only)
+  document.getElementById('bank_detail_account_number').addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '');
+  });
+</script>
