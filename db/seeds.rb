@@ -51,18 +51,24 @@ unless User.exists?(email: "employee@example.com")
 end
 
 # Create Projects
-project1 = Project.find_or_create_by!(
-  name: "Downtown Office Complex",
+project1 = Project.find_or_initialize_by(name: "Downtown Office Complex")
+project1.update!(
   location: "Downtown",
   status: "Active",
+  start_date: Date.today,
+  end_date: Date.today + 90,
+  customer_budget: 1000000,
   company: company1,
   user: user1
 )
 
-project2 = Project.find_or_create_by!(
-  name: "Residential Tower",
-  location: "Suburbs", 
+project2 = Project.find_or_initialize_by(name: "Residential Tower")
+project2.update!(
+  location: "Suburbs",
   status: "Active",
+  start_date: Date.today,
+  end_date: Date.today + 120,
+  customer_budget: 2500000,
   company: company2,
   user: user2
 )
